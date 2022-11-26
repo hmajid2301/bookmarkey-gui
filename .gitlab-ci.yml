@@ -1,13 +1,99 @@
-# You can override the included template(s) by including variable overrides
-# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
-# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
-# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
-# Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
-# Note that environment variables can be set in several places
-# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+image: docker
+
+services:
+  - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_BUILDKIT: 0
+
 stages:
-- test
+  - pre
+  - test
+  - publish
+
+before_script:
+  - apk add make
+
+publish:docker:dev:
+  stage: pre
+  image: docker
+  only:
+    - main
+  before_script: []
+  script:
+    - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+    - docker build --target development -t ${CI_REGISTRY_IMAGE}:development .
+    - docker push ${CI_REGISTRY_IMAGE}:development
+
+deploy:preview:
+  stage: test
+  image: node:16
+  only:
+    - merge_request
+  before_script: []
+  script:
+    - npm install
+    - npm install -g netlify-cli --unsafe-perm=true
+    - npm run deploy -- --alias $CI_MERGE_REQUEST_IID --site $NETLIFY_SITE_ID --auth $NETLIFY_PERSONAL_TOKEN --message "$CI_COMMIT_TITLE"
+    - echo $CI_MERGE_REQUEST_PROJECT_ID
+    - export MERGE_REQUEST_COMMENT="body=Deploy Preview can be found here https://$CI_MERGE_REQUEST_IID--banterbus.netlify.app"
+    - 'curl --request POST --header "Private-Token: $GITLAB_PRIVATE_TOKEN" --data "$MERGE_REQUEST_COMMENT" https://gitlab.com/api/v4/projects/$CI_MERGE_REQUEST_PROJECT_ID/merge_requests/$CI_MERGE_REQUEST_IID/notes '
+
 sast:
   stage: test
 include:
-- template: Security/SAST.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
+
+lint:
+  stage: test
+  only:
+    - merge_request
+  script:
+    - make lint
+
+format:
+  stage: test
+  only:
+    - merge_request
+  script:
+    - make format
+
+test:
+  stage: test
+  only:
+    - merge_request
+  script:
+    - make test
+
+svelte:check:
+  stage: test
+  only:
+    - merge_request
+  script:
+    - make svelte-check
+
+test:e2e:
+  stage: test
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: "$CI_MERGE_REQUEST_LABELS =~ /CI:E2E/"
+  script:
+    - export VITE_BANTER_BUS_CORE_API_URL=http://banter-bus-core-api:8080
+    - export VITE_BANTER_BUS_GUI_DISCONNECT_TIMER_IN_SECONDS=5
+  artifacts:
+    when: always
+    paths:
+      - e2e/hooks/**/*.webm
+    expire_in: 1 week
+
+publish:netlify:
+  stage: publish
+  image: node:16
+  only:
+    - main
+  script:
+    - npm install -g netlify-cli --unsafe-perm=true
+    - export MODE="production"
+    - npm run deploy -- --prod --site $NETLIFY_SITE_ID --auth $NETLIFY_PERSONAL_TOKEN --message "$CI_COMMIT_TITLE" --build
