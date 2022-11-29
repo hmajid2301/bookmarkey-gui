@@ -43,9 +43,13 @@
 
 	<div class="mt-4 text-center text-sm text-gray-500">
 		By signing up, you agree to the
-		<a class="border-grey-dark text-grey-dark border-b no-underline" href="#"> Terms of Service </a>
+		<a class="border-grey-dark text-grey-dark border-b no-underline" href="/terms-of-service">
+			Terms of Service
+		</a>
 		and
-		<a class="border-grey-dark text-grey-dark border-b no-underline" href="#"> Privacy Policy </a>
+		<a class="border-grey-dark text-grey-dark border-b no-underline" href="/privacy-policy">
+			Privacy Policy
+		</a>
 	</div>
 	<p class="text-sm font-light text-gray-500 dark:text-gray-400">
 		Already have an account? <a

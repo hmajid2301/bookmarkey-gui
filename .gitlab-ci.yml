@@ -1,12 +1,4 @@
-image: docker
-
-services:
-  - docker:dind
-
-variables:
-  DOCKER_DRIVER: overlay2
-  DOCKER_HOST: tcp://docker:2375
-  DOCKER_BUILDKIT: 0
+image: node:19.1.0
 
 stages:
   - pre
@@ -14,86 +6,33 @@ stages:
   - publish
 
 before_script:
-  - apk add make
-
-publish:docker:dev:
-  stage: pre
-  image: docker
-  only:
-    - main
-  before_script: []
-  script:
-    - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
-    - docker build --target development -t ${CI_REGISTRY_IMAGE}:development .
-    - docker push ${CI_REGISTRY_IMAGE}:development
-
-deploy:preview:
-  stage: test
-  image: node:16
-  only:
-    - merge_request
-  before_script: []
-  script:
-    - npm install
-    - npm install -g netlify-cli --unsafe-perm=true
-    - npm run deploy -- --alias $CI_MERGE_REQUEST_IID --site $NETLIFY_SITE_ID --auth $NETLIFY_PERSONAL_TOKEN --message "$CI_COMMIT_TITLE"
-    - echo $CI_MERGE_REQUEST_PROJECT_ID
-    - export MERGE_REQUEST_COMMENT="body=Deploy Preview can be found here https://$CI_MERGE_REQUEST_IID--banterbus.netlify.app"
-    - 'curl --request POST --header "Private-Token: $GITLAB_PRIVATE_TOKEN" --data "$MERGE_REQUEST_COMMENT" https://gitlab.com/api/v4/projects/$CI_MERGE_REQUEST_PROJECT_ID/merge_requests/$CI_MERGE_REQUEST_IID/notes '
-
-sast:
-  stage: test
-include:
-  - template: Security/SAST.gitlab-ci.yml
+  - npm install -g @go-task/cli
+  - npm ci
 
 lint:
   stage: test
   only:
     - merge_request
   script:
-    - make lint
+    - task lint
 
 format:
   stage: test
   only:
     - merge_request
   script:
-    - make format
+    - task format
 
-test:
+test:unit:
   stage: test
   only:
     - merge_request
   script:
-    - make test
+    - task unit_tests
 
-svelte:check:
+check:
   stage: test
   only:
     - merge_request
   script:
-    - make svelte-check
-
-test:e2e:
-  stage: test
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main"'
-    - if: "$CI_MERGE_REQUEST_LABELS =~ /CI:E2E/"
-  script:
-    - export VITE_BANTER_BUS_CORE_API_URL=http://banter-bus-core-api:8080
-    - export VITE_BANTER_BUS_GUI_DISCONNECT_TIMER_IN_SECONDS=5
-  artifacts:
-    when: always
-    paths:
-      - e2e/hooks/**/*.webm
-    expire_in: 1 week
-
-publish:netlify:
-  stage: publish
-  image: node:16
-  only:
-    - main
-  script:
-    - npm install -g netlify-cli --unsafe-perm=true
-    - export MODE="production"
-    - npm run deploy -- --prod --site $NETLIFY_SITE_ID --auth $NETLIFY_PERSONAL_TOKEN --message "$CI_COMMIT_TITLE" --build
+    - task check

@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let type: string = 'submit';
+	export let type = 'submit';
 </script>
 
 <button
