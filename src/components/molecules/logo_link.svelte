@@ -1,0 +1,4 @@
+<a href="/" class="mb-6 flex items-center text-2xl font-semibold text-gray-900 dark:text-white">
+	<img class="mr-2 h-8 w-8" src="/logo.png" alt="logo" />
+	Bookmarkey
+</a>

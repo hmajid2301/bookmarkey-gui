@@ -1,9 +1,13 @@
-// See https://kit.svelte.dev/docs/types#app
+/// <reference types="@sveltejs/kit" />
+
+// See https://kit.svelte.dev/docs/types#the-app-namespace
 // for information about these interfaces
-// and what to do when importing types
 declare namespace App {
-	// interface Locals {}
-	// interface PageData {}
-	// interface Error {}
+	type PocketBase = import('pocketbase').default;
+	interface Locals {
+		user?: import('pocketbase').Record | import('pocketbase').Admin | null | undefined;
+		pb?: PocketBase;
+	}
+
 	// interface Platform {}
 }

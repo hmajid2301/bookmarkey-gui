@@ -10,7 +10,7 @@
 	>
 		Create an account
 	</h1>
-	<form class="space-y-4 md:space-y-6" action="#">
+	<form class="space-y-4 md:space-y-6" action="?/register" method="post">
 		<Inputs
 			type="email"
 			name="email"
@@ -27,7 +27,7 @@
 		/>
 		<Inputs
 			type="password"
-			name="confirm_password"
+			name="passwordConfirm"
 			labelName="Confirm Password"
 			required={true}
 			placeholder="••••••••"
@@ -53,7 +53,7 @@
 	</div>
 	<p class="text-sm font-light text-gray-500 dark:text-gray-400">
 		Already have an account? <a
-			href="/login"
+			href="/account/login"
 			class="text-primary-600 dark:text-primary-500 font-medium hover:underline">Login here</a
 		>
 	</p>
