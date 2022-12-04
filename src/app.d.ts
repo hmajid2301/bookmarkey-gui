@@ -11,3 +11,7 @@ declare namespace App {
 
 	// interface Platform {}
 }
+
+interface ImportMetaEnv {
+	VITE_POCKET_BASE_URL: string;
+}

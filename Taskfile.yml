@@ -1,8 +1,15 @@
 version: '3'
 
 tasks:
+  build:
+    cmds:
+      - npm run build
+    env:
+      NETLIFY: true
+
   start:
     cmds:
+      - docker compose up --build -d
       - npm run dev -- --open
 
   lint:

@@ -1,8 +1,9 @@
 import type { Handle } from '@sveltejs/kit';
 import PocketBase from 'pocketbase';
+import { config } from './config';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	event.locals.pb = new PocketBase('http://localhost:8090');
+	event.locals.pb = new PocketBase(config.PocketBaseURL);
 	event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');
 
 	if (!event.locals.pb.authStore.isValid) {
