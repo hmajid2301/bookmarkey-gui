@@ -27,3 +27,7 @@ tasks:
   check:
     cmds:
       - npm run check
+
+  prepare:
+    cmds:
+      - npm run prepare
