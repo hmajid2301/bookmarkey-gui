@@ -2,8 +2,10 @@
 	import Button from '~/components/atoms/button.svelte';
 	import Inputs from '~/components/atoms/inputs.svelte';
 	import SignInGroup from '~/components/molecules/sign_in_group.svelte';
+	import type { PageData } from './$types';
 
 	export let form: { notVerified: boolean };
+	export let data: PageData;
 </script>
 
 <div class="space-y-4 p-6 sm:p-8 md:space-y-6">
@@ -57,7 +59,7 @@
 		<span class="h-px w-16 bg-gray-100" />
 	</div>
 
-	<SignInGroup />
+	<SignInGroup authProviders={data.authProviders} />
 	<p class="text-sm font-light text-gray-500 dark:text-gray-400">
 		Don't have an account? <a
 			href="/account/signup"

@@ -1,7 +1,10 @@
-<script>
+<script lang="ts">
 	import Button from '~/components/atoms/button.svelte';
 	import Inputs from '~/components/atoms/inputs.svelte';
 	import SignInGroup from '~/components/molecules/sign_in_group.svelte';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
 </script>
 
 <div class="space-y-4 p-6 sm:p-8 md:space-y-6">
@@ -39,7 +42,7 @@
 		<span class="font-normal text-gray-300">or</span>
 		<span class="h-px w-16 bg-gray-100" />
 	</div>
-	<SignInGroup />
+	<SignInGroup authProviders={data.authProviders} />
 
 	<div class="mt-4 text-center text-sm text-gray-500">
 		By signing up, you agree to the
