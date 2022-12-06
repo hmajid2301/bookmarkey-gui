@@ -19,7 +19,7 @@
 			name="email"
 			labelName="Email"
 			required={true}
-			placeholder="hello@haseebmajid.dev"
+			placeholder="your@email.com"
 		/>
 		<Inputs
 			type="password"

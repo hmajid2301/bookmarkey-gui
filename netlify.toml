@@ -3,11 +3,13 @@ publish = "build"
 command = "npm run build"
 
 [context.production.environment]
-VITE_POCKET_BASE_URL = "bookmarkey.fly.dev"
+NETLIFY = "true"
+VITE_POCKET_BASE_URL = "https://bookmarkey.fly.dev"
 
 [context.next.environment]
 
 [context.deploy-preview]
 
 [context.deploy-preview.environment]
-VITE_POCKET_BASE_URL = "bookmarkey.fly.dev"
+NETLIFY = "true"
+VITE_POCKET_BASE_URL = "https://bookmarkey.fly.dev"

@@ -9,16 +9,6 @@ before_script:
   - npm install -g @go-task/cli
   - npm ci
 
-deploy:preview:
-  stage: test
-  only:
-    - merge_request
-  variables:
-    NETLIFY: 'true'
-  script:
-    - npm install -g netlify-cli --unsafe-perm=true
-    - netlify deploy --build --context deploy-preview --site $NETLIFY_SITE_ID --auth $NETLIFY_PERSONAL_TOKEN --message "$CI_COMMIT_TITLE"
-
 lint:
   stage: test
   only:
@@ -46,13 +36,3 @@ check:
     - merge_request
   script:
     - task check
-
-deploy:
-  stage: deploy
-  only:
-    - main
-  variables:
-    NETLIFY: 'true'
-  script:
-    - npm install -g netlify-cli --unsafe-perm=true
-    - netlify deploy --build --context prod --site $NETLIFY_SITE_ID --auth $NETLIFY_PERSONAL_TOKEN --message "$CI_COMMIT_TITLE"
