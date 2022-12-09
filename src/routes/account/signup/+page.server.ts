@@ -10,6 +10,14 @@ export const actions: Actions = {
 			console.log('Error creating user', err);
 		}
 
-		throw redirect(303, '/account/login');
+		try {
+			await locals.pb
+				?.collection('users')
+				.authWithPassword(body['email'] as string, body['password'] as string);
+		} catch (err) {
+			console.log('Error logging in user', err);
+		}
+
+		throw redirect(303, '/');
 	}
 };
