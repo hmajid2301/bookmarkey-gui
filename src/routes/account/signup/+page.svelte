@@ -9,8 +9,7 @@
 
 <div class="space-y-4 p-6 sm:p-8 md:space-y-6">
 	<h1
-		class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl"
-	>
+		class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
 		Create an account
 	</h1>
 	<form class="space-y-4 md:space-y-6" action="?/register" method="post">
@@ -19,22 +18,19 @@
 			name="email"
 			labelName="Email"
 			required={true}
-			placeholder="your@email.com"
-		/>
+			placeholder="your@email.com" />
 		<Inputs
 			type="password"
 			name="password"
 			labelName="Password"
 			required={true}
-			placeholder="••••••••"
-		/>
+			placeholder="••••••••" />
 		<Inputs
 			type="password"
 			name="passwordConfirm"
 			labelName="Confirm Password"
 			required={true}
-			placeholder="••••••••"
-		/>
+			placeholder="••••••••" />
 		<Button>Create Account</Button>
 	</form>
 	<div class="my-5 flex items-center justify-center space-x-2">
@@ -57,7 +53,8 @@
 	<p class="text-sm font-light text-gray-500 dark:text-gray-400">
 		Already have an account? <a
 			href="/account/login"
-			class="text-primary-600 dark:text-primary-500 font-medium hover:underline">Login here</a
-		>
+			class="text-primary-600 dark:text-primary-500 font-medium hover:underline">
+			Login here
+		</a>
 	</p>
 </div>
