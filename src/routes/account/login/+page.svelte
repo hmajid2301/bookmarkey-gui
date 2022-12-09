@@ -2,9 +2,9 @@
 	import Button from '~/components/atoms/button.svelte';
 	import Inputs from '~/components/atoms/inputs.svelte';
 	import SignInGroup from '~/components/molecules/sign_in_group.svelte';
-	import type { PageData } from './$types';
+	import type { ActionData, PageData } from './$types';
 
-	export let form: { notVerified: boolean };
+	export let form: ActionData;
 	export let data: PageData;
 </script>
 
