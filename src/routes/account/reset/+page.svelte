@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { Alert } from 'flowbite-svelte';
+
 	import Button from '~/components/atoms/button.svelte';
 	import Inputs from '~/components/atoms/inputs.svelte';
 	import type { ActionData } from './$types';
@@ -21,22 +23,22 @@
 		<Button>Reset Password</Button>
 	</form>
 	{#if form?.success}
-		<div
-			class="mb-4 flex border-t-4 border-green-500 bg-green-100 p-4 dark:bg-green-200"
-			role="alert">
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				class="h-6 w-6 flex-shrink-0 stroke-current"
-				fill="none"
-				viewBox="0 0 24 24">
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-			</svg>
-			<div class="ml-3 text-sm font-medium text-green-700">Successfully sent password reset.</div>
-		</div>
+		<Alert color="green" accent>
+			<span slot="icon">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-6 w-6 flex-shrink-0 stroke-current"
+					fill="none"
+					viewBox="0 0 24 24">
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+				</svg>
+			</span>
+			<span class="font-medium">Successfully sent password reset.</span>
+		</Alert>
 	{/if}
 	<div class="my-5 flex items-center justify-center space-x-2">
 		<span class="h-px w-16 bg-gray-100" />
