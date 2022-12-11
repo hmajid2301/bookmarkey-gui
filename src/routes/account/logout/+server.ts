@@ -1,7 +1,8 @@
 import { redirect } from '@sveltejs/kit';
+import type { RequestEvent, RequestHandler } from './$types';
 
-export const POST = ({ locals }: { locals: App.Locals }) => {
+export const GET: RequestHandler = ({ locals }: RequestEvent) => {
 	locals.pb?.authStore.clear();
 	locals.user = undefined;
-	throw redirect(303, '/account/login');
+	throw redirect(303, '/');
 };

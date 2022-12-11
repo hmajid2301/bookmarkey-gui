@@ -17,12 +17,12 @@ export const GET: RequestHandler = async ({ locals, url, cookies }: RequestEvent
 	}
 	const provider = authMethods.authProviders.find((element) => element.name === providerName);
 	if (!provider) {
-		console.log('Provider');
+		console.log('Provider not found');
 		throw redirect(303, '/account/login');
 	}
 
 	if (expectedState !== state) {
-		console.log('state');
+		console.log('state does not match expected', expectedState, state);
 		throw redirect(303, '/account/login');
 	}
 
@@ -34,5 +34,7 @@ export const GET: RequestHandler = async ({ locals, url, cookies }: RequestEvent
 		console.log('Error logging in with 0Auth user', err);
 	}
 
-	throw redirect(303, '/');
+	// Something is broken here: https://github.com/pocketbase/pocketbase/discussions/903
+	return new Response('123456');
+	// throw redirect(303, '/');
 };

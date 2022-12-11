@@ -1,7 +1,14 @@
+import type { LoggedIn } from '~/components/organisms/navbar.svelte';
 import type { LayoutServerLoad } from './$types';
 
-export const load: LayoutServerLoad = async ({ locals }) => {
+export type OutputType = { loggedIn: LoggedIn };
+
+export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
 	return {
-		user: !locals.user ? undefined : locals.user
+		loggedIn: {
+			isLoggedIn: locals.user ? true : false,
+			avatar: locals.user?.avatar,
+			email: locals.user?.email
+		}
 	};
 };

@@ -10,7 +10,6 @@ export const actions: Actions = {
 				.authWithPassword(body['email'] as string, body['password'] as string);
 
 			if (!locals.pb?.authStore?.model?.verified) {
-				locals.pb?.authStore.clear();
 				return {
 					notVerified: true
 				};

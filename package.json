@@ -12,6 +12,7 @@
 		"test:unit": "vitest",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
+		"sync": "svelte-kit sync",
 		"prepare": "husky install"
 	},
 	"devDependencies": {

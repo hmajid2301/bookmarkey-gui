@@ -34,6 +34,7 @@
 		<div class="flex items-center md:order-2">
 			<NavUl {hidden}>
 				<NavLi href="/account/login">Login</NavLi>
+				<NavLi href="/account/signup">Sign Up</NavLi>
 			</NavUl>
 			<Theme />
 		</div>
@@ -50,7 +51,7 @@
 				<DropdownItem>Dashboard</DropdownItem>
 				<DropdownItem>Settings</DropdownItem>
 				<DropdownDivider />
-				<DropdownItem href="/account/signout">Sign out</DropdownItem>
+				<DropdownItem href="/account/logout">Sign out</DropdownItem>
 			</Dropdown>
 		{/if}
 		<NavUl {hidden}>

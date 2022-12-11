@@ -8,6 +8,8 @@
 	function gotoAuthProvider(providerName: string) {
 		const provider = authProviders[providerName];
 		if (browser) {
+			document.cookie = `state=`;
+			document.cookie = `provider=`;
 			document.cookie = `state=${provider?.state}`;
 			document.cookie = `provider=${provider?.name}`;
 		}

@@ -31,3 +31,7 @@ tasks:
   prepare:
     cmds:
       - npm run prepare
+
+  update_types:
+    cmds:
+      - npm run sync
