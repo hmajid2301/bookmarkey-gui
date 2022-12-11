@@ -34,7 +34,5 @@ export const GET: RequestHandler = async ({ locals, url, cookies }: RequestEvent
 		console.log('Error logging in with 0Auth user', err);
 	}
 
-	// Something is broken here: https://github.com/pocketbase/pocketbase/discussions/903
-	return new Response('123456');
-	// throw redirect(303, '/');
+	throw redirect(303, '/');
 };
