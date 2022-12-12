@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { Alert } from 'flowbite-svelte';
-
 	import Button from '~/components/atoms/button.svelte';
-	import Inputs from '~/components/atoms/inputs.svelte';
+	import DangerAlert from '~/components/atoms/fail_alert.svelte';
+	import Input from '~/components/atoms/input.svelte';
 	import SignInGroup from '~/components/molecules/sign_in_group.svelte';
 	import type { ActionData, PageData } from './$types';
 
@@ -16,40 +15,27 @@
 		Login to your account
 	</h1>
 	<form class="space-y-4 md:space-y-6" action="?/login" method="post">
-		<Inputs
+		<Input
 			type="email"
 			name="email"
 			labelName="Email"
 			required={true}
-			placeholder="your@email.com" />
-		<Inputs
+			placeholder="your@email.com"
+			errors={form?.errors?.email} />
+		<Input
 			type="password"
 			name="password"
 			labelName="Password"
 			required={true}
-			placeholder="••••••••" />
+			placeholder="••••••••"
+			errors={form?.errors?.password} />
 		<div class="flex items-center justify-between">
 			<a href="/account/reset" class="link">Forgot password?</a>
 		</div>
 		<Button>Login</Button>
 	</form>
-	{#if form?.notVerified}
-		<Alert color="red" accent>
-			<span slot="icon">
-				<svg
-					aria-hidden="true"
-					class="h-5 w-5"
-					fill="currentColor"
-					viewBox="0 0 20 20"
-					xmlns="http://www.w3.org/2000/svg">
-					<path
-						fill-rule="evenodd"
-						d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-						clip-rule="evenodd" />
-				</svg>
-			</span>
-			<span>You must verify your email before you can login.</span>
-		</Alert>
+	{#if form?.loginError}
+		<DangerAlert text={form?.loginError} />
 	{/if}
 	<div class="my-5 flex items-center justify-center space-x-2">
 		<span class="h-px w-16 bg-gray-100" />

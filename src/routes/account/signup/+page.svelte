@@ -1,9 +1,11 @@
 <script lang="ts">
 	import Button from '~/components/atoms/button.svelte';
-	import Inputs from '~/components/atoms/inputs.svelte';
+	import DangerAlert from '~/components/atoms/fail_alert.svelte';
+	import Inputs from '~/components/atoms/input.svelte';
 	import SignInGroup from '~/components/molecules/sign_in_group.svelte';
-	import type { PageData } from './$types';
+	import type { ActionData, PageData } from './$types';
 
+	export let form: ActionData;
 	export let data: PageData;
 </script>
 
@@ -18,21 +20,27 @@
 			name="email"
 			labelName="Email"
 			required={true}
-			placeholder="your@email.com" />
+			placeholder="your@email.com"
+			errors={form?.errors?.email} />
 		<Inputs
 			type="password"
 			name="password"
 			labelName="Password"
 			required={true}
-			placeholder="••••••••" />
+			placeholder="••••••••"
+			errors={form?.errors?.password} />
 		<Inputs
 			type="password"
 			name="passwordConfirm"
 			labelName="Confirm Password"
 			required={true}
-			placeholder="••••••••" />
+			placeholder="••••••••"
+			errors={form?.errors?.passwordConfirm} />
 		<Button>Create Account</Button>
 	</form>
+	{#if form?.signupError}
+		<DangerAlert text={form?.signupError} />
+	{/if}
 	<div class="my-5 flex items-center justify-center space-x-2">
 		<span class="h-px w-16 bg-gray-100" />
 		<span class="font-normal text-gray-300">or</span>

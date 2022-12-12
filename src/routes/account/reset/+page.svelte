@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Alert } from 'flowbite-svelte';
-
 	import Button from '~/components/atoms/button.svelte';
-	import Inputs from '~/components/atoms/inputs.svelte';
+	import FailAlert from '~/components/atoms/fail_alert.svelte';
+	import Inputs from '~/components/atoms/input.svelte';
+	import SuccessAlert from '~/components/atoms/success_alert.svelte';
 	import type { ActionData } from './$types';
 
 	export let form: ActionData;
@@ -19,26 +19,15 @@
 			name="email"
 			labelName="Email"
 			required={true}
-			placeholder="your@email.com" />
+			placeholder="your@email.com"
+			errors={form?.errors?.email} />
 		<Button>Reset Password</Button>
 	</form>
 	{#if form?.success}
-		<Alert color="green" accent>
-			<span slot="icon">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					class="h-6 w-6 flex-shrink-0 stroke-current"
-					fill="none"
-					viewBox="0 0 24 24">
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-				</svg>
-			</span>
-			<span class="font-medium">Successfully sent password reset.</span>
-		</Alert>
+		<SuccessAlert text="Successfully sent password reset" />
+	{/if}
+	{#if form?.resetErr}
+		<FailAlert text={form.resetErr} />
 	{/if}
 	<div class="my-5 flex items-center justify-center space-x-2">
 		<span class="h-px w-16 bg-gray-100" />

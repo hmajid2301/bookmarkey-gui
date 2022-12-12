@@ -1,22 +1,41 @@
-import { redirect, type Actions } from '@sveltejs/kit';
+import { invalid, redirect, type Actions } from '@sveltejs/kit';
+import { ClientResponseError } from 'pocketbase';
+import { z } from 'zod';
+
+export const loginSchema = z.object({
+	email: z
+		.string({ required_error: 'Email is required' })
+		.email({ message: 'Email must be a valid email.' }),
+	password: z.string({ required_error: 'Password is required' })
+});
 
 export const actions: Actions = {
 	login: async ({ locals, request }) => {
-		const body = Object.fromEntries(await request.formData());
+		const data = Object.fromEntries(await request.formData());
+		const result = loginSchema.safeParse(data);
+
+		if (!result.success) {
+			return invalid(400, {
+				data: data,
+				errors: result.error.flatten().fieldErrors
+			});
+		}
 
 		try {
 			await locals.pb
 				?.collection('users')
-				.authWithPassword(body['email'] as string, body['password'] as string);
-
-			if (!locals.pb?.authStore?.model?.verified) {
-				return {
-					notVerified: true
-				};
-			}
+				.authWithPassword(result.data.email, result.data.password);
 		} catch (err) {
-			console.log('Error logging in user', err);
-			return;
+			if (err instanceof ClientResponseError) {
+				if (err.status == 400) {
+					return {
+						loginError: 'Wrong email and password combination.'
+					};
+				}
+			}
+			return {
+				loginError: 'Failed to login, please try again later.'
+			};
 		}
 
 		throw redirect(303, '/');
