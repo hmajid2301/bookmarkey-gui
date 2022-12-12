@@ -4,7 +4,10 @@ import { sveltekit } from '@sveltejs/kit/vite';
 const config = {
 	plugins: [sveltekit()],
 	test: {
-		include: ['src/**/*.{test,spec}.{js,ts}']
+		globals: true,
+		environment: 'jsdom',
+		include: ['src/**/*.{test,spec}.{js,ts}'],
+		setupFiles: ['setupTest.ts']
 	}
 };
 

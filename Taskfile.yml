@@ -22,7 +22,7 @@ tasks:
 
   unit_tests:
     cmds:
-      - npm run test:unit
+      - npm run coverage
 
   check:
     cmds:

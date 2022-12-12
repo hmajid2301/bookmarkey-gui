@@ -1,7 +1,7 @@
-import { invalid, redirect, type Actions } from '@sveltejs/kit';
+import { fail, redirect, type Actions } from '@sveltejs/kit';
 import { z } from 'zod';
 
-export const signupSchema = z
+const signupSchema = z
 	.object({
 		email: z
 			.string({ required_error: 'Email is required' })
@@ -40,7 +40,7 @@ export const actions: Actions = {
 		const result = signupSchema.safeParse(data);
 
 		if (!result.success) {
-			return invalid(400, {
+			return fail(400, {
 				data: data,
 				errors: result.error.flatten().fieldErrors
 			});
