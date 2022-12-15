@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Button from '~/components/atoms/button.svelte';
 	import DangerAlert from '~/components/atoms/fail_alert.svelte';
-	import Inputs from '~/components/atoms/input.svelte';
+	import Input from '~/components/atoms/input.svelte';
+	import PasswordInput from '~/components/molecules/password_input.svelte';
 	import SignInGroup from '~/components/molecules/sign_in_group.svelte';
 	import type { ActionData, PageData } from './$types';
 
@@ -15,26 +16,23 @@
 		Create an account
 	</h1>
 	<form class="space-y-4 md:space-y-6" action="?/register" method="post">
-		<Inputs
+		<Input
 			type="email"
 			name="email"
 			labelName="Email"
 			required={true}
 			placeholder="your@email.com"
+			value={form?.data?.email}
 			errors={form?.errors?.email} />
-		<Inputs
-			type="password"
+		<PasswordInput
 			name="password"
 			labelName="Password"
-			required={true}
-			placeholder="••••••••"
+			value={form?.data?.password}
 			errors={form?.errors?.password} />
-		<Inputs
-			type="password"
+		<PasswordInput
 			name="passwordConfirm"
 			labelName="Confirm Password"
-			required={true}
-			placeholder="••••••••"
+			value={form?.data?.passwordConfirm}
 			errors={form?.errors?.passwordConfirm} />
 		<Button>Create Account</Button>
 	</form>

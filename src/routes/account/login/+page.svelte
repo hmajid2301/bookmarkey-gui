@@ -21,6 +21,7 @@
 			labelName="Email"
 			required={true}
 			placeholder="your@email.com"
+			value={form?.data.email}
 			errors={form?.errors?.email} />
 		<Input
 			type="password"
@@ -28,6 +29,7 @@
 			labelName="Password"
 			required={true}
 			placeholder="••••••••"
+			value={form?.data.password}
 			errors={form?.errors?.password} />
 		<div class="flex items-center justify-between">
 			<a href="/account/reset" class="link">Forgot password?</a>

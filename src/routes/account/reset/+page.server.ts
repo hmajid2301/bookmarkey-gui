@@ -1,7 +1,11 @@
 import { fail, type Actions } from '@sveltejs/kit';
 import { z } from 'zod';
 
-const resetSchema = z.object({
+interface Reset {
+	email: string;
+}
+
+const resetSchema: z.ZodType<Reset> = z.object({
 	email: z
 		.string({ required_error: 'Email is required' })
 		.email({ message: 'Email must be a valid email.' })
@@ -9,7 +13,7 @@ const resetSchema = z.object({
 
 export const actions: Actions = {
 	resetPassword: async ({ locals, request }) => {
-		const data = Object.fromEntries(await request.formData());
+		const data = Object.fromEntries((await request.formData()) as Iterable<[Reset]>);
 		const result = resetSchema.safeParse(data);
 
 		if (!result.success) {

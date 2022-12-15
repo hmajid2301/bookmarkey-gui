@@ -21,7 +21,7 @@
 		"@popperjs/core": "^2.11.6",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/adapter-netlify": "^1.0.0-next.84",
-		"@sveltejs/kit": "next",
+		"@sveltejs/kit": "^1.0.0-next.589",
 		"@testing-library/svelte": "^3.2.2",
 		"@typescript-eslint/eslint-plugin": "^5.27.0",
 		"@typescript-eslint/parser": "^5.27.0",
@@ -52,5 +52,8 @@
 		"zod": "^3.19.1",
 		"zod-form-data": "^1.2.4"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@vitest/coverage-c8": "^0.25.8"
+	}
 }

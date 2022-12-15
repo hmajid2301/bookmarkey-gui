@@ -33,8 +33,10 @@
 		</NavBrand>
 		<div class="flex items-center md:order-2">
 			<NavUl {hidden}>
-				<NavLi href="/account/login">Login</NavLi>
-				<NavLi href="/account/signup">Sign Up</NavLi>
+				{#if !loggedIn.isLoggedIn}
+					<NavLi href="/account/login">Login</NavLi>
+					<NavLi href="/account/signup">Sign Up</NavLi>
+				{/if}
 			</NavUl>
 			<Theme />
 		</div>

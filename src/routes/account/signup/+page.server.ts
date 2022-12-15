@@ -1,7 +1,13 @@
 import { fail, redirect, type Actions } from '@sveltejs/kit';
 import { z } from 'zod';
 
-const signupSchema = z
+interface SignUp {
+	email: string;
+	password: string;
+	passwordConfirm: string;
+}
+
+const signupSchema: z.ZodType<SignUp> = z
 	.object({
 		email: z
 			.string({ required_error: 'Email is required' })
@@ -36,7 +42,7 @@ const signupSchema = z
 
 export const actions: Actions = {
 	register: async ({ locals, request }) => {
-		const data = Object.fromEntries(await request.formData());
+		const data: SignUp = Object.fromEntries((await request.formData()) as Iterable<[SignUp]>);
 		const result = signupSchema.safeParse(data);
 
 		if (!result.success) {
@@ -46,6 +52,7 @@ export const actions: Actions = {
 			});
 		}
 
+		result.data;
 		try {
 			await locals.pb
 				?.collection('users')

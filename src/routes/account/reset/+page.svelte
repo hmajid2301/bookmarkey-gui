@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Button from '~/components/atoms/button.svelte';
 	import FailAlert from '~/components/atoms/fail_alert.svelte';
-	import Inputs from '~/components/atoms/input.svelte';
+	import Input from '~/components/atoms/input.svelte';
 	import SuccessAlert from '~/components/atoms/success_alert.svelte';
 	import type { ActionData } from './$types';
 
@@ -14,12 +14,13 @@
 		Reset your password
 	</h1>
 	<form class="space-y-4 md:space-y-6" action="?/resetPassword" method="post">
-		<Inputs
+		<Input
 			type="email"
 			name="email"
 			labelName="Email"
 			required={true}
 			placeholder="your@email.com"
+			value={form?.data?.email}
 			errors={form?.errors?.email} />
 		<Button>Reset Password</Button>
 	</form>
