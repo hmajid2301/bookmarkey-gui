@@ -12,12 +12,15 @@
 <div class="space-y-4 p-6 sm:p-8 md:space-y-6">
 	<h1
 		class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
-		Forgot your password?
+		Check your inbox
 	</h1>
 	<p class="font-light text-gray-500 dark:text-gray-400">
-		Don't fret! Just type in your email and we will send you a code to reset your password!
+		We are glad, that you're with us. We've sent you a verification link to the email address.
 	</p>
-	<form class="space-y-4 md:space-y-6" action="?/resetPassword" method="post">
+	<p class="font-light text-gray-500 dark:text-gray-400">
+		If you haven't received the email, try to send it again.
+	</p>
+	<form class="space-y-4 md:space-y-6" action="?/sendEmailVerification" method="post">
 		<Input
 			type="email"
 			name="email"
@@ -26,10 +29,10 @@
 			placeholder="your@email.com"
 			value={form?.data?.email}
 			errors={form?.errors?.email} />
-		<Button>Reset Password</Button>
+		<Button>Resend Email Verification</Button>
 	</form>
 	{#if form?.success}
-		<SuccessAlert text="Successfully sent password reset" />
+		<SuccessAlert text="Successfully sent verification link" />
 	{/if}
 	{#if form?.resetErr}
 		<FailAlert text={form.resetErr} />
