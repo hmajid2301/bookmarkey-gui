@@ -14,7 +14,7 @@ tasks:
 
   lint:
     cmds:
-      - npm run lint
+      - npm run lint -- --fix
 
   format:
     cmds:

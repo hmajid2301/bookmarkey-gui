@@ -1,5 +1,6 @@
 import type { Handle } from '@sveltejs/kit';
 import PocketBase from 'pocketbase';
+
 import { config } from './config';
 
 export const handle: Handle = async ({ event, resolve }) => {

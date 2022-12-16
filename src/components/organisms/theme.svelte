@@ -105,9 +105,3 @@
 		</span>
 	</span>
 </button>
-
-<style global type="postcss">
-	body {
-		@apply dark:bg-gray-800;
-	}
-</style>

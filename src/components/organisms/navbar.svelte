@@ -12,8 +12,9 @@
 		DropdownDivider
 	} from 'flowbite-svelte';
 
-	import LogoLink from '~/components/molecules/logo_link.svelte';
 	import Theme from './theme.svelte';
+
+	import LogoLink from '~/components/molecules/logo_link.svelte';
 
 	export interface LoggedIn {
 		isLoggedIn: boolean;

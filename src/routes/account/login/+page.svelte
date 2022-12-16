@@ -1,9 +1,10 @@
 <script lang="ts">
+	import type { ActionData, PageData } from './$types';
+
 	import Button from '~/components/atoms/button.svelte';
 	import DangerAlert from '~/components/atoms/fail_alert.svelte';
 	import Input from '~/components/atoms/input.svelte';
 	import SignInGroup from '~/components/molecules/sign_in_group.svelte';
-	import type { ActionData, PageData } from './$types';
 
 	export let form: ActionData;
 	export let data: PageData;

@@ -1,7 +1,9 @@
 <script lang="ts">
-	import Navbar from '~/components/organisms/navbar.svelte';
-	import '../app.css';
 	import type { LayoutData } from './$types';
+
+	import Navbar from '~/components/organisms/navbar.svelte';
+
+	import '../app.css';
 
 	export let data: LayoutData;
 </script>
