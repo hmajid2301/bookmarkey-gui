@@ -2,17 +2,16 @@
 	import {
 		Navbar,
 		NavBrand,
-		NavLi,
 		NavUl,
 		NavHamburger,
 		Avatar,
 		Dropdown,
 		DropdownItem,
 		DropdownHeader,
-		DropdownDivider
+		DropdownDivider,
+		Button,
+		DarkMode
 	} from 'flowbite-svelte';
-
-	import Theme from './theme.svelte';
 
 	import LogoLink from '~/components/molecules/logo_link.svelte';
 
@@ -33,19 +32,16 @@
 			<LogoLink />
 		</NavBrand>
 		<div class="flex items-center md:order-2">
-			<NavUl {hidden}>
-				{#if !loggedIn.isLoggedIn}
-					<NavLi href="/account/login">Login</NavLi>
-					<NavLi href="/account/signup">Sign Up</NavLi>
-				{/if}
-			</NavUl>
-			<Theme />
+			{#if !loggedIn.isLoggedIn}
+				<Button href="/account/login">Login</Button>
+			{/if}
+			<DarkMode />
 		</div>
 
+		<NavHamburger on:click={toggle} />
 		{#if loggedIn.isLoggedIn}
 			<div class="flex items-center md:order-2">
 				<Avatar id="avatar-menu" src={loggedIn.avatar} />
-				<NavHamburger on:click={toggle} class1="w-full md:flex md:w-auto md:order-1" />
 			</div>
 			<Dropdown placement="bottom" triggeredBy="#avatar-menu">
 				<DropdownHeader>
@@ -58,9 +54,12 @@
 			</Dropdown>
 		{/if}
 		<NavUl {hidden}>
-			<NavLi href="/" active={true}>Home</NavLi>
-			<NavLi href="/about">About</NavLi>
-			<NavLi href="/contact">Contact</NavLi>
+			<a
+				href="/"
+				class="rounded-md bg-gray-300 px-3 py-2 text-sm font-bold text-black dark:bg-gray-900 dark:text-white"
+				aria-current="page">
+				Home
+			</a>
 		</NavUl>
 	</Navbar>
 </header>
