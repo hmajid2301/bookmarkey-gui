@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
 
-	import Button from '~/components/atoms/button.svelte';
-	import FailAlert from '~/components/atoms/fail_alert.svelte';
-	import Input from '~/components/atoms/input.svelte';
-	import SuccessAlert from '~/components/atoms/success_alert.svelte';
+	import Button from '$lib/components/atoms/button.svelte';
+	import FailAlert from '$lib/components/atoms/fail_alert.svelte';
+	import Input from '$lib/components/atoms/input.svelte';
+	import SuccessAlert from '$lib/components/atoms/success_alert.svelte';
 
 	export let form: ActionData;
 </script>

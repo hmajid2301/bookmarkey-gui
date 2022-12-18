@@ -24,6 +24,13 @@ tasks:
     cmds:
       - npm run coverage
 
+  e2e_tests:
+    cmds:
+      - docker compose -f tests/docker-compose.test.yml up  -d
+      - npm run test
+    env:
+      VITE_POCKET_BASE_URL: 'http://localhost:9090'
+
   check:
     cmds:
       - npm run check

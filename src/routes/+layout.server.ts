@@ -1,6 +1,6 @@
 import type { LayoutServerLoad } from './$types';
 
-import type { LoggedIn } from '~/components/organisms/navbar.svelte';
+import type { LoggedIn } from '$lib/components/organisms/navbar.svelte';
 
 export type OutputType = { loggedIn: LoggedIn };
 

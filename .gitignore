@@ -46,3 +46,6 @@ node_modules
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,svelte,linux
 build/
 .netlify
+tests/pb_data/*
+!tests/pb_data/data.db
+test-results/

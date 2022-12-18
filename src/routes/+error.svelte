@@ -1,4 +1,4 @@
-<section class="bg-white dark:bg-gray-900">
+<!-- <section class="bg-white dark:bg-gray-900">
 	<div class="mx-auto max-w-screen-xl py-8 px-4 lg:py-16 lg:px-6">
 		<div class="mx-auto max-w-screen-sm text-center">
 			<h1
@@ -18,4 +18,9 @@
 			</a>
 		</div>
 	</div>
-</section>
+</section> -->
+<script>
+	import { page } from '$app/stores';
+</script>
+
+<h1>{$page.error.message}</h1>

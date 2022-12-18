@@ -1,9 +1,10 @@
 <script lang="ts">
 	import type { LayoutData } from './$types';
 
-	import Navbar from '~/components/organisms/navbar.svelte';
+	import Navbar from '$lib/components/organisms/navbar.svelte';
 
-	import '../app.css';
+	import '~/app.css';
+	import Footer from '$lib/components/organisms/footer.svelte';
 
 	export let data: LayoutData;
 </script>
@@ -13,4 +14,5 @@
 		<Navbar loggedIn={data.loggedIn} />
 		<slot />
 	</main>
+	<Footer />
 </div>
