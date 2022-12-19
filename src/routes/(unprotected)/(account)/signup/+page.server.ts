@@ -1,4 +1,5 @@
 import { fail, redirect, type Actions } from '@sveltejs/kit';
+import { Md5 } from 'ts-md5';
 import { z } from 'zod';
 
 interface SignUp {
@@ -52,13 +53,24 @@ export const actions: Actions = {
 			});
 		}
 
-		result.data;
+		const emailHash = Md5.hashStr(result.data.email);
+		const gravatarResp = await fetch(`https://www.gravatar.com/avatar/${emailHash}?s=200&d=404`);
+		let avatar = '/user.png';
+		if (gravatarResp.status === 404) {
+			avatar = `https://www.gravatar.com/avatar/${emailHash}?s=200`;
+		}
+
 		try {
-			await locals.pb
-				?.collection('users')
-				.create({ username: '', email: result.data.email, password: result.data.password });
+			await locals.pb?.collection('users').create({
+				username: '',
+				email: result.data.email,
+				password: result.data.password,
+				passwordConfirm: result.data.passwordConfirm,
+				avatar: avatar
+			});
 			await locals.pb?.collection('users').requestVerification(result.data.email);
 		} catch (err) {
+			console.log(err);
 			return {
 				signupError: 'Failed to sign up, please try again later.'
 			};

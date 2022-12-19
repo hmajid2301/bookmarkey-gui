@@ -54,8 +54,6 @@ tests:e2e:
     - apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
     - npx playwright install
     - task e2e_tests
-  after_script:
-    - cat a.txt
   artifacts:
     when: always
     paths:

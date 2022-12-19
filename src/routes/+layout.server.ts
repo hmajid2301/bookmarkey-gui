@@ -1,15 +1,16 @@
 import type { LayoutServerLoad } from './$types';
 
-import type { LoggedIn } from '$lib/components/organisms/navbar.svelte';
+import type { User } from '~/lib/types/logged_in';
 
-export type OutputType = { loggedIn: LoggedIn };
+export type OutputType = { user: User };
 
 export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
 	return {
-		loggedIn: {
+		user: {
 			isLoggedIn: locals.pb?.authStore.isValid ? true : false,
-			avatar: locals.user?.avatar,
-			email: locals.user?.email
+			email: locals.user?.email,
+			nickname: locals.user?.name || locals.user?.email,
+			avatar: locals.user?.avatar
 		}
 	};
 };

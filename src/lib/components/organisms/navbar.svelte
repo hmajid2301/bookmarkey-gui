@@ -1,29 +1,7 @@
 <script lang="ts" context="module">
-	import {
-		Navbar,
-		NavBrand,
-		NavUl,
-		NavHamburger,
-		Avatar,
-		Dropdown,
-		DropdownItem,
-		DropdownHeader,
-		DropdownDivider,
-		Button,
-		DarkMode
-	} from 'flowbite-svelte';
+	import { Navbar, NavBrand, NavUl, NavHamburger, Button, DarkMode } from 'flowbite-svelte';
 
-	import LogoLink from '$lib/components/molecules/logo_link.svelte';
-
-	export interface LoggedIn {
-		isLoggedIn: boolean;
-		email: string;
-		avatar: string;
-	}
-</script>
-
-<script lang="ts">
-	export let loggedIn: LoggedIn;
+	import LogoLink from '~/lib/components/molecules/logo_link.svelte';
 </script>
 
 <header>
@@ -32,27 +10,11 @@
 			<LogoLink />
 		</NavBrand>
 		<div class="flex items-center md:order-2">
-			{#if !loggedIn.isLoggedIn}
-				<Button href="/account/login">Login</Button>
-			{/if}
+			<Button href="/login">Login</Button>
 			<DarkMode />
 		</div>
 
 		<NavHamburger on:click={toggle} />
-		{#if loggedIn.isLoggedIn}
-			<div class="flex items-center md:order-2">
-				<Avatar id="avatar-menu" src={loggedIn.avatar} />
-			</div>
-			<Dropdown placement="bottom" triggeredBy="#avatar-menu">
-				<DropdownHeader>
-					<span class="block truncate text-sm font-medium">{loggedIn.email}</span>
-				</DropdownHeader>
-				<DropdownItem>Dashboard</DropdownItem>
-				<DropdownItem>Settings</DropdownItem>
-				<DropdownDivider />
-				<DropdownItem href="/account/logout">Sign out</DropdownItem>
-			</Dropdown>
-		{/if}
 		<NavUl {hidden}>
 			<a
 				href="/"

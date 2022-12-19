@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { ActionData, PageData } from './$types';
 
-	import Button from '$lib/components/atoms/button.svelte';
-	import DangerAlert from '$lib/components/atoms/fail_alert.svelte';
-	import Input from '$lib/components/atoms/input.svelte';
-	import PasswordInput from '$lib/components/molecules/password_input.svelte';
-	import SignInGroup from '$lib/components/molecules/sign_in_group.svelte';
+	import AccountButton from '~/lib/components/atoms/account_button.svelte';
+	import DangerAlert from '~/lib/components/atoms/fail_alert.svelte';
+	import Input from '~/lib/components/atoms/input.svelte';
+	import PasswordInput from '~/lib/components/molecules/password_input.svelte';
+	import SignInGroup from '~/lib/components/molecules/sign_in_group.svelte';
 
 	export let form: ActionData;
 	export let data: PageData;
@@ -35,7 +35,7 @@
 			labelName="Confirm Password"
 			value={form?.data?.passwordConfirm}
 			errors={form?.errors?.passwordConfirm} />
-		<Button>Create Account</Button>
+		<AccountButton>Create Account</AccountButton>
 	</form>
 	{#if form?.signupError}
 		<DangerAlert text={form?.signupError} />
@@ -59,7 +59,7 @@
 	</div>
 	<p class="text-sm font-light text-gray-500 dark:text-gray-400">
 		Already have an account? <a
-			href="/account/login"
+			href="/login"
 			class="text-primary-600 dark:text-primary-500 font-medium hover:underline">
 			Login here
 		</a>

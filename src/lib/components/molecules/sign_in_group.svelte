@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import SigninButton from '$lib/components/atoms/signin_button.svelte';
-	import type { AuthProviderWithRedirect } from '~/routes/account/types';
+	import SigninButton from '~/lib/components/atoms/signin_button.svelte';
+	import type { AuthProviderWithRedirect } from '~/routes/(unprotected)/(account)/types';
 
 	export let authProviders: Record<string, AuthProviderWithRedirect>;
 

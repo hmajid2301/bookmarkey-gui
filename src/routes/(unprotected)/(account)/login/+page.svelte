@@ -1,10 +1,11 @@
 <script lang="ts">
 	import type { ActionData, PageData } from './$types';
 
-	import Button from '$lib/components/atoms/button.svelte';
-	import DangerAlert from '$lib/components/atoms/fail_alert.svelte';
-	import Input from '$lib/components/atoms/input.svelte';
-	import SignInGroup from '$lib/components/molecules/sign_in_group.svelte';
+	import AccountButton from '~/lib/components/atoms/account_button.svelte';
+	import DangerAlert from '~/lib/components/atoms/fail_alert.svelte';
+	import Input from '~/lib/components/atoms/input.svelte';
+	import SignInGroup from '~/lib/components/molecules/sign_in_group.svelte';
+	import PasswordInput from '~/lib/components/molecules/password_input.svelte';
 
 	export let form: ActionData;
 	export let data: PageData;
@@ -24,18 +25,15 @@
 			placeholder="your@email.com"
 			value={form?.data.email}
 			errors={form?.errors?.email} />
-		<Input
-			type="password"
+		<PasswordInput
 			name="password"
 			labelName="Password"
-			required={true}
-			placeholder="••••••••"
 			value={form?.data.password}
 			errors={form?.errors?.password} />
 		<div class="flex items-center justify-between">
-			<a href="/account/reset" class="link">Forgot password?</a>
+			<a href="/reset" class="link">Forgot password?</a>
 		</div>
-		<Button>Login</Button>
+		<AccountButton>Login</AccountButton>
 	</form>
 	{#if form?.loginError}
 		<DangerAlert text={form?.loginError} />
@@ -48,6 +46,6 @@
 
 	<SignInGroup authProviders={data.authProviders} />
 	<p class="text-sm font-light text-gray-800 dark:text-gray-100">
-		Don't have an account? <a href="/account/signup" class="link">Sign up</a>
+		Don't have an account? <a href="/signup" class="link">Sign up</a>
 	</p>
 </div>
