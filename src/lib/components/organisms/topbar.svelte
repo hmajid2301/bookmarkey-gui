@@ -5,7 +5,6 @@
 <div class="mx-auto flex w-full max-w-screen-2xl justify-between">
 	<div class="hidden md:block">
 		<h1 class="mb-1 text-2xl font-bold text-blue-800 dark:text-blue-100">Hello 👋 {nickname}</h1>
-		<p class="hidden text-lg text-blue-900 dark:text-blue-200 lg:block">Dashboard overview</p>
 	</div>
 	<div class="flex flex-1 justify-between space-x-4 md:justify-end">
 		<div class="relative w-full md:max-w-xs">
