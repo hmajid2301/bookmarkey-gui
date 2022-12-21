@@ -9,6 +9,6 @@ test('Try to login', async ({ page, baseURL }) => {
 	const password = 'password11';
 	await page.locator('[name="password"]').type(password);
 
-	await page.locator('role=button[name=Login]').click();
+	await page.locator('button[type="submit"]').click();
 	await page.waitForURL(`${baseURL}/dashboard`);
 });

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
 
-	import AccountButton from '~/lib/components/atoms/account_button.svelte';
-	import FailAlert from '~/lib/components/atoms/fail_alert.svelte';
-	import Input from '~/lib/components/atoms/input.svelte';
-	import SuccessAlert from '~/lib/components/atoms/success_alert.svelte';
+	import FailAlert from '~/lib/components/molecules/danger_alert.svelte';
+	import EmailInput from '~/lib/components/molecules/email_input.svelte';
+	import FullWidthButton from '~/lib/components/molecules/full_width_button.svelte';
+	import SuccessAlert from '~/lib/components/molecules/success_alert.svelte';
 
 	export let form: ActionData;
 </script>
@@ -18,15 +18,8 @@
 		Don't fret! Just type in your email and we will send you a code to reset your password!
 	</p>
 	<form class="space-y-4 md:space-y-6" action="?/resetPassword" method="post">
-		<Input
-			type="email"
-			name="email"
-			labelName="Email"
-			required={true}
-			placeholder="your@email.com"
-			value={form?.data?.email}
-			errors={form?.errors?.email} />
-		<AccountButton>Reset Password</AccountButton>
+		<EmailInput value={form?.data.email} errors={form?.errors?.email} />
+		<FullWidthButton>Reset Password</FullWidthButton>
 	</form>
 	{#if form?.success}
 		<SuccessAlert text="Successfully sent password reset" />

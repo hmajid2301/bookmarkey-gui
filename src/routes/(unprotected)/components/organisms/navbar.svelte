@@ -1,16 +1,18 @@
 <script lang="ts" context="module">
-	import { Navbar, NavBrand, NavUl, NavHamburger, Button, DarkMode } from 'flowbite-svelte';
+	import { DarkMode, Navbar, NavBrand, NavHamburger, NavUl } from 'flowbite-svelte';
 
-	import LogoLink from '~/lib/components/molecules/logo_link.svelte';
+	import Button from '~/lib/components/atoms/button.svelte';
+	import Logo from '~/lib/components/atoms/logo.svelte';
 </script>
 
 <header>
 	<Navbar let:hidden let:toggle navClass="bg-slate-100 dark:border-slate-700 dark:bg-slate-800">
 		<NavBrand href="/">
-			<LogoLink />
+			<Logo />
 		</NavBrand>
-		<div class="flex items-center md:order-2">
-			<Button href="/login">Login</Button>
+		<div class="flex items-center space-x-4 md:order-2">
+			<Button extraClasses="mr-0 mb-0" href="/login">Login</Button>
+			<Button extraClasses="mr-0 mb-0" href="/signup">Sign Up</Button>
 			<DarkMode />
 		</div>
 

@@ -31,7 +31,7 @@
 	</div>
 
 	{#if note}
-		<div class="mt-1 text-xs text-gray-500 dark:text-slate-400">
+		<div class="mt-1 text-xs font-semibold text-gray-500 dark:text-slate-400">
 			{note}
 		</div>
 	{/if}

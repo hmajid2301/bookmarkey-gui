@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { ActionData, PageData } from './$types';
 
-	import AccountButton from '~/lib/components/atoms/account_button.svelte';
-	import DangerAlert from '~/lib/components/atoms/fail_alert.svelte';
-	import Input from '~/lib/components/atoms/input.svelte';
+	import DangerAlert from '~/lib/components/molecules/danger_alert.svelte';
+	import EmailInput from '~/lib/components/molecules/email_input.svelte';
+	import FullWidthButton from '~/lib/components/molecules/full_width_button.svelte';
 	import PasswordInput from '~/lib/components/molecules/password_input.svelte';
-	import SignInGroup from '~/lib/components/molecules/sign_in_group.svelte';
+	import OAuthLoginGroup from '~/routes/(unprotected)/components/molecules/oauth_login_buttons.svelte';
 
 	export let form: ActionData;
 	export let data: PageData;
@@ -17,14 +17,7 @@
 		Create an account
 	</h1>
 	<form class="space-y-4 md:space-y-6" action="?/register" method="post">
-		<Input
-			type="email"
-			name="email"
-			labelName="Email"
-			required={true}
-			placeholder="your@email.com"
-			value={form?.data?.email}
-			errors={form?.errors?.email} />
+		<EmailInput value={form?.data?.email} errors={form?.errors?.email} />
 		<PasswordInput
 			name="password"
 			labelName="Password"
@@ -33,9 +26,10 @@
 		<PasswordInput
 			name="passwordConfirm"
 			labelName="Confirm Password"
+			note="Required. Your password again"
 			value={form?.data?.passwordConfirm}
 			errors={form?.errors?.passwordConfirm} />
-		<AccountButton>Create Account</AccountButton>
+		<FullWidthButton>Create Account</FullWidthButton>
 	</form>
 	{#if form?.signupError}
 		<DangerAlert text={form?.signupError} />
@@ -45,7 +39,7 @@
 		<span class="font-normal text-gray-300">or</span>
 		<span class="h-px w-16 bg-gray-100" />
 	</div>
-	<SignInGroup authProviders={data.authProviders} />
+	<OAuthLoginGroup authProviders={data.authProviders} />
 
 	<div class="mt-4 text-center text-sm text-gray-500">
 		By signing up, you agree to the

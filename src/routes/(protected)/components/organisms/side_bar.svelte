@@ -1,6 +1,7 @@
 <script lang="ts">
-	import MenuLinks from '../molecules/menu_links.svelte';
-	import ProfileLink from '../molecules/profile_link.svelte';
+	import MenuLinks from '../../../../lib/components/molecules/menu_links.svelte';
+	import ProfileLink from '../../../../lib/components/molecules/profile_link.svelte';
+
 	import { page } from '$app/stores';
 
 	export let nickname: string;

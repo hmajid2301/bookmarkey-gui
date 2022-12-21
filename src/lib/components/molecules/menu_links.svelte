@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { NavBrand } from 'flowbite-svelte';
 
-	import LogoLink from './logo_link.svelte';
+	import Logo from '~/lib/components/atoms/logo.svelte';
 	export let currentPath: string;
 </script>
 
 <div class="hidden flex-1 py-4 md:block">
 	<NavBrand href="/dashboard">
-		<LogoLink />
+		<Logo />
 	</NavBrand>
 	<nav class="-mx-2 md:mt-8">
 		<ul class="space-y-3 pt-2 text-base">

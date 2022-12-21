@@ -1,14 +1,13 @@
 <script lang="ts">
-	import { DarkMode } from 'flowbite-svelte';
-	import MobileBar from '~/lib/components/molecules/mobile_bar.svelte';
-	import SideBar from '~/lib/components/organisms/side_bar.svelte';
-	import Topbar from '~/lib/components/organisms/topbar.svelte';
 	import type { LayoutData } from './$types';
+
+	import MobileBar from '~/routes/(protected)/components/molecules/mobile_bar.svelte';
+	import SideBar from '~/routes/(protected)/components/organisms/side_bar.svelte';
+	import Topbar from '~/routes/(protected)/components/organisms/topbar.svelte';
 
 	export let data: LayoutData;
 </script>
 
-<DarkMode />
 <div
 	class="flex min-h-screen flex-col text-base font-semibold text-blue-900 subpixel-antialiased dark:text-blue-100 lg:flex-row">
 	<MobileBar nickname={data.user.nickname} avatar={data.user.avatar} />

@@ -44,24 +44,23 @@ export const actions: Actions = {
 		const result = changePasswordSchema.safeParse(data);
 
 		if (!result.success) {
+			console.log('FAILED', result.error);
 			return fail(400, {
 				data: data,
 				errors: result.error.flatten().fieldErrors
 			});
 		}
-
 		try {
-			await locals.pb
-				?.collection('users')
-				.authWithPassword(locals.user?.email, result.data.currentPassword);
 			await locals.pb?.collection('users').update(locals?.user?.id as string, {
+				oldPassword: result.data.currentPassword,
 				password: result.data.password,
-				passwordConfig: result.data.passwordConfirm
+				passwordConfirm: result.data.passwordConfirm
 			});
 			return {
 				success: true
 			};
 		} catch (err) {
+			console.log('Err', err);
 			return {
 				changePasswordErr: 'Failed to update password, please try again later.'
 			};

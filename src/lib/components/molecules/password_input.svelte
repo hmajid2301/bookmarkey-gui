@@ -1,61 +1,35 @@
 <script lang="ts">
-	import { Helper, Input, Label } from 'flowbite-svelte';
+	import Input from '~/lib/components/atoms/input.svelte';
 
-	export let name: string;
+	export let name = 'password';
 	export let value: string | undefined;
-	export let labelName: string;
+	export let labelName = 'Password';
 	export let errors: string[] | undefined;
-	const color = errors ? 'red' : undefined;
+	export let note = 'Required. Your password';
+	export let placeholder = 'Your password';
 	let show = false;
 </script>
 
-<div>
-	<Label for={name} {color} class="mb-2">{labelName}</Label>
-	<Input
-		{name}
-		{color}
-		{value}
-		type={show ? 'text' : 'password'}
-		placeholder="Your password here"
-		required={true}>
-		<button slot="left" on:click|preventDefault={() => (show = !show)} class="pointer-events-auto">
-			{#if show}
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="currentColor"
-					class="h-6 w-6">
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-				</svg>
-			{:else}
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="currentColor"
-					class="h-6 w-6">
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
-				</svg>
-			{/if}
-		</button>
+<div class="relative mb-6 w-full last:mb-0">
+	<Input {placeholder} type={show ? 'text' : 'password'} {name} {value} {labelName} {errors} {note}>
+		<span
+			class="pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center text-gray-500 dark:text-slate-400">
+			<svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
+				<path
+					fill="currentColor"
+					d="M21 13H14.4L19.1 17.7L17.7 19.1L13 14.4V21H11V14.3L6.3 19L4.9 17.6L9.4 13H3V11H9.6L4.9 6.3L6.3 4.9L11 9.6V3H13V9.4L17.6 4.8L19 6.3L14.3 11H21V13Z" />
+			</svg>
+		</span>
+		<div class="absolute inset-y-0 right-0 flex items-center px-2">
+			<input class="hidden" type="checkbox" />
+			<button
+				type="button"
+				class="cursor-pointer rounded bg-gray-300 px-2 py-1 font-mono text-sm text-gray-600 hover:bg-gray-400 dark:bg-slate-600 dark:text-slate-100 dark:hover:bg-gray-700"
+				on:click={() => {
+					show = !show;
+				}}>
+				{show ? 'hide' : 'show'}
+			</button>
+		</div>
 	</Input>
-
-	{#if errors}
-		<Helper class="mt-2" color="red">
-			{errors[0]}
-		</Helper>
-	{/if}
 </div>

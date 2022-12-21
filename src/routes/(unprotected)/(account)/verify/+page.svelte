@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
 
-	import AccountButton from '~/lib/components/atoms/account_button.svelte';
-	import FailAlert from '~/lib/components/atoms/fail_alert.svelte';
-	import Input from '~/lib/components/atoms/input.svelte';
-	import SuccessAlert from '~/lib/components/atoms/success_alert.svelte';
+	import DangerAlert from '~/lib/components/molecules/danger_alert.svelte';
+	import EmailInput from '~/lib/components/molecules/email_input.svelte';
+	import FullWidthButton from '~/lib/components/molecules/full_width_button.svelte';
+	import SuccessAlert from '~/lib/components/molecules/success_alert.svelte';
 
 	export let form: ActionData;
 </script>
@@ -21,20 +21,13 @@
 		If you haven't received the email, try to send it again.
 	</p>
 	<form class="space-y-4 md:space-y-6" action="?/sendEmailVerification" method="post">
-		<Input
-			type="email"
-			name="email"
-			labelName="Email"
-			required={true}
-			placeholder="your@email.com"
-			value={form?.data?.email}
-			errors={form?.errors?.email} />
-		<AccountButton>Resend Email Verification</AccountButton>
+		<EmailInput value={form?.data.email} errors={form?.errors?.email} />
+		<FullWidthButton>Resend Email Verification</FullWidthButton>
 	</form>
 	{#if form?.success}
 		<SuccessAlert text="Successfully sent verification link" />
 	{/if}
 	{#if form?.resetErr}
-		<FailAlert text={form.resetErr} />
+		<DangerAlert text={form.resetErr} />
 	{/if}
 </div>

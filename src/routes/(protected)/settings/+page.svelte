@@ -15,16 +15,18 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
 
-	import FailAlert from '~/lib/components/atoms/fail_alert.svelte';
-	import UpdatePassword from '~/lib/components/molecules/update_password.svelte';
-	import UpdateProfile from '~/lib/components/molecules/update_profile.svelte';
+	import Section from '~/lib/components/atoms/section.svelte';
+	import DangerAlert from '~/lib/components/molecules/danger_alert.svelte';
+	import SuccessAlert from '~/lib/components/molecules/success_alert.svelte';
+	import UpdatePasswordForm from '~/routes/(protected)/components/molecules/update_password.svelte';
+	import UpdateProfileForm from '~/routes/(protected)/components/molecules/update_profile.svelte';
 
 	export let form: ActionData;
 
 	let values: PasswordValues = {
-		currentPassword: form?.data.currentPassword,
-		password: form?.data.password,
-		passwordConfirm: form?.data.passwordConfirm
+		currentPassword: form?.data?.currentPassword,
+		password: form?.data?.password,
+		passwordConfirm: form?.data?.passwordConfirm
 	};
 
 	let errors: PasswordErrors = {
@@ -32,7 +34,6 @@
 		password: form?.errors?.password,
 		passwordConfirm: form?.errors?.passwordConfirm
 	};
-	console.log('FORM', form);
 </script>
 
 <section class="mb-6 flex items-center justify-between pt-6">
@@ -49,17 +50,17 @@
 </section>
 
 <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-	<form class="flex flex-col rounded-2xl bg-white dark:bg-slate-900/70">
-		<UpdateProfile />
-	</form>
+	<Section>
+		<UpdateProfileForm />
+	</Section>
 
-	<form
-		class="flex flex-col rounded-2xl bg-white dark:bg-slate-900/70"
-		action="?/changePassword"
-		method="post">
-		<UpdatePassword {values} {errors} />
-	</form>
-	{#if form?.changePasswordErr}
-		<FailAlert text={form.changePasswordErr} />
-	{/if}
+	<Section>
+		<UpdatePasswordForm action="?/changePassword" {values} {errors} />
+		{#if form?.success}
+			<SuccessAlert text="Successfully updated password" />
+		{/if}
+		{#if form?.changePasswordErr}
+			<DangerAlert text={form.changePasswordErr} />
+		{/if}
+	</Section>
 </div>
