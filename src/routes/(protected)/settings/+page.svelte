@@ -24,8 +24,8 @@
 
 <script lang="ts">
 	import type { ActionData, PageData } from './$types';
-	import UpdatePasswordForm from './_components/update_password.svelte';
-	import UpdateProfileForm from './_components/update_profile.svelte';
+	import UpdatePasswordForm from './components/update_password.svelte';
+	import UpdateProfileForm from './components/update_profile.svelte';
 
 	import Section from '~/lib/components/atoms/section.svelte';
 
@@ -107,7 +107,8 @@
 			errors={profileErrors}
 			action="?/updateProfile"
 			error={updateProfileErr}
-			success={updateProfileSuccess} />
+			success={updateProfileSuccess}
+			avatar={data.user.avatar ? data.user.avatar : '/user.png'} />
 	</Section>
 
 	<Section>

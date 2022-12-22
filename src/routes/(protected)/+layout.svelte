@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { LayoutData } from './$types';
 
-	import HelloBar from '~/routes/(protected)/_components/hello_bar.svelte';
-	import MobileBar from '~/routes/(protected)/_components/mobile_bar.svelte';
-	import SideBar from '~/routes/(protected)/_components/side_bar.svelte';
+	import HelloBar from '~/routes/(protected)/components/hello_bar.svelte';
+	import MobileBar from '~/routes/(protected)/components/mobile_bar.svelte';
+	import SideBar from '~/routes/(protected)/components/side_bar.svelte';
 
 	export let data: LayoutData;
 </script>

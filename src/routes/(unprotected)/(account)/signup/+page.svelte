@@ -6,7 +6,7 @@
 	import EmailInput from '~/lib/components/molecules/email_input.svelte';
 	import FullWidthButton from '~/lib/components/molecules/full_width_button.svelte';
 	import PasswordInput from '~/lib/components/molecules/password_input.svelte';
-	import OAuthLoginGroup from '~/routes/(unprotected)/_components/oauth_login_buttons.svelte';
+	import OAuthLoginGroup from '~/routes/(unprotected)/components/oauth_login_buttons.svelte';
 
 	export let form: ActionData;
 	export let data: PageData;
