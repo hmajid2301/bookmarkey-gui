@@ -21,10 +21,9 @@
 			</svg>
 		</span>
 		<div class="absolute inset-y-0 right-0 flex items-center px-2">
-			<input class="hidden" type="checkbox" tabindex="-1" />
+			<input class="hidden" type="checkbox" />
 			<button
 				type="button"
-				tabindex="-1"
 				class="cursor-pointer rounded bg-gray-300 px-2 py-1 font-mono text-sm text-gray-600 hover:bg-gray-400 dark:bg-slate-600 dark:text-slate-100 dark:hover:bg-gray-700"
 				on:click={() => {
 					show = !show;

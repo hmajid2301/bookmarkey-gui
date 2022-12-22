@@ -2,8 +2,6 @@ import { fail, type Actions } from '@sveltejs/kit';
 import { serialize } from 'object-to-formdata';
 import { z } from 'zod';
 
-import { config } from '~/config';
-
 interface updatePassword {
 	currentPassword: string;
 	password: string;
@@ -58,26 +56,30 @@ const imageTypes = [
 
 const updateProfileSchema: z.ZodType<updateProfile> = z.object({
 	nickname: z.string().max(64, { message: 'Name must be 64 characters or less' }).trim(),
-	avatar: z.any(),
-	// .instanceof(Blob)
-	// .optional()
-	// .superRefine((val, ctx) => {
-	// 	if (val) {
-	// 		if (val.size > 500000) {
-	// 			ctx.addIssue({
-	// 				code: z.ZodIssueCode.custom,
-	// 				message: 'Avatar must be less than 500KB'
-	// 			});
-	// 		}
+	avatar:
+		typeof window === 'undefined'
+			? z.any()
+			: z
+					.instanceof(Blob)
+					.optional()
+					.superRefine((val, ctx) => {
+						if (val) {
+							if (val.size > 500000) {
+								ctx.addIssue({
+									code: z.ZodIssueCode.custom,
+									message: 'Avatar must be less than 500KB'
+								});
+							}
 
-	// 		if (!imageTypes.includes(val.type)) {
-	// 			ctx.addIssue({
-	// 				code: z.ZodIssueCode.custom,
-	// 				message: 'Unsupported file type. Supported formats: jpeg, jpg, png, webp, svg, gif'
-	// 			});
-	// 		}
-	// 	}
-	// }),
+							if (!imageTypes.includes(val.type)) {
+								ctx.addIssue({
+									code: z.ZodIssueCode.custom,
+									message:
+										'Unsupported file type. Supported formats: jpeg, jpg, png, webp, svg, gif'
+								});
+							}
+						}
+					}),
 	email: z
 		.string({ required_error: 'Email is required' })
 		.email({ message: 'Email must be a valid email.' })
@@ -129,8 +131,6 @@ export const actions: Actions = {
 					serialize({ name: result.data.nickname, avatar: result.data.avatar })
 				);
 
-			console.log('a', record);
-
 			if (locals.user?.email !== result.data.email) {
 				await locals.pb?.collection('users').requestEmailChange(result.data.email);
 			}
@@ -140,7 +140,7 @@ export const actions: Actions = {
 				locals.user.email = result.data.email;
 
 				if (record) {
-					locals.user.avatar = `${config.PocketBaseURL}/api/files/${record['collectionId']}/${record['id']}/${record['avatar']}`;
+					locals.user.avatar = `${locals.pb?.baseUrl}/api/files/${locals.user?.collectionId}/${locals.user?.id}/${record['avatar']}`;
 				}
 			}
 			return {

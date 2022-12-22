@@ -19,6 +19,7 @@
 	<div class="">
 		<div class="relative">
 			<input
+				id={name}
 				{name}
 				{required}
 				{type}

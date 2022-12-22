@@ -34,7 +34,6 @@ test:unit:
     - merge_request
   script:
     - task unit_tests
-  allow_failure: true
 
 tests:e2e:
   stage: test

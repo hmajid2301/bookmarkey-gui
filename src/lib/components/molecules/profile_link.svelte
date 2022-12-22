@@ -8,6 +8,10 @@
 	<img src={avatar} alt={nickname} class="h-14 w-14 rounded-full" />
 	<div class="flex flex-col items-center text-sm xl:items-start">
 		<span class="font-bold text-blue-900 dark:text-blue-100 ">{nickname}</span>
-		<span class="text-sm font-bold text-blue-800 opacity-50 dark:text-blue-200">View profile</span>
+		<a href="/settings">
+			<span class="text-sm font-bold text-blue-800 opacity-50 dark:text-blue-200">
+				View profile
+			</span>
+		</a>
 	</div>
 </button>
