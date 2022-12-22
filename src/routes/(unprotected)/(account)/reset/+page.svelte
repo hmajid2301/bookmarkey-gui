@@ -1,12 +1,19 @@
 <script lang="ts">
+	import toast from 'svelte-french-toast';
+
 	import type { ActionData } from './$types';
 
-	import FailAlert from '~/lib/components/molecules/danger_alert.svelte';
 	import EmailInput from '~/lib/components/molecules/email_input.svelte';
 	import FullWidthButton from '~/lib/components/molecules/full_width_button.svelte';
-	import SuccessAlert from '~/lib/components/molecules/success_alert.svelte';
 
 	export let form: ActionData;
+	if (form?.success) {
+		toast.success('Successfully sent password reset email');
+	}
+
+	if (form?.resetErr) {
+		toast.error(form.resetErr);
+	}
 </script>
 
 <div class="space-y-4 p-6 sm:p-8 md:space-y-6">
@@ -21,10 +28,4 @@
 		<EmailInput value={form?.data.email} errors={form?.errors?.email} />
 		<FullWidthButton>Reset Password</FullWidthButton>
 	</form>
-	{#if form?.success}
-		<SuccessAlert text="Successfully sent password reset" />
-	{/if}
-	{#if form?.resetErr}
-		<FailAlert text={form.resetErr} />
-	{/if}
 </div>

@@ -34,12 +34,12 @@ export const actions: Actions = {
 			if (err instanceof ClientResponseError) {
 				if (err.status == 400) {
 					return {
-						loginError: 'Wrong email and password combination.'
+						loginErr: 'Wrong email and password combination.'
 					};
 				}
 			}
 			return {
-				loginError: 'Failed to login, please try again later.'
+				loginErr: 'Failed to login, please try again later.'
 			};
 		}
 

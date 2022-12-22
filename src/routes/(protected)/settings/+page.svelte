@@ -14,12 +14,10 @@
 
 <script lang="ts">
 	import type { ActionData } from './$types';
+	import UpdatePasswordForm from './_components/update_password.svelte';
+	import UpdateProfileForm from './_components/update_profile.svelte';
 
 	import Section from '~/lib/components/atoms/section.svelte';
-	import DangerAlert from '~/lib/components/molecules/danger_alert.svelte';
-	import SuccessAlert from '~/lib/components/molecules/success_alert.svelte';
-	import UpdatePasswordForm from '~/routes/(protected)/components/molecules/update_password.svelte';
-	import UpdateProfileForm from '~/routes/(protected)/components/molecules/update_profile.svelte';
 
 	export let form: ActionData;
 
@@ -55,12 +53,11 @@
 	</Section>
 
 	<Section>
-		<UpdatePasswordForm action="?/changePassword" {values} {errors} />
-		{#if form?.success}
-			<SuccessAlert text="Successfully updated password" />
-		{/if}
-		{#if form?.changePasswordErr}
-			<DangerAlert text={form.changePasswordErr} />
-		{/if}
+		<UpdatePasswordForm
+			action="?/changePassword"
+			{values}
+			{errors}
+			error={form?.changePasswordErr}
+			success={form?.changePasswordSuccess} />
 	</Section>
 </div>

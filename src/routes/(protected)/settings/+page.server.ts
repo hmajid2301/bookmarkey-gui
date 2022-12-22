@@ -44,7 +44,6 @@ export const actions: Actions = {
 		const result = changePasswordSchema.safeParse(data);
 
 		if (!result.success) {
-			console.log('FAILED', result.error);
 			return fail(400, {
 				data: data,
 				errors: result.error.flatten().fieldErrors
@@ -57,7 +56,7 @@ export const actions: Actions = {
 				passwordConfirm: result.data.passwordConfirm
 			});
 			return {
-				success: true
+				changePasswordSuccess: true
 			};
 		} catch (err) {
 			console.log('Err', err);

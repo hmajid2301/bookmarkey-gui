@@ -72,7 +72,7 @@ export const actions: Actions = {
 		} catch (err) {
 			console.log(err);
 			return {
-				signupError: 'Failed to sign up, please try again later.'
+				signupErr: 'Failed to sign up, please try again later.'
 			};
 		}
 
@@ -82,7 +82,7 @@ export const actions: Actions = {
 				.authWithPassword(result.data.email, result.data.password);
 		} catch (err) {
 			return {
-				signupError: 'Failed to login, please try again later.'
+				signupErr: 'Failed to login, please try again later.'
 			};
 		}
 

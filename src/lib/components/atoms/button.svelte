@@ -10,5 +10,11 @@
 	{type}
 	{href}
 	on:click={onClick}>
-	<slot />
+	{#if href}
+		<a {href}>
+			<slot />
+		</a>
+	{:else}
+		<slot />
+	{/if}
 </button>

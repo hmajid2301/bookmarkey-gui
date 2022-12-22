@@ -15,7 +15,7 @@ module.exports = {
 		'plugin:import/typescript'
 	],
 	plugins: ['@typescript-eslint'],
-	ignorePatterns: ['*.cjs'],
+	ignorePatterns: ['*.cjs', 'svelte-french-toast'],
 	overrides: [
 		{
 			files: ['*.svelte'],
@@ -39,6 +39,7 @@ module.exports = {
 		]
 	},
 	settings: {
+		'import/ignore': ['svelte-french-toast'],
 		'svelte3/typescript': () => require('typescript')
 	},
 	parserOptions: {

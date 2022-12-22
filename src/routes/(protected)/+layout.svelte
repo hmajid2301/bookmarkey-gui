@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { LayoutData } from './$types';
 
-	import MobileBar from '~/routes/(protected)/components/molecules/mobile_bar.svelte';
-	import SideBar from '~/routes/(protected)/components/organisms/side_bar.svelte';
-	import Topbar from '~/routes/(protected)/components/organisms/topbar.svelte';
+	import HelloBar from '~/routes/(protected)/_components/hello_bar.svelte';
+	import MobileBar from '~/routes/(protected)/_components/mobile_bar.svelte';
+	import SideBar from '~/routes/(protected)/_components/side_bar.svelte';
 
 	export let data: LayoutData;
 </script>
@@ -15,7 +15,7 @@
 
 	<div
 		class="flex flex-1 flex-col overflow-hidden bg-blue-50  px-4 py-4 dark:bg-gray-800 lg:py-8 lg:px-6 xl:px-8">
-		<Topbar nickname={data.user.nickname} />
+		<HelloBar nickname={data.user.nickname} />
 		<slot />
 	</div>
 </div>

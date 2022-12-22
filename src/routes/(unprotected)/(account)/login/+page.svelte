@@ -1,14 +1,19 @@
 <script lang="ts">
+	import toast from 'svelte-french-toast';
+
 	import type { ActionData, PageData } from './$types';
 
-	import DangerAlert from '~/lib/components/molecules/danger_alert.svelte';
 	import EmailInput from '~/lib/components/molecules/email_input.svelte';
 	import FullWidthButton from '~/lib/components/molecules/full_width_button.svelte';
 	import PasswordInput from '~/lib/components/molecules/password_input.svelte';
-	import OAuthLoginGroup from '~/routes/(unprotected)/components/molecules/oauth_login_buttons.svelte';
+	import OAuthLoginGroup from '~/routes/(unprotected)/_components/oauth_login_buttons.svelte';
 
 	export let form: ActionData;
 	export let data: PageData;
+
+	if (form?.loginErr) {
+		toast.error(form?.loginErr);
+	}
 </script>
 
 <div class="space-y-4 p-6 sm:p-8 md:space-y-6">
@@ -28,9 +33,7 @@
 		</div>
 		<FullWidthButton>Login</FullWidthButton>
 	</form>
-	{#if form?.loginError}
-		<DangerAlert text={form?.loginError} />
-	{/if}
+
 	<div class="my-5 flex items-center justify-center space-x-2">
 		<span class="h-px w-16 bg-gray-100" />
 		<span class="font-normal text-gray-300">or</span>
