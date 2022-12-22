@@ -24,7 +24,7 @@
 				{type}
 				{placeholder}
 				{value}
-				class="h-12 w-full max-w-full rounded border border-gray-700 bg-white px-3 py-2 pl-10 focus:outline-none focus:ring dark:bg-slate-800 dark:placeholder-gray-400 {errors &&
+				class="h-12 w-full max-w-full rounded border border-gray-300 bg-white px-3 py-2 pl-10 focus:outline-none focus:ring dark:border-gray-700 dark:bg-slate-800 dark:placeholder-gray-400 {errors &&
 					'text-red-600'}" />
 			<slot />
 		</div>

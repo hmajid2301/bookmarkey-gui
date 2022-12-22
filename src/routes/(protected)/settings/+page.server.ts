@@ -1,13 +1,18 @@
 import { fail, type Actions } from '@sveltejs/kit';
 import { z } from 'zod';
 
-interface ChangePassword {
+interface updatePassword {
 	currentPassword: string;
 	password: string;
 	passwordConfirm: string;
 }
 
-const changePasswordSchema: z.ZodType<ChangePassword> = z
+interface updateProfile {
+	nickname: string;
+	email: string;
+}
+
+const updatePasswordSchema: z.ZodType<updatePassword> = z
 	.object({
 		currentPassword: z.string({ required_error: 'Current password is required' }),
 		password: z
@@ -38,10 +43,17 @@ const changePasswordSchema: z.ZodType<ChangePassword> = z
 		}
 	});
 
+const updateProfileSchema: z.ZodType<updateProfile> = z.object({
+	nickname: z.string(),
+	email: z
+		.string({ required_error: 'Email is required' })
+		.email({ message: 'Email must be a valid email.' })
+});
+
 export const actions: Actions = {
-	changePassword: async ({ locals, request }) => {
-		const data = Object.fromEntries((await request.formData()) as Iterable<[ChangePassword]>);
-		const result = changePasswordSchema.safeParse(data);
+	updatePassword: async ({ locals, request }) => {
+		const data = Object.fromEntries((await request.formData()) as Iterable<[updatePassword]>);
+		const result = updatePasswordSchema.safeParse(data);
 
 		if (!result.success) {
 			return fail(400, {
@@ -56,12 +68,45 @@ export const actions: Actions = {
 				passwordConfirm: result.data.passwordConfirm
 			});
 			return {
-				changePasswordSuccess: true
+				updatePasswordSuccess: true
 			};
 		} catch (err) {
 			console.log('Err', err);
 			return {
-				changePasswordErr: 'Failed to update password, please try again later.'
+				updatePasswordErr: 'Failed to update password, please try again later.'
+			};
+		}
+	},
+	updateProfile: async ({ locals, request }) => {
+		const data = Object.fromEntries((await request.formData()) as Iterable<[updateProfile]>);
+		const result = updateProfileSchema.safeParse(data);
+
+		if (!result.success) {
+			return fail(400, {
+				data: data,
+				errors: result.error.flatten().fieldErrors
+			});
+		}
+		try {
+			await locals.pb?.collection('users').update(locals?.user?.id as string, {
+				name: result.data.nickname
+			});
+
+			if (locals.user?.email !== result.data.email) {
+				await locals.pb?.collection('users').requestEmailChange(result.data.email);
+			}
+
+			if (locals.user) {
+				locals.user.name = result.data.nickname;
+				locals.user.email = result.data.email;
+			}
+			return {
+				updateProfileSuccess: true
+			};
+		} catch (err) {
+			console.log('Err', err);
+			return {
+				updateProfileErr: 'Failed to update password, please try again later.'
 			};
 		}
 	}

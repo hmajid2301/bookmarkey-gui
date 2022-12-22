@@ -27,7 +27,7 @@
 		</div>
 		<div class="flex space-x-4">
 			<DarkMode
-				btnClass="relative h-10 rounded-lg px-3 bg-white hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-60 dark:hover:bg-gray-700 dark:bg-gray-600" />
+				btnClass="relative h-10 rounded-lg px-3 bg-white hover:bg-gray-300 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-60 dark:hover:bg-gray-700 dark:bg-gray-600" />
 		</div>
 	</div>
 </div>
