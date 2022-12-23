@@ -1,5 +1,7 @@
-import { fail, type Actions } from '@sveltejs/kit';
+import { error, fail, type Actions } from '@sveltejs/kit';
 import { z } from 'zod';
+
+import { HTTP_BAD_REQUEST, HTTP_SERVER_ERROR } from '~/lib/http';
 
 interface EmailVerification {
 	email: string;
@@ -17,7 +19,7 @@ export const actions: Actions = {
 		const result = verificationLinkSchema.safeParse(data);
 
 		if (!result.success) {
-			return fail(400, {
+			return fail(HTTP_BAD_REQUEST, {
 				data: data,
 				errors: result.error.flatten().fieldErrors
 			});
@@ -29,9 +31,7 @@ export const actions: Actions = {
 				success: true
 			};
 		} catch (err) {
-			return {
-				resetErr: 'Failed to send email verification, please try again later.'
-			};
+			throw error(HTTP_SERVER_ERROR, 'Failed to send verification email.');
 		}
 	}
 };

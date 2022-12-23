@@ -7,9 +7,19 @@
 	export let note = 'Required. Your email';
 	export let value: string | undefined;
 	export let errors: string[] | undefined;
+	export let disabled = false;
 </script>
 
-<Input type="email" {name} {labelName} required={true} {placeholder} {note} {value} {errors}>
+<Input
+	type="email"
+	{name}
+	{disabled}
+	{labelName}
+	required={true}
+	{placeholder}
+	{note}
+	{value}
+	{errors}>
 	<span
 		class="pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center text-gray-500 dark:text-slate-400">
 		<svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">

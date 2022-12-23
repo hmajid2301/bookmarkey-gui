@@ -1,6 +1,8 @@
-import { fail, type Actions } from '@sveltejs/kit';
+import { error, fail, type Actions } from '@sveltejs/kit';
 import { serialize } from 'object-to-formdata';
 import { z } from 'zod';
+
+import { HTTP_BAD_REQUEST, HTTP_SERVER_ERROR } from '~/lib/http';
 
 interface updatePassword {
 	currentPassword: string;
@@ -54,6 +56,9 @@ const imageTypes = [
 	'image/gif'
 ];
 
+// Max limit for avatars 5KB
+const MAX_AVATAR_FILE_LIMIT = 500_000;
+
 const updateProfileSchema: z.ZodType<updateProfile> = z.object({
 	nickname: z.string().max(64, { message: 'Name must be 64 characters or less' }).trim(),
 	avatar:
@@ -64,7 +69,7 @@ const updateProfileSchema: z.ZodType<updateProfile> = z.object({
 					.optional()
 					.superRefine((val, ctx) => {
 						if (val) {
-							if (val.size > 500000) {
+							if (val.size > MAX_AVATAR_FILE_LIMIT) {
 								ctx.addIssue({
 									code: z.ZodIssueCode.custom,
 									message: 'Avatar must be less than 500KB'
@@ -91,7 +96,7 @@ export const actions: Actions = {
 		const result = updatePasswordSchema.safeParse(data);
 
 		if (!result.success) {
-			return fail(400, {
+			return fail(HTTP_BAD_REQUEST, {
 				data: data,
 				errors: result.error.flatten().fieldErrors
 			});
@@ -106,30 +111,28 @@ export const actions: Actions = {
 				updatePasswordSuccess: true
 			};
 		} catch (err) {
-			console.log('Err', err);
-			return {
-				updatePasswordErr: 'Failed to update password, please try again later.'
-			};
+			throw error(HTTP_SERVER_ERROR, 'Failed to update password.');
 		}
 	},
 	updateProfile: async ({ locals, request }) => {
-		const d = await request.formData();
-		const data = Object.fromEntries(d as Iterable<[updateProfile]>);
+		const data = Object.fromEntries((await request.formData()) as Iterable<[updateProfile]>);
 		const result = updateProfileSchema.safeParse(data);
 
 		if (!result.success) {
-			return fail(400, {
+			return fail(HTTP_BAD_REQUEST, {
 				data: data,
 				errors: result.error.flatten().fieldErrors
 			});
 		}
+
+		const updatedProfile: Record<string, string | Blob> = { name: result.data.nickname };
+		if (result?.data?.avatar && result.data.avatar.size > 0) {
+			updatedProfile['avatar'] = result.data.avatar;
+		}
 		try {
 			const record = await locals.pb
 				?.collection('users')
-				.update(
-					locals?.user?.id as string,
-					serialize({ name: result.data.nickname, avatar: result.data.avatar })
-				);
+				.update(locals?.user?.id as string, serialize(updatedProfile));
 
 			if (locals.user?.email !== result.data.email) {
 				await locals.pb?.collection('users').requestEmailChange(result.data.email);
@@ -147,10 +150,7 @@ export const actions: Actions = {
 				updateProfileSuccess: true
 			};
 		} catch (err) {
-			console.log('Err', err);
-			return {
-				updateProfileErr: 'Failed to update password, please try again later.'
-			};
+			throw error(HTTP_SERVER_ERROR, 'Failed to update profile information.');
 		}
 	}
 };

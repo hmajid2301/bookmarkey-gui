@@ -1,6 +1,8 @@
-import { fail, redirect, type Actions } from '@sveltejs/kit';
+import { error, fail, redirect, type Actions } from '@sveltejs/kit';
 import { ClientResponseError } from 'pocketbase';
 import { z } from 'zod';
+
+import { HTTP_BAD_REQUEST, HTTP_SEE_OTHER, HTTP_SERVER_ERROR } from '~/lib/http';
 
 interface Login {
 	email: string;
@@ -20,7 +22,7 @@ export const actions: Actions = {
 		const result = loginSchema.safeParse(data);
 
 		if (!result.success) {
-			return fail(400, {
+			return fail(HTTP_BAD_REQUEST, {
 				data: data,
 				errors: result.error.flatten().fieldErrors
 			});
@@ -30,19 +32,21 @@ export const actions: Actions = {
 			await locals.pb
 				?.collection('users')
 				.authWithPassword(result.data.email, result.data.password);
+			if (!locals.pb?.authStore?.model?.verified) {
+				locals.pb?.authStore.clear();
+				return {
+					notVerified: true
+				};
+			}
 		} catch (err) {
 			if (err instanceof ClientResponseError) {
-				if (err.status == 400) {
-					return {
-						loginErr: 'Wrong email and password combination.'
-					};
+				if (err.status === HTTP_BAD_REQUEST) {
+					throw error(err.status, 'Wrong email and password combination.');
 				}
 			}
-			return {
-				loginErr: 'Failed to login, please try again later.'
-			};
+			throw error(HTTP_SERVER_ERROR, 'Failed to login, please try again later.');
 		}
 
-		throw redirect(303, '/');
+		throw redirect(HTTP_SEE_OTHER, '/dashboard');
 	}
 };

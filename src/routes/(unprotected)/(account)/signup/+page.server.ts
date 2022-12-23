@@ -1,6 +1,8 @@
-import { fail, redirect, type Actions } from '@sveltejs/kit';
+import { error, fail, redirect, type Actions } from '@sveltejs/kit';
 import { Md5 } from 'ts-md5';
 import { z } from 'zod';
+
+import { HTTP_BAD_REQUEST, HTTP_NOT_FOUND, HTTP_SEE_OTHER, HTTP_SERVER_ERROR } from '~/lib/http';
 
 interface SignUp {
 	email: string;
@@ -47,7 +49,7 @@ export const actions: Actions = {
 		const result = signupSchema.safeParse(data);
 
 		if (!result.success) {
-			return fail(400, {
+			return fail(HTTP_BAD_REQUEST, {
 				data: data,
 				errors: result.error.flatten().fieldErrors
 			});
@@ -56,7 +58,7 @@ export const actions: Actions = {
 		const emailHash = Md5.hashStr(result.data.email);
 		const gravatarResp = await fetch(`https://www.gravatar.com/avatar/${emailHash}?s=200&d=404`);
 		let avatar = '/user.png';
-		if (gravatarResp.status === 404) {
+		if (gravatarResp.status === HTTP_NOT_FOUND) {
 			avatar = `https://www.gravatar.com/avatar/${emailHash}?s=200`;
 		}
 
@@ -68,12 +70,14 @@ export const actions: Actions = {
 				passwordConfirm: result.data.passwordConfirm,
 				avatar: avatar
 			});
+		} catch (err) {
+			throw error(HTTP_SERVER_ERROR, 'Failed to create account.');
+		}
+
+		try {
 			await locals.pb?.collection('users').requestVerification(result.data.email);
 		} catch (err) {
-			console.log(err);
-			return {
-				signupErr: 'Failed to sign up, please try again later.'
-			};
+			throw error(HTTP_SERVER_ERROR, 'Failed to send verification email.');
 		}
 
 		try {
@@ -81,11 +85,9 @@ export const actions: Actions = {
 				?.collection('users')
 				.authWithPassword(result.data.email, result.data.password);
 		} catch (err) {
-			return {
-				signupErr: 'Failed to login, please try again later.'
-			};
+			throw error(HTTP_SERVER_ERROR, 'Failed to automatically log you in.');
 		}
 
-		throw redirect(303, '/');
+		throw redirect(HTTP_SEE_OTHER, '/');
 	}
 };

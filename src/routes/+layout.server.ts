@@ -1,6 +1,6 @@
 import type { LayoutServerLoad } from './$types';
 
-import type { User } from '~/lib/types/logged_in';
+import type { User } from '~/lib/constants/types/logged_in';
 
 export type OutputType = { user: User };
 

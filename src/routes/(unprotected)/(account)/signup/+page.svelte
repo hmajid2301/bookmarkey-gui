@@ -1,8 +1,10 @@
 <script lang="ts">
+	import type { ActionResult } from '@sveltejs/kit';
 	import toast from 'svelte-french-toast';
 
 	import type { ActionData, PageData } from './$types';
 
+	import { enhance } from '$app/forms';
 	import EmailInput from '~/lib/components/molecules/email_input.svelte';
 	import FullWidthButton from '~/lib/components/molecules/full_width_button.svelte';
 	import PasswordInput from '~/lib/components/molecules/password_input.svelte';
@@ -11,9 +13,28 @@
 	export let form: ActionData;
 	export let data: PageData;
 
-	if (form?.signupErr) {
-		toast.error(form.signupErr);
-	}
+	let loading = false;
+
+	const submitSignup = () => {
+		loading = true;
+		return async ({ result, update }: { result: ActionResult; update: () => Promise<void> }) => {
+			switch (result.type) {
+				case 'success':
+					await update();
+					break;
+				case 'failure':
+					toast.error('Invalid credentials');
+					await update();
+					break;
+				case 'error':
+					toast.error(result.error.message);
+					break;
+				default:
+					await update();
+			}
+			loading = false;
+		};
+	};
 </script>
 
 <div class="space-y-4 p-6 sm:p-8 md:space-y-6">
@@ -21,14 +42,16 @@
 		class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
 		Create an account
 	</h1>
-	<form class="space-y-4 md:space-y-6" action="?/register" method="post">
-		<EmailInput value={form?.data?.email} errors={form?.errors?.email} />
+	<form class="space-y-4 md:space-y-6" action="?/register" method="post" use:enhance={submitSignup}>
+		<EmailInput disabled={loading} value={form?.data?.email} errors={form?.errors?.email} />
 		<PasswordInput
+			disabled={loading}
 			name="password"
 			labelName="Password"
 			value={form?.data?.password}
 			errors={form?.errors?.password} />
 		<PasswordInput
+			disabled={loading}
 			name="passwordConfirm"
 			labelName="Confirm Password"
 			note="Required. Your password again"

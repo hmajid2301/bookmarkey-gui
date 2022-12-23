@@ -6,6 +6,7 @@
 	export let required = true;
 	export let value: string | undefined;
 	export let note: string | null = null;
+	export let disabled = false;
 
 	if (value === undefined) {
 		value = '';
@@ -25,6 +26,7 @@
 				{type}
 				{placeholder}
 				{value}
+				{disabled}
 				class="h-12 w-full max-w-full rounded border border-gray-300 bg-white px-3 py-2 pl-10 focus:outline-none focus:ring dark:border-gray-700 dark:bg-slate-800 dark:placeholder-gray-400 {errors &&
 					'text-red-600'}" />
 			<slot />

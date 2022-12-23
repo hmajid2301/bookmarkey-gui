@@ -2,6 +2,7 @@ import { redirect, type Handle } from '@sveltejs/kit';
 import PocketBase from 'pocketbase';
 
 import { config } from './config';
+import { HTTP_SEE_OTHER } from './lib/http';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.pb = new PocketBase(config.PocketBaseURL);
@@ -19,7 +20,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	if (event.url.pathname.startsWith('/dashboard') && !event.locals.pb.authStore.isValid) {
-		throw redirect(303, '/');
+		throw redirect(HTTP_SEE_OTHER, '/');
 	}
 
 	const response = await resolve(event);

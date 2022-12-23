@@ -7,11 +7,20 @@
 	export let errors: string[] | undefined;
 	export let note = 'Required. Your password';
 	export let placeholder = 'Your password';
+	export let disabled = false;
 	let show = false;
 </script>
 
 <div class="relative mb-6 w-full last:mb-0">
-	<Input {placeholder} type={show ? 'text' : 'password'} {name} {value} {labelName} {errors} {note}>
+	<Input
+		{placeholder}
+		type={show ? 'text' : 'password'}
+		{name}
+		{value}
+		{disabled}
+		{labelName}
+		{errors}
+		{note}>
 		<span
 			class="pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center text-gray-500 dark:text-slate-400">
 			<svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
@@ -21,9 +30,10 @@
 			</svg>
 		</span>
 		<div class="absolute inset-y-0 right-0 flex items-center px-2">
-			<input class="hidden" type="checkbox" />
+			<input class="hidden" type="checkbox" tabindex="-1" />
 			<button
 				type="button"
+				tabindex="-1"
 				class="cursor-pointer rounded bg-gray-300 px-2 py-1 font-mono text-sm text-gray-600 hover:bg-gray-400 dark:bg-slate-600 dark:text-slate-100 dark:hover:bg-gray-700"
 				on:click={() => {
 					show = !show;

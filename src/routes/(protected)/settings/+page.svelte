@@ -23,6 +23,9 @@
 </script>
 
 <script lang="ts">
+	import type { ActionResult } from '@sveltejs/kit';
+	import toast from 'svelte-french-toast';
+
 	import type { ActionData, PageData } from './$types';
 	import UpdatePasswordForm from './components/update_password.svelte';
 	import UpdateProfileForm from './components/update_profile.svelte';
@@ -54,11 +57,6 @@
 		passwordConfirm: undefined
 	};
 
-	let updatePasswordErr = '';
-	let updatePasswordSuccess: boolean | undefined = undefined;
-	let updateProfileErr = '';
-	let updateProfileSuccess: boolean | undefined = undefined;
-
 	if (form !== undefined && form?.errors !== undefined) {
 		if ('nickname' in form.errors) {
 			profileErrors = {
@@ -72,19 +70,51 @@
 				passwordConfirm: form?.errors?.passwordConfirm
 			};
 		}
-		if ('updatePasswordErr' in form) {
-			updatePasswordErr = form.updatePasswordErr;
-		}
-		if ('updatePasswordSuccess' in form) {
-			updatePasswordSuccess = form.updatePasswordSuccess;
-		}
-		if ('updateProfileErr' in form) {
-			updateProfileErr = form.updateProfileErr;
-		}
-		if ('updateProfileSuccess' in form) {
-			updateProfileSuccess = form.updateProfileSuccess;
-		}
 	}
+
+	let loading = false;
+
+	const submitUpdatePassword = () => {
+		loading = true;
+		return async ({ result, update }: { result: ActionResult; update: () => Promise<void> }) => {
+			switch (result.type) {
+				case 'success':
+					await update();
+					break;
+				case 'failure':
+					toast.error('Invalid password data');
+					await update();
+					break;
+				case 'error':
+					toast.error(result.error.message);
+					break;
+				default:
+					await update();
+			}
+			loading = false;
+		};
+	};
+
+	const submitUpdateProfile = () => {
+		loading = true;
+		return async ({ result, update }: { result: ActionResult; update: () => Promise<void> }) => {
+			switch (result.type) {
+				case 'success':
+					await update();
+					break;
+				case 'failure':
+					toast.error('Invalid profile data');
+					await update();
+					break;
+				case 'error':
+					toast.error(result.error.message);
+					break;
+				default:
+					await update();
+			}
+			loading = false;
+		};
+	};
 </script>
 
 <section class="mb-6 flex items-center justify-between pt-6 font-semibold">
@@ -103,20 +133,20 @@
 <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
 	<Section>
 		<UpdateProfileForm
+			useEnhanceFunc={submitUpdateProfile}
+			{loading}
 			values={profileValues}
 			errors={profileErrors}
 			action="?/updateProfile"
-			error={updateProfileErr}
-			success={updateProfileSuccess}
 			avatar={data.user.avatar ? data.user.avatar : '/user.png'} />
 	</Section>
 
 	<Section>
 		<UpdatePasswordForm
 			action="?/updatePassword"
+			{loading}
 			values={passwordValues}
 			errors={passwordErrors}
-			error={updatePasswordErr}
-			success={updatePasswordSuccess} />
+			useEnhanceFunc={submitUpdatePassword} />
 	</Section>
 </div>

@@ -1,26 +1,25 @@
 <script lang="ts">
-	import toast from 'svelte-french-toast';
+	import type { ActionResult } from '@sveltejs/kit';
 
 	import type { ProfileErrors, ProfileValues } from '../+page.svelte';
 
+	import { enhance } from '$app/forms';
 	import Button from '~/lib/components/atoms/button.svelte';
 	import Input from '~/lib/components/atoms/input.svelte';
 	import EmailInput from '~/lib/components/molecules/email_input.svelte';
 
 	export let values: ProfileValues;
+	export let loading: boolean;
 	export let errors: ProfileErrors;
 	export let avatar = '/user.png';
 	export let action: string;
-	export let success: boolean | undefined = undefined;
-	export let error: string | undefined = undefined;
-
-	if (success) {
-		toast.success('Updated profile successfully');
-	}
-
-	if (error) {
-		toast.error('Failed to update profile');
-	}
+	export let useEnhanceFunc: () => ({
+		result,
+		update
+	}: {
+		result: ActionResult;
+		update: () => Promise<void>;
+	}) => Promise<void>;
 
 	const showPreview = (event: Event) => {
 		const target = event.target as HTMLInputElement;
@@ -36,7 +35,7 @@
 	};
 </script>
 
-<form {action} enctype="multipart/form-data" method="post">
+<form {action} enctype="multipart/form-data" method="post" use:enhance={useEnhanceFunc}>
 	<div class="flex-1 p-6">
 		<div class="mb-6 last:mb-0">
 			<label for="" class="mb-2 block font-bold">Avatar</label>
@@ -62,6 +61,7 @@
 								</span>
 							</a>
 							<input
+								disabled={loading}
 								name="avatar"
 								accept="image/*"
 								on:change={showPreview}
@@ -77,6 +77,7 @@
 
 		<Input
 			name="nickname"
+			disabled={loading}
 			type="text"
 			labelName="Nickname"
 			note="Your nickname"

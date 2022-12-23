@@ -3,12 +3,12 @@
 	import { Toaster } from 'svelte-french-toast';
 
 	import '~/app.css';
-
-	let style = 'background: #fff; color: #333;';
+	let style: string;
 	onMount(() => {
-		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-			style = 'background: #333; color: #fff;';
-		}
+		style =
+			window && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+				? 'background: #334155; color: #fff;'
+				: 'background: #fff; color: #000;';
 	});
 </script>
 
