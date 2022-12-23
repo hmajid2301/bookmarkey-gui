@@ -44,7 +44,7 @@
 			errors={errors.passwordConfirm} />
 	</div>
 
-	<div class="mt-auto p-6">
+	<div class="p-6">
 		<div class="-mb-3 flex flex-wrap items-center justify-start">
 			<Button type="submit">Change Password</Button>
 		</div>

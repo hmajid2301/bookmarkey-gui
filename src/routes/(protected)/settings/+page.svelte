@@ -87,7 +87,7 @@
 	}
 </script>
 
-<section class="mb-6 flex items-center justify-between pt-6">
+<section class="mb-6 flex items-center justify-between pt-6 font-semibold">
 	<div class="flex items-center justify-start">
 		<span class="mr-2 inline-flex h-6 w-6 items-center justify-center">
 			<svg viewBox="0 0 24 24" width="20" height="20" class="inline-block">

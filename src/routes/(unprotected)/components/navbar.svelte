@@ -6,7 +6,7 @@
 </script>
 
 <header>
-	<Navbar let:hidden let:toggle navClass="bg-slate-100 dark:border-slate-700 dark:bg-slate-800">
+	<Navbar let:hidden let:toggle navClass="bg-slate-100 dark:border-slate-700 dark:bg-slate-900">
 		<NavBrand href="/">
 			<Logo />
 		</NavBrand>

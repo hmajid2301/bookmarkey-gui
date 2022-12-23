@@ -94,7 +94,7 @@
 		</Input>
 
 		<EmailInput value={values.email} errors={errors.email} />
-		<div class="p-6">
+		<div class="pt-6">
 			<div class="-mb-3 flex flex-wrap items-center justify-start">
 				<Button type="submit">Update Profile</Button>
 			</div>

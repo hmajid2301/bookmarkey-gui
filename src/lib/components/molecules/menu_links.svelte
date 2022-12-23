@@ -5,7 +5,7 @@
 	export let currentPath: string;
 </script>
 
-<div class="hidden flex-1 py-4 md:block">
+<div class="flex-1 py-4">
 	<NavBrand href="/dashboard">
 		<Logo />
 	</NavBrand>

@@ -13,6 +13,6 @@
 </script>
 
 <Toaster toastOptions={{ style: style }} />
-<main class="bg-blue-100 font-sans font-medium text-gray-800 dark:bg-slate-700 dark:text-white">
+<main class="bg-blue-100 font-sans font-medium text-gray-800 dark:bg-slate-800 dark:text-white">
 	<slot />
 </main>
