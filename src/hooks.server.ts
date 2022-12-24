@@ -14,7 +14,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 			event.locals.user = event.locals.pb?.authStore.model;
 		}
 	} catch (err) {
-		console.log('ERR', err);
 		event.locals.user = undefined;
 		event.locals.pb.authStore.clear();
 	}

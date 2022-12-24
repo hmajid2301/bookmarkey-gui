@@ -30,15 +30,12 @@
 	import UpdatePasswordForm from './components/update_password.svelte';
 	import UpdateProfileForm from './components/update_profile.svelte';
 
+	import { applyAction } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
 	import Section from '~/lib/components/atoms/section.svelte';
 
 	export let form: ActionData;
 	export let data: PageData;
-
-	let profileValues: ProfileValues = {
-		nickname: form?.data?.nickname || data.user.nickname,
-		email: form?.data?.email || data.user.email
-	};
 
 	let passwordValues: PasswordValues = {
 		currentPassword: form?.data?.currentPassword,
@@ -79,7 +76,8 @@
 		return async ({ result, update }: { result: ActionResult; update: () => Promise<void> }) => {
 			switch (result.type) {
 				case 'success':
-					await update();
+					toast.success('Updated password');
+					await invalidateAll();
 					break;
 				case 'failure':
 					toast.error('Invalid password data');
@@ -97,20 +95,17 @@
 
 	const submitUpdateProfile = () => {
 		loading = true;
-		return async ({ result, update }: { result: ActionResult; update: () => Promise<void> }) => {
+		return async ({ result }: { result: ActionResult }) => {
 			switch (result.type) {
 				case 'success':
-					await update();
-					break;
-				case 'failure':
-					toast.error('Invalid profile data');
-					await update();
+					toast.success('Updated profile data');
+					await invalidateAll();
 					break;
 				case 'error':
 					toast.error(result.error.message);
 					break;
 				default:
-					await update();
+					await applyAction(result);
 			}
 			loading = false;
 		};
@@ -135,10 +130,13 @@
 		<UpdateProfileForm
 			useEnhanceFunc={submitUpdateProfile}
 			{loading}
-			values={profileValues}
+			values={{
+				nickname: form?.data?.nickname ?? data.user.nickname,
+				email: form?.data?.email ?? data.user.email
+			}}
 			errors={profileErrors}
 			action="?/updateProfile"
-			avatar={data.user.avatar ? data.user.avatar : '/user.png'} />
+			avatar={data.user.avatar} />
 	</Section>
 
 	<Section>

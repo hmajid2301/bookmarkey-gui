@@ -4,6 +4,18 @@ import { z } from 'zod';
 
 import { HTTP_BAD_REQUEST, HTTP_SERVER_ERROR } from '~/lib/http';
 
+const imageTypes = [
+	'image/jpeg',
+	'image/jpg',
+	'image/png',
+	'image/webp',
+	'image/svg+xml',
+	'image/gif'
+];
+
+// Max limit for avatars 5KB
+const MAX_AVATAR_FILE_LIMIT = 500_000;
+
 interface updatePassword {
 	currentPassword: string;
 	password: string;
@@ -46,18 +58,6 @@ const updatePasswordSchema: z.ZodType<updatePassword> = z
 			});
 		}
 	});
-
-const imageTypes = [
-	'image/jpeg',
-	'image/jpg',
-	'image/png',
-	'image/webp',
-	'image/svg+xml',
-	'image/gif'
-];
-
-// Max limit for avatars 5KB
-const MAX_AVATAR_FILE_LIMIT = 500_000;
 
 const updateProfileSchema: z.ZodType<updateProfile> = z.object({
 	nickname: z.string().max(64, { message: 'Name must be 64 characters or less' }).trim(),

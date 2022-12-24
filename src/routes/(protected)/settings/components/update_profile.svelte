@@ -4,6 +4,7 @@
 	import type { ProfileErrors, ProfileValues } from '../+page.svelte';
 
 	import { enhance } from '$app/forms';
+	import Avatar from '~/lib/components/atoms/avatar.svelte';
 	import Button from '~/lib/components/atoms/button.svelte';
 	import Input from '~/lib/components/atoms/input.svelte';
 	import EmailInput from '~/lib/components/molecules/email_input.svelte';
@@ -11,26 +12,16 @@
 	export let values: ProfileValues;
 	export let loading: boolean;
 	export let errors: ProfileErrors;
-	export let avatar = '/user.png';
+	export let avatar: string;
 	export let action: string;
-	export let useEnhanceFunc: () => ({
-		result,
-		update
-	}: {
-		result: ActionResult;
-		update: () => Promise<void>;
-	}) => Promise<void>;
+	export let useEnhanceFunc: () => ({ result }: { result: ActionResult }) => Promise<void>;
 
 	const showPreview = (event: Event) => {
 		const target = event.target as HTMLInputElement;
 		const files = target.files;
 
 		if (files && files.length > 0) {
-			const src = URL.createObjectURL(files[0] as Blob);
-			const preview = document.getElementById('avatar-preview');
-			if (preview && preview instanceof HTMLImageElement) {
-				preview.src = src;
-			}
+			avatar = files[0]?.name || '';
 		}
 	};
 </script>
@@ -40,11 +31,9 @@
 		<div class="mb-6 last:mb-0">
 			<label for="" class="mb-2 block font-bold">Avatar</label>
 			<div class="relative mr-6 h-24 w-24 md:h-36 md:w-36">
-				<img
-					id="avatar-preview"
-					src={avatar}
-					alt="User Avatar"
-					class="block h-auto w-full max-w-full rounded-full bg-gray-100 dark:bg-slate-800" />
+				{#key avatar}
+					<Avatar pocketbaseAvatar={avatar} email={values.email} nickname={values.nickname} />
+				{/key}
 				<div class="absolute right-0 bottom-0">
 					<div class="relative flex items-stretch justify-start">
 						<label class="inline-flex">
