@@ -1,7 +1,7 @@
 import { error, fail, type Actions } from '@sveltejs/kit';
 import { z } from 'zod';
 
-import { HTTP_BAD_REQUEST, HTTP_SERVER_ERROR } from '~/lib/http';
+import { HTTP_BAD_REQUEST, HTTP_SERVER_ERROR } from '~/lib/constants/http';
 
 interface EmailVerification {
 	email: string;

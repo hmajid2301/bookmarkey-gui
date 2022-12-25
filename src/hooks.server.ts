@@ -2,11 +2,10 @@ import { redirect, type Handle } from '@sveltejs/kit';
 import PocketBase from 'pocketbase';
 
 import { config } from './config';
-import { HTTP_SEE_OTHER } from './lib/http';
+import { HTTP_SEE_OTHER } from './lib/constants/http';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.pb = new PocketBase(config.PocketBaseURL);
-	console.log('HELLOabcbad', config.PocketBaseURL);
 	event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');
 
 	try {
@@ -20,7 +19,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		event.locals.pb.authStore.clear();
 	}
 
-	if (event.url.pathname.startsWith('/dashboard') && !event.locals.pb.authStore.isValid) {
+	if (event.url.pathname.startsWith('/my') && !event.locals.pb.authStore.isValid) {
 		throw redirect(HTTP_SEE_OTHER, '/');
 	}
 

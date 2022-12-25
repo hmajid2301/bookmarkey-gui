@@ -4,7 +4,7 @@
 	import { enhance } from '$app/forms';
 	import Button from '~/lib/components/atoms/Button.svelte';
 	import PasswordInput from '~/lib/components/molecules/PasswordInput.svelte';
-	import type { PasswordErrors, PasswordValues } from '~/routes/(protected)/settings/+page.svelte';
+	import type { PasswordErrors, PasswordValues } from '~/routes/my/settings/+page.svelte';
 
 	export let loading: boolean;
 	export let values: PasswordValues;

@@ -2,7 +2,7 @@ import { redirect } from '@sveltejs/kit';
 
 import type { RequestEvent, RequestHandler } from './$types';
 
-import { HTTP_SEE_OTHER } from '~/lib/http';
+import { HTTP_SEE_OTHER } from '~/lib/constants/http';
 
 export const GET: RequestHandler = async ({ locals, url, cookies }: RequestEvent) => {
 	const redirectURL = `${url.origin}/callback`;

@@ -1,7 +1,7 @@
 import { error, fail, redirect, type Actions } from '@sveltejs/kit';
 import { z } from 'zod';
 
-import { HTTP_BAD_REQUEST, HTTP_SEE_OTHER, HTTP_SERVER_ERROR } from '~/lib/http';
+import { HTTP_BAD_REQUEST, HTTP_SEE_OTHER, HTTP_SERVER_ERROR } from '~/lib/constants/http';
 
 interface SignUp {
 	email: string;
@@ -80,6 +80,6 @@ export const actions: Actions = {
 			throw error(HTTP_SERVER_ERROR, 'Failed to automatically log you in.');
 		}
 
-		throw redirect(HTTP_SEE_OTHER, '/dashboard');
+		throw redirect(HTTP_SEE_OTHER, '/my/dashboard');
 	}
 };

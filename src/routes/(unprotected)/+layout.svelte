@@ -5,7 +5,7 @@
 
 <div>
 	<Navbar />
-	<div class="h-screen">
+	<div class="h-full">
 		<slot />
 	</div>
 	<Footer />

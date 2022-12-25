@@ -12,7 +12,7 @@ test('Successfully signup to app', async ({ page, baseURL }) => {
 	await page.locator('[name="passwordConfirm"]').type(password);
 
 	await page.locator('button[type="submit"]').click();
-	await page.waitForURL(`${baseURL}/dashboard`);
+	await page.waitForURL(`${baseURL}/my/dashboard`);
 
 	await deleteUserByEmail(email);
 });
@@ -57,7 +57,6 @@ test('Fail to signup with passwords that do not match', async ({ page, baseURL }
 
 async function deleteUserByEmail(email: string) {
 	const pb = new pocketbase(process.env.VITE_POCKET_BASE_URL);
-	console.log('HELLO', process.env.VITE_POCKET_BASE_URL);
 	const adminEmail = 'admin@bookmarkey.app';
 	const adminPassword = 'password11';
 	await pb.admins.authWithPassword(adminEmail, adminPassword);

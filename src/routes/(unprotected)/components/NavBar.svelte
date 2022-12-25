@@ -6,17 +6,13 @@
 </script>
 
 <header>
-	<Navbar let:hidden let:toggle navClass="bg-slate-100 dark:border-slate-700 dark:bg-slate-900">
+	<Navbar
+		let:hidden
+		let:toggle
+		navClass="bg-slate-100 dark:border-slate-700 dark:bg-slate-900 py-2 px-2">
 		<NavBrand href="/">
 			<Logo />
 		</NavBrand>
-		<div class="flex items-center space-x-4 md:order-2">
-			<Button extraClasses="mr-0 mb-0" href="/login">Login</Button>
-			<Button extraClasses="mr-0 mb-0" href="/signup">Sign Up</Button>
-			<DarkMode />
-		</div>
-
-		<NavHamburger on:click={toggle} />
 		<NavUl {hidden}>
 			<a
 				href="/"
@@ -24,6 +20,12 @@
 				aria-current="page">
 				Home
 			</a>
+			<Button extraClasses="mr-0 mb-0" href="/login">Login</Button>
+			<Button extraClasses="mr-0 mb-0" href="/signup">Sign Up</Button>
 		</NavUl>
+		<div>
+			<NavHamburger on:click={toggle} />
+			<DarkMode />
+		</div>
 	</Navbar>
 </header>

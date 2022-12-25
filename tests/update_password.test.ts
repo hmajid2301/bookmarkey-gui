@@ -5,7 +5,7 @@ test('Successfully update password in app', async ({ page, baseURL }) => {
 	const email = 'test+update_password@bookmarkey.app';
 	const password = 'password@11';
 	await login(page, baseURL || '', email, password);
-	await page.goto('/settings');
+	await page.goto('/my/settings');
 
 	await page.locator('[name="currentPassword"]').type(password);
 
@@ -25,7 +25,7 @@ async function login(page: Page, baseURL: string, email: string, password: strin
 	await page.locator('[name="email"]').type(email);
 	await page.locator('[name="password"]').type(password);
 	await page.locator('button[type="submit"]').click();
-	await page.waitForURL(`${baseURL}/dashboard`);
+	await page.waitForURL(`${baseURL}/my/dashboard`);
 }
 
 async function updatePassword(email: string, newPassword: string, password: string) {
