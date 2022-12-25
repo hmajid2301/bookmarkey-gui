@@ -21,6 +21,12 @@
 		<Header bind:showMenu />
 
 		<div
+			on:click={() => {
+				showMenu = false;
+			}}
+			on:keydown={() => {
+				showMenu = false;
+			}}
 			class="flex flex-1 flex-col overflow-hidden bg-blue-50  px-4 py-4 dark:bg-gray-800 lg:py-8 lg:px-6 xl:px-8">
 			<HelloBar nickname={data.user.nickname} />
 			<slot />
