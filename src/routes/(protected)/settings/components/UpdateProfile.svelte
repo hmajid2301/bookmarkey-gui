@@ -4,10 +4,10 @@
 	import type { ProfileErrors, ProfileValues } from '../+page.svelte';
 
 	import { enhance } from '$app/forms';
-	import Avatar from '~/lib/components/atoms/avatar.svelte';
-	import Button from '~/lib/components/atoms/button.svelte';
-	import Input from '~/lib/components/atoms/input.svelte';
-	import EmailInput from '~/lib/components/molecules/email_input.svelte';
+	import Avatar from '~/lib/components/atoms/Avatar.svelte';
+	import Button from '~/lib/components/atoms/Button.svelte';
+	import Input from '~/lib/components/atoms/Input.svelte';
+	import EmailInput from '~/lib/components/molecules/EmailInput.svelte';
 
 	export let values: ProfileValues;
 	export let loading: boolean;

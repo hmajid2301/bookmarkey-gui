@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import TransparentButton from '~/lib/components/atoms/transparent_button.svelte';
+	import TransparentButton from '~/lib/components/atoms/TransparentButton.svelte';
 	import type { AuthProviderWithRedirect } from '~/routes/(unprotected)/(account)/types';
 
 	export let authProviders: Record<string, AuthProviderWithRedirect>;

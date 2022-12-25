@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Input from '~/lib/components/atoms/input.svelte';
+	import Input from '~/lib/components/atoms/Input.svelte';
 
 	export let name = 'email';
 	export let labelName = 'Email';

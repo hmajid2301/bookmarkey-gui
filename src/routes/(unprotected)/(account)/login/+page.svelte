@@ -5,10 +5,10 @@
 	import type { ActionData, PageData } from './$types';
 
 	import { enhance } from '$app/forms';
-	import EmailInput from '~/lib/components/molecules/email_input.svelte';
-	import FullWidthButton from '~/lib/components/molecules/full_width_button.svelte';
-	import PasswordInput from '~/lib/components/molecules/password_input.svelte';
-	import OAuthLoginGroup from '~/routes/(unprotected)/components/oauth_login_buttons.svelte';
+	import EmailInput from '~/lib/components/molecules/EmailInput.svelte';
+	import FullWidthButton from '~/lib/components/molecules/FullWidthInput.svelte';
+	import PasswordInput from '~/lib/components/molecules/PasswordInput.svelte';
+	import OAuthLoginGroup from '~/routes/(unprotected)/components/OAuthLoginButtons.svelte';
 
 	export let form: ActionData;
 	export let data: PageData;

@@ -27,12 +27,12 @@
 	import toast from 'svelte-french-toast';
 
 	import type { ActionData, PageData } from './$types';
-	import UpdatePasswordForm from './components/update_password.svelte';
-	import UpdateProfileForm from './components/update_profile.svelte';
+	import UpdatePasswordForm from './components/UpdatePassword.svelte';
+	import UpdateProfileForm from './components/UpdateProfile.svelte';
 
 	import { applyAction } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
-	import Section from '~/lib/components/atoms/section.svelte';
+	import Section from '~/lib/components/atoms/Section.svelte';
 
 	export let form: ActionData;
 	export let data: PageData;

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { NavBrand } from 'flowbite-svelte';
 
-	import Logo from '~/lib/components/atoms/logo.svelte';
+	import Logo from '~/lib/components/atoms/Logo.svelte';
 	export let currentPath: string;
 </script>
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Footer from '~/routes/(unprotected)/components/footer.svelte';
-	import Navbar from '~/routes/(unprotected)/components/navbar.svelte';
+	import Footer from '~/routes/(unprotected)/components/Footer.svelte';
+	import Navbar from '~/routes/(unprotected)/components/NavBar.svelte';
 </script>
 
 <div>

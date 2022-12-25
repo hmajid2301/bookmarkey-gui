@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import MenuLinks from '~/lib/components/molecules/menu_links.svelte';
+	import MenuLinks from '~/lib/components/molecules/MenuLinks.svelte';
 </script>
 
 <div id="menu" class="min-h-screen flex-col bg-white px-4 py-4  dark:bg-gray-900">

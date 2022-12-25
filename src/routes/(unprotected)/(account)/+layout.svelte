@@ -1,5 +1,5 @@
 <script>
-	import Section from '~/lib/components/atoms/section.svelte';
+	import Section from '~/lib/components/atoms/Section.svelte';
 </script>
 
 <section class="">

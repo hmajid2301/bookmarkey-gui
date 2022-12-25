@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Button from '~/lib/components/atoms/button.svelte';
+	import Button from '~/lib/components/atoms/Button.svelte';
 </script>
 
 <Button type="submit" extraClasses="my-1 w-full">

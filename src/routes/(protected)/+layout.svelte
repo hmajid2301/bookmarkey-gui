@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { LayoutData } from './$types';
-	import Header from './components/header.svelte';
-	import HelloBar from './components/hello_bar.svelte';
-	import SideBar from './components/side_bar.svelte';
+	import Header from './components/Header.svelte';
+	import HelloBar from './components/HelloBar.svelte';
+	import SideBar from './components/SideBar.svelte';
 
 	export let data: LayoutData;
 	let showMenu = false;

@@ -2,8 +2,8 @@
 	import type { ActionResult } from '@sveltejs/kit';
 
 	import { enhance } from '$app/forms';
-	import Button from '~/lib/components/atoms/button.svelte';
-	import PasswordInput from '~/lib/components/molecules/password_input.svelte';
+	import Button from '~/lib/components/atoms/Button.svelte';
+	import PasswordInput from '~/lib/components/molecules/PasswordInput.svelte';
 	import type { PasswordErrors, PasswordValues } from '~/routes/(protected)/settings/+page.svelte';
 
 	export let loading: boolean;

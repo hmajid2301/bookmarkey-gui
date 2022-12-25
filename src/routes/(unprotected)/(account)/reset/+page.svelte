@@ -5,8 +5,8 @@
 	import type { ActionData } from './$types';
 
 	import { enhance } from '$app/forms';
-	import EmailInput from '~/lib/components/molecules/email_input.svelte';
-	import FullWidthButton from '~/lib/components/molecules/full_width_button.svelte';
+	import EmailInput from '~/lib/components/molecules/EmailInput.svelte';
+	import FullWidthButton from '~/lib/components/molecules/FullWidthInput.svelte';
 
 	let loading = false;
 
