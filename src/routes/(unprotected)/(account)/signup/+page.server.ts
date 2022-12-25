@@ -62,6 +62,7 @@ export const actions: Actions = {
 				passwordConfirm: result.data.passwordConfirm
 			});
 		} catch (err) {
+			console.log('err', err);
 			throw error(HTTP_SERVER_ERROR, 'Failed to create account.');
 		}
 
@@ -79,6 +80,6 @@ export const actions: Actions = {
 			throw error(HTTP_SERVER_ERROR, 'Failed to automatically log you in.');
 		}
 
-		throw redirect(HTTP_SEE_OTHER, '/');
+		throw redirect(HTTP_SEE_OTHER, '/dashboard');
 	}
 };

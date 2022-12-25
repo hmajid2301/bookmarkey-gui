@@ -42,3 +42,9 @@ tasks:
   update_types:
     cmds:
       - npm run sync
+
+  run_prod:
+    cmds:
+      - docker compose up --build -d
+      - npm run build
+      - npm run preview

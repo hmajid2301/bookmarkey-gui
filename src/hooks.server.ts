@@ -6,6 +6,7 @@ import { HTTP_SEE_OTHER } from './lib/http';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.pb = new PocketBase(config.PocketBaseURL);
+	console.log('HELLOabcbad', config.PocketBaseURL);
 	event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');
 
 	try {
@@ -14,6 +15,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			event.locals.user = event.locals.pb?.authStore.model;
 		}
 	} catch (err) {
+		console.log('Failed auth refresh', err);
 		event.locals.user = undefined;
 		event.locals.pb.authStore.clear();
 	}

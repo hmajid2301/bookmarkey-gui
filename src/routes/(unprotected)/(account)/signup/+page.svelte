@@ -23,7 +23,7 @@
 					await update();
 					break;
 				case 'failure':
-					toast.error('Invalid credentials');
+					toast.error('Invalid data in form.');
 					await update();
 					break;
 				case 'error':
