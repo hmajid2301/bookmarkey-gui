@@ -36,7 +36,7 @@
 			<label for="" class="mb-2 block font-bold">Avatar</label>
 			<div class="relative mr-6 h-24 w-24 md:h-36 md:w-36">
 				{#key avatar}
-					<Avatar pocketbaseAvatar={avatar} email={values.email} nickname={values.nickname} />
+					<Avatar {avatar} email={values.email} nickname={values.nickname} />
 				{/key}
 				<div class="absolute right-0 bottom-0">
 					<div class="relative flex items-stretch justify-start">
