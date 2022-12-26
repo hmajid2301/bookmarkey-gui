@@ -4,7 +4,8 @@ command = "npm run build"
 
 [context.production.environment]
 NETLIFY = "true"
-VITE_POCKET_BASE_URL = "https://bookmarkey.fly.dev"
+VITE_POCKET_BASE_URL = "https://pocketbase.bookmarkey.app"
+VITE_SENTRY_DSN = 'https://38be6117d9454303a80c3875e56eec02@o247056.ingest.sentry.io/4504394811113472'
 
 [context.next.environment]
 
@@ -12,4 +13,12 @@ VITE_POCKET_BASE_URL = "https://bookmarkey.fly.dev"
 
 [context.deploy-preview.environment]
 NETLIFY = "true"
-VITE_POCKET_BASE_URL = "https://bookmarkey.fly.dev"
+VITE_POCKET_BASE_URL = "https://pocketbase.bookmarkey.app"
+VITE_SENTRY_DSN = "https://38be6117d9454303a80c3875e56eec02@o247056.ingest.sentry.io/4504394811113472"
+
+[[plugins]]
+package = "@sentry/netlify-build-plugin"
+
+[plugins.inputs]
+sentryOrg = "majiy"
+sentryProject = "bookmarkey"

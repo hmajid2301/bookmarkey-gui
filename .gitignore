@@ -50,3 +50,4 @@ tests/pb_data/*
 !tests/pb_data/data.db
 test-results/
 *.log
+.env

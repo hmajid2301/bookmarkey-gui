@@ -1,18 +1,27 @@
 <script lang="ts">
+	import * as Sentry from '@sentry/svelte';
+	import { BrowserTracing } from '@sentry/tracing';
 	import { onMount } from 'svelte';
 	import { Toaster } from 'svelte-french-toast';
 	import { pwaInfo } from 'virtual:pwa-info';
 
+	import '~/app.css';
 	import type ReloadPrompt from '$lib/ReloadPrompt.svelte';
+	import { config } from '~/config';
 
 	let reloadPrompt: typeof ReloadPrompt;
 	onMount(async () => {
 		pwaInfo && (reloadPrompt = (await import('$lib/ReloadPrompt.svelte')).default);
 	});
 
-	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
+	Sentry.init({
+		dsn: config.SentryDNS,
+		environment: config.PROD ? 'production' : 'development',
+		integrations: [new BrowserTracing()],
+		tracesSampleRate: 1.0 // tweak this number
+	});
 
-	import '~/app.css';
+	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 </script>
 
 <svelte:head>
