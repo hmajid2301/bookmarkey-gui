@@ -20,8 +20,12 @@
 		const target = event.target as HTMLInputElement;
 		const files = target.files;
 
-		if (files && files.length > 0) {
-			avatar = files[0]?.name || '';
+		if (files && files[0]) {
+			const reader = new FileReader();
+			reader.addEventListener('load', function () {
+				avatar = reader.result as string;
+			});
+			reader.readAsDataURL(files[0]);
 		}
 	};
 </script>
