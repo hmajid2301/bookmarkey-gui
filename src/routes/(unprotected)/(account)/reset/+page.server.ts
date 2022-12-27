@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/browser';
 import { error, fail, type Actions } from '@sveltejs/kit';
 import { z } from 'zod';
 
@@ -31,6 +32,7 @@ export const actions: Actions = {
 				success: true
 			};
 		} catch (err) {
+			Sentry.captureException(err);
 			throw error(HTTP_SERVER_ERROR, 'Failed to send password reset email');
 		}
 	}

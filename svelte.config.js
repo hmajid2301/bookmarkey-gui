@@ -1,3 +1,4 @@
+import { withSentryConfig } from '@sentry/svelte';
 import adapter from '@sveltejs/adapter-auto';
 import preprocess from 'svelte-preprocess';
 
@@ -23,4 +24,12 @@ const config = {
 	]
 };
 
-export default config;
+const sentryOptions = {
+	componentTracking: {
+		trackComponents: true,
+		trackInit: true,
+		trackUpdates: false
+	}
+};
+
+export default withSentryConfig(config, sentryOptions);

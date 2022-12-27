@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/browser';
 import { error, fail, type Actions } from '@sveltejs/kit';
 import { serialize } from 'object-to-formdata';
 import { z } from 'zod';
@@ -111,6 +112,7 @@ export const actions: Actions = {
 				updatePasswordSuccess: true
 			};
 		} catch (err) {
+			Sentry.captureException(err);
 			throw error(HTTP_SERVER_ERROR, 'Failed to update password.');
 		}
 	},
@@ -150,6 +152,7 @@ export const actions: Actions = {
 				updateProfileSuccess: true
 			};
 		} catch (err) {
+			Sentry.captureException(err);
 			throw error(HTTP_SERVER_ERROR, 'Failed to update profile information.');
 		}
 	}

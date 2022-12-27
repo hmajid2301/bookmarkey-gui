@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/browser';
 import { error, fail, redirect, type Actions } from '@sveltejs/kit';
 import { z } from 'zod';
 
@@ -63,12 +64,14 @@ export const actions: Actions = {
 			});
 		} catch (err) {
 			console.log('err', err);
+			Sentry.captureException(err);
 			throw error(HTTP_SERVER_ERROR, 'Failed to create account.');
 		}
 
 		try {
 			await locals.pb?.collection('users').requestVerification(result.data.email);
 		} catch (err) {
+			Sentry.captureException(err);
 			throw error(HTTP_SERVER_ERROR, 'Failed to send verification email.');
 		}
 
@@ -77,6 +80,7 @@ export const actions: Actions = {
 				?.collection('users')
 				.authWithPassword(result.data.email, result.data.password);
 		} catch (err) {
+			Sentry.captureException(err);
 			throw error(HTTP_SERVER_ERROR, 'Failed to automatically log you in.');
 		}
 

@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/browser';
 import { error, fail, redirect, type Actions } from '@sveltejs/kit';
 import { ClientResponseError } from 'pocketbase';
 import { z } from 'zod';
@@ -44,6 +45,7 @@ export const actions: Actions = {
 					throw error(err.status, 'Wrong email and password combination.');
 				}
 			}
+			Sentry.captureException(err);
 			throw error(HTTP_SERVER_ERROR, 'Failed to login, please try again later.');
 		}
 
