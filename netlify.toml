@@ -22,3 +22,4 @@ package = "@sentry/netlify-build-plugin"
 [plugins.inputs]
 sentryOrg = "majiy"
 sentryProject = "bookmarkey"
+sentryRepository = "HaseebMajid Apps / Bookmarkey / gui"

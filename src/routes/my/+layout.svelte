@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { swipe } from 'svelte-gestures';
+
 	import type { LayoutData } from './$types';
 	import Header from './components/Header.svelte';
 	import HelloBar from './components/HelloBar.svelte';
@@ -6,13 +8,30 @@
 
 	export let data: LayoutData;
 	let showMenu = false;
+
+	function handler(
+		event: CustomEvent<{
+			direction: 'top' | 'right' | 'bottom' | 'left';
+			target: EventTarget;
+		}>
+	) {
+		const direction = event.detail.direction;
+		if (direction === 'left') {
+			showMenu = false;
+		} else if (direction === 'right') {
+			showMenu = true;
+		}
+	}
 </script>
 
-<div class="flex h-screen overflow-x-hidden">
+<div
+	class="flex h-screen overflow-x-hidden"
+	use:swipe={{ timeframe: 300, minSwipeDistance: 60, touchAction: 'pan-y' }}
+	on:swipe={handler}>
 	<aside
 		class="{showMenu
 			? ''
-			: '-ml-64'} flex w-64 flex-shrink-0 flex-col transition-all duration-300 md:ml-0">
+			: '-ml-64'} flex w-64 flex-shrink-0 flex-col transition-all duration-300 lg:ml-0">
 		<nav class="flex flex-1 flex-col bg-white ">
 			<SideBar />
 		</nav>
@@ -27,7 +46,7 @@
 			on:keydown={() => {
 				showMenu = false;
 			}}
-			class="flex flex-1 flex-col overflow-hidden bg-blue-50  px-4 py-4 dark:bg-gray-800 lg:py-8 lg:px-6 xl:px-8">
+			class="flex flex-1 flex-col overflow-hidden bg-blue-50  px-4 py-4 dark:bg-slate-800 lg:py-8 lg:px-6 xl:px-8">
 			<HelloBar avatar={data.user.avatar} email={data.user.email} nickname={data.user.nickname} />
 			<slot />
 		</div>

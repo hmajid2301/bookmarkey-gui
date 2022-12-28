@@ -10,7 +10,7 @@ tasks:
   start:
     cmds:
       - docker compose up --build -d
-      - npm run dev -- --open
+      - npm run dev -- --host --port 5173 --open
 
   lint:
     cmds:

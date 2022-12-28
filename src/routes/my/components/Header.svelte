@@ -2,7 +2,7 @@
 	export let showMenu = false;
 </script>
 
-<header class="text-semibold flex items-center bg-gray-900 p-4 text-gray-100 md:hidden">
+<header class="text-semibold flex items-center bg-gray-900 p-4 text-gray-100 lg:hidden">
 	<button
 		class="mr-4 p-1"
 		on:click={() => {

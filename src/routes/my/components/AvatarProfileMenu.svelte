@@ -6,30 +6,52 @@
 	export let nickname: string;
 	export let avatar: string;
 	export let email: string;
+	let showAvatarMenu = false;
 	let showMenu = false;
 </script>
 
-<div
-	class="max-h-screen-menu absolute top-14 left-0 hidden w-screen overflow-y-auto bg-gray-50 shadow-lg dark:bg-slate-800 lg:static lg:flex lg:w-auto lg:overflow-visible lg:shadow-none">
+<div class="flex h-14 flex-none items-stretch lg:hidden">
 	<div
-		class="relative block cursor-pointer items-center text-slate-600 dark:text-slate-400 lg:flex lg:py-2 lg:px-3">
+		class="flex cursor-pointer items-center py-2 px-3 text-black hover:text-slate-500 dark:text-white dark:hover:text-slate-400">
+		<button
+			on:click={() => {
+				showMenu = !showMenu;
+			}}
+			class="inline-flex h-6 w-6 items-center justify-center">
+			<svg viewBox="0 0 24 24" width="24" height="24" class="inline-block">
+				<path
+					fill="currentColor"
+					d="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z" />
+			</svg>
+		</button>
+	</div>
+</div>
+
+<div
+	class="max-h-screen-menu {showMenu
+		? 'absolute'
+		: 'hidden'}  absolute top-14 left-0 z-20 block w-screen overflow-y-auto bg-slate-100 shadow-lg dark:bg-slate-800 lg:static lg:flex lg:w-auto lg:overflow-visible lg:shadow-none">
+	<div
+		class="relative block cursor-pointer items-center text-black hover:text-slate-500 dark:text-white dark:hover:text-slate-400 lg:flex lg:py-2 lg:px-3" />
+	<div
+		class="relative block cursor-pointer items-center text-black hover:text-slate-500 dark:text-white dark:hover:text-slate-400 lg:flex lg:py-2 lg:px-3">
 		<div
 			class="flex items-center bg-gray-100 p-3 dark:bg-slate-800 lg:bg-transparent lg:p-0 lg:dark:bg-transparent">
 			<div
-				class="mr-3 inline-flex h-6 w-6"
 				on:keydown={() => {
-					showMenu = !showMenu;
+					showAvatarMenu = !showAvatarMenu;
 				}}
 				on:click={() => {
-					showMenu = !showMenu;
-				}}>
+					showAvatarMenu = !showAvatarMenu;
+				}}
+				class="mr-3 inline-flex h-6 w-6">
 				<Avatar {avatar} {nickname} {email} />
 			</div>
 		</div>
 		<div
-			class="border-b {showMenu
-				? 'block'
-				: 'hidden'} border-gray-100 text-sm dark:border-slate-700 lg:absolute lg:top-full lg:left-0 lg:z-20 lg:min-w-full lg:rounded-lg lg:border lg:bg-white lg:shadow-lg lg:dark:bg-slate-800">
+			class="block border-b {showAvatarMenu
+				? 'lg:block'
+				: 'lg:hidden'}  border-gray-100 text-sm dark:border-slate-700 lg:absolute lg:top-full lg:left-0 lg:z-20 lg:min-w-full lg:rounded-lg lg:border lg:bg-white lg:shadow-lg lg:dark:bg-slate-800">
 			<div
 				class="relative block flex-col items-start py-2 px-3  text-black  dark:text-white lg:flex">
 				<div class="flex">
@@ -41,8 +63,7 @@
 			</div>
 			<hr class="hidden border-t border-gray-100 dark:border-slate-700 lg:my-0.5 lg:block" />
 			<div
-				aria-current="page"
-				class="router-link-active router-link-exact-active relative block cursor-pointer items-center py-2 px-3 text-black hover:text-slate-500 dark:text-white dark:hover:text-slate-400 lg:flex">
+				class="relative block cursor-pointer items-center py-2 px-3 text-black hover:text-slate-500 dark:text-white dark:hover:text-slate-400 lg:flex">
 				<div class="flex items-center">
 					<span class="inline-flex h-6 w-6 items-center justify-center transition-colors">
 						<svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
@@ -82,6 +103,7 @@
 			</div>
 		</div>
 	</div>
+
 	<div
 		class="relative block cursor-pointer items-center py-2 px-3 text-black hover:text-slate-500 dark:text-white dark:hover:text-slate-400 lg:flex lg:w-16 lg:justify-center">
 		<div class="flex items-center">
@@ -89,4 +111,18 @@
 			<span class="px-2 transition-colors lg:hidden">Light/Dark</span>
 		</div>
 	</div>
+	<a
+		class="relative block cursor-pointer items-center py-2 px-3 text-black hover:text-slate-500 dark:text-white dark:hover:text-slate-400 lg:flex lg:w-16 lg:justify-center"
+		href="https://justboil.me/tailwind-admin-templates/vue-dashboard/">
+		<div class="flex items-center">
+			<span class="inline-flex h-6 w-6 items-center justify-center transition-colors">
+				<svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
+					<path
+						fill="currentColor"
+						d="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z" />
+				</svg>
+			</span>
+			<span class="px-2 transition-colors lg:hidden">About</span>
+		</div>
+	</a>
 </div>
