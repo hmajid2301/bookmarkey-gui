@@ -1,15 +1,8 @@
-import type { ActionResult } from '@sveltejs/kit';
 import { render } from '@testing-library/svelte';
 import type { ComponentProps } from 'svelte';
 import { describe, test } from 'vitest';
 
 import UpdatePassword from './UpdatePassword.svelte';
-
-const submitUpdatePassword = () => {
-	return async ({ result, update }: { result: ActionResult; update: () => Promise<void> }) => {
-		console.log('Hello World!');
-	};
-};
 
 const defaultProps: ComponentProps<UpdatePassword> = {
 	values: {
@@ -22,9 +15,7 @@ const defaultProps: ComponentProps<UpdatePassword> = {
 		password: [],
 		passwordConfirm: []
 	},
-	loading: false,
-	action: '?/updatePassword',
-	useEnhanceFunc: submitUpdatePassword
+	action: '?/updatePassword'
 };
 
 describe('UpdatePassword', () => {

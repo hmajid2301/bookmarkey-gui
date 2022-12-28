@@ -1,47 +1,13 @@
-<script lang="ts" context="module">
-	export interface PasswordValues {
-		currentPassword: string;
-		password: string;
-		passwordConfirm: string;
-	}
-
-	export interface PasswordErrors {
-		currentPassword: string[] | undefined;
-		password: string[] | undefined;
-		passwordConfirm: string[] | undefined;
-	}
-
-	export interface ProfileValues {
-		nickname: string;
-		email: string;
-	}
-
-	export interface ProfileErrors {
-		nickname: string[] | undefined;
-		email: string[] | undefined;
-	}
-</script>
-
 <script lang="ts">
-	import type { ActionResult } from '@sveltejs/kit';
-	import toast from 'svelte-french-toast';
-
 	import type { ActionData, PageData } from './$types';
 	import UpdatePasswordForm from './components/UpdatePassword.svelte';
 	import UpdateProfileForm from './components/UpdateProfile.svelte';
+	import type { PasswordErrors, ProfileErrors } from './types';
 
-	import { applyAction } from '$app/forms';
-	import { invalidateAll } from '$app/navigation';
 	import Section from '~/lib/components/atoms/Section.svelte';
 
 	export let form: ActionData;
 	export let data: PageData;
-
-	let passwordValues: PasswordValues = {
-		currentPassword: form?.data?.currentPassword,
-		password: form?.data?.password,
-		passwordConfirm: form?.data?.passwordConfirm
-	};
 
 	let profileErrors: ProfileErrors = {
 		nickname: undefined,
@@ -68,48 +34,6 @@
 			};
 		}
 	}
-
-	let loading = false;
-
-	const submitUpdatePassword = () => {
-		loading = true;
-		return async ({ result, update }: { result: ActionResult; update: () => Promise<void> }) => {
-			switch (result.type) {
-				case 'success':
-					toast.success('Updated password');
-					await invalidateAll();
-					break;
-				case 'failure':
-					toast.error('Invalid password data');
-					await update();
-					break;
-				case 'error':
-					toast.error(result.error.message);
-					break;
-				default:
-					await update();
-			}
-			loading = false;
-		};
-	};
-
-	const submitUpdateProfile = () => {
-		loading = true;
-		return async ({ result }: { result: ActionResult }) => {
-			switch (result.type) {
-				case 'success':
-					toast.success('Updated profile data');
-					await invalidateAll();
-					break;
-				case 'error':
-					toast.error(result.error.message);
-					break;
-				default:
-					await applyAction(result);
-			}
-			loading = false;
-		};
-	};
 </script>
 
 <section class="mb-6 flex items-center justify-between pt-6 font-semibold">
@@ -128,8 +52,6 @@
 <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
 	<Section>
 		<UpdateProfileForm
-			useEnhanceFunc={submitUpdateProfile}
-			{loading}
 			values={{
 				nickname: form?.data?.nickname ?? data.user.nickname,
 				email: form?.data?.email ?? data.user.email
@@ -142,9 +64,11 @@
 	<Section>
 		<UpdatePasswordForm
 			action="?/updatePassword"
-			{loading}
-			values={passwordValues}
-			errors={passwordErrors}
-			useEnhanceFunc={submitUpdatePassword} />
+			values={{
+				currentPassword: form?.data?.currentPassword,
+				password: form?.data?.password,
+				passwordConfirm: form?.data?.passwordConfirm
+			}}
+			errors={passwordErrors} />
 	</Section>
 </div>

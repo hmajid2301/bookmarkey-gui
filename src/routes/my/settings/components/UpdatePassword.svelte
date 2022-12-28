@@ -1,25 +1,42 @@
 <script lang="ts">
 	import type { ActionResult } from '@sveltejs/kit';
+	import toast from 'svelte-french-toast';
+
+	import type { PasswordErrors, PasswordValues } from '../types';
 
 	import { enhance } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
 	import Button from '~/lib/components/atoms/Button.svelte';
 	import PasswordInput from '~/lib/components/molecules/PasswordInput.svelte';
-	import type { PasswordErrors, PasswordValues } from '~/routes/my/settings/+page.svelte';
 
-	export let loading: boolean;
+	let loading = false;
 	export let values: PasswordValues;
 	export let errors: PasswordErrors;
 	export let action: string;
-	export let useEnhanceFunc: () => ({
-		result,
-		update
-	}: {
-		result: ActionResult;
-		update: () => Promise<void>;
-	}) => Promise<void>;
+	const submitUpdatePassword = () => {
+		loading = true;
+		return async ({ result, update }: { result: ActionResult; update: () => Promise<void> }) => {
+			switch (result.type) {
+				case 'success':
+					toast.success('Updated password');
+					await invalidateAll();
+					break;
+				case 'failure':
+					toast.error('Invalid password data');
+					await update();
+					break;
+				case 'error':
+					toast.error(result.error.message);
+					break;
+				default:
+					await update();
+			}
+			loading = false;
+		};
+	};
 </script>
 
-<form class="flex h-full flex-col" {action} method="post" use:enhance={useEnhanceFunc}>
+<form class="flex h-full flex-col" {action} method="post" use:enhance={submitUpdatePassword}>
 	<div class="flex-1 p-6">
 		<PasswordInput
 			disabled={loading}

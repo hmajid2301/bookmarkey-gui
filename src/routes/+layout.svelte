@@ -5,8 +5,8 @@
 	import { Toaster } from 'svelte-french-toast';
 	import { pwaInfo } from 'virtual:pwa-info';
 
-	import '~/app.css';
 	import type ReloadPrompt from '$lib/ReloadPrompt.svelte';
+	import '~/app.css';
 	import { config } from '~/config';
 
 	let reloadPrompt: typeof ReloadPrompt;

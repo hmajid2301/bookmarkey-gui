@@ -1,20 +1,39 @@
 <script lang="ts">
 	import type { ActionResult } from '@sveltejs/kit';
+	import toast from 'svelte-french-toast';
 
-	import type { ProfileErrors, ProfileValues } from '../+page.svelte';
+	import type { ProfileErrors, ProfileValues } from '../types';
 
-	import { enhance } from '$app/forms';
+	import { applyAction, enhance } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
 	import Avatar from '~/lib/components/atoms/Avatar.svelte';
 	import Button from '~/lib/components/atoms/Button.svelte';
 	import Input from '~/lib/components/atoms/Input.svelte';
 	import EmailInput from '~/lib/components/molecules/EmailInput.svelte';
 
 	export let values: ProfileValues;
-	export let loading: boolean;
 	export let errors: ProfileErrors;
 	export let avatar: string;
 	export let action: string;
-	export let useEnhanceFunc: () => ({ result }: { result: ActionResult }) => Promise<void>;
+
+	let loading = false;
+	const submitUpdateProfile = () => {
+		loading = true;
+		return async ({ result }: { result: ActionResult }) => {
+			switch (result.type) {
+				case 'success':
+					toast.success('Updated profile data');
+					await invalidateAll();
+					break;
+				case 'error':
+					toast.error(result.error.message);
+					break;
+				default:
+					await applyAction(result);
+			}
+			loading = false;
+		};
+	};
 
 	const showPreview = (event: Event) => {
 		const target = event.target as HTMLInputElement;
@@ -30,7 +49,7 @@
 	};
 </script>
 
-<form {action} enctype="multipart/form-data" method="post" use:enhance={useEnhanceFunc}>
+<form {action} enctype="multipart/form-data" method="post" use:enhance={submitUpdateProfile}>
 	<div class="flex-1 p-6">
 		<div class="mb-6 last:mb-0">
 			<label for="" class="mb-2 block font-bold">Avatar</label>

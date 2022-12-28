@@ -6,18 +6,19 @@ include:
 image: node:19.1.0
 
 stages:
-  - pre
   - test
   - deploy
 
-before_script:
-  - npm install -g @go-task/cli
-  - npm ci
+.mr:
+  before_script:
+    - npm install -g @go-task/cli
+    - npm ci
 
 lint:
   stage: test
   only:
     - merge_request
+  extends: .mr
   script:
     - task lint
 
@@ -25,6 +26,7 @@ format:
   stage: test
   only:
     - merge_request
+  extends: .mr
   script:
     - task format
 
@@ -32,9 +34,9 @@ test:unit:
   stage: test
   only:
     - merge_request
+  extends: .mr
   script:
     - task unit_tests
-  allow_failure: true
 
 tests:e2e:
   stage: test
@@ -47,6 +49,7 @@ tests:e2e:
     DOCKER_DRIVER: overlay2
     DOCKER_HOST: tcp://docker:2375
     VITE_POCKET_BASE_URL: 'http://docker:9090'
+  extends: .mr
   script:
     - npx playwright install
     - echo "VITE_POCKET_BASE_URL='http://docker:9090'" >> .env.test
@@ -63,5 +66,6 @@ check:
   stage: test
   only:
     - merge_request
+  extends: .mr
   script:
     - task check
