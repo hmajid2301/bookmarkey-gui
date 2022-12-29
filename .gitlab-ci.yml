@@ -9,7 +9,7 @@ stages:
   - test
   - deploy
 
-.mr:
+.task:
   before_script:
     - npm install -g @go-task/cli
     - npm ci
@@ -18,7 +18,7 @@ lint:
   stage: test
   only:
     - merge_request
-  extends: .mr
+  extends: .task
   script:
     - task lint
 
@@ -26,7 +26,7 @@ format:
   stage: test
   only:
     - merge_request
-  extends: .mr
+  extends: .task
   script:
     - task format
 
@@ -34,9 +34,17 @@ test:unit:
   stage: test
   only:
     - merge_request
-  extends: .mr
+    - main
+  extends: .task
   script:
     - task unit_tests
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  artifacts:
+    reports:
+      junit: test-results/junit.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
 
 tests:e2e:
   stage: test
@@ -49,7 +57,7 @@ tests:e2e:
     DOCKER_DRIVER: overlay2
     DOCKER_HOST: tcp://docker:2375
     VITE_POCKET_BASE_URL: 'http://docker:9090'
-  extends: .mr
+  extends: .task
   script:
     - npx playwright install
     - echo "VITE_POCKET_BASE_URL='http://docker:9090'" >> .env.test
@@ -66,6 +74,6 @@ check:
   stage: test
   only:
     - merge_request
-  extends: .mr
+  extends: .task
   script:
     - task check

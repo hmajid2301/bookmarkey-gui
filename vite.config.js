@@ -21,7 +21,13 @@ const config = {
 		globals: true,
 		environment: 'jsdom',
 		include: ['src/**/*.{test,spec}.{js,ts}'],
-		setupFiles: ['setupTest.ts']
+		outputFile: 'test-results/junit.xml',
+		setupFiles: ['setupTest.ts'],
+		reporters: ['default', 'junit'],
+		coverage: {
+			all: true,
+			reporter: ['text', 'json', 'html', 'cobertura']
+		}
 	}
 };
 

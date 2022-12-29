@@ -51,3 +51,4 @@ tests/pb_data/*
 test-results/
 *.log
 .env
+coverage
