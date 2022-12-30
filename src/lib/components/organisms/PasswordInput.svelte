@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Input from '~/lib/components/atoms/Input.svelte';
+	import FormField from '../molecules/FormField.svelte';
 
 	export let name = 'password';
 	export let value: string | undefined;
@@ -12,7 +12,7 @@
 </script>
 
 <div class="relative mb-6 w-full last:mb-0">
-	<Input
+	<FormField
 		{placeholder}
 		type={show ? 'text' : 'password'}
 		{name}
@@ -41,5 +41,5 @@
 				{show ? 'hide' : 'show'}
 			</button>
 		</div>
-	</Input>
+	</FormField>
 </div>

@@ -9,7 +9,8 @@
 	import Avatar from '~/lib/components/atoms/Avatar.svelte';
 	import Button from '~/lib/components/atoms/Button.svelte';
 	import Input from '~/lib/components/atoms/Input.svelte';
-	import EmailInput from '~/lib/components/molecules/EmailInput.svelte';
+	import FormField from '~/lib/components/molecules/FormField.svelte';
+	import EmailInput from '~/lib/components/organisms/EmailInput.svelte';
 
 	export let values: ProfileValues;
 	export let errors: ProfileErrors;
@@ -59,7 +60,7 @@
 				{/key}
 				<div class="absolute right-0 bottom-0">
 					<div class="relative flex items-stretch justify-start">
-						<label for="avatar" class="inline-flex">
+						<div class="inline-flex">
 							<a
 								href="/"
 								on:click|preventDefault
@@ -72,15 +73,14 @@
 									</svg>
 								</span>
 							</a>
-							<input
-								id="avatar"
-								disabled={loading}
+							<Input
+								classes="-z-1 absolute top-0 left-0 h-full w-full cursor-pointer opacity-0 outline-none"
+								labelName="Avatar"
 								name="avatar"
-								accept="image/*"
-								on:change={showPreview}
 								type="file"
-								class="-z-1 absolute top-0 left-0 h-full w-full cursor-pointer opacity-0 outline-none" />
-						</label>
+								accept="images/*"
+								onChange={showPreview} />
+						</div>
 					</div>
 				</div>
 			</div>
@@ -88,7 +88,7 @@
 			<div class="mt-1 text-xs text-gray-500 dark:text-slate-400">Max 500KB</div>
 		</div>
 
-		<Input
+		<FormField
 			name="nickname"
 			disabled={loading}
 			type="text"
@@ -105,7 +105,7 @@
 						d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
 				</svg>
 			</span>
-		</Input>
+		</FormField>
 
 		<EmailInput value={values.email} errors={errors.email} />
 		<div class="pt-6">

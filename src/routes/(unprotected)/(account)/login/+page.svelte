@@ -5,9 +5,9 @@
 	import type { ActionData, PageData } from './$types';
 
 	import { enhance } from '$app/forms';
-	import EmailInput from '~/lib/components/molecules/EmailInput.svelte';
 	import FullWidthButton from '~/lib/components/molecules/FullWidthInput.svelte';
-	import PasswordInput from '~/lib/components/molecules/PasswordInput.svelte';
+	import EmailInput from '~/lib/components/organisms/EmailInput.svelte';
+	import PasswordInput from '~/lib/components/organisms/PasswordInput.svelte';
 	import OAuthLoginGroup from '~/routes/(unprotected)/components/OAuthLoginButtons.svelte';
 
 	export let form: ActionData;

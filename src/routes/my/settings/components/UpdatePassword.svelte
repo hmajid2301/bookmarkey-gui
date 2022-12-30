@@ -7,7 +7,7 @@
 	import { enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
 	import Button from '~/lib/components/atoms/Button.svelte';
-	import PasswordInput from '~/lib/components/molecules/PasswordInput.svelte';
+	import PasswordInput from '~/lib/components/organisms/PasswordInput.svelte';
 
 	let loading = false;
 	export let values: PasswordValues;

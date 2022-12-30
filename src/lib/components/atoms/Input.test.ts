@@ -1,69 +1,19 @@
 import { render } from '@testing-library/svelte';
-import userEvent from '@testing-library/user-event';
+import type { ComponentProps } from 'svelte';
 import { describe, expect, test } from 'vitest';
 
 import Input from './Input.svelte';
 
 describe('Input', () => {
-	test('Should update password input when user types', async () => {
-		const user = userEvent.setup();
-		const { getByLabelText, getByDisplayValue } = render(Input, {
-			props: {
-				type: 'password',
-				name: 'password',
-				labelName: 'Password',
-				value: 'MyPassword'
-			}
-		});
-		const input = getByLabelText('Password');
-		await user.type(input, 'MyNewPassword');
-		const value = getByDisplayValue('MyPasswordMyNewPassword');
-		expect(value).toBeTruthy();
-	});
-
-	test('Should render password input with errors', async () => {
-		const { getByText } = render(Input, {
-			props: {
-				type: 'password',
-				name: 'password',
-				labelName: 'Password',
-				value: 'MyPassword',
-				errors: ['Password needs to be atleast 8 characters long']
-			}
-		});
-		const error = getByText('Password needs to be atleast 8 characters long');
-		expect(error.className).toContain('text-red-500');
-	});
-
-	test('Should render text input with note', async () => {
-		const { getByText } = render(Input, {
-			props: {
-				type: 'text',
-				name: 'name',
-				labelName: 'Nickname',
-				note: 'Required',
-				value: 'MyName',
-				errors: []
-			}
-		});
-		const error = getByText('Required');
-		expect(error.className).toContain('text-gray-500');
-	});
-
-	test('Should not be able to update disabled input when user types', async () => {
-		const user = userEvent.setup();
-		const { getByLabelText, getByDisplayValue } = render(Input, {
-			props: {
-				type: 'password',
-				name: 'password',
-				labelName: 'Password',
-				value: 'MyPassword',
-				disabled: true
-			}
-		});
-		const input = getByLabelText('Password');
-		await user.type(input, 'MyNewPassword');
-		const value = getByDisplayValue('MyPassword');
-		expect(value).toBeTruthy();
+	test('Should render input', async () => {
+		const props: ComponentProps<Input> = {
+			type: 'password',
+			name: 'password',
+			value: 'MyPassword',
+			labelName: 'Password'
+		};
+		const { getByLabelText } = render(Input, props);
+		const input = getByLabelText('Password') as HTMLInputElement;
+		expect(input.value).toBe('MyPassword');
 	});
 });
