@@ -30,14 +30,14 @@ format:
   script:
     - task format
 
-test:unit:
+coverage:unit:
   stage: test
   only:
     - merge_request
     - main
   extends: .task
   script:
-    - task unit_tests
+    - task coverage
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   artifacts:
     reports:

@@ -1,8 +1,8 @@
 services:
-  pocketbase:
-    image: ghcr.io/muchobien/pocketbase:latest
+  api:
+    image: registry.gitlab.com/banter-bus/bookmarkey/api:latest
     ports:
-      - '8090:8090'
+      - '8080:8080'
     volumes:
       - /pb_data
       - /pb_public

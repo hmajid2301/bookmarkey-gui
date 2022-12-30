@@ -2,7 +2,12 @@ import * as Sentry from '@sentry/browser';
 
 import type { LayoutServerLoad } from './$types';
 
-import type { User } from '~/lib/types/logged_in';
+export interface User {
+	isLoggedIn: boolean;
+	email: string;
+	avatar?: string;
+	nickname: string;
+}
 
 export type OutputType = { user: User };
 

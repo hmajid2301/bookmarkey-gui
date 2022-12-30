@@ -1,8 +1,7 @@
 services:
-  pocketbase:
-    image: ghcr.io/muchobien/pocketbase:latest
+  api:
     ports:
-      - '9090:8090'
+      - '9090:8080'
     volumes:
-      - ./pb_data:/pb_data
+      - ./tests/pb_data:/pb_data
       - /pb_public

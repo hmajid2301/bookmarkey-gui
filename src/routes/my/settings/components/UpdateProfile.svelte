@@ -59,7 +59,7 @@
 				{/key}
 				<div class="absolute right-0 bottom-0">
 					<div class="relative flex items-stretch justify-start">
-						<label class="inline-flex">
+						<label for="avatar" class="inline-flex">
 							<a
 								href="/"
 								on:click|preventDefault
@@ -73,6 +73,7 @@
 								</span>
 							</a>
 							<input
+								id="avatar"
 								disabled={loading}
 								name="avatar"
 								accept="image/*"
