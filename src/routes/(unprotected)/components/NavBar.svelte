@@ -21,7 +21,6 @@
 				Home
 			</a>
 			<Button extraClasses="mr-0 mb-0" href="/login">Login</Button>
-			<Button extraClasses="mr-0 mb-0" href="/signup">Sign Up</Button>
 		</NavUl>
 		<div>
 			<NavHamburger on:click={toggle} />

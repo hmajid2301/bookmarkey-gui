@@ -46,6 +46,7 @@
 			errors={errors.currentPassword} />
 		<hr class="my-6 -mx-6 border-t border-gray-100 dark:border-slate-800" />
 		<PasswordInput
+			autocomplete="new-password"
 			disabled={loading}
 			name="password"
 			labelName="Password"
@@ -54,6 +55,7 @@
 			value={values.password}
 			errors={errors.password} />
 		<PasswordInput
+			autocomplete="new-password"
 			disabled={loading}
 			name="passwordConfirm"
 			labelName="Confirm Password"

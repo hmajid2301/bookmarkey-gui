@@ -1,7 +1,9 @@
 <script lang="ts">
 	import FormField from '../molecules/FormField.svelte';
 
+	export let autocomplete = 'current-password';
 	export let name = 'password';
+	export let onChange: ((event: Event) => void) | null = null;
 	export let value: string | undefined;
 	export let labelName = 'Password';
 	export let errors: string[] | undefined;
@@ -15,14 +17,18 @@
 	<FormField
 		{placeholder}
 		type={show ? 'text' : 'password'}
+		{autocomplete}
 		{name}
 		{value}
+		{onChange}
 		{disabled}
 		{labelName}
 		{errors}
 		{note}>
 		<span
-			class="pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center text-gray-500 dark:text-slate-400">
+			class=" pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center {errors
+				? 'text-red-500'
+				: 'text-slate-500 dark:text-slate-400'}">
 			<svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
 				<path
 					fill="currentColor"

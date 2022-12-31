@@ -8,7 +8,6 @@
 	import { invalidateAll } from '$app/navigation';
 	import Avatar from '~/lib/components/atoms/Avatar.svelte';
 	import Button from '~/lib/components/atoms/Button.svelte';
-	import Input from '~/lib/components/atoms/Input.svelte';
 	import FormField from '~/lib/components/molecules/FormField.svelte';
 	import EmailInput from '~/lib/components/organisms/EmailInput.svelte';
 
@@ -60,7 +59,7 @@
 				{/key}
 				<div class="absolute right-0 bottom-0">
 					<div class="relative flex items-stretch justify-start">
-						<div class="inline-flex">
+						<label class="inline-flex">
 							<a
 								href="/"
 								on:click|preventDefault
@@ -73,14 +72,14 @@
 									</svg>
 								</span>
 							</a>
-							<Input
-								classes="-z-1 absolute top-0 left-0 h-full w-full cursor-pointer opacity-0 outline-none"
-								labelName="Avatar"
+							<input
+								disabled={loading}
 								name="avatar"
+								accept="image/*"
+								on:change={showPreview}
 								type="file"
-								accept="images/*"
-								onChange={showPreview} />
-						</div>
+								class="-z-1 absolute top-0 left-0 h-full w-full cursor-pointer opacity-0 outline-none" />
+						</label>
 					</div>
 				</div>
 			</div>

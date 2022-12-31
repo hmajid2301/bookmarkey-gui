@@ -1,15 +1,14 @@
 import { expect, test } from '@playwright/test';
 import pocketbase from 'pocketbase';
 
-test('Successfully signup to app', async ({ page, baseURL }) => {
-	await page.goto('/signup');
+test('Successfully register an account', async ({ page, baseURL }) => {
+	await page.goto('/register');
 
 	const email = 'test+signup@bookmarkey.app';
 	await page.locator('[name="email"]').type(email);
 
-	const password = 'password@11';
+	const password = 'sec9rePa@sword@11789';
 	await page.locator('[name="password"]').type(password);
-	await page.locator('[name="passwordConfirm"]').type(password);
 
 	await page.locator('button[type="submit"]').click();
 	await page.waitForURL(`${baseURL}/my/dashboard`);
@@ -17,42 +16,43 @@ test('Successfully signup to app', async ({ page, baseURL }) => {
 	await deleteUserByEmail(email);
 });
 
-test('Fail to signup with an email that exists', async ({ page, baseURL }) => {
-	await page.goto('/signup');
+test('Fail to register an account with an email that exists', async ({ page, baseURL }) => {
+	await page.goto('/register');
 
 	const email = 'test@bookmarkey.app';
 	await page.locator('[name="email"]').type(email);
 
-	const password = 'password@11';
+	const password = 'sec9rePa@sword@11789';
 	await page.locator('[name="password"]').type(password);
-	await page.locator('[name="passwordConfirm"]').type(password);
 
 	await page.locator('button[type="submit"]').click();
+
 	const toastMessage = await page.locator('.message').innerText();
 	expect(toastMessage).toBe('Failed to create account.');
-	await page.waitForURL(`${baseURL}/signup`);
+	await page.waitForURL(`${baseURL}/register`);
 });
 
-test('Fail to signup with passwords that do not match', async ({ page, baseURL }) => {
-	await page.goto('/signup');
+test('Fail to register an account with a compromised password', async ({ page, baseURL }) => {
+	await page.goto('/register');
 
-	const email = 'test+test2@bookmarkey.app';
+	const email = 'test@bookmarkey.app';
 	await page.locator('[name="email"]').type(email);
 
-	const password = 'password@11';
+	const password = 'password';
 	await page.locator('[name="password"]').type(password);
-	const passwordConfirm = 'password';
-	await page.locator('[name="passwordConfirm"]').type(passwordConfirm);
 
 	await page.locator('button[type="submit"]').click();
-	const toastMessage = await page.locator('.message').innerText();
-	await page
-		.locator(
-			'text="Password must be a minimum of 8 characters & contain at least one letter, one number, and one special character."'
-		)
-		.innerText();
-	expect(toastMessage).toBe('Invalid data in form.');
-	await page.waitForURL(`${baseURL}/signup`);
+
+	// expect error message to be present and to be red
+	const error = page.locator('p.text-red-500').first();
+	expect(error).toHaveText('Password has been compromised, please try again');
+
+	// expect 4 password strength blocks to be gray
+	const span = page.locator('span.bg-gray-200');
+	const passwordStrengthItems = await span.count();
+	expect(passwordStrengthItems).toBe(4);
+
+	await page.waitForURL(`${baseURL}/register`);
 });
 
 async function deleteUserByEmail(email: string) {

@@ -5,7 +5,7 @@ dotenv.config({ path: '.env.test' });
 
 const config: PlaywrightTestConfig = {
 	webServer: {
-		command: 'npm run build && npm run preview > svelte_playwright.log',
+		command: 'NODE_ENV=test npm run build && npm run preview > svelte_playwright.log',
 		port: 4173
 	},
 	use: {

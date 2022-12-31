@@ -2,6 +2,7 @@
 	import FormField from '../molecules/FormField.svelte';
 
 	export let name = 'email';
+	export let autocomplete = 'email';
 	export let labelName = 'Email';
 	export let placeholder = 'your@email.com';
 	export let note = 'Required. Your email';
@@ -12,6 +13,7 @@
 
 <FormField
 	type="email"
+	{autocomplete}
 	{name}
 	{disabled}
 	{labelName}
@@ -21,7 +23,9 @@
 	{value}
 	{errors}>
 	<span
-		class="pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center text-gray-500 dark:text-slate-400">
+		class="pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center {errors
+			? 'text-red-500'
+			: 'text-slate-500 dark:text-slate-400'}">
 		<svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
 			<path
 				fill="currentColor"

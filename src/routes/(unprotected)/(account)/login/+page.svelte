@@ -43,7 +43,11 @@
 		Login to your account
 	</h1>
 	<form class="space-y-4 md:space-y-6" action="?/login" method="post" use:enhance={submitLogin}>
-		<EmailInput disabled={loading} value={form?.data.email} errors={form?.errors?.email} />
+		<EmailInput
+			autocomplete="username"
+			disabled={loading}
+			value={form?.data.email}
+			errors={form?.errors?.email} />
 		<PasswordInput
 			name="password"
 			labelName="Password"
@@ -64,6 +68,6 @@
 
 	<OAuthLoginGroup authProviders={data.authProviders} />
 	<p class="text-sm font-light text-gray-800 dark:text-gray-100">
-		Don't have an account? <a href="/signup" class="link">Sign up</a>
+		Don't have an account? <a href="/register" class="link">Sign up</a>
 	</p>
 </div>

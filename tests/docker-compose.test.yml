@@ -1,7 +1,8 @@
 services:
   api:
+    image: registry.gitlab.com/banter-bus/bookmarkey/api:latest
     ports:
       - '9090:8080'
     volumes:
-      - ./tests/pb_data:/pb_data
+      - ./pb_data:/pb_data
       - /pb_public

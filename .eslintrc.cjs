@@ -30,6 +30,13 @@ module.exports = {
 		'import/order': [
 			'warn',
 			{
+				pathGroups: [
+					{
+						pattern: '$app',
+						group: 'external',
+						position: 'before'
+					}
+				],
 				alphabetize: {
 					order: 'asc',
 					caseInsensitive: true

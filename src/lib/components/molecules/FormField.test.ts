@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest';
 
 import FormField from './FormField.svelte';
 
-describe('Input', () => {
+describe('FormField', () => {
 	test('Should update password input when user types', async () => {
 		const user = userEvent.setup();
 		const { getByLabelText, getByDisplayValue } = render(FormField, {
@@ -12,7 +12,8 @@ describe('Input', () => {
 				type: 'password',
 				name: 'password',
 				labelName: 'Password',
-				value: 'MyPassword'
+				value: 'MyPassword',
+				errors: []
 			}
 		});
 		const input = getByLabelText('Password');
@@ -58,7 +59,8 @@ describe('Input', () => {
 				name: 'password',
 				labelName: 'Password',
 				value: 'MyPassword',
-				disabled: true
+				disabled: true,
+				errors: []
 			}
 		});
 		const input = getByLabelText('Password');

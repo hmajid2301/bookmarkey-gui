@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { ActionResult } from '@sveltejs/kit';
+	import { passwordStrength } from 'check-password-strength';
 	import toast from 'svelte-french-toast';
 
-	import type { ActionData, PageData } from './$types';
+	import type { ActionData, PageData } from '../register/$types';
 
 	import { enhance } from '$app/forms';
 	import FullWidthButton from '~/lib/components/molecules/FullWidthInput.svelte';
@@ -15,15 +16,11 @@
 
 	let loading = false;
 
-	const submitSignup = () => {
+	const submitRegister = () => {
 		loading = true;
 		return async ({ result, update }: { result: ActionResult; update: () => Promise<void> }) => {
 			switch (result.type) {
 				case 'success':
-					await update();
-					break;
-				case 'failure':
-					toast.error('Invalid data in form.');
 					await update();
 					break;
 				case 'error':
@@ -35,6 +32,27 @@
 			loading = false;
 		};
 	};
+
+	interface Item {
+		color: string;
+		note: string;
+	}
+
+	let passwordScoreMap: Record<number, Item> = {
+		0: { color: 'bg-gray-200', note: 'Very Weak Password' },
+		1: { color: 'bg-red-500', note: 'Weak Password' },
+		2: { color: 'bg-orange-500', note: 'Average Password' },
+		3: { color: 'bg-green-500', note: 'Strong Password' }
+	};
+
+	let passwordScore = 0;
+	let passwordScoreItem = passwordScoreMap[0];
+	function onChange(event: Event) {
+		const target = event.target as HTMLInputElement;
+		const value = target.value;
+		passwordScore = passwordStrength(value).id;
+		passwordScoreItem = passwordScoreMap[passwordScore] || passwordScoreMap[0];
+	}
 </script>
 
 <div class="space-y-4 p-6 sm:p-8 md:space-y-6">
@@ -42,21 +60,42 @@
 		class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
 		Create an account
 	</h1>
-	<form class="space-y-4 md:space-y-6" action="?/register" method="post" use:enhance={submitSignup}>
-		<EmailInput disabled={loading} value={form?.data?.email} errors={form?.errors?.email} />
+	<form
+		class="space-y-4 md:space-y-6"
+		action="?/register"
+		method="post"
+		use:enhance={submitRegister}>
+		<EmailInput
+			autocomplete="username"
+			disabled={loading}
+			value={form?.data?.email}
+			errors={form?.errors?.email} />
 		<PasswordInput
+			autocomplete="new-password"
+			note="Required. Your password"
+			{onChange}
 			disabled={loading}
 			name="password"
 			labelName="Password"
 			value={form?.data?.password}
 			errors={form?.errors?.password} />
-		<PasswordInput
-			disabled={loading}
-			name="passwordConfirm"
-			labelName="Confirm Password"
-			note="Required. Your password again"
-			value={form?.data?.passwordConfirm}
-			errors={form?.errors?.passwordConfirm} />
+		<div class="flex w-full">
+			<span
+				class="h-1 w-1/3 rounded {passwordScore >= 0 ? passwordScoreItem?.color : 'bg-gray-200'}" />
+			<span
+				class="mx-3 h-1 w-1/3 rounded {passwordScore >= 1
+					? passwordScoreItem?.color
+					: 'bg-gray-200'}" />
+			<span
+				class="h-1 w-1/3 rounded {passwordScore >= 2 ? passwordScoreItem?.color : 'bg-gray-200'}" />
+			<span
+				class="mx-3 h-1 w-1/3 rounded {passwordScore >= 3
+					? passwordScoreItem?.color
+					: 'bg-gray-200'}" />
+		</div>
+		<div class="my-2 text-sm">
+			{passwordScoreItem?.note}
+		</div>
 		<FullWidthButton>Create Account</FullWidthButton>
 	</form>
 

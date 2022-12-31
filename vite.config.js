@@ -14,7 +14,8 @@ const config = {
 			org: 'majiy',
 			project: 'bookmarkey',
 			include: './dist',
-			authToken: process.env.SENTRY_AUTH_TOKEN
+			authToken: process.env.SENTRY_AUTH_TOKEN,
+			dryRun: process.env.NODE_ENV === 'production' ? false : true
 		})
 	],
 	test: {
