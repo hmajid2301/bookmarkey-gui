@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Avatar from '@svelte-put/avatar/Avatar.svelte';
+	import Avatar from "@svelte-put/avatar/Avatar.svelte";
 
-	export let avatar = '';
-	export let email = '';
-	export let nickname = '';
+	export let avatar = "";
+	export let email = "";
+	export let nickname = "";
 </script>
 
 <Avatar

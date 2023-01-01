@@ -1,24 +1,24 @@
 <script lang="ts">
-	import { swipe } from 'svelte-gestures';
+	import { swipe } from "svelte-gestures";
 
-	import type { LayoutData } from './$types';
-	import Header from './components/Header.svelte';
-	import HelloBar from './components/HelloBar.svelte';
-	import SideBar from './components/SideBar.svelte';
+	import type { LayoutData } from "./$types";
+	import Header from "./components/Header.svelte";
+	import HelloBar from "./components/HelloBar.svelte";
+	import SideBar from "./components/SideBar.svelte";
 
 	export let data: LayoutData;
 	let showMenu = false;
 
 	function handler(
 		event: CustomEvent<{
-			direction: 'top' | 'right' | 'bottom' | 'left';
+			direction: "top" | "right" | "bottom" | "left";
 			target: EventTarget;
 		}>
 	) {
 		const direction = event.detail.direction;
-		if (direction === 'left') {
+		if (direction === "left") {
 			showMenu = false;
-		} else if (direction === 'right') {
+		} else if (direction === "right") {
 			showMenu = true;
 		}
 	}
@@ -26,7 +26,7 @@
 
 <div
 	class="flex h-screen overflow-x-hidden"
-	use:swipe={{ timeframe: 300, minSwipeDistance: 60, touchAction: 'pan-y' }}
+	use:swipe={{ timeframe: 300, minSwipeDistance: 60, touchAction: "pan-y" }}
 	on:swipe={handler}>
 	<aside
 		class="{showMenu
@@ -47,7 +47,10 @@
 				showMenu = false;
 			}}
 			class="flex flex-1 flex-col overflow-hidden bg-blue-50  px-4 py-4 dark:bg-slate-800 lg:py-8 lg:px-6 xl:px-8">
-			<HelloBar avatar={data.user.avatar} email={data.user.email} nickname={data.user.nickname} />
+			<HelloBar
+				avatar={data.user.avatar}
+				email={data.user.email}
+				nickname={data.user.nickname} />
 			<slot />
 		</div>
 	</div>

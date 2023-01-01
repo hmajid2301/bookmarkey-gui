@@ -1,14 +1,14 @@
 <script lang="ts">
-	import type { ActionResult } from '@sveltejs/kit';
-	import toast from 'svelte-french-toast';
+	import type { ActionResult } from "@sveltejs/kit";
+	import toast from "svelte-french-toast";
 
-	import type { ActionData, PageData } from './$types';
+	import type { ActionData, PageData } from "./$types";
 
-	import { enhance } from '$app/forms';
-	import FullWidthButton from '~/lib/components/molecules/FullWidthInput.svelte';
-	import EmailInput from '~/lib/components/organisms/EmailInput.svelte';
-	import PasswordInput from '~/lib/components/organisms/PasswordInput.svelte';
-	import OAuthLoginGroup from '~/routes/(unprotected)/components/OAuthLoginButtons.svelte';
+	import { enhance } from "$app/forms";
+	import FullWidthButton from "~/lib/components/molecules/FullWidthInput.svelte";
+	import EmailInput from "~/lib/components/organisms/EmailInput.svelte";
+	import PasswordInput from "~/lib/components/organisms/PasswordInput.svelte";
+	import OAuthLoginGroup from "~/routes/(unprotected)/components/OAuthLoginButtons.svelte";
 
 	export let form: ActionData;
 	export let data: PageData;
@@ -17,16 +17,22 @@
 
 	const submitLogin = () => {
 		loading = true;
-		return async ({ result, update }: { result: ActionResult; update: () => Promise<void> }) => {
+		return async ({
+			result,
+			update
+		}: {
+			result: ActionResult;
+			update: () => Promise<void>;
+		}) => {
 			switch (result.type) {
-				case 'success':
+				case "success":
 					await update();
 					break;
-				case 'failure':
-					toast.error('Invalid credentials');
+				case "failure":
+					toast.error("Invalid credentials");
 					await update();
 					break;
-				case 'error':
+				case "error":
 					toast.error(result.error.message);
 					break;
 				default:

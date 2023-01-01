@@ -1,24 +1,30 @@
 <script lang="ts">
-	import type { ActionResult } from '@sveltejs/kit';
-	import toast from 'svelte-french-toast';
+	import type { ActionResult } from "@sveltejs/kit";
+	import toast from "svelte-french-toast";
 
-	import type { ActionData } from './$types';
+	import type { ActionData } from "./$types";
 
-	import { enhance } from '$app/forms';
-	import FullWidthButton from '~/lib/components/molecules/FullWidthInput.svelte';
-	import EmailInput from '~/lib/components/organisms/EmailInput.svelte';
+	import { enhance } from "$app/forms";
+	import FullWidthButton from "~/lib/components/molecules/FullWidthInput.svelte";
+	import EmailInput from "~/lib/components/organisms/EmailInput.svelte";
 
 	export let form: ActionData;
 
 	let loading = false;
 	const submitVerifyEmail = () => {
 		loading = true;
-		return async ({ result, update }: { result: ActionResult; update: () => Promise<void> }) => {
+		return async ({
+			result,
+			update
+		}: {
+			result: ActionResult;
+			update: () => Promise<void>;
+		}) => {
 			switch (result.type) {
-				case 'success':
+				case "success":
 					await update();
 					break;
-				case 'error':
+				case "error":
 					toast.error(result.error.message);
 					break;
 				default:

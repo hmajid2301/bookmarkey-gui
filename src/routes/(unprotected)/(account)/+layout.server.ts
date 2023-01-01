@@ -1,14 +1,14 @@
-import type { LayoutServerLoad } from './$types';
-import type { AuthProviderWithRedirect } from './types';
+import type { LayoutServerLoad } from "./$types";
+import type { AuthProviderWithRedirect } from "./types";
 
 export type OutputType = { authProviders: Record<string, AuthProviderWithRedirect> };
 
 export const load: LayoutServerLoad<OutputType> = async ({ locals, url }) => {
 	let authMethods;
 	try {
-		authMethods = await locals.pb?.collection('users').listAuthMethods();
+		authMethods = await locals.pb?.collection("users").listAuthMethods();
 	} catch (err) {
-		console.error('ERROR', err);
+		console.error("ERROR", err);
 	}
 	if (!authMethods) {
 		return {

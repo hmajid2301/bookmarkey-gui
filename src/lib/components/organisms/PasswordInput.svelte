@@ -1,14 +1,14 @@
 <script lang="ts">
-	import FormField from '../molecules/FormField.svelte';
+	import FormField from "../molecules/FormField.svelte";
 
-	export let autocomplete = 'current-password';
-	export let name = 'password';
+	export let autocomplete = "current-password";
+	export let name = "password";
 	export let onChange: ((event: Event) => void) | null = null;
 	export let value: string | undefined;
-	export let labelName = 'Password';
+	export let labelName = "Password";
 	export let errors: string[] | undefined;
-	export let note = 'Required. Your password';
-	export let placeholder = 'Your password';
+	export let note = "Required. Your password";
+	export let placeholder = "Your password";
 	export let disabled = false;
 	let show = false;
 </script>
@@ -16,7 +16,7 @@
 <div class="relative mb-6 w-full last:mb-0">
 	<FormField
 		{placeholder}
-		type={show ? 'text' : 'password'}
+		type={show ? "text" : "password"}
 		{autocomplete}
 		{name}
 		{value}
@@ -44,7 +44,7 @@
 				on:click={() => {
 					show = !show;
 				}}>
-				{show ? 'hide' : 'show'}
+				{show ? "hide" : "show"}
 			</button>
 		</div>
 	</FormField>

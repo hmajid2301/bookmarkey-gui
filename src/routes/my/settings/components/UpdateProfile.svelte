@@ -1,15 +1,15 @@
 <script lang="ts">
-	import type { ActionResult } from '@sveltejs/kit';
-	import toast from 'svelte-french-toast';
+	import type { ActionResult } from "@sveltejs/kit";
+	import toast from "svelte-french-toast";
 
-	import type { ProfileErrors, ProfileValues } from '../types';
+	import type { ProfileErrors, ProfileValues } from "../types";
 
-	import { applyAction, enhance } from '$app/forms';
-	import { invalidateAll } from '$app/navigation';
-	import Avatar from '~/lib/components/atoms/Avatar.svelte';
-	import Button from '~/lib/components/atoms/Button.svelte';
-	import FormField from '~/lib/components/molecules/FormField.svelte';
-	import EmailInput from '~/lib/components/organisms/EmailInput.svelte';
+	import { applyAction, enhance } from "$app/forms";
+	import { invalidateAll } from "$app/navigation";
+	import Avatar from "~/lib/components/atoms/Avatar.svelte";
+	import Button from "~/lib/components/atoms/Button.svelte";
+	import FormField from "~/lib/components/molecules/FormField.svelte";
+	import EmailInput from "~/lib/components/organisms/EmailInput.svelte";
 
 	export let values: ProfileValues;
 	export let errors: ProfileErrors;
@@ -21,11 +21,11 @@
 		loading = true;
 		return async ({ result }: { result: ActionResult }) => {
 			switch (result.type) {
-				case 'success':
-					toast.success('Updated profile data');
+				case "success":
+					toast.success("Updated profile data");
 					await invalidateAll();
 					break;
-				case 'error':
+				case "error":
 					toast.error(result.error.message);
 					break;
 				default:
@@ -41,7 +41,7 @@
 
 		if (files && files[0]) {
 			const reader = new FileReader();
-			reader.addEventListener('load', function () {
+			reader.addEventListener("load", function () {
 				avatar = reader.result as string;
 			});
 			reader.readAsDataURL(files[0]);
@@ -65,7 +65,11 @@
 								on:click|preventDefault
 								class="inline-flex h-12 w-12 cursor-pointer items-center justify-center whitespace-nowrap rounded-full border border-blue-600 bg-blue-600 p-1 text-white ring-blue-300 transition-colors duration-150 hover:border-blue-700 hover:bg-blue-700 focus:outline-none focus:ring dark:border-blue-500 dark:bg-blue-500 dark:ring-blue-700 hover:dark:border-blue-600 hover:dark:bg-blue-600">
 								<span class="inline-flex h-6 w-6 items-center justify-center">
-									<svg viewBox="0 0 24 24" width="24" height="24" class="inline-block">
+									<svg
+										viewBox="0 0 24 24"
+										width="24"
+										height="24"
+										class="inline-block">
 										<path
 											fill="currentColor"
 											d="M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z" />

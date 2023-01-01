@@ -1,15 +1,15 @@
 <script lang="ts">
-	import type { ActionResult } from '@sveltejs/kit';
-	import { passwordStrength } from 'check-password-strength';
-	import toast from 'svelte-french-toast';
+	import type { ActionResult } from "@sveltejs/kit";
+	import { passwordStrength } from "check-password-strength";
+	import toast from "svelte-french-toast";
 
-	import type { ActionData, PageData } from '../register/$types';
+	import type { ActionData, PageData } from "../register/$types";
 
-	import { enhance } from '$app/forms';
-	import FullWidthButton from '~/lib/components/molecules/FullWidthInput.svelte';
-	import EmailInput from '~/lib/components/organisms/EmailInput.svelte';
-	import PasswordInput from '~/lib/components/organisms/PasswordInput.svelte';
-	import OAuthLoginGroup from '~/routes/(unprotected)/components/OAuthLoginButtons.svelte';
+	import { enhance } from "$app/forms";
+	import FullWidthButton from "~/lib/components/molecules/FullWidthInput.svelte";
+	import EmailInput from "~/lib/components/organisms/EmailInput.svelte";
+	import PasswordInput from "~/lib/components/organisms/PasswordInput.svelte";
+	import OAuthLoginGroup from "~/routes/(unprotected)/components/OAuthLoginButtons.svelte";
 
 	export let form: ActionData;
 	export let data: PageData;
@@ -18,12 +18,18 @@
 
 	const submitRegister = () => {
 		loading = true;
-		return async ({ result, update }: { result: ActionResult; update: () => Promise<void> }) => {
+		return async ({
+			result,
+			update
+		}: {
+			result: ActionResult;
+			update: () => Promise<void>;
+		}) => {
 			switch (result.type) {
-				case 'success':
+				case "success":
 					await update();
 					break;
-				case 'error':
+				case "error":
 					toast.error(result.error.message);
 					break;
 				default:
@@ -39,10 +45,10 @@
 	}
 
 	let passwordScoreMap: Record<number, Item> = {
-		0: { color: 'bg-gray-200', note: 'Very Weak Password' },
-		1: { color: 'bg-red-500', note: 'Weak Password' },
-		2: { color: 'bg-orange-500', note: 'Average Password' },
-		3: { color: 'bg-green-500', note: 'Strong Password' }
+		0: { color: "bg-gray-200", note: "Very Weak Password" },
+		1: { color: "bg-red-500", note: "Weak Password" },
+		2: { color: "bg-orange-500", note: "Average Password" },
+		3: { color: "bg-green-500", note: "Strong Password" }
 	};
 
 	let passwordScore = 0;
@@ -81,13 +87,17 @@
 			errors={form?.errors?.password} />
 		<div class="flex w-full">
 			<span
-				class="h-1 w-1/3 rounded {passwordScore >= 0 ? passwordScoreItem?.color : 'bg-gray-200'}" />
+				class="h-1 w-1/3 rounded {passwordScore >= 0
+					? passwordScoreItem?.color
+					: 'bg-gray-200'}" />
 			<span
 				class="mx-3 h-1 w-1/3 rounded {passwordScore >= 1
 					? passwordScoreItem?.color
 					: 'bg-gray-200'}" />
 			<span
-				class="h-1 w-1/3 rounded {passwordScore >= 2 ? passwordScoreItem?.color : 'bg-gray-200'}" />
+				class="h-1 w-1/3 rounded {passwordScore >= 2
+					? passwordScoreItem?.color
+					: 'bg-gray-200'}" />
 			<span
 				class="mx-3 h-1 w-1/3 rounded {passwordScore >= 3
 					? passwordScoreItem?.color

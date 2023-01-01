@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { ActionData, PageData } from './$types';
-	import UpdatePasswordForm from './components/UpdatePassword.svelte';
-	import UpdateProfileForm from './components/UpdateProfile.svelte';
-	import type { PasswordErrors, ProfileErrors } from './types';
+	import type { ActionData, PageData } from "./$types";
+	import UpdatePasswordForm from "./components/UpdatePassword.svelte";
+	import UpdateProfileForm from "./components/UpdateProfile.svelte";
+	import type { PasswordErrors, ProfileErrors } from "./types";
 
-	import Section from '~/lib/components/atoms/Section.svelte';
+	import Section from "~/lib/components/atoms/Section.svelte";
 
 	export let form: ActionData;
 	export let data: PageData;
@@ -21,12 +21,12 @@
 	};
 
 	if (form !== undefined && form?.errors !== undefined) {
-		if ('nickname' in form.errors) {
+		if ("nickname" in form.errors) {
 			profileErrors = {
 				nickname: form?.errors?.nickname,
 				email: form?.errors?.email
 			};
-		} else if ('password' in form.errors) {
+		} else if ("password" in form.errors) {
 			passwordErrors = {
 				currentPassword: form?.errors?.currentPassword,
 				password: form?.errors?.password,

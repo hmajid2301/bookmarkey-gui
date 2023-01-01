@@ -1,5 +1,5 @@
 <script>
-	import { Footer, FooterCopyright } from 'flowbite-svelte';
+	import { Footer, FooterCopyright } from "flowbite-svelte";
 </script>
 
 <Footer footerType="socialmedia">

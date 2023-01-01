@@ -1,7 +1,7 @@
-import { beforeAll, vi } from 'vitest';
+import { beforeAll, vi } from "vitest";
 
 beforeAll(() => {
-	vi.mock('$app/env', () => ({
-		browser: 'window' in globalThis
+	vi.mock("$app/env", () => ({
+		browser: "window" in globalThis
 	}));
 });

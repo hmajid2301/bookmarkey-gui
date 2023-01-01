@@ -1,5 +1,5 @@
 <script lang="ts">
-	import AvatarProfileMenu from './AvatarProfileMenu.svelte';
+	import AvatarProfileMenu from "./AvatarProfileMenu.svelte";
 
 	export let nickname: string;
 	export let avatar: string;

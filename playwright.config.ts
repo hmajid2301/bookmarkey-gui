@@ -1,18 +1,18 @@
-import type { PlaywrightTestConfig } from '@playwright/test';
-import dotenv from 'dotenv';
+import type { PlaywrightTestConfig } from "@playwright/test";
+import dotenv from "dotenv";
 
-dotenv.config({ path: '.env.test' });
+dotenv.config({ path: ".env.test" });
 
 const config: PlaywrightTestConfig = {
 	webServer: {
-		command: 'NODE_ENV=test npm run build && npm run preview > svelte_playwright.log',
+		command: "NODE_ENV=test npm run build && npm run preview > svelte_playwright.log",
 		port: 4173
 	},
 	use: {
-		trace: 'retain-on-failure',
-		video: 'retain-on-failure'
+		trace: "retain-on-failure",
+		video: "retain-on-failure"
 	},
-	testDir: './tests'
+	testDir: "./tests"
 };
 
 export default config;

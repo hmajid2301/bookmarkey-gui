@@ -1,4 +1,4 @@
-import type { AuthProviderInfo } from 'pocketbase';
+import type { AuthProviderInfo } from "pocketbase";
 
 export interface AuthProviderWithRedirect extends AuthProviderInfo {
 	redirect: string;

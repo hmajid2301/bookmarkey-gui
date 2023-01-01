@@ -1,9 +1,9 @@
-import * as Sentry from '@sentry/browser';
-import { error, fail, redirect, type Actions } from '@sveltejs/kit';
-import { ClientResponseError } from 'pocketbase';
-import { z } from 'zod';
+import * as Sentry from "@sentry/browser";
+import { error, fail, redirect, type Actions } from "@sveltejs/kit";
+import { ClientResponseError } from "pocketbase";
+import { z } from "zod";
 
-import { HTTP_BAD_REQUEST, HTTP_SEE_OTHER, HTTP_SERVER_ERROR } from '~/lib/constants/http';
+import { HTTP_BAD_REQUEST, HTTP_SEE_OTHER, HTTP_SERVER_ERROR } from "~/lib/constants/http";
 
 interface Login {
 	email: string;
@@ -12,9 +12,9 @@ interface Login {
 
 const loginSchema: z.ZodType<Login> = z.object({
 	email: z
-		.string({ required_error: 'Email is required' })
-		.email({ message: 'Email must be a valid email.' }),
-	password: z.string({ required_error: 'Password is required' })
+		.string({ required_error: "Email is required" })
+		.email({ message: "Email must be a valid email." }),
+	password: z.string({ required_error: "Password is required" })
 });
 
 export const actions: Actions = {
@@ -31,7 +31,7 @@ export const actions: Actions = {
 
 		try {
 			await locals.pb
-				?.collection('users')
+				?.collection("users")
 				.authWithPassword(result.data.email, result.data.password);
 			if (!locals.pb?.authStore?.model?.verified) {
 				locals.pb?.authStore.clear();
@@ -42,13 +42,13 @@ export const actions: Actions = {
 		} catch (err) {
 			if (err instanceof ClientResponseError) {
 				if (err.status === HTTP_BAD_REQUEST) {
-					throw error(err.status, 'Wrong email and password combination.');
+					throw error(err.status, "Wrong email and password combination.");
 				}
 			}
 			Sentry.captureException(err);
-			throw error(HTTP_SERVER_ERROR, 'Failed to login, please try again later.');
+			throw error(HTTP_SERVER_ERROR, "Failed to login, please try again later.");
 		}
 
-		throw redirect(HTTP_SEE_OTHER, '/my/dashboard');
+		throw redirect(HTTP_SEE_OTHER, "/my/dashboard");
 	}
 };

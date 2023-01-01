@@ -1,13 +1,13 @@
 <script lang="ts">
-	import type { ActionResult } from '@sveltejs/kit';
-	import toast from 'svelte-french-toast';
+	import type { ActionResult } from "@sveltejs/kit";
+	import toast from "svelte-french-toast";
 
-	import type { PasswordErrors, PasswordValues } from '../types';
+	import type { PasswordErrors, PasswordValues } from "../types";
 
-	import { enhance } from '$app/forms';
-	import { invalidateAll } from '$app/navigation';
-	import Button from '~/lib/components/atoms/Button.svelte';
-	import PasswordInput from '~/lib/components/organisms/PasswordInput.svelte';
+	import { enhance } from "$app/forms";
+	import { invalidateAll } from "$app/navigation";
+	import Button from "~/lib/components/atoms/Button.svelte";
+	import PasswordInput from "~/lib/components/organisms/PasswordInput.svelte";
 
 	let loading = false;
 	export let values: PasswordValues;
@@ -15,17 +15,23 @@
 	export let action: string;
 	const submitUpdatePassword = () => {
 		loading = true;
-		return async ({ result, update }: { result: ActionResult; update: () => Promise<void> }) => {
+		return async ({
+			result,
+			update
+		}: {
+			result: ActionResult;
+			update: () => Promise<void>;
+		}) => {
 			switch (result.type) {
-				case 'success':
-					toast.success('Updated password');
+				case "success":
+					toast.success("Updated password");
 					await invalidateAll();
 					break;
-				case 'failure':
-					toast.error('Invalid password data');
+				case "failure":
+					toast.error("Invalid password data");
 					await update();
 					break;
-				case 'error':
+				case "error":
 					toast.error(result.error.message);
 					break;
 				default:

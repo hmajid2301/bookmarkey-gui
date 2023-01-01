@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import TransparentButton from '~/lib/components/atoms/TransparentButton.svelte';
-	import type { AuthProviderWithRedirect } from '~/routes/(unprotected)/(account)/types';
+	import { browser } from "$app/environment";
+	import TransparentButton from "~/lib/components/atoms/TransparentButton.svelte";
+	import type { AuthProviderWithRedirect } from "~/routes/(unprotected)/(account)/types";
 
 	export let authProviders: Record<string, AuthProviderWithRedirect>;
 
@@ -14,12 +14,12 @@
 			document.cookie = `provider=${provider?.name}`;
 		}
 
-		window.location.href = provider?.redirect || '';
+		window.location.href = provider?.redirect || "";
 	}
 </script>
 
 <div>
-	<TransparentButton onClick={() => gotoAuthProvider('github')}>
+	<TransparentButton onClick={() => gotoAuthProvider("github")}>
 		<svg
 			class="mr-2 -ml-1 h-4 w-4"
 			aria-hidden="true"
@@ -38,7 +38,7 @@
 </div>
 
 <div>
-	<TransparentButton onClick={() => gotoAuthProvider('github')}>
+	<TransparentButton onClick={() => gotoAuthProvider("github")}>
 		<svg
 			class="mr-2 -ml-1 h-6 w-6"
 			aria-hidden="true"

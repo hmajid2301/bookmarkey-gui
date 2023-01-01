@@ -1,6 +1,6 @@
-import sentryVitePlugin from '@sentry/vite-plugin';
-import { sveltekit } from '@sveltejs/kit/vite';
-import { SvelteKitPWA } from '@vite-pwa/sveltekit';
+import sentryVitePlugin from "@sentry/vite-plugin";
+import { sveltekit } from "@sveltejs/kit/vite";
+import { SvelteKitPWA } from "@vite-pwa/sveltekit";
 
 /** @type {import('vite').UserConfig} */
 const config = {
@@ -11,23 +11,23 @@ const config = {
 		sveltekit(),
 		SvelteKitPWA({}),
 		sentryVitePlugin({
-			org: 'majiy',
-			project: 'bookmarkey',
-			include: './dist',
+			org: "majiy",
+			project: "bookmarkey",
+			include: "./dist",
 			authToken: process.env.SENTRY_AUTH_TOKEN,
-			dryRun: process.env.NODE_ENV === 'production' ? false : true
+			dryRun: process.env.NODE_ENV === "production" ? false : true
 		})
 	],
 	test: {
 		globals: true,
-		environment: 'jsdom',
-		include: ['src/**/*.{test,spec}.{js,ts}'],
-		outputFile: 'test-results/junit.xml',
-		setupFiles: ['setupTest.ts'],
-		reporters: ['default', 'junit'],
+		environment: "jsdom",
+		include: ["src/**/*.{test,spec}.{js,ts}"],
+		outputFile: "test-results/junit.xml",
+		setupFiles: ["setupTest.ts"],
+		reporters: ["default", "junit"],
 		coverage: {
 			all: true,
-			reporter: ['text', 'json', 'html', 'cobertura']
+			reporter: ["text", "json", "html", "cobertura"]
 		}
 	}
 };

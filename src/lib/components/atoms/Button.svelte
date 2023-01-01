@@ -1,8 +1,8 @@
 <script lang="ts">
 	export let onClick: (() => void) | null = null;
-	export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button';
+	export let type: "button" | "submit" | "reset" | null | undefined = "button";
 	export let href: string | undefined = undefined;
-	export let extraClasses = '';
+	export let extraClasses = "";
 </script>
 
 <button

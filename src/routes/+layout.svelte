@@ -1,27 +1,27 @@
 <script lang="ts">
-	import * as Sentry from '@sentry/svelte';
-	import { BrowserTracing } from '@sentry/tracing';
-	import { onMount } from 'svelte';
-	import { Toaster } from 'svelte-french-toast';
-	import { pwaInfo } from 'virtual:pwa-info';
+	import * as Sentry from "@sentry/svelte";
+	import { BrowserTracing } from "@sentry/tracing";
+	import { onMount } from "svelte";
+	import { Toaster } from "svelte-french-toast";
+	import { pwaInfo } from "virtual:pwa-info";
 
-	import type ReloadPrompt from '$lib/ReloadPrompt.svelte';
-	import '~/app.css';
-	import { config } from '~/config';
+	import type ReloadPrompt from "$lib/ReloadPrompt.svelte";
+	import "~/app.css";
+	import { config } from "~/config";
 
 	let reloadPrompt: typeof ReloadPrompt;
 	onMount(async () => {
-		pwaInfo && (reloadPrompt = (await import('$lib/ReloadPrompt.svelte')).default);
+		pwaInfo && (reloadPrompt = (await import("$lib/ReloadPrompt.svelte")).default);
 	});
 
 	Sentry.init({
 		dsn: config.SentryDNS,
-		environment: config.PROD ? 'production' : 'development',
+		environment: config.PROD ? "production" : "development",
 		integrations: [new BrowserTracing()],
 		tracesSampleRate: 1.0 // tweak this number
 	});
 
-	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
+	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : "";
 </script>
 
 <svelte:head>
@@ -29,7 +29,7 @@
 	{@html webManifest}
 </svelte:head>
 
-<Toaster toastOptions={{ style: 'background: #334155; color: #fff' }} />
+<Toaster toastOptions={{ style: "background: #334155; color: #fff" }} />
 <main class="bg-blue-100 font-sans font-medium text-gray-800 dark:bg-slate-800 dark:text-white">
 	<slot />
 </main>

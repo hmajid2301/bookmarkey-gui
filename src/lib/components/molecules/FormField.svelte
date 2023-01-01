@@ -6,7 +6,7 @@
 	export let autocomplete: string | null = null;
 	export let labelName: string;
 	export let required = true;
-	export let value: string | undefined = '';
+	export let value: string | undefined = "";
 	export let note: string | null = null;
 	export let disabled = false;
 	export let errors: string[] | undefined;
@@ -16,7 +16,9 @@
 </script>
 
 <div class="mb-6 last:mb-0">
-	<label for={name} class="mb-2 block font-bold {errors ? 'text-red-600' : ''}">{labelName}</label>
+	<label for={name} class="mb-2 block font-bold {errors ? 'text-red-600' : ''}">
+		{labelName}
+	</label>
 
 	<div class="">
 		<div class="relative">

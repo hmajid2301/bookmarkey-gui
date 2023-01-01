@@ -1,11 +1,11 @@
 <script lang="ts">
-	import FormField from '../molecules/FormField.svelte';
+	import FormField from "../molecules/FormField.svelte";
 
-	export let name = 'email';
-	export let autocomplete = 'email';
-	export let labelName = 'Email';
-	export let placeholder = 'your@email.com';
-	export let note = 'Required. Your email';
+	export let name = "email";
+	export let autocomplete = "email";
+	export let labelName = "Email";
+	export let placeholder = "your@email.com";
+	export let note = "Required. Your email";
 	export let value: string | undefined;
 	export let errors: string[] | undefined;
 	export let disabled = false;

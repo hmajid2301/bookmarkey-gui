@@ -1,17 +1,17 @@
-import * as Sentry from '@sentry/browser';
-import { error, fail, type Actions } from '@sveltejs/kit';
-import { serialize } from 'object-to-formdata';
-import { z } from 'zod';
+import * as Sentry from "@sentry/browser";
+import { error, fail, type Actions } from "@sveltejs/kit";
+import { serialize } from "object-to-formdata";
+import { z } from "zod";
 
-import { HTTP_BAD_REQUEST, HTTP_SERVER_ERROR } from '~/lib/constants/http';
+import { HTTP_BAD_REQUEST, HTTP_SERVER_ERROR } from "~/lib/constants/http";
 
 const imageTypes = [
-	'image/jpeg',
-	'image/jpg',
-	'image/png',
-	'image/webp',
-	'image/svg+xml',
-	'image/gif'
+	"image/jpeg",
+	"image/jpg",
+	"image/png",
+	"image/webp",
+	"image/svg+xml",
+	"image/gif"
 ];
 
 // Max limit for avatars 5KB
@@ -31,39 +31,39 @@ interface updateProfile {
 
 const updatePasswordSchema: z.ZodType<updatePassword> = z
 	.object({
-		currentPassword: z.string({ required_error: 'Current password is required' }),
+		currentPassword: z.string({ required_error: "Current password is required" }),
 		password: z
-			.string({ required_error: 'Password is required' })
+			.string({ required_error: "Password is required" })
 			.regex(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, {
 				message:
-					'Password must be a minimum of 8 characters & contain at least one letter, one number, and one special character.'
+					"Password must be a minimum of 8 characters & contain at least one letter, one number, and one special character."
 			}),
 		passwordConfirm: z
-			.string({ required_error: 'Confirm Password is required' })
+			.string({ required_error: "Confirm Password is required" })
 			.regex(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, {
 				message:
-					'Password must be a minimum of 8 characters & contain at least one letter, one number, and one special character.'
+					"Password must be a minimum of 8 characters & contain at least one letter, one number, and one special character."
 			})
 	})
 	.superRefine(({ passwordConfirm, password }, ctx) => {
 		if (passwordConfirm !== password) {
 			ctx.addIssue({
 				code: z.ZodIssueCode.custom,
-				message: 'Password & Confirm password must match',
-				path: ['password']
+				message: "Password & Confirm password must match",
+				path: ["password"]
 			});
 			ctx.addIssue({
 				code: z.ZodIssueCode.custom,
-				message: 'Password & Confirm password must match',
-				path: ['passwordConfirm']
+				message: "Password & Confirm password must match",
+				path: ["passwordConfirm"]
 			});
 		}
 	});
 
 const updateProfileSchema: z.ZodType<updateProfile> = z.object({
-	nickname: z.string().max(64, { message: 'Name must be 64 characters or less' }).trim(),
+	nickname: z.string().max(64, { message: "Name must be 64 characters or less" }).trim(),
 	avatar:
-		typeof window === 'undefined'
+		typeof window === "undefined"
 			? z.any()
 			: z
 					.instanceof(Blob)
@@ -73,7 +73,7 @@ const updateProfileSchema: z.ZodType<updateProfile> = z.object({
 							if (val.size > MAX_AVATAR_FILE_LIMIT) {
 								ctx.addIssue({
 									code: z.ZodIssueCode.custom,
-									message: 'Avatar must be less than 500KB'
+									message: "Avatar must be less than 500KB"
 								});
 							}
 
@@ -81,14 +81,14 @@ const updateProfileSchema: z.ZodType<updateProfile> = z.object({
 								ctx.addIssue({
 									code: z.ZodIssueCode.custom,
 									message:
-										'Unsupported file type. Supported formats: jpeg, jpg, png, webp, svg, gif'
+										"Unsupported file type. Supported formats: jpeg, jpg, png, webp, svg, gif"
 								});
 							}
 						}
 					}),
 	email: z
-		.string({ required_error: 'Email is required' })
-		.email({ message: 'Email must be a valid email.' })
+		.string({ required_error: "Email is required" })
+		.email({ message: "Email must be a valid email." })
 });
 
 export const actions: Actions = {
@@ -103,7 +103,7 @@ export const actions: Actions = {
 			});
 		}
 		try {
-			await locals.pb?.collection('users').update(locals?.user?.id as string, {
+			await locals.pb?.collection("users").update(locals?.user?.id as string, {
 				oldPassword: result.data.currentPassword,
 				password: result.data.password,
 				passwordConfirm: result.data.passwordConfirm
@@ -113,7 +113,7 @@ export const actions: Actions = {
 			};
 		} catch (err) {
 			Sentry.captureException(err);
-			throw error(HTTP_SERVER_ERROR, 'Failed to update password.');
+			throw error(HTTP_SERVER_ERROR, "Failed to update password.");
 		}
 	},
 	updateProfile: async ({ locals, request }) => {
@@ -129,15 +129,15 @@ export const actions: Actions = {
 
 		const updatedProfile: Record<string, string | Blob> = { name: result.data.nickname };
 		if (result?.data?.avatar && result.data.avatar.size > 0) {
-			updatedProfile['avatar'] = result.data.avatar;
+			updatedProfile["avatar"] = result.data.avatar;
 		}
 		try {
 			const record = await locals.pb
-				?.collection('users')
+				?.collection("users")
 				.update(locals?.user?.id as string, serialize(updatedProfile));
 
 			if (locals.user?.email !== result.data.email) {
-				await locals.pb?.collection('users').requestEmailChange(result.data.email);
+				await locals.pb?.collection("users").requestEmailChange(result.data.email);
 			}
 
 			if (locals.user) {
@@ -145,7 +145,7 @@ export const actions: Actions = {
 				locals.user.email = result.data.email;
 
 				if (record) {
-					locals.user.avatar = `${locals.pb?.baseUrl}/api/files/${locals.user?.collectionId}/${locals.user?.id}/${record['avatar']}`;
+					locals.user.avatar = `${locals.pb?.baseUrl}/api/files/${locals.user?.collectionId}/${locals.user?.id}/${record["avatar"]}`;
 				}
 			}
 			return {
@@ -153,7 +153,7 @@ export const actions: Actions = {
 			};
 		} catch (err) {
 			Sentry.captureException(err);
-			throw error(HTTP_SERVER_ERROR, 'Failed to update profile information.');
+			throw error(HTTP_SERVER_ERROR, "Failed to update profile information.");
 		}
 	}
 };

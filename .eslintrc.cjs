@@ -1,56 +1,56 @@
 module.exports = {
 	root: true,
-	parser: '@typescript-eslint/parser',
+	parser: "@typescript-eslint/parser",
 	parserOptions: {
-		project: './tsconfig.json',
-		extraFileExtensions: ['.svelte']
+		project: "./tsconfig.json",
+		extraFileExtensions: [".svelte"]
 	},
 	extends: [
-		'eslint:recommended',
-		'plugin:svelte/recommended',
-		'plugin:@typescript-eslint/recommended',
-		'prettier',
-		'plugin:import/errors',
-		'plugin:import/warnings',
-		'plugin:import/typescript'
+		"eslint:recommended",
+		"plugin:svelte/recommended",
+		"plugin:@typescript-eslint/recommended",
+		"prettier",
+		"plugin:import/errors",
+		"plugin:import/warnings",
+		"plugin:import/typescript"
 	],
-	plugins: ['@typescript-eslint'],
-	ignorePatterns: ['*.cjs', 'svelte-french-toast'],
+	plugins: ["@typescript-eslint"],
+	ignorePatterns: ["*.cjs", "svelte-french-toast"],
 	overrides: [
 		{
-			files: ['*.svelte'],
-			parser: 'svelte-eslint-parser',
+			files: ["*.svelte"],
+			parser: "svelte-eslint-parser",
 			parserOptions: {
-				parser: '@typescript-eslint/parser'
+				parser: "@typescript-eslint/parser"
 			}
 		}
 	],
 	rules: {
-		'import/no-unresolved': 'off',
-		'import/order': [
-			'warn',
+		"import/no-unresolved": "off",
+		"import/order": [
+			"warn",
 			{
 				pathGroups: [
 					{
-						pattern: '$app',
-						group: 'external',
-						position: 'before'
+						pattern: "$app",
+						group: "external",
+						position: "before"
 					}
 				],
 				alphabetize: {
-					order: 'asc',
+					order: "asc",
 					caseInsensitive: true
 				},
-				'newlines-between': 'always'
+				"newlines-between": "always"
 			}
 		]
 	},
 	settings: {
-		'import/ignore': ['svelte-french-toast'],
-		'svelte3/typescript': () => require('typescript')
+		"import/ignore": ["svelte-french-toast"],
+		"svelte3/typescript": () => require("typescript")
 	},
 	parserOptions: {
-		sourceType: 'module',
+		sourceType: "module",
 		ecmaVersion: 2020
 	},
 	env: {

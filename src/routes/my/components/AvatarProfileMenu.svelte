@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { DarkMode } from 'flowbite-svelte';
+	import { DarkMode } from "flowbite-svelte";
 
-	import Avatar from '~/lib/components/atoms/Avatar.svelte';
+	import Avatar from "~/lib/components/atoms/Avatar.svelte";
 
 	export let nickname: string;
 	export let avatar: string;
@@ -58,7 +58,9 @@
 					<span class="px-2 transition-colors">{nickname}</span>
 				</div>
 				<div class="flex">
-					<span class="px-2 text-gray-500 transition-colors dark:text-gray-400">{email}</span>
+					<span class="px-2 text-gray-500 transition-colors dark:text-gray-400">
+						{email}
+					</span>
 				</div>
 			</div>
 			<hr class="hidden border-t border-gray-100 dark:border-slate-700 lg:my-0.5 lg:block" />

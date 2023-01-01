@@ -1,6 +1,6 @@
-import * as Sentry from '@sentry/browser';
+import * as Sentry from "@sentry/browser";
 
-import type { LayoutServerLoad } from './$types';
+import type { LayoutServerLoad } from "./$types";
 
 export interface User {
 	isLoggedIn: boolean;
@@ -16,7 +16,7 @@ export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
 	if (locals.user?.avatar) {
 		avatar = `${locals.pb?.baseUrl}/api/files/${locals.user?.collectionId}/${locals.user?.id}/${locals.user?.avatar}`;
 	}
-	Sentry.setContext('user', {
+	Sentry.setContext("user", {
 		id: locals.user?.id,
 		nickname: locals.user?.name
 	});
@@ -25,7 +25,7 @@ export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
 			isLoggedIn: locals.pb?.authStore.isValid ? true : false,
 			email: locals.user?.email,
 			nickname: locals.user?.name || locals.user?.email,
-			avatar: avatar || ''
+			avatar: avatar || ""
 		}
 	};
 };

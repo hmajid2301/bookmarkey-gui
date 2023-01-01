@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { NavBrand } from 'flowbite-svelte';
+	import { NavBrand } from "flowbite-svelte";
 
-	import Logo from '~/lib/components/atoms/Logo.svelte';
+	import Logo from "~/lib/components/atoms/Logo.svelte";
 	export let currentPath: string;
 </script>
 
@@ -13,7 +13,7 @@
 		<ul class="space-y-3 pt-2 text-base">
 			<li>
 				<a
-					class:active={currentPath === '/my/dashboard'}
+					class:active={currentPath === "/my/dashboard"}
 					href="/my/dashboard"
 					class="flex items-end space-x-2 rounded-lg bg-white px-4 py-3 font-bold text-blue-800 text-opacity-100 transition-colors duration-100  hover:bg-blue-50 dark:bg-gray-900 dark:text-blue-200 dark:hover:bg-gray-700">
 					<svg
@@ -29,7 +29,7 @@
 			</li>
 			<li>
 				<a
-					class:active={currentPath === '/my/settings'}
+					class:active={currentPath === "/my/settings"}
 					href="/my/settings"
 					class="flex items-end space-x-2 rounded-lg bg-white px-4 py-3 font-bold text-blue-800 text-opacity-70 transition-colors duration-100 hover:bg-blue-50 hover:text-opacity-100 dark:bg-gray-900 dark:text-blue-200 dark:hover:bg-gray-700 dark:hover:text-opacity-100">
 					<svg

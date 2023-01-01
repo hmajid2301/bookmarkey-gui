@@ -1,8 +1,8 @@
 <script lang="ts" context="module">
-	import { DarkMode, Navbar, NavBrand, NavHamburger, NavUl } from 'flowbite-svelte';
+	import { DarkMode, Navbar, NavBrand, NavHamburger, NavUl } from "flowbite-svelte";
 
-	import Button from '~/lib/components/atoms/Button.svelte';
-	import Logo from '~/lib/components/atoms/Logo.svelte';
+	import Button from "~/lib/components/atoms/Button.svelte";
+	import Logo from "~/lib/components/atoms/Logo.svelte";
 </script>
 
 <header>
