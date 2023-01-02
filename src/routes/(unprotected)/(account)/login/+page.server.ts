@@ -3,8 +3,6 @@ import { error, fail, redirect, type Actions } from "@sveltejs/kit";
 import { ClientResponseError } from "pocketbase";
 import { z } from "zod";
 
-import { HTTP_BAD_REQUEST, HTTP_SEE_OTHER, HTTP_SERVER_ERROR } from "~/lib/constants/http";
-
 interface Login {
 	email: string;
 	password: string;
@@ -23,7 +21,7 @@ export const actions: Actions = {
 		const result = loginSchema.safeParse(data);
 
 		if (!result.success) {
-			return fail(HTTP_BAD_REQUEST, {
+			return fail(400, {
 				data: data,
 				errors: result.error.flatten().fieldErrors
 			});
@@ -41,14 +39,14 @@ export const actions: Actions = {
 			}
 		} catch (err) {
 			if (err instanceof ClientResponseError) {
-				if (err.status === HTTP_BAD_REQUEST) {
+				if (err.status === 400) {
 					throw error(err.status, "Wrong email and password combination.");
 				}
 			}
 			Sentry.captureException(err);
-			throw error(HTTP_SERVER_ERROR, "Failed to login, please try again later.");
+			throw error(500, "Failed to login, please try again later.");
 		}
 
-		throw redirect(HTTP_SEE_OTHER, "/my/dashboard");
+		throw redirect(303, "/my/dashboard");
 	}
 };

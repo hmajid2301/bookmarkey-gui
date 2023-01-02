@@ -1,18 +1,30 @@
-<script lang="ts">
+<script lang="ts" context="module">
 	import type { ActionResult } from "@sveltejs/kit";
 	import toast from "svelte-french-toast";
 
-	import type { PasswordErrors, PasswordValues } from "../types";
+	export interface PasswordValues {
+		currentPassword: string;
+		password: string;
+		passwordConfirm: string;
+	}
 
+	export interface PasswordErrors {
+		currentPassword: string[] | undefined;
+		password: string[] | undefined;
+		passwordConfirm: string[] | undefined;
+	}
+</script>
+
+<script lang="ts">
 	import { enhance } from "$app/forms";
 	import { invalidateAll } from "$app/navigation";
+
 	import Button from "~/lib/components/atoms/Button.svelte";
-	import PasswordInput from "~/lib/components/organisms/PasswordInput.svelte";
+	import PasswordInput from "~/lib/components/molecules/PasswordInput.svelte";
 
 	let loading = false;
 	export let values: PasswordValues;
 	export let errors: PasswordErrors;
-	export let action: string;
 	const submitUpdatePassword = () => {
 		loading = true;
 		return async ({
@@ -42,7 +54,11 @@
 	};
 </script>
 
-<form class="flex h-full flex-col" {action} method="post" use:enhance={submitUpdatePassword}>
+<form
+	class="flex h-full flex-col"
+	action="?/updatePassword"
+	method="post"
+	use:enhance={submitUpdatePassword}>
 	<div class="flex-1 p-6">
 		<PasswordInput
 			disabled={loading}

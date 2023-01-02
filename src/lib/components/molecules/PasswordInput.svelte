@@ -1,9 +1,10 @@
 <script lang="ts">
-	import FormField from "../molecules/FormField.svelte";
+	import { LockSolid } from "svelte-awesome-icons";
+
+	import FormField from "./FormField.svelte";
 
 	export let autocomplete = "current-password";
 	export let name = "password";
-	export let onChange: ((event: Event) => void) | null = null;
 	export let value: string | undefined;
 	export let labelName = "Password";
 	export let errors: string[] | undefined;
@@ -20,7 +21,7 @@
 		{autocomplete}
 		{name}
 		{value}
-		{onChange}
+		on:input
 		{disabled}
 		{labelName}
 		{errors}
@@ -29,11 +30,7 @@
 			class=" pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center {errors
 				? 'text-red-500'
 				: 'text-slate-500 dark:text-slate-400'}">
-			<svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
-				<path
-					fill="currentColor"
-					d="M21 13H14.4L19.1 17.7L17.7 19.1L13 14.4V21H11V14.3L6.3 19L4.9 17.6L9.4 13H3V11H9.6L4.9 6.3L6.3 4.9L11 9.6V3H13V9.4L17.6 4.8L19 6.3L14.3 11H21V13Z" />
-			</svg>
+			<LockSolid class="inline-block h-4 w-4" />
 		</span>
 		<div class="absolute inset-y-0 right-0 flex items-center px-2">
 			<input class="hidden" type="checkbox" tabindex="-1" />

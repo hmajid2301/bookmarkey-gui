@@ -2,7 +2,7 @@ import { render } from "@testing-library/svelte";
 import type { ComponentProps } from "svelte";
 import { describe, test } from "vitest";
 
-import UpdatePassword from "./UpdatePassword.svelte";
+import UpdatePassword from "./UpdatePasswordForm.svelte";
 
 const defaultProps: ComponentProps<UpdatePassword> = {
 	values: {
@@ -14,8 +14,7 @@ const defaultProps: ComponentProps<UpdatePassword> = {
 		currentPassword: [],
 		password: [],
 		passwordConfirm: []
-	},
-	action: "?/updatePassword"
+	}
 };
 
 describe("UpdatePassword", () => {

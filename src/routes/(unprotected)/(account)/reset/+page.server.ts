@@ -2,8 +2,6 @@ import * as Sentry from "@sentry/browser";
 import { error, fail, type Actions } from "@sveltejs/kit";
 import { z } from "zod";
 
-import { HTTP_BAD_REQUEST, HTTP_SERVER_ERROR } from "~/lib/constants/http";
-
 interface Reset {
 	email: string;
 }
@@ -20,7 +18,7 @@ export const actions: Actions = {
 		const result = resetSchema.safeParse(data);
 
 		if (!result.success) {
-			return fail(HTTP_BAD_REQUEST, {
+			return fail(400, {
 				data: data,
 				errors: result.error.flatten().fieldErrors
 			});
@@ -33,7 +31,7 @@ export const actions: Actions = {
 			};
 		} catch (err) {
 			Sentry.captureException(err);
-			throw error(HTTP_SERVER_ERROR, "Failed to send password reset email");
+			throw error(500, "Failed to send password reset email");
 		}
 	}
 };

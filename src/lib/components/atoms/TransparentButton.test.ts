@@ -11,7 +11,7 @@ describe("TransparentButton", () => {
 		const user = userEvent.setup();
 
 		render(html`
-		<${Button} onClick=${mock}>
+		<${Button} on:click=${mock}>
         button
 		</${Button}>
 	`);

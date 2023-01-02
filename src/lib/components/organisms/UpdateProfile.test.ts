@@ -1,7 +1,7 @@
 import { render } from "@testing-library/svelte";
 import { describe, test } from "vitest";
 
-import UpdateProfile from "./UpdateProfile.svelte";
+import UpdateProfile from "./UpdateProfileForm.svelte";
 
 describe("UpdateProfile", () => {
 	test("Renders update profile component", async () => {
@@ -15,7 +15,6 @@ describe("UpdateProfile", () => {
 					nickname: [],
 					email: []
 				},
-				action: "?/updateProfile",
 				avatar: "user.png"
 			}
 		});

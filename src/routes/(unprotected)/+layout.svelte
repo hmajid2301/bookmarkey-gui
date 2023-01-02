@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Footer from "~/routes/(unprotected)/components/Footer.svelte";
-	import Navbar from "~/routes/(unprotected)/components/NavBar.svelte";
+	import Footer from "~/lib/components/molecules/Footer.svelte";
+	import NavBar from "~/lib/components/organisms/NavBar.svelte";
 </script>
 
 <div>
-	<Navbar />
+	<NavBar />
 	<div class="h-full">
 		<slot />
 	</div>

@@ -1,14 +1,14 @@
 <script lang="ts">
+	import { enhance } from "$app/forms";
 	import type { ActionResult } from "@sveltejs/kit";
 	import toast from "svelte-french-toast";
 
 	import type { ActionData, PageData } from "./$types";
 
-	import { enhance } from "$app/forms";
-	import FullWidthButton from "~/lib/components/molecules/FullWidthInput.svelte";
-	import EmailInput from "~/lib/components/organisms/EmailInput.svelte";
-	import PasswordInput from "~/lib/components/organisms/PasswordInput.svelte";
-	import OAuthLoginGroup from "~/routes/(unprotected)/components/OAuthLoginButtons.svelte";
+	import EmailInput from "~/lib/components/molecules/EmailInput.svelte";
+	import FullWidthButton from "~/lib/components/molecules/FullWidthButton.svelte";
+	import OAuthLoginGroup from "~/lib/components/molecules/OAuthLoginButtons.svelte";
+	import PasswordInput from "~/lib/components/molecules/PasswordInput.svelte";
 
 	export let form: ActionData;
 	export let data: PageData;

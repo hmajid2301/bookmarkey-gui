@@ -1,10 +1,15 @@
 <script lang="ts">
+	import { UserSolid } from "svelte-awesome-icons";
+
 	import type { ActionData, PageData } from "./$types";
-	import UpdatePasswordForm from "./components/UpdatePassword.svelte";
-	import UpdateProfileForm from "./components/UpdateProfile.svelte";
-	import type { PasswordErrors, ProfileErrors } from "./types";
 
 	import Section from "~/lib/components/atoms/Section.svelte";
+	import UpdatePasswordForm, {
+		type PasswordErrors
+	} from "~/lib/components/organisms/UpdatePasswordForm.svelte";
+	import UpdateProfileForm, {
+		type ProfileErrors
+	} from "~/lib/components/organisms/UpdateProfileForm.svelte";
 
 	export let form: ActionData;
 	export let data: PageData;
@@ -39,11 +44,7 @@
 <section class="mb-6 flex items-center justify-between pt-6 font-semibold">
 	<div class="flex items-center justify-start">
 		<span class="mr-2 inline-flex h-6 w-6 items-center justify-center">
-			<svg viewBox="0 0 24 24" width="20" height="20" class="inline-block">
-				<path
-					fill="currentColor"
-					d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
-			</svg>
+			<UserSolid />
 		</span>
 		<h1 class="text-2xl leading-tight">Manage profile</h1>
 	</div>
@@ -57,13 +58,11 @@
 				email: form?.data?.email ?? data.user.email
 			}}
 			errors={profileErrors}
-			action="?/updateProfile"
 			avatar={data.user.avatar} />
 	</Section>
 
 	<Section>
 		<UpdatePasswordForm
-			action="?/updatePassword"
 			values={{
 				currentPassword: form?.data?.currentPassword,
 				password: form?.data?.password,

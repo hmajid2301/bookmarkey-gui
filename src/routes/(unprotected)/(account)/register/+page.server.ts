@@ -3,9 +3,7 @@ import { error, fail, redirect, type Actions } from "@sveltejs/kit";
 import { pwnedPassword } from "hibp";
 import { z } from "zod";
 
-import { HTTP_BAD_REQUEST, HTTP_SEE_OTHER, HTTP_SERVER_ERROR } from "~/lib/constants/http";
-
-interface Register {
+export interface Register {
 	email: string;
 	password: string;
 }
@@ -34,13 +32,11 @@ const registerSchema: z.ZodType<Register> = z.object({
 
 export const actions: Actions = {
 	register: async ({ locals, request }) => {
-		const data: Register = Object.fromEntries(
-			(await request.formData()) as Iterable<[Register]>
-		);
+		const data: Register = Object.fromEntries((await request.formData()) as Iterable<[Register]>);
 		const result = await registerSchema.safeParseAsync(data);
 
 		if (!result.success) {
-			return fail(HTTP_BAD_REQUEST, {
+			return fail(400, {
 				data: data,
 				errors: result.error.flatten().fieldErrors
 			});
@@ -56,14 +52,14 @@ export const actions: Actions = {
 		} catch (err) {
 			console.log("err", err);
 			Sentry.captureException(err);
-			throw error(HTTP_SERVER_ERROR, "Failed to create account.");
+			throw error(500, "Failed to create account.");
 		}
 
 		try {
 			await locals.pb?.collection("users").requestVerification(result.data.email);
 		} catch (err) {
 			Sentry.captureException(err);
-			throw error(HTTP_SERVER_ERROR, "Failed to send verification email.");
+			throw error(500, "Failed to send verification email.");
 		}
 
 		try {
@@ -72,9 +68,9 @@ export const actions: Actions = {
 				.authWithPassword(result.data.email, result.data.password);
 		} catch (err) {
 			Sentry.captureException(err);
-			throw error(HTTP_SERVER_ERROR, "Failed to automatically log you in.");
+			throw error(500, "Failed to automatically log you in.");
 		}
 
-		throw redirect(HTTP_SEE_OTHER, "/my/dashboard");
+		throw redirect(303, "/my/dashboard");
 	}
 };

@@ -5,13 +5,15 @@
 	import { Toaster } from "svelte-french-toast";
 	import { pwaInfo } from "virtual:pwa-info";
 
-	import type ReloadPrompt from "$lib/ReloadPrompt.svelte";
 	import "~/app.css";
 	import { config } from "~/config";
+	import type ReloadPrompt from "~/lib/components/organisms/ReloadPrompt.svelte";
 
 	let reloadPrompt: typeof ReloadPrompt;
 	onMount(async () => {
-		pwaInfo && (reloadPrompt = (await import("$lib/ReloadPrompt.svelte")).default);
+		pwaInfo &&
+			(reloadPrompt = (await import("~/lib/components/organisms/ReloadPrompt.svelte"))
+				.default);
 	});
 
 	Sentry.init({

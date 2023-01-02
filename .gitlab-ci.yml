@@ -1,79 +1,79 @@
 include:
-    - template: Jobs/Dependency-Scanning.gitlab-ci.yml
-    - template: Security/License-Scanning.gitlab-ci.yml
-    - template: Security/SAST.gitlab-ci.yml
+  - template: Jobs/Dependency-Scanning.gitlab-ci.yml
+  - template: Security/License-Scanning.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
 
 image: node:19.1.0
 
 stages:
-    - test
-    - deploy
+  - test
+  - deploy
 
 .task:
-    before_script:
-        - npm install -g @go-task/cli
-        - npm ci
+  before_script:
+    - npm install -g @go-task/cli
+    - npm ci
 
 lint:
-    stage: test
-    only:
-        - merge_request
-    extends: .task
-    script:
-        - task lint
+  stage: test
+  only:
+    - merge_request
+  extends: .task
+  script:
+    - task lint
 
 format:
-    stage: test
-    only:
-        - merge_request
-    extends: .task
-    script:
-        - task format
+  stage: test
+  only:
+    - merge_request
+  extends: .task
+  script:
+    - task format
 
 coverage:unit:
-    stage: test
-    only:
-        - merge_request
-        - main
-    extends: .task
-    script:
-        - task coverage
-    coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
-    artifacts:
-        reports:
-            junit: test-results/junit.xml
-            coverage_report:
-                coverage_format: cobertura
-                path: coverage/cobertura-coverage.xml
+  stage: test
+  only:
+    - merge_request
+    - main
+  extends: .task
+  script:
+    - task coverage
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  artifacts:
+    reports:
+      junit: test-results/junit.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
 
 tests:e2e:
-    stage: test
-    only:
-        - merge_request
-    image: registry.gitlab.com/hmajid2301/playwright-docker:latest
-    services:
-        - name: docker:dind
-    variables:
-        DOCKER_DRIVER: overlay2
-        DOCKER_HOST: tcp://docker:2375
-        VITE_POCKET_BASE_URL: "http://docker:9090"
-    extends: .task
-    script:
-        - npx playwright install
-        - echo "VITE_POCKET_BASE_URL='http://docker:9090'" >> .env.test
-        - task e2e_tests
-    after_script:
-        - cat svelte_playwright.log
-    artifacts:
-        when: always
-        paths:
-            - test-results/
-        expire_in: 1 week
+  stage: test
+  only:
+    - merge_request
+  image: registry.gitlab.com/hmajid2301/playwright-docker:latest
+  services:
+    - name: docker:dind
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_HOST: tcp://docker:2375
+    VITE_POCKET_BASE_URL: "http://docker:9090"
+  extends: .task
+  script:
+    - npx playwright install
+    - echo "VITE_POCKET_BASE_URL='http://docker:9090'" >> .env.test
+    - task e2e_tests
+  after_script:
+    - cat svelte_playwright.log
+  artifacts:
+    when: always
+    paths:
+      - test-results/
+    expire_in: 1 week
 
 check:
-    stage: test
-    only:
-        - merge_request
-    extends: .task
-    script:
-        - task check
+  stage: test
+  only:
+    - merge_request
+  extends: .task
+  script:
+    - task check

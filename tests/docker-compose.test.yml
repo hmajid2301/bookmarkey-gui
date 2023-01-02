@@ -1,8 +1,10 @@
 services:
-    api:
-        image: registry.gitlab.com/banter-bus/bookmarkey/api:latest
-        ports:
-            - "9090:8080"
-        volumes:
-            - ./pb_data:/pb_data
-            - /pb_public
+  api:
+    image: registry.gitlab.com/banter-bus/bookmarkey/api:latest
+    ports:
+      - "9090:8080"
+    environment:
+      PB_ENCRYPTION_KEY: 123456
+    volumes:
+      - ./pb_data:/pb_data
+      - /pb_public

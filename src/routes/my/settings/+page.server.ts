@@ -3,8 +3,6 @@ import { error, fail, type Actions } from "@sveltejs/kit";
 import { serialize } from "object-to-formdata";
 import { z } from "zod";
 
-import { HTTP_BAD_REQUEST, HTTP_SERVER_ERROR } from "~/lib/constants/http";
-
 const imageTypes = [
 	"image/jpeg",
 	"image/jpg",
@@ -97,7 +95,7 @@ export const actions: Actions = {
 		const result = updatePasswordSchema.safeParse(data);
 
 		if (!result.success) {
-			return fail(HTTP_BAD_REQUEST, {
+			return fail(400, {
 				data: data,
 				errors: result.error.flatten().fieldErrors
 			});
@@ -113,7 +111,7 @@ export const actions: Actions = {
 			};
 		} catch (err) {
 			Sentry.captureException(err);
-			throw error(HTTP_SERVER_ERROR, "Failed to update password.");
+			throw error(500, "Failed to update password.");
 		}
 	},
 	updateProfile: async ({ locals, request }) => {
@@ -121,7 +119,7 @@ export const actions: Actions = {
 		const result = updateProfileSchema.safeParse(data);
 
 		if (!result.success) {
-			return fail(HTTP_BAD_REQUEST, {
+			return fail(400, {
 				data: data,
 				errors: result.error.flatten().fieldErrors
 			});
@@ -153,7 +151,7 @@ export const actions: Actions = {
 			};
 		} catch (err) {
 			Sentry.captureException(err);
-			throw error(HTTP_SERVER_ERROR, "Failed to update profile information.");
+			throw error(500, "Failed to update profile information.");
 		}
 	}
 };
