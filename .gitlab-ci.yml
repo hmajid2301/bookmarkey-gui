@@ -9,10 +9,18 @@ stages:
   - test
   - deploy
 
+cache:
+  key:
+    files:
+      - pnpm-lock.yaml
+  paths:
+    - .pnpm-store
+
 .task:
   before_script:
-    - npm install -g @go-task/cli
-    - npm ci
+    - npm install --global pnpm @go-task/cli
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install
 
 lint:
   stage: test

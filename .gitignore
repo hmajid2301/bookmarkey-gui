@@ -52,3 +52,4 @@ test-results/
 *.log
 .env
 coverage
+.pnpm-store

@@ -3,52 +3,52 @@ version: "3"
 tasks:
   build:
     cmds:
-      - npm run build
+      - pnpm run build
     env:
       NETLIFY: true
 
   start:
     cmds:
       - docker compose up --build -d
-      - npm run dev -- --host --port 5173 --open
+      - pnpm run dev --host --port 5173 --open
 
   lint:
     cmds:
-      - npm run lint -- --fix
+      - pnpm run lint --fix
 
   format:
     cmds:
-      - npm run format
+      - pnpm run format
 
   unit_tests:
     cmds:
-      - npm run test:unit
+      - pnpm run test:unit
 
   coverage:
     cmds:
-      - npm run coverage
+      - pnpm run coverage
 
   e2e_tests:
     cmds:
       - docker compose -f tests/docker-compose.test.yml up  -d
-      - npm run test
+      - pnpm run test
     env:
       VITE_POCKET_BASE_URL: "http://localhost:9090"
 
   check:
     cmds:
-      - npm run check
+      - pnpm run check
 
   prepare:
     cmds:
-      - npm run prepare
+      - pnpm run prepare
 
   update_types:
     cmds:
-      - npm run sync
+      - pnpm run sync
 
   run_prod:
     cmds:
       - docker compose up --build -d
-      - npm run build
-      - npm run preview -- --host
+      - pnpm run build
+      - pnpm run preview --host
