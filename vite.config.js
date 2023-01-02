@@ -27,6 +27,7 @@ const config = {
 		reporters: ["default", "junit"],
 		coverage: {
 			all: true,
+			include: "src/**",
 			reporter: ["text", "json", "html", "cobertura"]
 		}
 	}

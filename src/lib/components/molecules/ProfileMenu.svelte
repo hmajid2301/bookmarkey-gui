@@ -1,6 +1,5 @@
 <script lang="ts">
 	import ProfileMenuItem from "../atoms/ProfileMenuItem.svelte";
-
 	import type { MenuItem } from "./SideBarItems.svelte";
 
 	export let nickname: string;

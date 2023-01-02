@@ -4,13 +4,13 @@ import { describe, expect, test } from "vitest";
 import Avatar from "./Avatar.svelte";
 
 describe("Avatar", () => {
-	test("Renders fallback avatar", async () => {
+	test("Successfully renders fallback avatar", async () => {
 		const { getByAltText } = render(Avatar, {});
 		const image = getByAltText("") as HTMLImageElement;
 		expect(image.src).toContain("");
 	});
 
-	test("Renders gravatar avatar", async () => {
+	test("Successfully renders gravatar avatar", async () => {
 		const { getByAltText } = render(Avatar, {
 			props: { email: "user@example.com" }
 		});
@@ -20,7 +20,7 @@ describe("Avatar", () => {
 		);
 	});
 
-	test("Renders text avatar", async () => {
+	test("Successfully renders text avatar", async () => {
 		const { getByAltText } = render(Avatar, {
 			props: { nickname: "haseeb" }
 		});
@@ -28,7 +28,7 @@ describe("Avatar", () => {
 		expect(image.getAttribute("data-sources")).toBe(",https://ui-avatars.com/api/?name=haseeb");
 	});
 
-	test("Renders src avatar", async () => {
+	test("Successfully renders src avatar", async () => {
 		const { getByAltText } = render(Avatar, {
 			props: { avatar: "my_avatar.png" }
 		});
@@ -36,7 +36,7 @@ describe("Avatar", () => {
 		expect(image.getAttribute("data-sources")).toBe("my_avatar.png");
 	});
 
-	test("Renders gravatar, when given email and nickname", async () => {
+	test("Successfully renders gravatar, when given email and nickname", async () => {
 		const { getByAltText } = render(Avatar, {
 			props: { nickname: "haseeb", email: "user@example.com" }
 		});

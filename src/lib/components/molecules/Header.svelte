@@ -10,6 +10,7 @@
 	<Button
 		btnClass="mr-4 p-1"
 		on:click={() => {
+			console.log("TEST CLICK");
 			showMenu = !showMenu;
 		}}>
 		<BarsSolid />

@@ -30,11 +30,16 @@ module.exports = {
 		"import/order": [
 			"warn",
 			{
+				groups: ["builtin", "external", ["sibling", "parent"], "index"],
 				pathGroups: [
 					{
 						pattern: "$app/**",
 						group: "external"
 					}
+					// {
+					// 	pattern: "~/**",
+					// 	group: "internal"
+					// }
 				],
 				alphabetize: {
 					order: "asc",

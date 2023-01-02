@@ -16,4 +16,5 @@ declare namespace App {
 
 interface ImportMetaEnv {
 	VITE_POCKET_BASE_URL: string;
+	VITE_SENTRY_DSN: string;
 }

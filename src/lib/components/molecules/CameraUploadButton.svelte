@@ -5,7 +5,7 @@
 	export let loading = false;
 </script>
 
-<div class="absolute right-0 bottom-0">
+<div class="absolute right-0 bottom-0" role="button">
 	<div class="relative flex items-stretch justify-start">
 		<label for="avatar" class="inline-flex">
 			<span

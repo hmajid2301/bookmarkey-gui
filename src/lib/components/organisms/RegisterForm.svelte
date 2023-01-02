@@ -8,8 +8,8 @@
 		type PasswordIndicatorItem
 	} from "../molecules/PasswordIndicator.svelte";
 
+	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
 	import EmailInput from "~/lib/components/molecules/EmailInput.svelte";
-	import FullWidthButton from "~/lib/components/molecules/FullWidthButton.svelte";
 	import PasswordInput from "~/lib/components/molecules/PasswordInput.svelte";
 	import type { Register } from "~/routes/(unprotected)/(account)/register/+page.server";
 

@@ -13,6 +13,7 @@
 	import SideBarItem from "../atoms/SideBarItem.svelte";
 
 	import Logo from "~/lib/components/atoms/Logo.svelte";
+
 	export let mainPageLink: string;
 	export let currentPath: string;
 	export let menuItems: MenuItem[];

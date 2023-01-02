@@ -40,6 +40,7 @@
 				class="cursor-pointer rounded bg-gray-300 px-2 py-1 font-mono text-sm text-gray-600 hover:bg-gray-400 dark:bg-slate-600 dark:text-slate-100 dark:hover:bg-gray-700"
 				on:click={() => {
 					show = !show;
+					console.log("HELO HELLO");
 				}}>
 				{show ? "hide" : "show"}
 			</button>

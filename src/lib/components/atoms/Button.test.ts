@@ -6,7 +6,7 @@ import { describe, expect, test, vi } from "vitest";
 import Button from "./Button.svelte";
 
 describe("Button", () => {
-	test("Renders button with anchor", async () => {
+	test("Successfully renders button with anchor", async () => {
 		render(html`
 		<${Button} href="/test">
         button
@@ -17,7 +17,7 @@ describe("Button", () => {
 		expect(href).toBe("/test");
 	});
 
-	test("on:click button calls function", async () => {
+	test("Successfully calls on:click function when button is pressed", async () => {
 		const mock = vi.fn();
 		const user = userEvent.setup();
 

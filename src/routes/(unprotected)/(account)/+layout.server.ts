@@ -1,5 +1,6 @@
 import type { LayoutServerLoad } from "./$types";
-import type { AuthProviderWithRedirect } from "./types";
+
+import type { AuthProviderWithRedirect } from "~/lib/components/molecules/OAuthLoginButton.svelte";
 
 export type OutputType = { authProviders: Record<string, AuthProviderWithRedirect> };
 

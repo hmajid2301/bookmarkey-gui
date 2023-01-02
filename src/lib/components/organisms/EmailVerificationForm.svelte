@@ -3,8 +3,8 @@
 	import type { ActionResult } from "@sveltejs/kit";
 	import toast from "svelte-french-toast";
 
+	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
 	import EmailInput from "~/lib/components/molecules/EmailInput.svelte";
-	import FullWidthButton from "~/lib/components/molecules/FullWidthButton.svelte";
 
 	export let email: string;
 	export let errors: string[] | undefined = undefined;

@@ -1,10 +1,16 @@
+<script lang="ts" context="module">
+	import type { AuthProviderInfo } from "pocketbase";
+
+	export interface AuthProviderWithRedirect extends AuthProviderInfo {
+		redirect: string;
+	}
+</script>
+
 <script lang="ts">
 	import { browser } from "$app/environment";
 	import { GithubBrand, GitlabBrand } from "svelte-awesome-icons";
 
-	import BrandButton from "./BrandButton.svelte";
-
-	import type { AuthProviderWithRedirect } from "~/routes/(unprotected)/(account)/types";
+	import IconButton from "./IconButton.svelte";
 
 	export let authProviders: Record<string, AuthProviderWithRedirect>;
 
@@ -20,14 +26,14 @@
 </script>
 
 <div>
-	<BrandButton
+	<IconButton
 		iconComponent={GithubBrand}
 		on:click={() => gotoAuthProvider("github")}
 		name="Sign in with GitHub" />
 </div>
 
 <div>
-	<BrandButton
+	<IconButton
 		iconComponent={GitlabBrand}
 		on:click={() => gotoAuthProvider("github")}
 		name="Sign in with GitLab" />

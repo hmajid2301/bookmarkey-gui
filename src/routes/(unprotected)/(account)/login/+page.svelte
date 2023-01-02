@@ -5,9 +5,9 @@
 
 	import type { ActionData, PageData } from "./$types";
 
+	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
 	import EmailInput from "~/lib/components/molecules/EmailInput.svelte";
-	import FullWidthButton from "~/lib/components/molecules/FullWidthButton.svelte";
-	import OAuthLoginGroup from "~/lib/components/molecules/OAuthLoginButtons.svelte";
+	import OAuthLoginGroup from "~/lib/components/molecules/OAuthLoginButton.svelte";
 	import PasswordInput from "~/lib/components/molecules/PasswordInput.svelte";
 
 	export let form: ActionData;
