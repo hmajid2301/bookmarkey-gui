@@ -1,6 +1,6 @@
 services:
   api:
-    image: registry.gitlab.com/banter-bus/bookmarkey/api:latest
+    image: registry.gitlab.com/bookmarkey/api:latest
     ports:
       - "9090:8080"
     environment:

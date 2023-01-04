@@ -3,7 +3,7 @@ include:
   - template: Security/License-Scanning.gitlab-ci.yml
   - template: Security/SAST.gitlab-ci.yml
 
-image: registry.gitlab.com/hmajid2301/pnpm-docker-ci:latest
+image: registry.gitlab.com/hmajid2301/pnpm-docker-ci:6faf9994486627a07ff45fa574f5c9e8df669413
 
 stages:
   - test
@@ -57,7 +57,7 @@ tests:e2e:
   only:
     - merge_request
   image:
-    name: registry.gitlab.com/hmajid2301/playwright-docker:latest
+    name: registry.gitlab.com/hmajid2301/playwright-docker:bfb03856092c2fa9d0f4d3db97034e7aab78d727
     entrypoint: [""]
   services:
     - name: docker:dind
