@@ -3,7 +3,6 @@ publish = "build"
 command = "npm run build"
 
 [context.production.environment]
-NETLIFY = "true"
 VITE_POCKET_BASE_URL = "https://pocketbase.bookmarkey.app"
 VITE_SENTRY_DSN = 'https://38be6117d9454303a80c3875e56eec02@o247056.ingest.sentry.io/4504394811113472'
 
@@ -12,7 +11,6 @@ VITE_SENTRY_DSN = 'https://38be6117d9454303a80c3875e56eec02@o247056.ingest.sentr
 [context.deploy-preview]
 
 [context.deploy-preview.environment]
-NETLIFY = "true"
 VITE_POCKET_BASE_URL = "https://pocketbase.bookmarkey.app"
 VITE_SENTRY_DSN = "https://38be6117d9454303a80c3875e56eec02@o247056.ingest.sentry.io/4504394811113472"
 
@@ -22,4 +20,4 @@ package = "@sentry/netlify-build-plugin"
 [plugins.inputs]
 sentryOrg = "majiy"
 sentryProject = "bookmarkey"
-sentryRepository = "HaseebMajid Apps / Bookmarkey / gui"
+sentryRepository = "Bookmarkey / gui"

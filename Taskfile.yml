@@ -4,8 +4,6 @@ tasks:
   build:
     cmds:
       - pnpm run build
-    env:
-      NETLIFY: true
 
   start:
     cmds:
