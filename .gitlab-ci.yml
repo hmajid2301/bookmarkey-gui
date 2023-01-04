@@ -43,7 +43,7 @@ coverage:unit:
     - main
   extends: .task
   script:
-    - task coverage
+    - time task coverage
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   artifacts:
     reports:
@@ -65,11 +65,12 @@ tests:e2e:
     DOCKER_DRIVER: overlay2
     DOCKER_HOST: tcp://docker:2375
     VITE_POCKET_BASE_URL: "http://docker:9090"
+  parallel: 2
   extends: .task
   script:
     - npx playwright install
     - echo "VITE_POCKET_BASE_URL='http://docker:9090'" >> .env.test
-    - task e2e_tests
+    - task e2e_tests -- --shard=$CI_NODE_INDEX/$CI_NODE_TOTAL
   after_script:
     - cat svelte_playwright.log
   artifacts:

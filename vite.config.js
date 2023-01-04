@@ -28,7 +28,7 @@ const config = {
 		coverage: {
 			all: true,
 			include: "src/**",
-			reporter: ["text", "json", "html", "cobertura"]
+			reporter: ["text", "cobertura"]
 		}
 	}
 };
