@@ -55,7 +55,7 @@
 		"md5": "^2.3.0",
 		"neverthrow": "^5.1.0",
 		"object-to-formdata": "^4.4.2",
-		"pocketbase": "^0.8.2",
+		"pocketbase": "^0.9.1",
 		"postcss": "^8.4.19",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.7.0",

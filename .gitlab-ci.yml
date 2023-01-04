@@ -3,7 +3,7 @@ include:
   - template: Security/License-Scanning.gitlab-ci.yml
   - template: Security/SAST.gitlab-ci.yml
 
-image: node:19.1.0
+image: registry.gitlab.com/hmajid2301/pnpm-docker-ci:latest
 
 stages:
   - test
@@ -18,8 +18,6 @@ cache:
 
 .task:
   before_script:
-    - npm install --global pnpm @go-task/cli
-    - pnpm config set store-dir .pnpm-store
     - pnpm install
 
 lint:
@@ -58,7 +56,9 @@ tests:e2e:
   stage: test
   only:
     - merge_request
-  image: registry.gitlab.com/hmajid2301/playwright-docker:latest
+  image:
+    name: registry.gitlab.com/hmajid2301/playwright-docker:latest
+    entrypoint: [""]
   services:
     - name: docker:dind
   variables:

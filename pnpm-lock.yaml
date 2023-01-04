@@ -38,7 +38,7 @@ specifiers:
   md5: ^2.3.0
   neverthrow: ^5.1.0
   object-to-formdata: ^4.4.2
-  pocketbase: ^0.8.2
+  pocketbase: ^0.9.1
   postcss: ^8.4.19
   prettier: ^2.8.0
   prettier-plugin-svelte: ^2.7.0
@@ -98,7 +98,7 @@ devDependencies:
   md5: 2.3.0
   neverthrow: 5.1.0
   object-to-formdata: 4.4.2
-  pocketbase: 0.8.4
+  pocketbase: 0.9.1
   postcss: 8.4.20
   prettier: 2.8.1
   prettier-plugin-svelte: 2.9.0_ajxj753sv7dbwexjherrch25ta
@@ -4601,8 +4601,8 @@ packages:
     hasBin: true
     dev: true
 
-  /pocketbase/0.8.4:
-    resolution: {integrity: sha512-VKttLeMDtbF4ck0MohHafMcZ5uQkiEedrS4iKyfo9+dBA0UotbMTKnFpXCYIKe76wEhQGes4bDzFyLlcEku72w==}
+  /pocketbase/0.9.1:
+    resolution: {integrity: sha512-a9S/WHak+mgr3WI8bD2tz3lFVFzoy6ZgKTBlUXwIH4VLTKVU3JKeAKxqIFBF7av4qblmB+52tX8sWLS08Ftm/w==}
     dev: true
 
   /postcss-import/14.1.0_postcss@8.4.20:
