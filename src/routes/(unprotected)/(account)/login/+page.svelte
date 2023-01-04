@@ -4,7 +4,6 @@
 	import toast from "svelte-french-toast";
 
 	import type { ActionData, PageData } from "./$types";
-
 	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
 	import EmailInput from "~/lib/components/molecules/EmailInput.svelte";
 	import OAuthLoginGroup from "~/lib/components/molecules/OAuthLoginButton.svelte";

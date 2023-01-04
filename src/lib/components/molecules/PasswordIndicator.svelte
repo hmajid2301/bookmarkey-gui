@@ -7,7 +7,18 @@
 
 <script lang="ts">
 	export let passwordScore: number;
-	export let passwordScoreItem: PasswordIndicatorItem | undefined;
+
+	const passwordScoreMap: Record<number, PasswordIndicatorItem> = {
+		0: { color: "bg-gray-200", note: "Very Weak Password" },
+		1: { color: "bg-red-500", note: "Weak Password" },
+		2: { color: "bg-orange-500", note: "Average Password" },
+		3: { color: "bg-green-500", note: "Strong Password" }
+	};
+
+	let passwordScoreItem = passwordScoreMap[0];
+	$: if (passwordScore !== undefined) {
+		passwordScoreItem = passwordScoreMap[passwordScore] || passwordScoreMap[0];
+	}
 </script>
 
 <div class="flex w-full">

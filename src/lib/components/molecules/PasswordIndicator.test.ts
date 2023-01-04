@@ -7,11 +7,7 @@ describe("PasswordIndicator", () => {
 	test("Successfully renders indicator", async () => {
 		const { getByText } = render(PasswordIndicator, {
 			props: {
-				passwordScore: 3,
-				passwordScoreItem: {
-					color: "text-green-300",
-					note: "Strong Password"
-				}
+				passwordScore: 3
 			}
 		});
 

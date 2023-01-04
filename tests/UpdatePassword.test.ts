@@ -9,9 +9,8 @@ test("Successfully update password in app", async ({ page, baseURL }) => {
 
 	await page.locator('[name="currentPassword"]').type(password);
 
-	const newPassword = "password@112";
+	const newPassword = "mY$$ecureP@ssword@112";
 	await page.locator('[name="password"]').type(newPassword);
-	await page.locator('[name="passwordConfirm"]').type(newPassword);
 	await page.locator('button[type="submit"]').last().click();
 
 	const toastMessage = await page.locator(".message").innerText();

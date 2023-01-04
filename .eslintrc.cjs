@@ -35,11 +35,11 @@ module.exports = {
 					{
 						pattern: "$app/**",
 						group: "external"
+					},
+					{
+						pattern: "~/**",
+						group: "sibling"
 					}
-					// {
-					// 	pattern: "~/**",
-					// 	group: "internal"
-					// }
 				],
 				alphabetize: {
 					order: "asc",

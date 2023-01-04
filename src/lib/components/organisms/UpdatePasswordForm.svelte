@@ -5,20 +5,31 @@
 	export interface PasswordValues {
 		currentPassword: string;
 		password: string;
-		passwordConfirm: string;
 	}
 
 	export interface PasswordErrors {
 		currentPassword: string[] | undefined;
 		password: string[] | undefined;
-		passwordConfirm: string[] | undefined;
+	}
+
+	let passwordScore = 0;
+	let passwordValue = "";
+	function updatePassword(event: Event) {
+		const target = event.target as HTMLInputElement;
+		const value = target.value;
+		passwordScore = passwordStrength(value).id;
+		console.log("HELLO", passwordScore);
+		passwordValue = value;
 	}
 </script>
 
 <script lang="ts">
 	import { enhance } from "$app/forms";
 	import { invalidateAll } from "$app/navigation";
+	import { passwordStrength } from "check-password-strength";
 
+	import PasswordIndicator from "../molecules/PasswordIndicator.svelte";
+	import PasswordRules from "../molecules/PasswordRules.svelte";
 	import Button from "~/lib/components/atoms/Button.svelte";
 	import PasswordInput from "~/lib/components/molecules/PasswordInput.svelte";
 
@@ -70,21 +81,15 @@
 		<PasswordInput
 			autocomplete="new-password"
 			disabled={loading}
+			on:input={updatePassword}
 			name="password"
 			labelName="Password"
 			placeholder="Your new password"
 			note="Required. Your new password"
 			value={values.password}
 			errors={errors.password} />
-		<PasswordInput
-			autocomplete="new-password"
-			disabled={loading}
-			name="passwordConfirm"
-			labelName="Confirm Password"
-			placeholder="Your new password"
-			note="Required. Your new password again"
-			value={values.passwordConfirm}
-			errors={errors.passwordConfirm} />
+		<PasswordRules password={passwordValue} />
+		<PasswordIndicator {passwordScore} />
 	</div>
 
 	<div class="p-6">

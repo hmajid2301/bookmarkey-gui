@@ -3,7 +3,6 @@
 	import { GearSolid, RightFromBracketSolid, UserSolid } from "svelte-awesome-icons";
 
 	import ProfileMenu from "../molecules/ProfileMenu.svelte";
-
 	import Avatar from "~/lib/components/atoms/Avatar.svelte";
 
 	export let nickname: string;

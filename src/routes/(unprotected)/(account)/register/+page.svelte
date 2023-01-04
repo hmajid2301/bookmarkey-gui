@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { ActionData, PageData } from "./$types";
-
 	import OAuthLoginGroup from "~/lib/components/molecules/OAuthLoginButton.svelte";
 	import RegisterForm from "~/lib/components/organisms/RegisterForm.svelte";
 

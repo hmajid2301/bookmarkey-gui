@@ -2,7 +2,6 @@
 	import { UserSolid } from "svelte-awesome-icons";
 
 	import type { ActionData, PageData } from "./$types";
-
 	import Section from "~/lib/components/atoms/Section.svelte";
 	import UpdatePasswordForm, {
 		type PasswordErrors
@@ -21,8 +20,7 @@
 
 	let passwordErrors: PasswordErrors = {
 		currentPassword: undefined,
-		password: undefined,
-		passwordConfirm: undefined
+		password: undefined
 	};
 
 	if (form !== undefined && form?.errors !== undefined) {
@@ -34,8 +32,7 @@
 		} else if ("password" in form.errors) {
 			passwordErrors = {
 				currentPassword: form?.errors?.currentPassword,
-				password: form?.errors?.password,
-				passwordConfirm: form?.errors?.passwordConfirm
+				password: form?.errors?.password
 			};
 		}
 	}
@@ -65,8 +62,7 @@
 		<UpdatePasswordForm
 			values={{
 				currentPassword: form?.data?.currentPassword,
-				password: form?.data?.password,
-				passwordConfirm: form?.data?.passwordConfirm
+				password: form?.data?.password
 			}}
 			errors={passwordErrors} />
 	</Section>

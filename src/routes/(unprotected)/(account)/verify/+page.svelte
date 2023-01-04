@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { ActionData } from "./$types";
-
 	import EmailVerificationForm from "~/lib/components/organisms/EmailVerificationForm.svelte";
 
 	export let form: ActionData;

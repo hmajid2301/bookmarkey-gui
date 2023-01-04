@@ -1,5 +1,6 @@
 import * as Sentry from "@sentry/browser";
 import { error, fail, type Actions } from "@sveltejs/kit";
+import { pwnedPassword } from "hibp";
 import { serialize } from "object-to-formdata";
 import { z } from "zod";
 
@@ -18,7 +19,6 @@ const MAX_AVATAR_FILE_LIMIT = 500_000;
 interface updatePassword {
 	currentPassword: string;
 	password: string;
-	passwordConfirm: string;
 }
 
 interface updateProfile {
@@ -27,36 +27,28 @@ interface updateProfile {
 	avatar?: Blob | undefined;
 }
 
-const updatePasswordSchema: z.ZodType<updatePassword> = z
-	.object({
-		currentPassword: z.string({ required_error: "Current password is required" }),
-		password: z
-			.string({ required_error: "Password is required" })
-			.regex(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, {
-				message:
-					"Password must be a minimum of 8 characters & contain at least one letter, one number, and one special character."
-			}),
-		passwordConfirm: z
-			.string({ required_error: "Confirm Password is required" })
-			.regex(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, {
-				message:
-					"Password must be a minimum of 8 characters & contain at least one letter, one number, and one special character."
-			})
-	})
-	.superRefine(({ passwordConfirm, password }, ctx) => {
-		if (passwordConfirm !== password) {
-			ctx.addIssue({
-				code: z.ZodIssueCode.custom,
-				message: "Password & Confirm password must match",
-				path: ["password"]
-			});
-			ctx.addIssue({
-				code: z.ZodIssueCode.custom,
-				message: "Password & Confirm password must match",
-				path: ["passwordConfirm"]
-			});
-		}
-	});
+const isSafePassword = async (ph: string) => {
+	try {
+		const pwned = await pwnedPassword(ph);
+		return pwned <= 3;
+	} catch (err) {
+		console.log(err);
+		return true;
+	}
+};
+
+const updatePasswordSchema: z.ZodType<updatePassword> = z.object({
+	currentPassword: z.string({ required_error: "Current password is required" }),
+	password: z
+		.string({ required_error: "Password is required" })
+		.regex(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, {
+			message:
+				"Password must be a minimum of 8 characters & contain at least one letter, one number, and one special character."
+		})
+		.refine(isSafePassword, () => ({
+			message: `Password has been compromised, please try again`
+		}))
+});
 
 const updateProfileSchema: z.ZodType<updateProfile> = z.object({
 	nickname: z.string().max(64, { message: "Name must be 64 characters or less" }).trim(),
@@ -92,7 +84,7 @@ const updateProfileSchema: z.ZodType<updateProfile> = z.object({
 export const actions: Actions = {
 	updatePassword: async ({ locals, request }) => {
 		const data = Object.fromEntries((await request.formData()) as Iterable<[updatePassword]>);
-		const result = updatePasswordSchema.safeParse(data);
+		const result = await updatePasswordSchema.safeParseAsync(data);
 
 		if (!result.success) {
 			return fail(400, {
@@ -104,7 +96,7 @@ export const actions: Actions = {
 			await locals.pb?.collection("users").update(locals?.user?.id as string, {
 				oldPassword: result.data.currentPassword,
 				password: result.data.password,
-				passwordConfirm: result.data.passwordConfirm
+				passwordConfirm: result.data.password
 			});
 			return {
 				updatePasswordSuccess: true

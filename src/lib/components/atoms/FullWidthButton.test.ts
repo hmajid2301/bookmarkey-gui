@@ -7,7 +7,7 @@ import FullWidthButton from "./FullWidthButton.svelte";
 describe("FullWidthButton", () => {
 	test("Successfully renders button with anchor", async () => {
 		render(html`
-		<${FullWidthButton} href="/test">
+		<${FullWidthButton}>
         button
 		</${FullWidthButton}>
 	`);

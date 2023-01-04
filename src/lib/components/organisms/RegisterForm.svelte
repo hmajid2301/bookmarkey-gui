@@ -4,10 +4,8 @@
 	import { passwordStrength } from "check-password-strength";
 	import toast from "svelte-french-toast";
 
-	import PasswordIndicator, {
-		type PasswordIndicatorItem
-	} from "../molecules/PasswordIndicator.svelte";
-
+	import PasswordIndicator from "../molecules/PasswordIndicator.svelte";
+	import PasswordRules from "../molecules/PasswordRules.svelte";
 	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
 	import EmailInput from "~/lib/components/molecules/EmailInput.svelte";
 	import PasswordInput from "~/lib/components/molecules/PasswordInput.svelte";
@@ -46,20 +44,14 @@
 		};
 	};
 
-	let passwordScoreMap: Record<number, PasswordIndicatorItem> = {
-		0: { color: "bg-gray-200", note: "Very Weak Password" },
-		1: { color: "bg-red-500", note: "Weak Password" },
-		2: { color: "bg-orange-500", note: "Average Password" },
-		3: { color: "bg-green-500", note: "Strong Password" }
-	};
-
 	let passwordScore = 0;
-	let passwordScoreItem = passwordScoreMap[0];
-	function updatePasswordScore(event: Event) {
+	let passwordValue = "";
+	function updatePassword(event: Event) {
 		const target = event.target as HTMLInputElement;
 		const value = target.value;
 		passwordScore = passwordStrength(value).id;
-		passwordScoreItem = passwordScoreMap[passwordScore] || passwordScoreMap[0];
+		console.log("HELLO", passwordScore);
+		passwordValue = value;
 	}
 </script>
 
@@ -76,12 +68,13 @@
 	<PasswordInput
 		autocomplete="new-password"
 		note="Required. Your password"
-		on:input={updatePasswordScore}
+		on:input={updatePassword}
 		disabled={loading}
 		name="password"
 		labelName="Password"
 		value={data?.password}
 		errors={errors?.password} />
-	<PasswordIndicator {passwordScoreItem} {passwordScore} />
+	<PasswordRules password={passwordValue} />
+	<PasswordIndicator {passwordScore} />
 	<FullWidthButton>Create Account</FullWidthButton>
 </form>

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { ActionData } from "./$types";
-
 	import ResetPasswordForm from "~/lib/components/organisms/ResetPasswordForm.svelte";
 
 	export let form: ActionData;
