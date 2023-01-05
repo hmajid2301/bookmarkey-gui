@@ -31,6 +31,7 @@
 		"@sveltejs/adapter-netlify": "1.0.0-next.88",
 		"@sveltejs/kit": "^1.0.1",
 		"@testing-library/dom": "^8.19.1",
+		"@testing-library/jest-dom": "^5.16.5",
 		"@testing-library/svelte": "^3.2.2",
 		"@testing-library/user-event": "^14.4.3",
 		"@typescript-eslint/eslint-plugin": "^5.48.0",
@@ -74,6 +75,7 @@
 		"vite": "^4.0.4",
 		"vite-plugin-pwa": "^0.14.1",
 		"vitest": "^0.26.3",
+		"vitest-dom": "^0.0.4",
 		"workbox-window": "^6.5.4",
 		"zod": "^3.20.2",
 		"zod-form-data": "^1.2.4"

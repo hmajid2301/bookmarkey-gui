@@ -1,6 +1,7 @@
 import sentryVitePlugin from "@sentry/vite-plugin";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { SvelteKitPWA } from "@vite-pwa/sveltekit";
+import "vitest-dom/extend-expect";
 
 /** @type {import('vite').UserConfig} */
 const config = {
@@ -23,7 +24,7 @@ const config = {
 		environment: "jsdom",
 		include: ["src/**/*.{test,spec}.{js,ts}"],
 		outputFile: "test-results/junit.xml",
-		setupFiles: ["setupTest.ts"],
+		setupFiles: ["./setupTest.ts"],
 		reporters: ["default", "junit"],
 		coverage: {
 			all: true,

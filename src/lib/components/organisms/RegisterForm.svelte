@@ -11,7 +11,7 @@
 	import PasswordInput from "~/lib/components/molecules/PasswordInput.svelte";
 	import type { Register } from "~/routes/(unprotected)/(account)/register/+page.server";
 
-	export let data: Register | undefined;
+	export let register: Register | undefined;
 	export let errors:
 		| {
 				email?: string[];
@@ -63,7 +63,7 @@
 	<EmailInput
 		autocomplete="username"
 		disabled={loading}
-		value={data?.email}
+		value={register?.email}
 		errors={errors?.email} />
 	<PasswordInput
 		autocomplete="new-password"
@@ -72,7 +72,7 @@
 		disabled={loading}
 		name="password"
 		labelName="Password"
-		value={data?.password}
+		value={register?.password}
 		errors={errors?.password} />
 	<PasswordRules password={passwordValue} />
 	<PasswordIndicator {passwordScore} />
