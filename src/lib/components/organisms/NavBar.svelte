@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	import { DarkMode, Navbar, NavBrand, NavHamburger, NavUl } from "flowbite-svelte";
+	import { UserSolid } from "svelte-awesome-icons";
 
-	import Button from "~/lib/components/atoms/Button.svelte";
 	import Logo from "~/lib/components/atoms/Logo.svelte";
 </script>
 
@@ -20,7 +20,13 @@
 				aria-current="page">
 				Home
 			</a>
-			<Button extraClasses="mr-0 mb-0" href="/login">Login</Button>
+			<a
+				href="/login"
+				class="rounded-md bg-gray-300 px-3 py-2 text-sm font-bold text-black dark:bg-gray-900 dark:text-white"
+				aria-current="page">
+				<UserSolid class="mr-2 inline-flex" size="15" />
+				Login
+			</a>
 		</NavUl>
 		<div>
 			<NavHamburger on:click={toggle} />
