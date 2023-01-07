@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@go-task/cli': ^3.19.1
-  '@playwright/test': 1.25.0
+  '@playwright/test': 1.30.0-alpha-jan-5-2023
   '@popperjs/core': ^2.11.6
   '@sentry/browser': ^7.29.0
   '@sentry/svelte': ^7.29.0
@@ -17,6 +17,7 @@ specifiers:
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/svelte': ^3.2.2
   '@testing-library/user-event': ^14.4.3
+  '@types/node': ^18.11.18
   '@typescript-eslint/eslint-plugin': ^5.48.0
   '@typescript-eslint/parser': ^5.48.0
   '@vite-pwa/sveltekit': ^0.1.2
@@ -65,7 +66,7 @@ specifiers:
 
 devDependencies:
   '@go-task/cli': 3.19.1
-  '@playwright/test': 1.25.0
+  '@playwright/test': 1.30.0-alpha-jan-5-2023
   '@popperjs/core': 2.11.6
   '@sentry/browser': 7.29.0
   '@sentry/svelte': 7.29.0_svelte@3.55.0
@@ -80,6 +81,7 @@ devDependencies:
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/svelte': 3.2.2_svelte@3.55.0
   '@testing-library/user-event': 14.4.3_ua4wuun3fnehcjqtqj2e2ldgpe
+  '@types/node': 18.11.18
   '@typescript-eslint/eslint-plugin': 5.48.0_k73wpmdolxikpyqun3p36akaaq
   '@typescript-eslint/parser': 5.48.0_iukboom6ndih5an6iafl45j2fe
   '@vite-pwa/sveltekit': 0.1.2_vj5sym4t3puh65scvs7gsojppi
@@ -118,7 +120,7 @@ devDependencies:
   tailwindcss: 3.2.4_postcss@8.4.20
   tslib: 2.4.1
   typescript: 4.9.4
-  vite: 4.0.4
+  vite: 4.0.4_@types+node@18.11.18
   vite-plugin-pwa: 0.14.1_aln3rhi4rqbizqxdkcc2hwlswu
   vitest: 0.26.3_jsdom@20.0.3
   vitest-dom: 0.0.4_vitest@0.26.3
@@ -1652,13 +1654,13 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@playwright/test/1.25.0:
-    resolution: {integrity: sha512-j4EZhTTQI3dBeWblE21EV//swwmBtOpIrLdOIJIRv4uqsLdHgBg1z+JtTg+AeC5o2bAXIE26kDNW5A0TimG8Bg==}
+  /@playwright/test/1.30.0-alpha-jan-5-2023:
+    resolution: {integrity: sha512-QEelJ/vgVE4ZzDaKWkietddmR3Vz+GCknv2A0eU/2UM+F8CNkcDPb8G9z22TGV/HUFH0/GOhKSrbEolKdCqR0A==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@types/node': 18.11.18
-      playwright-core: 1.25.0
+      playwright-core: 1.30.0-alpha-jan-5-2023
     dev: true
 
   /@polka/url/1.0.0-next.21:
@@ -1941,7 +1943,7 @@ packages:
       svelte: 3.55.0
       tiny-glob: 0.2.9
       undici: 5.14.0
-      vite: 4.0.4
+      vite: 4.0.4_@types+node@18.11.18
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1959,7 +1961,7 @@ packages:
       magic-string: 0.27.0
       svelte: 3.55.0
       svelte-hmr: 0.15.1_svelte@3.55.0
-      vite: 4.0.4
+      vite: 4.0.4_@types+node@18.11.18
       vitefu: 0.2.4_vite@4.0.4
     transitivePeerDependencies:
       - supports-color
@@ -4836,8 +4838,8 @@ packages:
       pathe: 1.0.0
     dev: true
 
-  /playwright-core/1.25.0:
-    resolution: {integrity: sha512-kZ3Jwaf3wlu0GgU0nB8UMQ+mXFTqBIFz9h1svTlNduNKjnbPXFxw7mJanLVjqxHJRn62uBfmgBj93YHidk2N5Q==}
+  /playwright-core/1.30.0-alpha-jan-5-2023:
+    resolution: {integrity: sha512-EGlCi1ErhX0S7Sr7GjIrqUdIDESI8qXoPqwA6xCDfoHvZmLL0mHJPpvqAKXJ8HoOLDLNiJ3q0PO1t1/C0fgkMQ==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
@@ -6040,45 +6042,12 @@ packages:
       fast-glob: 3.2.12
       pretty-bytes: 6.0.0
       rollup: 3.9.1
-      vite: 4.0.4
+      vite: 4.0.4_@types+node@18.11.18
       workbox-build: 6.5.4
       workbox-window: 6.5.4
     transitivePeerDependencies:
       - '@types/babel__core'
       - supports-color
-    dev: true
-
-  /vite/4.0.4:
-    resolution: {integrity: sha512-xevPU7M8FU0i/80DMR+YhgrzR5KS2ORy1B4xcX/cXLsvnUWvfHuqMmVU6N0YiJ4JWGRJJsLCgjEzKjG9/GKoSw==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      esbuild: 0.16.13
-      postcss: 8.4.20
-      resolve: 1.22.1
-      rollup: 3.9.1
-    optionalDependencies:
-      fsevents: 2.3.2
     dev: true
 
   /vite/4.0.4_@types+node@18.11.18:
@@ -6123,7 +6092,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.0.4
+      vite: 4.0.4_@types+node@18.11.18
     dev: true
 
   /vitest-dom/0.0.4_vitest@0.26.3:

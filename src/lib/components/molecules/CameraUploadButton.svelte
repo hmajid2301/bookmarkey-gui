@@ -16,6 +16,7 @@
 			</span>
 			<Input
 				disabled={loading}
+				required={false}
 				name="avatar"
 				accept="image/*"
 				on:change

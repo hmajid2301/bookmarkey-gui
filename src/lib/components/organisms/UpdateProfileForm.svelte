@@ -34,7 +34,7 @@
 		return async ({ result }: { result: ActionResult }) => {
 			switch (result.type) {
 				case "success":
-					toast.success("Updated profile data");
+					toast.success("Updated profile");
 					await invalidateAll();
 					break;
 				case "error":

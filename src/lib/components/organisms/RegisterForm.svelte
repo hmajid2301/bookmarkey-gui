@@ -50,7 +50,6 @@
 		const target = event.target as HTMLInputElement;
 		const value = target.value;
 		passwordScore = passwordStrength(value).id;
-		console.log("HELLO", passwordScore);
 		passwordValue = value;
 	}
 </script>

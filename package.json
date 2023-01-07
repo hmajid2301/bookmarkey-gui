@@ -19,7 +19,7 @@
 	},
 	"devDependencies": {
 		"@go-task/cli": "^3.19.1",
-		"@playwright/test": "1.25.0",
+		"@playwright/test": "1.30.0-alpha-jan-5-2023",
 		"@popperjs/core": "^2.11.6",
 		"@sentry/browser": "^7.29.0",
 		"@sentry/svelte": "^7.29.0",
@@ -34,6 +34,7 @@
 		"@testing-library/jest-dom": "^5.16.5",
 		"@testing-library/svelte": "^3.2.2",
 		"@testing-library/user-event": "^14.4.3",
+		"@types/node": "^18.11.18",
 		"@typescript-eslint/eslint-plugin": "^5.48.0",
 		"@typescript-eslint/parser": "^5.48.0",
 		"@vite-pwa/sveltekit": "^0.1.2",

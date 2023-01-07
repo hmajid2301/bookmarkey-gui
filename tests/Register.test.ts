@@ -1,10 +1,10 @@
 import { expect, test } from "@playwright/test";
 import pocketbase from "pocketbase";
 
+const email = "test+signup@bookmarkey.app";
 test("Successfully register an account", async ({ page, baseURL }) => {
 	await page.goto("/register");
 
-	const email = "test+signup@bookmarkey.app";
 	await page.locator('[name="email"]').type(email);
 
 	const password = "sec9rePa@sword@11789";
@@ -12,8 +12,6 @@ test("Successfully register an account", async ({ page, baseURL }) => {
 
 	await page.locator('button[type="submit"]').click();
 	await page.waitForURL(`${baseURL}/my/dashboard`);
-
-	await deleteUserByEmail(email);
 });
 
 test("Fail to register an account with an email that exists", async ({ page, baseURL }) => {
@@ -55,11 +53,16 @@ test("Fail to register an account with a compromised password", async ({ page, b
 	await page.waitForURL(`${baseURL}/register`);
 });
 
-async function deleteUserByEmail(email: string) {
-	const pb = new pocketbase(process.env.VITE_POCKET_BASE_URL);
-	const adminEmail = "admin@bookmarkey.app";
-	const adminPassword = "password11";
-	await pb.admins.authWithPassword(adminEmail, adminPassword);
-	const record = await pb.collection("users").getFirstListItem(`email = "${email}"`);
-	await pb.collection("users").delete(record.id);
-}
+const ADMIN_EMAIL = "admin@bookmarkey.app";
+const ADMIN_PASSWORD = "password11";
+
+test.afterEach(async () => {
+	try {
+		const pb = new pocketbase(process.env.VITE_POCKET_BASE_URL);
+		await pb.admins.authWithPassword(ADMIN_EMAIL, ADMIN_PASSWORD);
+		const record = await pb.collection("users").getFirstListItem(`email = "${email}"`);
+		await pb.collection("users").delete(record.id);
+	} catch (err) {
+		console.log("failed to delete email");
+	}
+});
