@@ -10,7 +10,32 @@ const config = {
 	},
 	plugins: [
 		sveltekit(),
-		SvelteKitPWA({}),
+		SvelteKitPWA({
+			manifest: {
+				short_name: "bookmarkey",
+				name: "bookmarkey",
+				description: "Bookmarking & RSS reader 2 in 1 app.",
+				start_url: "/my/dashboard?source=pwa",
+				scope: "/",
+				display: "standalone",
+				theme_color: "#006aa3",
+				background_color: "#fff",
+				icons: [
+					{
+						src: "/logo.png",
+						sizes: "196x196",
+						type: "image/png",
+						purpose: "any"
+					},
+					{
+						src: "/maskable_icon.png",
+						sizes: "196x196",
+						type: "image/png",
+						purpose: "maskable"
+					}
+				]
+			}
+		}),
 		sentryVitePlugin({
 			org: "majiy",
 			project: "bookmarkey",
