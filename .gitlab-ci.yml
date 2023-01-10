@@ -82,8 +82,7 @@ check:
 notify:
   stage: notify
   only:
-    variables:
-      - $variables[TRIGGERED]=true
+    - triggers
   before_script: []
   script:
     - wget https://raw.githubusercontent.com/hmajid2301/gitlab-ci-discord-webhook/master/send.sh
