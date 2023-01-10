@@ -78,13 +78,3 @@ check:
   extends: .task
   script:
     - task check
-
-notify:
-  stage: notify
-  only:
-    - triggers
-  before_script: []
-  script:
-    - wget https://raw.githubusercontent.com/hmajid2301/gitlab-ci-discord-webhook/master/send.sh
-    - chmod +x send.sh
-    - ./send.sh $STATE $MESSAGE
