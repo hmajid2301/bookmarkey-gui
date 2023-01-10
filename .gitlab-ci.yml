@@ -9,6 +9,7 @@ image: registry.gitlab.com/hmajid2301/pnpm-docker-ci:6faf9994486627a07ff45fa574f
 stages:
   - test
   - deploy
+  - notify
 
 cache:
   key:
@@ -77,3 +78,14 @@ check:
   extends: .task
   script:
     - task check
+
+notify:
+  stage: notify
+  only:
+    variables:
+      - $variables[TRIGGERED]=true
+  before_script: []
+  script:
+    - wget https://raw.githubusercontent.com/hmajid2301/gitlab-ci-discord-webhook/master/send.sh
+    - chmod +x send.sh
+    - ./send.sh $STATE $MESSAGE
