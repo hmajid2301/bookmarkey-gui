@@ -14,6 +14,7 @@
 	export let note: string | null = null;
 	export let disabled = false;
 	export let errors: string[] | undefined;
+	export let ref: HTMLInputElement | undefined = undefined;
 
 	// TODO: remove this logic
 	if (errors?.length === 0) {
@@ -26,7 +27,10 @@
 
 	<div class="relative">
 		<Input
+			bind:ref
 			on:input
+			on:change
+			on:blur
 			{autocomplete}
 			{name}
 			{required}

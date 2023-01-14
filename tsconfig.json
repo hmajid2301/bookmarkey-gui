@@ -11,6 +11,5 @@
 		"noFallthroughCasesInSwitch": true,
 		"noUncheckedIndexedAccess": true,
 		"types": ["vite-plugin-pwa/client"]
-	},
-	"include": ["./setupTest.ts"]
+	}
 }

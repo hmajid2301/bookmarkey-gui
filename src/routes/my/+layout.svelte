@@ -1,14 +1,15 @@
 <script lang="ts">
 	import { page } from "$app/stores";
-	import { EnvelopeSolid, GearSolid } from "svelte-awesome-icons";
 	import { swipe } from "svelte-gestures";
 
 	import type { LayoutData } from "./$types";
+	import type { ActionData } from "./collections/$types";
 	import Header from "~/lib/components/molecules/Header.svelte";
 	import HelloBar from "~/lib/components/organisms/HelloBar.svelte";
 	import SideBar from "~/lib/components/organisms/SideBar.svelte";
 
 	export let data: LayoutData;
+	export let form: ActionData;
 	let showMenu = false;
 
 	function handler(
@@ -34,20 +35,11 @@
 		class="{showMenu
 			? ''
 			: '-ml-64'} flex w-64 flex-shrink-0 flex-col transition-all duration-300 lg:ml-0">
-		<nav class="flex flex-1 flex-col bg-white ">
+		<nav class="flex flex-1 flex-col bg-white">
 			<SideBar
-				menuItems={[
-					{
-						link: "/my/dashboard",
-						name: "Dashboard",
-						icon: EnvelopeSolid
-					},
-					{
-						link: "/my/settings",
-						name: "Settings",
-						icon: GearSolid
-					}
-				]}
+				collections={data.collections}
+				newCollectionErrors={form?.errors?.collection}
+				newCollectionValue={form?.data?.collection}
 				currentPath={$page.url.pathname}
 				mainPageLink="/my/dashboard" />
 		</nav>

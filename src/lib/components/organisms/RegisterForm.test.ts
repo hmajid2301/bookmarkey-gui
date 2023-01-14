@@ -13,7 +13,10 @@ describe("RegisterForm", () => {
 					email: "hello@haseebmajid.dev",
 					password: "MyPassword11"
 				},
-				errors: []
+				errors: {
+					email: [],
+					password: []
+				}
 			}
 		});
 

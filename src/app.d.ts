@@ -1,4 +1,3 @@
-/// <reference types="@sveltejs/kit" />
 /// <reference types="vite-plugin-pwa/client" />
 /// <reference types="vite-plugin-pwa/info" />
 
@@ -10,8 +9,6 @@ declare namespace App {
 		user?: import("pocketbase").Record | import("pocketbase").Admin | null | undefined;
 		pb?: PocketBase;
 	}
-
-	// interface Platform {}
 }
 
 interface ImportMetaEnv {

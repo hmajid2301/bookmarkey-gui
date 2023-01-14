@@ -8,7 +8,7 @@
 </script>
 
 <div class="space-y-4 p-6 sm:p-8 md:space-y-6">
-	<RegisterForm data={form?.data} errors={form?.errors} />
+	<RegisterForm register={form?.data} errors={form?.errors} />
 
 	<div class="my-5 flex items-center justify-center space-x-2">
 		<span class="h-px w-16 bg-gray-100" />
