@@ -10,7 +10,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	try {
 		if (event.locals.pb.authStore.isValid) {
 			await event.locals.pb.collection("users").authRefresh();
-			event.locals.user = event.locals.pb?.authStore.model;
+			event.locals.user = structuredClone(event.locals.pb?.authStore.model);
 		}
 	} catch (err) {
 		event.locals.user = undefined;
@@ -19,6 +19,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	if (event.url.pathname.startsWith("/my") && !event.locals.pb.authStore.isValid) {
 		throw redirect(303, "/");
+	} else if (event.url.pathname.startsWith("/login") && event.locals.pb.authStore.isValid) {
+		throw redirect(303, "/my/dashboard");
 	}
 
 	const response = await resolve(event);
