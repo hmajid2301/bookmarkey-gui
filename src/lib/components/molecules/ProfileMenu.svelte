@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	import type { SvelteComponent } from "svelte";
 
-	export interface ContextMenuItemsA {
+	export interface ProfileMenuItem {
 		icon: typeof SvelteComponent;
 		link: string;
 		name: string;
@@ -14,7 +14,7 @@
 	export let nickname: string;
 	export let email: string;
 	export let showMenu = false;
-	export let menuItems: ContextMenuItemsA[];
+	export let menuItems: ProfileMenuItem[];
 </script>
 
 <ContextMenu {menuItems} {showMenu}>

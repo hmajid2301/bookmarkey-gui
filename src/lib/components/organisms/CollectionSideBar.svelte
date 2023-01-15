@@ -2,9 +2,9 @@
 	import { tick } from "svelte";
 	import { FolderClosedSolid, PlusSolid } from "svelte-awesome-icons";
 
-	import AddCollectionForm from "./AddCollectionForm.svelte";
-	import ContextMenu from "../molecules/ContextMenu.svelte";
 	import type { Collection } from "~/routes/my/+layout.server";
+	import ContextMenu from "../molecules/ContextMenu.svelte";
+	import AddCollectionForm from "./AddCollectionForm.svelte";
 
 	let showMenu = false;
 	let showInput = false;
@@ -43,7 +43,7 @@
 	</div>
 
 	{#if showInput}
-		<AddCollectionForm bind:ref {value} {errors} />
+		<AddCollectionForm bind:ref bind:showInput {value} {errors} />
 	{/if}
 	<div class="my-2 flex flex-col items-start">
 		{#each collections as collection}

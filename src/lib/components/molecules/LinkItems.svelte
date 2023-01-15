@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	export interface LinkItemsA {
+	export interface LinkItem {
 		icon: typeof SvelteComponent;
 		link: string;
 		name: string;
@@ -12,7 +12,7 @@
 	import SideBarItem from "../atoms/LinkItem.svelte";
 
 	export let currentPath: string;
-	export let links: LinkItemsA[];
+	export let links: LinkItem[];
 </script>
 
 <nav class="-mx-2 md:mt-8">

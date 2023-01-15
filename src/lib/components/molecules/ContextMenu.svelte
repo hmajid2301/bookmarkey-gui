@@ -3,7 +3,7 @@
 
 	import ContextMenuItems from "../atoms/ContextMenuItems.svelte";
 
-	export interface ContextMenuItemsA {
+	export interface ContextMenuItem {
 		icon?: typeof SvelteComponent;
 		link?: string;
 		name: string;
@@ -14,7 +14,7 @@
 
 <script lang="ts">
 	export let showMenu = false;
-	export let menuItems: ContextMenuItemsA[];
+	export let menuItems: ContextMenuItem[];
 </script>
 
 <div
