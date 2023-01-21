@@ -47,7 +47,7 @@ tasks:
     cmds:
       - pnpm run sync
 
-  run_prod:
+  prod:
     cmds:
       - docker compose pull
       - docker compose up --build -d

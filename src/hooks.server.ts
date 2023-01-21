@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/node";
 import { redirect, type Handle } from "@sveltejs/kit";
 import PocketBase from "pocketbase";
 
@@ -13,6 +14,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 			event.locals.user = structuredClone(event.locals.pb?.authStore.model);
 		}
 	} catch (err) {
+		console.log("failed to refresh auth", err);
+		Sentry.captureException(err);
 		event.locals.user = undefined;
 		event.locals.pb.authStore.clear();
 	}
