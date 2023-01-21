@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { tick } from "svelte";
-	import { FolderClosedSolid, PlusSolid } from "svelte-awesome-icons";
+	import { PlusSolid } from "svelte-awesome-icons";
 
-	import type { Collection } from "~/routes/my/+layout.server";
-	import ContextMenu from "../molecules/ContextMenu.svelte";
 	import AddCollectionForm from "./AddCollectionForm.svelte";
+	import Collections from "../molecules/Collections.svelte";
+	import ContextMenu from "../molecules/ContextMenu.svelte";
+	import type { Collection } from "~/routes/my/+layout.server";
 
 	let showMenu = false;
 	let showInput = false;
@@ -45,19 +46,5 @@
 	{#if showInput}
 		<AddCollectionForm bind:ref bind:showInput {value} {errors} />
 	{/if}
-	<div class="my-2 flex flex-col items-start">
-		{#each collections as collection}
-			<a
-				class=" flex w-full flex-row space-x-4 rounded-lg py-2 px-2"
-				class:active={currentPath === `/my/collections/${collection.id}`}
-				href={`/my/collections/${collection.id}`}>
-				<div>
-					<FolderClosedSolid />
-				</div>
-				<div>
-					{collection.name}
-				</div>
-			</a>
-		{/each}
-	</div>
+	<Collections {collections} {currentPath} />
 </div>

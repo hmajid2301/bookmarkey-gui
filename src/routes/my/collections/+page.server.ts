@@ -24,16 +24,20 @@ export const actions: Actions = {
 			});
 		}
 		try {
-			await locals.pb?.collection("collections").create({
-				name: result.data.collection,
-				user: locals.user?.id,
-				parent: null
+			await locals.pb?.send(`/collections`, {
+				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({ collection_name: result.data.collection, user: locals.user?.id })
 			});
 			return {
 				addCollection: true
 			};
 		} catch (err) {
 			Sentry.captureException(err);
+			console.error("Failed to create collection", err);
 			throw error(500, "Failed to create collection.");
 		}
 	}

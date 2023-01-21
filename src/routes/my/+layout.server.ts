@@ -16,7 +16,7 @@ export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
 
 	const collections = await locals.pb
 		?.collection("collections")
-		.getList<Collection>(1, 30, { user: locals.user?.id, sort: "-created" });
+		.getList<Collection>(1, 30, { sort: "-created" });
 
 	return {
 		collections: collections.items.map((collection) => {

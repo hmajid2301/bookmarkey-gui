@@ -1,7 +1,7 @@
 import { type FullConfig } from "@playwright/test";
 
 async function globalSetup(config: FullConfig) {
-	console.log("start global setup!");
+	console.log("start global setup!", config);
 	// const browser = await firefox.launch({ headless: false });
 	// const page = await browser.newPage();
 

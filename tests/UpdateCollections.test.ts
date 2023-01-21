@@ -23,6 +23,18 @@ test.describe(() => {
 		expect(toastMessage).toBe("Created collection");
 	});
 
+	test("Successfully delete collection in app", async ({ page, baseURL }) => {
+		await login(page, baseURL || "");
+		await page.getByRole("button", { name: "plus" }).click();
+		await page.getByRole("button", { name: "Create Collection" }).click();
+		await page.getByPlaceholder("Collection Name").fill("abcd");
+		await page.getByPlaceholder("Collection Name").press("Enter");
+		await page.getByRole("link", { name: "folder closed abcd" }).click({
+			button: "right"
+		});
+		await page.getByRole("button", { name: "Delete Collection" }).click();
+	});
+
 	test.afterEach(async () => {
 		try {
 			const pb = new pocketbase(process.env.VITE_POCKET_BASE_URL);
