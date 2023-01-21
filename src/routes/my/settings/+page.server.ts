@@ -1,4 +1,4 @@
-import * as Sentry from "@sentry/browser";
+import * as Sentry from "@sentry/node";
 import { error, fail, type Actions } from "@sveltejs/kit";
 import { pwnedPassword } from "hibp";
 import { serialize } from "object-to-formdata";
