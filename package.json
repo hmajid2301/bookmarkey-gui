@@ -15,13 +15,14 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"sync": "svelte-kit sync",
-		"prepare": "husky install && pnpm run sync"
+		"prepare": "node -e \"if (process.env.NODE_ENV !== 'production'){process.exit(1)} \" || husky install"
 	},
 	"devDependencies": {
 		"@go-task/cli": "^3.19.1",
 		"@playwright/test": "1.30.0-alpha-jan-5-2023",
 		"@popperjs/core": "^2.11.6",
 		"@sentry/browser": "^7.29.0",
+		"@sentry/node": "^7.31.1",
 		"@sentry/svelte": "^7.29.0",
 		"@sentry/tracing": "^7.29.0",
 		"@sentry/utils": "^7.29.0",
