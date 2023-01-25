@@ -13,13 +13,6 @@ stages:
   - deploy
   - notify
 
-cache:
-  key:
-    files:
-      - pnpm-lock.yaml
-  paths:
-    - .pnpm-store
-
 .task:
   stage: test
   only:
