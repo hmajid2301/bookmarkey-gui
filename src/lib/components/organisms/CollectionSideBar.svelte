@@ -1,20 +1,36 @@
+<script lang="ts" context="module">
+	export interface CollectionGroupForms {
+		errors?: {
+			collection: string[];
+			group: string[];
+		};
+		value: {
+			collection: string;
+			group: string;
+		};
+	}
+</script>
+
 <script lang="ts">
 	import { tick } from "svelte";
 	import { PlusSolid } from "svelte-awesome-icons";
 
-	import AddCollectionForm from "./AddCollectionForm.svelte";
+	// TODO: centralise common types
 	import Collections from "../molecules/Collections.svelte";
 	import ContextMenu from "../molecules/ContextMenu.svelte";
-	import type { Collection } from "~/routes/my/+layout.server";
+	import AddCollectionForm from "./AddCollectionForm.svelte";
+	import AddGroupForm from "./AddGroupForm.svelte";
+	import type { CollectionGroups } from "~/routes/my/+layout.server";
 
 	let showMenu = false;
-	let showInput = false;
-	let ref: HTMLInputElement;
+	let showAddCollectionForm = false;
+	let showAddGroupForm = false;
 
-	export let value: string;
-	export let errors: string[] | undefined;
+	let collectionRef: HTMLInputElement;
+	let groupRef: HTMLInputElement;
+
 	export let currentPath: string;
-	export let collections: Collection[];
+	export let collections: CollectionGroups;
 </script>
 
 <div class="flex flex-col pr-5 text-blue-800 dark:text-blue-200">
@@ -34,17 +50,27 @@
 					divider: true,
 					onClick: async () => {
 						showMenu = false;
-						showInput = true;
+						showAddCollectionForm = true;
 						await tick();
-						ref?.focus();
+						collectionRef?.focus();
+					}
+				},
+				{
+					name: "Create Group",
+					onClick: async () => {
+						showMenu = false;
+						showAddGroupForm = true;
+						await tick();
+						groupRef?.focus();
 					}
 				}
 			]}
 			{showMenu} />
 	</div>
 
-	{#if showInput}
-		<AddCollectionForm bind:ref bind:showInput {value} {errors} />
+	{#if showAddCollectionForm}
+		<AddCollectionForm bind:ref={collectionRef} bind:showInput={showAddCollectionForm} />
 	{/if}
+	<AddGroupForm bind:ref={groupRef} bind:show={showAddGroupForm} />
 	<Collections {collections} {currentPath} />
 </div>

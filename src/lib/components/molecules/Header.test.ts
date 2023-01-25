@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/svelte";
 import userEvent from "@testing-library/user-event";
-import { writable } from "svelte/store";
 import html from "svelte-htm";
+import { writable } from "svelte/store";
 import { describe, expect, test } from "vitest";
 
 import Header from "./Header.svelte";

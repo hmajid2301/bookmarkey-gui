@@ -7,16 +7,14 @@
 		GearSolid
 	} from "svelte-awesome-icons";
 
-	import CollectionSideBar from "./CollectionSideBar.svelte";
 	import LinkItem from "../atoms/LinkItem.svelte";
 	import Logo from "../atoms/Logo.svelte";
-	import type { Collection } from "~/routes/my/+layout.server";
+	import CollectionSideBar from "./CollectionSideBar.svelte";
+	import type { CollectionGroups } from "~/routes/my/+layout.server";
 
 	export let mainPageLink: string;
 	export let currentPath: string;
-	export let collections: Collection[];
-	export let newCollectionValue: string;
-	export let newCollectionErrors: string[] | undefined;
+	export let collections: CollectionGroups;
 	export let collectionIcon = FolderOpenSolid;
 	export let showCollections = true;
 </script>
@@ -47,11 +45,7 @@
 
 				{#if showCollections}
 					<div class="ml-7">
-						<CollectionSideBar
-							{currentPath}
-							{collections}
-							value={newCollectionValue}
-							errors={newCollectionErrors} />
+						<CollectionSideBar {currentPath} {collections} />
 					</div>
 				{/if}
 			</li>

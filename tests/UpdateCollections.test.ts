@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 import pocketbase from "pocketbase";
 
 test.describe(() => {
-	const email = "test+update_password@bookmarkey.app";
+	const email = "test@bookmarkey.app";
 	const password = "password@11";
 
 	const adminEmail = "admin@bookmarkey.app";

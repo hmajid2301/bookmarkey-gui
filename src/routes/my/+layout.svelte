@@ -3,13 +3,11 @@
 	import { swipe } from "svelte-gestures";
 
 	import type { LayoutData } from "./$types";
-	import type { ActionData } from "./collections/$types";
 	import Header from "~/lib/components/molecules/Header.svelte";
 	import HelloBar from "~/lib/components/organisms/HelloBar.svelte";
 	import SideBar from "~/lib/components/organisms/SideBar.svelte";
 
 	export let data: LayoutData;
-	export let form: ActionData;
 	let showMenu = false;
 
 	function handler(
@@ -38,8 +36,6 @@
 		<nav class="flex flex-1 flex-col bg-white">
 			<SideBar
 				collections={data.collections}
-				newCollectionErrors={form?.errors?.collection}
-				newCollectionValue={form?.data?.collection}
 				currentPath={$page.url.pathname}
 				mainPageLink="/my/dashboard" />
 		</nav>

@@ -13,7 +13,7 @@
 	export let value: string | undefined = "";
 	export let note: string | null = null;
 	export let disabled = false;
-	export let errors: string[] | undefined;
+	export let errors: string[] | undefined = [];
 	export let ref: HTMLInputElement | undefined = undefined;
 
 	// TODO: remove this logic

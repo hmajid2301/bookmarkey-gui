@@ -7,10 +7,7 @@
 	import FormField from "../molecules/FormField.svelte";
 
 	export let showInput = false;
-
 	export let ref: HTMLInputElement;
-	export let value: string;
-	export let errors: string[] | undefined;
 
 	let loading = false;
 	const submitAddCollection = () => {
@@ -49,13 +46,9 @@
 		type="text"
 		labelName=""
 		placeholder="Collection Name"
-		name="collection"
-		{value}
-		{errors}>
+		name="collection">
 		<span
-			class="pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center {errors
-				? 'text-red-500'
-				: 'text-slate-500 dark:text-slate-400'}">
+			class="pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center text-slate-500 dark:text-slate-400">
 			<FolderSolid class="inline-block h-4 w-4" />
 		</span>
 	</FormField>

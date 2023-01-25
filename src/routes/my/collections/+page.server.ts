@@ -24,13 +24,11 @@ export const actions: Actions = {
 			});
 		}
 		try {
-			await locals.pb?.send(`/collections`, {
-				method: "POST",
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify({ collection_name: result.data.collection, user: locals.user?.id })
+			await locals.pb?.collection("collections").create({
+				name: result.data.collection,
+				user: locals.user?.id,
+				parent: null,
+				group: null
 			});
 			return {
 				addCollection: true

@@ -7,6 +7,7 @@ import { config } from "./config";
 
 SentryNode.init({
 	dsn: config.SentryDNS,
+	environment: config.PROD ? "production" : "development",
 	tracesSampleRate: 1.0,
 	integrations: [new SentryNode.Integrations.Http()]
 });
@@ -15,6 +16,7 @@ SentryNode.setTag("svelteKit", "server");
 
 export const handleError: HandleServerError = ({ error, event }) => {
 	SentryNode.captureException(error, { contexts: { sveltekit: { event } } });
+	console.error(error);
 
 	return {
 		message: "Internal Error"

@@ -7,14 +7,14 @@ describe("SideBar", () => {
 	test("Successfully render SideBar", async () => {
 		const { getByText } = render(SideBar, {
 			props: {
-				collections: [
-					{
-						id: "a id",
-						name: "my collection"
-					}
-				],
-				newCollectionErrors: [],
-				newCollectionValue: "",
+				collections: {
+					collections: [
+						{
+							id: "a id",
+							name: "my collection"
+						}
+					]
+				},
 				currentPath: "/my/settings",
 				mainPageLink: "/my/dashboard"
 			}

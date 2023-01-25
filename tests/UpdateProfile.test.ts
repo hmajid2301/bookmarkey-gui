@@ -27,7 +27,7 @@ test.describe(() => {
 		await page.goto("/my/settings");
 
 		await page.locator('[name="nickname"]').type(nickname);
-		await page.locator('button[type="submit"]').first().click();
+		await page.getByRole("button", { name: "Update Profile" }).click();
 
 		const toastMessage = await page.locator(".message").innerText();
 		expect(toastMessage).toBe("Updated profile");
@@ -38,7 +38,7 @@ test.describe(() => {
 		await page.goto("/my/settings");
 
 		await page.locator('[name="avatar"]').setInputFiles("static/logo.png");
-		await page.locator('button[type="submit"]').first().click();
+		await page.getByRole("button", { name: "Update Profile" }).click();
 
 		const toastMessage = await page.locator(".message").innerText();
 		expect(toastMessage).toBe("Updated profile");
