@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 import pocketbase from "pocketbase";
 
 test.describe(() => {
-	const email = "test+update_password@bookmarkey.app";
+	const email = "test@bookmarkey.app";
 	const password = "password@11";
 
 	const adminEmail = "admin@bookmarkey.app";
@@ -21,10 +21,19 @@ test.describe(() => {
 		expect(toastMessage).toBe("Created group");
 	});
 
+	// TODO: work out how to fix
+	// test("Successfully swap two group in app", async ({ page, baseURL }) => {
+	// 	await login(page, baseURL || "");
+	// 	await page.dragAndDrop("id=64453vih35psbtz", "id=401vo8ew48e7m6y");
+
+	// 	const toastMessage = await page.locator(".message").innerText();
+	// 	expect(toastMessage).toBe("Moved group");
+	// });
+
 	// TODO: generalise between this and update collection
 	test.afterEach(async () => {
 		try {
-			const pb = new pocketbase(process.env.VITE_POCKET_BASE_URL);
+			const pb = new pocketbase(process.env.VITE_TEST_POCKET_BASE_URL);
 			await pb.admins.authWithPassword(adminEmail, adminPassword);
 
 			const record = await pb.collection("users").authWithPassword(email, password);
@@ -36,7 +45,7 @@ test.describe(() => {
 				await pb.collection("groups").delete(elem.id);
 			});
 		} catch (err) {
-			console.log("failed to delete group");
+			console.log("failed to delete group", err);
 		}
 	});
 

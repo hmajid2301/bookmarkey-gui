@@ -37,7 +37,7 @@ test.describe(() => {
 
 	test.afterEach(async () => {
 		try {
-			const pb = new pocketbase(process.env.VITE_POCKET_BASE_URL);
+			const pb = new pocketbase(process.env.VITE_TEST_POCKET_BASE_URL);
 			await pb.admins.authWithPassword(adminEmail, adminPassword);
 
 			const record = await pb.collection("users").authWithPassword(email, password);
@@ -49,7 +49,7 @@ test.describe(() => {
 				await pb.collection("collections").delete(elem.id);
 			});
 		} catch (err) {
-			console.log("failed to delete collections");
+			console.log("failed to delete collections", err);
 		}
 	});
 

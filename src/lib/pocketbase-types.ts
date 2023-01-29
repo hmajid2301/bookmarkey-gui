@@ -44,6 +44,7 @@ export type BookmarksRecord = {
 	collection: RecordIdString;
 	url: string;
 	favourite: boolean;
+	custom_order?: number;
 };
 
 export type CollectionsRecord = {
@@ -51,11 +52,13 @@ export type CollectionsRecord = {
 	name: string;
 	user: RecordIdString;
 	group?: RecordIdString;
+	custom_order?: number;
 };
 
 export type GroupsRecord = {
 	user?: RecordIdString;
 	name?: string;
+	custom_order?: number;
 };
 
 export type TagsRecord = {

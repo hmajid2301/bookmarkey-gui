@@ -8,7 +8,7 @@ test.describe(() => {
 	test("Successfully load collections in side bar", async ({ page, baseURL }) => {
 		await login(page, baseURL || "");
 		await page.getByRole("link", { name: "folder closed test" }).click();
-		await page.waitForURL(`${baseURL}/my/collections/s4fy5ezzbeoyzoy`);
+		await page.waitForURL(`${baseURL}/my/collections/46lfmlwhymhv6xl`);
 	});
 
 	// TODO: generalise

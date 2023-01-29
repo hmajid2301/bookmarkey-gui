@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { EllipsisSolid } from "svelte-awesome-icons";
 
-	import CollectionItem from "./CollectionItem.svelte";
 	import type { Group } from "~/routes/my/+layout.server";
+	import CollectionItem from "./CollectionItem.svelte";
 
 	export let currentPath: string;
 	export let hideGroups: Set<string>;
@@ -22,7 +22,7 @@
 			hideGroups = hideGroups;
 		}
 	}}>
-	<button class="mb-1 text-lg">
+	<button id={group.id} class="mb-1 text-lg">
 		{group.name}
 	</button>
 	<EllipsisSolid />

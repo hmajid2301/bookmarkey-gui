@@ -4,9 +4,9 @@
 	import { LayerGroupSolid } from "svelte-awesome-icons";
 	import toast from "svelte-french-toast";
 
+	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
 	import Modal from "../atoms/Modal.svelte";
 	import FormField from "../molecules/FormField.svelte";
-	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
 
 	let loading = false;
 	export let ref: HTMLInputElement;

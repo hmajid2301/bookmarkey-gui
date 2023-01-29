@@ -6,5 +6,5 @@ services:
     environment:
       PB_ENCRYPTION_KEY: CKMeo1mZuTs18DWHItd8qbYZMC7rLCBq
     volumes:
-      - /pb_data
+      - ./pb_data:/pb_data
       - /pb_public

@@ -28,7 +28,8 @@ export const actions: Actions = {
 		try {
 			await locals.pb?.collection("groups").create<GroupsResponse>({
 				user: locals.user?.id,
-				name: result.data.group
+				name: result.data.group,
+				custom_order: Number.MAX_SAFE_INTEGER
 			});
 			return {
 				addCollection: true

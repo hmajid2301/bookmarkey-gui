@@ -58,11 +58,11 @@ const ADMIN_PASSWORD = "password11";
 
 test.afterEach(async () => {
 	try {
-		const pb = new pocketbase(process.env.VITE_POCKET_BASE_URL);
+		const pb = new pocketbase(process.env.VITE_TEST_POCKET_BASE_URL);
 		await pb.admins.authWithPassword(ADMIN_EMAIL, ADMIN_PASSWORD);
 		const record = await pb.collection("users").getFirstListItem(`email = "${email}"`);
 		await pb.collection("users").delete(record.id);
 	} catch (err) {
-		console.log("failed to delete email");
+		console.log("failed to delete email", err);
 	}
 });

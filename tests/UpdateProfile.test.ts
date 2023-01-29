@@ -26,6 +26,7 @@ test.describe(() => {
 		await login(page, baseURL || "");
 		await page.goto("/my/settings");
 
+		await page.locator('[name="nickname"]').fill("");
 		await page.locator('[name="nickname"]').type(nickname);
 		await page.getByRole("button", { name: "Update Profile" }).click();
 
@@ -46,7 +47,7 @@ test.describe(() => {
 
 	test.afterEach(async () => {
 		try {
-			const pb = new pocketbase(process.env.VITE_POCKET_BASE_URL);
+			const pb = new pocketbase(process.env.VITE_TEST_POCKET_BASE_URL);
 			const record = await pb.collection("users").authWithPassword(email, newPassword);
 
 			await pb?.collection("users").update(record.record.id as string, {
@@ -57,7 +58,7 @@ test.describe(() => {
 				avatar: ""
 			});
 		} catch (err) {
-			console.log("failed to update profile");
+			console.log("failed to update profile", err);
 		}
 	});
 

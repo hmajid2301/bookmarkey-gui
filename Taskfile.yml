@@ -34,6 +34,7 @@ tasks:
       - pnpm run test {{.CLI_ARGS}}
     env:
       VITE_POCKET_BASE_URL: "http://localhost:9090"
+      VITE_TEST_POCKET_BASE_URL: "http://localhost:9090"
 
   check:
     cmds:

@@ -26,9 +26,10 @@ export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
 		?.collection("collections")
 		.getList<CollectionsResponse>(1, 30, { sort: "-created", filter: "group = NULL" });
 
-	const groups = await locals.pb
-		?.collection("groups")
-		.getList<GroupsResponse>(1, 30, { sort: "-created", expand: "collections(group)" });
+	const groups = await locals.pb?.collection("groups").getList<GroupsResponse>(1, 30, {
+		sort: "custom_order,-created",
+		expand: "collections(group)"
+	});
 
 	const groupWithCollections: Group[] = [];
 	groups.items.forEach((group) => {

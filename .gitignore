@@ -54,3 +54,4 @@ test-results/
 coverage
 .pnpm-store
 .*mjs
+pb_data/
