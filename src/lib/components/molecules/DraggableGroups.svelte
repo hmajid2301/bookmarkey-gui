@@ -2,8 +2,8 @@
 	import toast from "svelte-french-toast";
 	import { flip } from "svelte/animate";
 
-	import type { Group as GroupC } from "~/routes/my/+layout.server";
 	import Group from "./Group.svelte";
+	import type { Group as GroupC } from "~/routes/my/+layout.server";
 
 	export let groups: GroupC[] = [];
 	export let currentPath: string;

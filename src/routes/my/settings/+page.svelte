@@ -38,6 +38,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>My Settings</title>
+</svelte:head>
+
 <section class="mb-6 flex items-center justify-between pt-6 font-semibold">
 	<div class="flex items-center justify-start">
 		<span class="mr-2 inline-flex h-6 w-6 items-center justify-center">

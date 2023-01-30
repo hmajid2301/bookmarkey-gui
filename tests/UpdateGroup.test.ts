@@ -21,6 +21,19 @@ test.describe(() => {
 		expect(toastMessage).toBe("Created group");
 	});
 
+	test("Successfully delete group in app", async ({ page, baseURL }) => {
+		await login(page, baseURL || "");
+		await page.getByRole("button", { name: "plus" }).click();
+		await page.getByRole("button", { name: "Create Group" }).click();
+		await page.getByPlaceholder("Group Name").fill("Delete Group");
+
+		await page.getByRole("button", { name: "Delete Group ellipsis" }).click();
+		await page.getByRole("button", { name: "Delete Group" }).click();
+
+		const toastMessage = await page.locator(".message").innerText();
+		expect(toastMessage).toBe("Deleted group");
+	});
+
 	// TODO: work out how to fix
 	// test("Successfully swap two group in app", async ({ page, baseURL }) => {
 	// 	await login(page, baseURL || "");

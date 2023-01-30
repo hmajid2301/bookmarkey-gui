@@ -42,6 +42,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Login</title>
+</svelte:head>
+
 <div class="space-y-4 p-6 sm:p-8 md:space-y-6">
 	<h1
 		class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">

@@ -52,11 +52,6 @@ tests:e2e:
   services:
     - name: docker:dind
   variables:
-    DOCKER_DRIVER: overlay2
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_TLS_CERTDIR: "/certs"
-    DOCKER_TLS_VERIFY: 1
-    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
     VITE_TEST_POCKET_BASE_URL: "http://docker:9090"
   parallel: 2
   extends: .task
