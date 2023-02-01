@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { CollectionGroups } from "~/routes/my/+layout.server";
 	import DraggableCollections from "./DraggableCollections.svelte";
 	import DraggableGroups from "./DraggableGroups.svelte";
+	import type { CollectionGroups } from "~/lib/types/components";
 
 	export let currentPath: string;
 	export let collections: CollectionGroups;

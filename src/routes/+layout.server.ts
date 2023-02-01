@@ -2,7 +2,7 @@ import * as Sentry from "@sentry/node";
 
 import type { LayoutServerLoad } from "./$types";
 
-export interface User {
+interface User {
 	isLoggedIn: boolean;
 	email: string;
 	avatar?: string;

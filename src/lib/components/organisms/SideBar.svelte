@@ -10,7 +10,7 @@
 	import LinkItem from "../atoms/LinkItem.svelte";
 	import Logo from "../atoms/Logo.svelte";
 	import CollectionSideBar from "./CollectionSideBar.svelte";
-	import type { CollectionGroups } from "~/routes/my/+layout.server";
+	import type { CollectionGroups } from "~/lib/types/components";
 
 	export let mainPageLink: string;
 	export let currentPath: string;

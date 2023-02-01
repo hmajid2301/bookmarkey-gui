@@ -2,16 +2,11 @@ import * as Sentry from "@sentry/node";
 import { error } from "@sveltejs/kit";
 
 import type { RequestEvent, RequestHandler } from "./$types";
-
-export interface CollectionSwap {
-	new_order: number;
-	collection_id: string;
-	group_id?: string;
-}
+import type { CollectionMove } from "~/lib/types/api";
 
 export const POST: RequestHandler = async ({ locals, request }: RequestEvent) => {
 	try {
-		const collection: CollectionSwap = await request.json();
+		const collection: CollectionMove = await request.json();
 		await locals.pb?.collection("collections").update(collection.collection_id, {
 			custom_order: collection.new_order,
 			group: [collection?.group_id]

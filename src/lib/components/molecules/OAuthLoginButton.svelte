@@ -1,16 +1,9 @@
-<script lang="ts" context="module">
-	import type { AuthProviderInfo } from "pocketbase";
-
-	export interface AuthProviderWithRedirect extends AuthProviderInfo {
-		redirect: string;
-	}
-</script>
-
 <script lang="ts">
 	import { browser } from "$app/environment";
 	import { GithubBrand, GitlabBrand } from "svelte-awesome-icons";
 
 	import IconButton from "./IconButton.svelte";
+	import type { AuthProviderWithRedirect } from "~/lib/types/api";
 
 	export let authProviders: Record<string, AuthProviderWithRedirect>;
 

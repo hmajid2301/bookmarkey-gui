@@ -1,15 +1,13 @@
-<script lang="ts" context="module">
-	export interface MenuItem {
-		icon: typeof SvelteComponent;
-		link: string;
-		name: string;
-	}
-</script>
-
 <script lang="ts">
 	import type { SvelteComponent } from "svelte";
 
 	import SideBarItem from "../atoms/SideBarItem.svelte";
+
+	interface MenuItem {
+		icon: typeof SvelteComponent;
+		link: string;
+		name: string;
+	}
 
 	export let currentPath: string;
 	export let menuItems: MenuItem[];

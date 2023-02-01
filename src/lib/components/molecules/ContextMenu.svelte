@@ -1,20 +1,17 @@
-<script lang="ts" context="module">
+<script lang="ts">
+	export let showMenu = false;
+	export let menuItems: ContextMenuItem[];
 	import type { SvelteComponent } from "svelte";
 
 	import ContextMenuItems from "../atoms/ContextMenuItems.svelte";
 
-	export interface ContextMenuItem {
+	interface ContextMenuItem {
 		icon?: typeof SvelteComponent;
 		link?: string;
 		name: string;
 		onClick?: () => void;
 		divider?: boolean;
 	}
-</script>
-
-<script lang="ts">
-	export let showMenu = false;
-	export let menuItems: ContextMenuItem[];
 </script>
 
 <div

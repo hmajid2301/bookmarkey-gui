@@ -1,19 +1,11 @@
-<script lang="ts" context="module">
-	export interface Collection {
-		id: string;
-		name: string;
-	}
-</script>
-
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
-
 	import toast from "svelte-french-toast";
 
-	import type { Collection as Collection_ } from "~/lib/components/molecules/CollectionItem.svelte";
-	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
-	import type { CollectionSwap as CollectionMove } from "~/routes/my/collections/move/+server";
 	import CollectionItem from "./CollectionItem.svelte";
+	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
+	import type { CollectionMove } from "~/lib/types/api";
+	import type { Collection as Collection_ } from "~/lib/types/components";
 
 	export let currentPath: string;
 	export let collections: Collection_[];

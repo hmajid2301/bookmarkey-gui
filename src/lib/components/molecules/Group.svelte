@@ -3,10 +3,10 @@
 	import { EllipsisSolid } from "svelte-awesome-icons";
 	import toast from "svelte-french-toast";
 
-	import { clickOutside } from "~/lib/use/clickOutside";
-	import type { Group } from "~/routes/my/+layout.server";
 	import ContextMenu from "./ContextMenu.svelte";
 	import DraggableCollections from "./DraggableCollections.svelte";
+	import type { Group } from "~/lib/types/components";
+	import { clickOutside } from "~/lib/use/clickOutside";
 
 	export let currentPath: string;
 	export let hideGroups: Set<string>;
@@ -34,7 +34,6 @@
 			toast.error("Failed to delete collection");
 		}
 	}
-	// TODO: REFACTOR this file
 </script>
 
 <button

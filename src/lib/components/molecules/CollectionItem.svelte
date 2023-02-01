@@ -1,17 +1,11 @@
-<script lang="ts" context="module">
-	export interface Collection {
-		id: string;
-		name: string;
-	}
-</script>
-
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
 	import { FolderClosedSolid } from "svelte-awesome-icons";
 	import toast from "svelte-french-toast";
 
-	import { clickOutside } from "~/lib/use/clickOutside";
 	import ContextMenu from "./ContextMenu.svelte";
+	import type { Collection } from "~/lib/types/components";
+	import { clickOutside } from "~/lib/use/clickOutside";
 
 	export let currentPath: string;
 	export let collection: Collection;

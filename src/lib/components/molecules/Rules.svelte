@@ -1,13 +1,10 @@
-<script lang="ts" context="module">
-	export interface RuleData {
+<script lang="ts">
+	import Rule from "../atoms/Rule.svelte";
+	interface RuleData {
 		check: boolean;
 		successText: string;
 		errorText: string;
 	}
-</script>
-
-<script lang="ts">
-	import Rule from "../atoms/Rule.svelte";
 
 	export let rules: RuleData[];
 </script>

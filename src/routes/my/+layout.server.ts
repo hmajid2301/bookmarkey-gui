@@ -1,19 +1,8 @@
 import { redirect } from "@sveltejs/kit";
 
 import type { LayoutServerLoad } from "./$types";
-import type { Collection } from "~/lib/components/molecules/CollectionItem.svelte";
 import type { CollectionsResponse, GroupsResponse } from "~/lib/pocketbase-types";
-
-export interface Group {
-	id: string;
-	name: string;
-	collections: Collection[];
-}
-
-export interface CollectionGroups {
-	collections: Collection[];
-	groups?: Group[];
-}
+import type { Collection, CollectionGroups, Group } from "~/lib/types/components";
 
 export type OutputType = { collections: CollectionGroups };
 

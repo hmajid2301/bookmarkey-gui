@@ -3,10 +3,7 @@ import { error, fail, redirect, type Actions } from "@sveltejs/kit";
 import { pwnedPassword } from "hibp";
 import { z } from "zod";
 
-export interface Register {
-	email: string;
-	password: string;
-}
+import type { Register } from "~/lib/types/form";
 
 const isSafePassword = async (ph: string) => {
 	try {

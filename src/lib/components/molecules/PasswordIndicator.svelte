@@ -1,12 +1,10 @@
-<script lang="ts" context="module">
-	export interface PasswordIndicatorItem {
+<script lang="ts">
+	export let passwordScore: number;
+
+	interface PasswordIndicatorItem {
 		color: string;
 		note: string;
 	}
-</script>
-
-<script lang="ts">
-	export let passwordScore: number;
 
 	const passwordScoreMap: Record<number, PasswordIndicatorItem> = {
 		0: { color: "bg-gray-200", note: "Very Weak Password" },

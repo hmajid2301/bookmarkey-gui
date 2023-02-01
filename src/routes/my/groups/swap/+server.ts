@@ -2,11 +2,7 @@ import * as Sentry from "@sentry/node";
 import { error } from "@sveltejs/kit";
 
 import type { RequestEvent, RequestHandler } from "./$types";
-
-export interface GroupSwap {
-	new_order: number;
-	group_id: string;
-}
+import type { GroupSwap } from "~/lib/types/api";
 
 export const POST: RequestHandler = async ({ locals, request }: RequestEvent) => {
 	try {

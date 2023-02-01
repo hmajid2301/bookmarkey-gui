@@ -1,26 +1,12 @@
-<script lang="ts" context="module">
-	export interface CollectionGroupForms {
-		errors?: {
-			collection: string[];
-			group: string[];
-		};
-		value: {
-			collection: string;
-			group: string;
-		};
-	}
-</script>
-
 <script lang="ts">
 	import { tick } from "svelte";
 	import { PlusSolid } from "svelte-awesome-icons";
 
-	// TODO: centralise common types
 	import Collections from "../molecules/Collections.svelte";
 	import ContextMenu from "../molecules/ContextMenu.svelte";
 	import AddCollectionForm from "./AddCollectionForm.svelte";
 	import AddGroupForm from "./AddGroupForm.svelte";
-	import type { CollectionGroups } from "~/routes/my/+layout.server";
+	import type { CollectionGroups } from "~/lib/types/components";
 
 	let showMenu = false;
 	let showAddCollectionForm = false;

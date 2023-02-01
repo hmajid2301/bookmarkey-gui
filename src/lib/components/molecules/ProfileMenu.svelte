@@ -1,15 +1,13 @@
-<script lang="ts" context="module">
+<script lang="ts">
 	import type { SvelteComponent } from "svelte";
 
-	export interface ProfileMenuItem {
+	import ContextMenu from "./ContextMenu.svelte";
+
+	interface ProfileMenuItem {
 		icon: typeof SvelteComponent;
 		link: string;
 		name: string;
 	}
-</script>
-
-<script lang="ts">
-	import ContextMenu from "./ContextMenu.svelte";
 
 	export let nickname: string;
 	export let email: string;

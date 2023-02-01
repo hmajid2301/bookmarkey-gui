@@ -2,10 +2,10 @@
 	import toast from "svelte-french-toast";
 	import { flip } from "svelte/animate";
 
-	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
-	import type { Group as Group_ } from "~/routes/my/+layout.server";
-	import type { GroupSwap } from "~/routes/my/groups/swap/+server";
 	import Group from "./Group.svelte";
+	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
+	import type { GroupSwap } from "~/lib/types/api";
+	import type { Group as Group_ } from "~/lib/types/components";
 
 	export let groups: Group_[] = [];
 	export let currentPath: string;

@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	export interface LinkItem {
+	interface LinkItem {
 		icon: typeof SvelteComponent;
 		link: string;
 		name: string;
