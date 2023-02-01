@@ -1,5 +1,6 @@
 <script lang="ts">
 	import * as Sentry from "@sentry/svelte";
+	import { Replay } from "@sentry/svelte";
 	import { BrowserTracing } from "@sentry/tracing";
 	import { onMount } from "svelte";
 	import { Toaster } from "svelte-french-toast";
@@ -19,8 +20,11 @@
 	Sentry.init({
 		dsn: config.SentryDNS,
 		environment: config.PROD ? "production" : "development",
-		integrations: [new BrowserTracing()],
-		tracesSampleRate: 1.0 // tweak this number
+		integrations: [new BrowserTracing(), new Replay()],
+		// tweak these numbers
+		replaysSessionSampleRate: 1.0,
+		replaysOnErrorSampleRate: 1.0,
+		tracesSampleRate: 1.0
 	});
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : "";
