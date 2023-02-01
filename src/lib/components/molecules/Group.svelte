@@ -3,10 +3,10 @@
 	import { EllipsisSolid } from "svelte-awesome-icons";
 	import toast from "svelte-french-toast";
 
-	import CollectionItem from "./CollectionItem.svelte";
-	import ContextMenu from "./ContextMenu.svelte";
 	import { clickOutside } from "~/lib/use/clickOutside";
 	import type { Group } from "~/routes/my/+layout.server";
+	import ContextMenu from "./ContextMenu.svelte";
+	import DraggableCollections from "./DraggableCollections.svelte";
 
 	export let currentPath: string;
 	export let hideGroups: Set<string>;
@@ -70,10 +70,9 @@
 		</div>
 	</div>
 </button>
+
 {#if !hideGroups.has(group.id)}
-	<div>
-		{#each group.collections as collection}
-			<CollectionItem {collection} {currentPath} />
-		{/each}
+	<div class="my-2 flex flex-col items-start space-y-1">
+		<DraggableCollections groupId={group.id} collections={group.collections} {currentPath} />
 	</div>
 {/if}

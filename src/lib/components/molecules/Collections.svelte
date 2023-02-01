@@ -1,7 +1,7 @@
 <script lang="ts">
-	import CollectionItem from "./CollectionItem.svelte";
-	import DraggableGroups from "./DraggableGroups.svelte";
 	import type { CollectionGroups } from "~/routes/my/+layout.server";
+	import DraggableCollections from "./DraggableCollections.svelte";
+	import DraggableGroups from "./DraggableGroups.svelte";
 
 	export let currentPath: string;
 	export let collections: CollectionGroups;
@@ -11,7 +11,5 @@
 	{#if collections.groups}
 		<DraggableGroups {currentPath} groups={collections.groups} />
 	{/if}
-	{#each collections.collections as collection}
-		<CollectionItem {collection} {currentPath} />
-	{/each}
+	<DraggableCollections collections={collections.collections} {currentPath} />
 </div>

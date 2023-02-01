@@ -35,6 +35,15 @@ test.describe(() => {
 		await page.getByRole("button", { name: "Delete Collection" }).click();
 	});
 
+	// TODO: work out how to fix
+	// test("Successfully move collection in app", async ({ page, baseURL }) => {
+	// 	await login(page, baseURL || "");
+	// 	await page.dragAndDrop("id=64453vih35psbtz", "id=401vo8ew48e7m6y");
+
+	// 	const toastMessage = await page.locator(".message").innerText();
+	// 	expect(toastMessage).toBe("Moved collection");
+	// });
+
 	test.afterEach(async () => {
 		try {
 			const pb = new pocketbase(process.env.VITE_TEST_POCKET_BASE_URL);

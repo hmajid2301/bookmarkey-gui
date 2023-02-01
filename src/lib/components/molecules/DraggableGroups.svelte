@@ -2,10 +2,12 @@
 	import toast from "svelte-french-toast";
 	import { flip } from "svelte/animate";
 
+	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
+	import type { Group as Group_ } from "~/routes/my/+layout.server";
+	import type { GroupSwap } from "~/routes/my/groups/swap/+server";
 	import Group from "./Group.svelte";
-	import type { Group as GroupC } from "~/routes/my/+layout.server";
 
-	export let groups: GroupC[] = [];
+	export let groups: Group_[] = [];
 	export let currentPath: string;
 	export let hideGroups = new Set<string>();
 
@@ -19,18 +21,20 @@
 		setTimeout(() => animatingCards.delete(swapToIndex), dragDuration);
 		if (swapFromindex === undefined) return;
 
+		const groupSwap: GroupSwap[] = [
+			{
+				new_order: swapToIndex,
+				group_id: groups[swapFromindex]?.id || ""
+			},
+			{
+				new_order: swapFromindex,
+				group_id: groups[swapToIndex]?.id || ""
+			}
+		];
+
 		const response = await fetch(`/my/groups/swap`, {
 			method: "POST",
-			body: JSON.stringify([
-				{
-					new_order: swapToIndex,
-					group_id: groups[swapFromindex]?.id
-				},
-				{
-					new_order: swapFromindex,
-					group_id: groups[swapToIndex]?.id
-				}
-			])
+			body: JSON.stringify(groupSwap)
 		});
 		if (response.ok) {
 			const swappingFrom = groups[swapFromindex];
@@ -48,20 +52,25 @@
 
 {#each groups as group, index (group)}
 	<div
-		class="flex w-full grow"
+		class="flex w-full grow flex-col"
 		animate:flip={{ duration: dragDuration }}
-		draggable="true"
+		draggable={$draggableStore.draggingType === DraggingType.Collection ? "false" : "true"}
 		on:dragstart={() => {
-			console.log("DRAGGING ME");
-			swapFromindex = index;
+			if ($draggableStore.draggingType !== DraggingType.Collection) {
+				$draggableStore.draggingType = DraggingType.Group;
+				$draggableStore.group.groupId = group.id || "";
+				swapFromindex = index;
+			}
 		}}
 		on:dragend={() => {
-			console.log("DRAGGING END");
 			swapFromindex = undefined;
 		}}
 		on:dragenter={() => {
-			console.log("DRAGGING ENTGER");
-			changeGroupOrder(index);
+			if ($draggableStore.draggingType !== DraggingType.Collection) {
+				changeGroupOrder(index);
+				$draggableStore.draggingType = null;
+				$draggableStore.group = {};
+			}
 		}}
 		on:dragover|preventDefault>
 		<Group {group} bind:hideGroups {currentPath} />
