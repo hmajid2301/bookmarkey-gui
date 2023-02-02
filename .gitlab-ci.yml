@@ -71,4 +71,5 @@ tests:e2e:
 check:
   extends: .task
   script:
+    - cp .env.sample .env
     - task check
