@@ -1,9 +1,10 @@
 <script lang="ts">
-	export let showMenu = false;
-	export let menuItems: ContextMenuItem[];
 	import type { SvelteComponent } from "svelte";
 
 	import ContextMenuItems from "../atoms/ContextMenuItems.svelte";
+
+	export let showMenu = false;
+	export let menuItems: ContextMenuItem[];
 
 	interface ContextMenuItem {
 		icon?: typeof SvelteComponent;
@@ -30,7 +31,7 @@
 			link={item.link}
 			name={item.name}
 			iconComponent={item.icon} />
-		{#if item.divider}
+		{#if item.divider === true}
 			<hr class="border-t border-gray-100 dark:border-slate-700 lg:my-0.5 lg:block" />
 		{/if}
 	{/each}

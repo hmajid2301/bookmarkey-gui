@@ -53,7 +53,6 @@
 		menuItems={[
 			{
 				name: "Delete Collection",
-				divider: true,
 				onClick: async function () {
 					await deleteCollection();
 				}

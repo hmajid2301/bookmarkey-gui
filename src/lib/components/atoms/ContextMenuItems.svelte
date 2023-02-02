@@ -7,7 +7,7 @@
 </script>
 
 <div
-	class="relative flex cursor-pointer items-center py-2 px-3 text-black hover:text-slate-500 dark:text-white dark:hover:bg-blue-500 dark:hover:text-slate-900">
+	class="relative flex cursor-pointer items-center rounded-md py-2 px-3 text-black hover:bg-blue-500 hover:text-slate-100 dark:text-white dark:hover:text-slate-900">
 	<div class="flex items-center">
 		{#if iconComponent}
 			<span class="inline-flex h-6 w-6 items-center justify-center transition-colors">

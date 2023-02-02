@@ -59,7 +59,6 @@
 				menuItems={[
 					{
 						name: "Delete Group",
-						divider: true,
 						onClick: async function () {
 							await deleteGroup();
 						}

@@ -7,6 +7,7 @@
 	import AddCollectionForm from "./AddCollectionForm.svelte";
 	import AddGroupForm from "./AddGroupForm.svelte";
 	import type { CollectionGroups } from "~/lib/types/components";
+	import { clickOutside } from "~/lib/use/clickOutside";
 
 	let showMenu = false;
 	let showAddCollectionForm = false;
@@ -19,7 +20,11 @@
 	export let collections: CollectionGroups;
 </script>
 
-<div class="flex flex-col pr-5 text-blue-800 dark:text-blue-200">
+<div
+	use:clickOutside={() => {
+		showMenu = false;
+	}}
+	class="flex flex-col pr-5 text-blue-800 dark:text-blue-200">
 	<button
 		on:click={() => {
 			showMenu = !showMenu;
