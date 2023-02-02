@@ -36,23 +36,24 @@
 	}
 </script>
 
-<button
-	class="flex w-full grow justify-between"
-	on:click={() => {
-		if (hideGroups.has(group.id)) {
-			hideGroups.delete(group.id);
-			/* eslint no-self-assign: "off" */
-			hideGroups = hideGroups; //
-		} else {
-			hideGroups.add(group.id);
-			/* eslint no-self-assign: "off" */
-			hideGroups = hideGroups;
-		}
-	}}>
-	<button id={group.id} class="mb-1 text-sm">
+<button class="flex w-full grow justify-between">
+	<button
+		on:click={() => {
+			if (hideGroups.has(group.id)) {
+				hideGroups.delete(group.id);
+				/* eslint no-self-assign: "off" */
+				hideGroups = hideGroups; //
+			} else {
+				hideGroups.add(group.id);
+				/* eslint no-self-assign: "off" */
+				hideGroups = hideGroups;
+			}
+		}}
+		id={group.id}
+		class="mb-1 text-sm">
 		{group.name}
 	</button>
-	<div on:click={openMenu} on:keyup={openMenu} use:clickOutside={closeMenu}>
+	<button on:click={openMenu} on:keyup={openMenu} use:clickOutside={closeMenu}>
 		<EllipsisSolid />
 		<div class="relative block w-full">
 			<ContextMenu
@@ -66,7 +67,7 @@
 				]}
 				{showMenu} />
 		</div>
-	</div>
+	</button>
 </button>
 
 {#if !hideGroups.has(group.id)}

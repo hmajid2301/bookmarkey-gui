@@ -25,10 +25,18 @@ test.describe(() => {
 		await login(page, baseURL || "");
 		await page.getByRole("button", { name: "plus" }).click();
 		await page.getByRole("button", { name: "Create Group" }).click();
-		await page.getByPlaceholder("Group Name").fill("Delete Group");
+		await page.getByPlaceholder("Group Name").fill("Group to delete");
+		await page.getByRole("button", { name: "Add Group" }).click();
 
-		await page.getByRole("button", { name: "Delete Group ellipsis" }).click();
-		await page.getByRole("button", { name: "Delete Group" }).click();
+		// Wait for `created group` message to disappear
+		// await expect(page.locator(".message")).toHaveCount(0);
+		await page.waitForTimeout(3000);
+		await page
+			.getByRole("button", { name: "Group to delete ellipsis" })
+			.first()
+			.getByRole("button", { name: "ellipsis" })
+			.click();
+		await page.getByRole("button", { name: "Delete Group", exact: true }).click();
 
 		const toastMessage = await page.locator(".message").innerText();
 		expect(toastMessage).toBe("Deleted group");

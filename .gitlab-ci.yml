@@ -53,15 +53,13 @@ tests:e2e:
     - name: docker:dind
   variables:
     VITE_TEST_POCKET_BASE_URL: "http://docker:9090"
+    VITE_POCKET_BASE_URL: "http://docker:9090"
   parallel: 2
   extends: .task
   script:
     - npx playwright install
     - echo "VITE_TEST_POCKET_BASE_URL='http://docker:9090'" >> .env.test
     - task e2e_tests -- --shard=$CI_NODE_INDEX/$CI_NODE_TOTAL
-  after_script:
-    - cat svelte_playwright.log
-  allow_failure: true # Until GitLab bug is fixed https://gitlab.com/gitlab-org/gitlab/-/issues/354744
   artifacts:
     when: always
     paths:
