@@ -12,8 +12,9 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test:unit": "vitest",
 		"coverage": "vitest run --coverage",
-		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+		"lint": "eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
+		"format:check": "prettier --plugin-search-dir . --check .",
 		"sync": "svelte-kit sync",
 		"prepare": "node -e \"if (process.env.NODE_ENV !== 'production'){process.exit(1)} \" || husky install"
 	},

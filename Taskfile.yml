@@ -19,6 +19,10 @@ tasks:
     cmds:
       - pnpm run format
 
+  format:check:
+    cmds:
+      - pnpm run format:check
+
   unit_tests:
     cmds:
       - pnpm run test:unit
@@ -27,7 +31,7 @@ tasks:
     cmds:
       - pnpm run coverage
 
-  e2e_tests:
+  e2e:tests:
     cmds:
       - docker compose pull
       - docker compose -f tests/docker-compose.test.yml up  -d
@@ -44,7 +48,7 @@ tasks:
     cmds:
       - pnpm run prepare
 
-  update_types:
+  update:types:
     cmds:
       - pnpm run sync
 

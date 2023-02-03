@@ -23,10 +23,10 @@ lint:
   script:
     - task lint
 
-format:
+format:check:
   extends: .task
   script:
-    - task format
+    - task format:check
 
 coverage:unit:
   only:
@@ -52,12 +52,13 @@ tests:e2e:
   variables:
     VITE_TEST_POCKET_BASE_URL: "http://docker:9090"
     VITE_POCKET_BASE_URL: "http://docker:9090"
+  allow_failure: true # dind not working again on gitlab ci
   parallel: 2
   extends: .task
   script:
     - npx playwright install
     - echo "VITE_TEST_POCKET_BASE_URL='http://docker:9090'" >> .env.test
-    - task e2e_tests -- --shard=$CI_NODE_INDEX/$CI_NODE_TOTAL
+    - task e2e:tests -- --shard=$CI_NODE_INDEX/$CI_NODE_TOTAL
   artifacts:
     when: always
     paths:

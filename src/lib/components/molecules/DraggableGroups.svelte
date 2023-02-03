@@ -1,6 +1,6 @@
 <script lang="ts">
-	import toast from "svelte-french-toast";
 	import { flip } from "svelte/animate";
+	import toast from "svelte-french-toast";
 
 	import Group from "./Group.svelte";
 	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
