@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
 	import type { ActionResult } from "@sveltejs/kit";
-	import { LayerGroupSolid } from "svelte-awesome-icons";
+	import LayerGroupSolid from "svelte-awesome-icons/LayerGroupSolid.svelte";
 	import toast from "svelte-french-toast";
 
 	import Modal from "../atoms/Modal.svelte";

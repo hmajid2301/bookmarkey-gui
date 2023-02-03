@@ -1,15 +1,13 @@
 <script lang="ts">
 	import { NavBrand } from "flowbite-svelte";
-	import {
-		ChartSimpleSolid,
-		FolderClosedSolid,
-		FolderOpenSolid,
-		GearSolid
-	} from "svelte-awesome-icons";
+	import ChartSimpleSolid from "svelte-awesome-icons/ChartSimpleSolid.svelte";
+	import FolderClosedSolid from "svelte-awesome-icons/FolderClosedSolid.svelte";
+	import FolderOpenSolid from "svelte-awesome-icons/FolderOpenSolid.svelte";
+	import GearSolid from "svelte-awesome-icons/GearSolid.svelte";
 
+	import CollectionSideBar from "./CollectionSideBar.svelte";
 	import LinkItem from "../atoms/LinkItem.svelte";
 	import Logo from "../atoms/Logo.svelte";
-	import CollectionSideBar from "./CollectionSideBar.svelte";
 	import type { CollectionGroups } from "~/lib/types/components";
 
 	export let mainPageLink: string;

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { XmarkSolid } from "svelte-awesome-icons";
+	import XmarkSolid from "svelte-awesome-icons/XmarkSolid.svelte";
 
 	import { clickOutside } from "~/lib/use/clickOutside";
 

@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { tick } from "svelte";
-	import { PlusSolid } from "svelte-awesome-icons";
+	import PlusSolid from "svelte-awesome-icons/PlusSolid.svelte";
 
-	import Collections from "../molecules/Collections.svelte";
-	import ContextMenu from "../molecules/ContextMenu.svelte";
 	import AddCollectionForm from "./AddCollectionForm.svelte";
 	import AddGroupForm from "./AddGroupForm.svelte";
+	import Collections from "../molecules/Collections.svelte";
+	import ContextMenu from "../molecules/ContextMenu.svelte";
 	import type { CollectionGroups } from "~/lib/types/components";
 	import { clickOutside } from "~/lib/use/clickOutside";
 

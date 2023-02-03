@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CameraSolid } from "svelte-awesome-icons";
+	import CameraSolid from "svelte-awesome-icons/CameraSolid.svelte";
 
 	import Input from "../atoms/Input.svelte";
 	export let loading = false;

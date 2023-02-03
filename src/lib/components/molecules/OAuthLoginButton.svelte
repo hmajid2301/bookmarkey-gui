@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { browser } from "$app/environment";
-	import { GithubBrand, GitlabBrand } from "svelte-awesome-icons";
+	import GithubBrand from "svelte-awesome-icons/GithubBrand.svelte";
+	import GitlabBrand from "svelte-awesome-icons/GitlabBrand.svelte";
 
 	import IconButton from "./IconButton.svelte";
 	import type { AuthProviderWithRedirect } from "~/lib/types/api";

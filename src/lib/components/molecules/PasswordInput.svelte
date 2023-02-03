@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { LockSolid } from "svelte-awesome-icons";
+	import LockSolid from "svelte-awesome-icons/LockSolid.svelte";
 
 	import FormField from "./FormField.svelte";
 

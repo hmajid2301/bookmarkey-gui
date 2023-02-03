@@ -1,5 +1,5 @@
 import { render } from "@testing-library/svelte";
-import { SoapSolid } from "svelte-awesome-icons";
+import SoapSolid from "svelte-awesome-icons/SoapSolid.svelte";
 import { describe, expect, test } from "vitest";
 
 import SideBarItem from "./SideBarItem.svelte";

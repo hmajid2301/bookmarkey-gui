@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { CircleCheckSolid, CircleXmarkSolid } from "svelte-awesome-icons";
+	import CircleCheckSolid from "svelte-awesome-icons/CircleCheckSolid.svelte";
+	import CircleXmarkSolid from "svelte-awesome-icons/CircleXmarkSolid.svelte";
 
 	export let check: boolean;
 	export let errorText: string;

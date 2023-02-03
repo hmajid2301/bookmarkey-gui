@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BarsSolid } from "svelte-awesome-icons";
+	import BarsSolid from "svelte-awesome-icons/BarsSolid.svelte";
 
 	import Button from "../atoms/Button.svelte";
 

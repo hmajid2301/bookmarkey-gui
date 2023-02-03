@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { UserSolid } from "svelte-awesome-icons";
+	import UserSolid from "svelte-awesome-icons/UserSolid.svelte";
 
 	import type { ActionData, PageData } from "./$types";
 	import Section from "~/lib/components/atoms/Section.svelte";

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { DarkMode } from "flowbite-svelte";
-	import { GearSolid, RightFromBracketSolid, UserSolid } from "svelte-awesome-icons";
+	import GearSolid from "svelte-awesome-icons/GearSolid.svelte";
+	import RightFromBracketSolid from "svelte-awesome-icons/RightFromBracketSolid.svelte";
+	import UserSolid from "svelte-awesome-icons/UserSolid.svelte";
 
 	import ProfileMenu from "../molecules/ProfileMenu.svelte";
 	import Avatar from "~/lib/components/atoms/Avatar.svelte";

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
 	import type { ActionResult } from "@sveltejs/kit";
-	import { FolderSolid } from "svelte-awesome-icons";
+	import FolderSolid from "svelte-awesome-icons/FolderSolid.svelte";
 	import toast from "svelte-french-toast";
 
 	import FormField from "../molecules/FormField.svelte";

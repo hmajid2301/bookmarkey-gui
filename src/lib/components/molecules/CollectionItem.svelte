@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
-	import { FolderClosedSolid } from "svelte-awesome-icons";
+	import FolderClosedSolid from "svelte-awesome-icons/FolderClosedSolid.svelte";
 	import toast from "svelte-french-toast";
 
 	import ContextMenu from "./ContextMenu.svelte";

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { EnvelopeSolid } from "svelte-awesome-icons";
+	import EnvelopeSolid from "svelte-awesome-icons/EnvelopeSolid.svelte";
 
 	import FormField from "../molecules/FormField.svelte";
 

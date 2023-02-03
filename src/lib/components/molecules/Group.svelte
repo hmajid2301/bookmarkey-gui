@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
-	import { EllipsisSolid } from "svelte-awesome-icons";
+	import EllipsisSolid from "svelte-awesome-icons/EllipsisSolid.svelte";
 	import toast from "svelte-french-toast";
 
 	import ContextMenu from "./ContextMenu.svelte";

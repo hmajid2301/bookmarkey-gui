@@ -14,7 +14,7 @@
 	import { applyAction, enhance } from "$app/forms";
 	import { invalidateAll } from "$app/navigation";
 	import type { ActionResult } from "@sveltejs/kit";
-	import { SignatureSolid } from "svelte-awesome-icons";
+	import SignatureSolid from "svelte-awesome-icons/SignatureSolid.svelte";
 	import toast from "svelte-french-toast";
 
 	import Avatar from "../atoms/Avatar.svelte";

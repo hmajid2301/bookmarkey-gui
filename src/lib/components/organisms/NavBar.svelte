@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	import { DarkMode, Navbar, NavBrand, NavHamburger, NavUl } from "flowbite-svelte";
-	import { UserSolid } from "svelte-awesome-icons";
+	import UserSolid from "svelte-awesome-icons/UserSolid.svelte";
 
 	import Logo from "~/lib/components/atoms/Logo.svelte";
 </script>

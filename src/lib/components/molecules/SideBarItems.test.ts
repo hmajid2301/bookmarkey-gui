@@ -1,5 +1,6 @@
 import { render } from "@testing-library/svelte";
-import { EnvelopeSolid, GearSolid } from "svelte-awesome-icons";
+import EnvelopeSolid from "svelte-awesome-icons/EnvelopeSolid.svelte";
+import GearSolid from "svelte-awesome-icons/GearSolid.svelte";
 import { describe, test } from "vitest";
 
 import SideBarItems from "./SideBarItems.svelte";
