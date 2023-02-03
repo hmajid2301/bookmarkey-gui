@@ -31,7 +31,7 @@
 			toast.success("Deleted group");
 			await invalidateAll();
 		} else {
-			toast.error("Failed to delete collection");
+			toast.error("Failed to delete group");
 		}
 	}
 </script>

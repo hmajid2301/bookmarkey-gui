@@ -4,6 +4,7 @@
 
 	import ProfileMenu from "../molecules/ProfileMenu.svelte";
 	import Avatar from "~/lib/components/atoms/Avatar.svelte";
+	import { clickOutside } from "~/lib/use/clickOutside";
 
 	export let nickname: string;
 	export let avatar: string;
@@ -12,7 +13,11 @@
 	let showMenu = false;
 </script>
 
-<div class="flex h-14 flex-none items-stretch lg:hidden">
+<div
+	use:clickOutside={() => {
+		showMenu = false;
+	}}
+	class="flex h-14 flex-none items-stretch lg:hidden">
 	<div
 		class="flex cursor-pointer items-center py-2 px-3 text-black hover:text-slate-500 dark:text-white dark:hover:text-slate-400">
 		<button

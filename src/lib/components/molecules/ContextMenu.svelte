@@ -17,8 +17,8 @@
 
 <div
 	class="block border-b {showMenu
-		? 'lg:block'
-		: 'lg:hidden'}  border-gray-100 text-sm dark:border-slate-700 lg:absolute lg:top-full lg:left-0 lg:z-20 lg:min-w-full lg:rounded-lg lg:border lg:bg-white lg:shadow-lg lg:dark:bg-slate-800">
+		? 'block'
+		: 'hidden'}  absolute top-full left-0 z-20 rounded-lg border border-gray-100 bg-white text-sm shadow-lg dark:border-slate-700 dark:bg-slate-800 lg:min-w-full">
 	<slot />
 	{#each menuItems as item}
 		<ContextMenuItems
