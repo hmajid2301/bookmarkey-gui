@@ -58,7 +58,7 @@
 		on:dragstart={() => {
 			if ($draggableStore.draggingType !== DraggingType.Collection) {
 				$draggableStore.draggingType = DraggingType.Group;
-				$draggableStore.group.groupId = group.id || "";
+				$draggableStore.group.id = group.id || "";
 				swapFromindex = index;
 			}
 		}}

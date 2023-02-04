@@ -14,7 +14,7 @@
 	async function changeGroupOrder(swapToIndex: number) {
 		const collectionMove: CollectionMove = {
 			new_order: swapToIndex + 1,
-			collection_id: $draggableStore.collection.collectionId || "",
+			collection_id: $draggableStore.collection.id || "",
 			group_id: $draggableStore.collection.newGroupId || ""
 		};
 
@@ -51,7 +51,7 @@
 		class="flex grow"
 		draggable="true"
 		on:dragstart={() => {
-			$draggableStore.collection.collectionId = collection.id;
+			$draggableStore.collection.id = collection.id;
 			$draggableStore.draggingType = DraggingType.Collection;
 		}}
 		on:dragend={() => {

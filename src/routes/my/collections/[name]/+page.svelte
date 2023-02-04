@@ -1,11 +1,17 @@
 <script lang="ts">
-	import type { PageServerLoad } from "./$types";
+	import { navigating } from "$app/stores";
 
-	export let data: PageServerLoad;
+	import type { PageData } from "./$types";
+	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
+
+	export let data: PageData;
+	$: if ($navigating) {
+		$selectedGroupStore.group.id = data.collection.group || "";
+	}
 </script>
 
 <svelte:head>
-	<title>My Collection: {data.name}</title>
+	<title>My Collection: {data.collection.name}</title>
 </svelte:head>
 
-<p>Hello {data.name}</p>
+<p>Hello {data.collection.name}</p>

@@ -6,6 +6,7 @@
 	import AddGroupForm from "./AddGroupForm.svelte";
 	import Collections from "../molecules/Collections.svelte";
 	import ContextMenu from "../molecules/ContextMenu.svelte";
+	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 	import type { CollectionGroups } from "~/lib/types/components";
 	import { clickOutside } from "~/lib/use/clickOutside";
 
@@ -40,10 +41,14 @@
 					name: "Create Collection",
 					divider: true,
 					onClick: async () => {
-						showMenu = false;
-						showAddCollectionForm = true;
-						await tick();
-						collectionRef?.focus();
+						if ($selectedGroupStore.group.id) {
+							$selectedGroupStore.addCollection = true;
+						} else {
+							showMenu = false;
+							showAddCollectionForm = true;
+							await tick();
+							collectionRef?.focus();
+						}
 					}
 				},
 				{

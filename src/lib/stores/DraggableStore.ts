@@ -8,10 +8,10 @@ export enum DraggingType {
 interface Drag {
 	collection: {
 		newGroupId?: string;
-		collectionId?: string;
+		id?: string;
 	};
 	group: {
-		groupId?: string;
+		id?: string;
 	};
 	draggingType?: DraggingType | null;
 }
