@@ -16,8 +16,7 @@ VITE_SENTRY_DSN = "https://38be6117d9454303a80c3875e56eec02@o247056.ingest.sentr
 
 [[plugins]]
 package = "@sentry/netlify-build-plugin"
-
 [plugins.inputs]
-sentryOrg = "majiy"
-sentryProject = "bookmarkey"
+sentryOrg = "bookmarkey"
+sentryProject = "gui"
 sentryRepository = "Bookmarkey / gui"

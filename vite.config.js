@@ -36,8 +36,8 @@ const config = {
 			}
 		}),
 		sentryVitePlugin({
-			org: "majiy",
-			project: "bookmarkey",
+			org: "bookmarkey",
+			project: "gui",
 			include: "./dist",
 			authToken: process.env.SENTRY_AUTH_TOKEN,
 			dryRun: process.env.NODE_ENV === "production" ? false : true
