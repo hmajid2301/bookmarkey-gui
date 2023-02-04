@@ -20,7 +20,7 @@
 	},
 	"devDependencies": {
 		"@go-task/cli": "^3.20.0",
-		"@playwright/test": "1.30.0-alpha-jan-5-2023",
+		"@playwright/test": "1.30.0",
 		"@popperjs/core": "^2.11.6",
 		"@sentry/browser": "^7.29.0",
 		"@sentry/node": "^7.31.1",

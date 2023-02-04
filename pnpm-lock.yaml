@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@go-task/cli': ^3.20.0
-  '@playwright/test': 1.30.0-alpha-jan-5-2023
+  '@playwright/test': 1.30.0
   '@popperjs/core': ^2.11.6
   '@sentry/browser': ^7.29.0
   '@sentry/node': ^7.31.1
@@ -67,7 +67,7 @@ specifiers:
 
 devDependencies:
   '@go-task/cli': 3.20.0
-  '@playwright/test': 1.30.0-alpha-jan-5-2023
+  '@playwright/test': 1.30.0
   '@popperjs/core': 2.11.6
   '@sentry/browser': 7.29.0
   '@sentry/node': 7.31.1
@@ -1661,13 +1661,13 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@playwright/test/1.30.0-alpha-jan-5-2023:
-    resolution: {integrity: sha512-QEelJ/vgVE4ZzDaKWkietddmR3Vz+GCknv2A0eU/2UM+F8CNkcDPb8G9z22TGV/HUFH0/GOhKSrbEolKdCqR0A==}
+  /@playwright/test/1.30.0:
+    resolution: {integrity: sha512-SVxkQw1xvn/Wk/EvBnqWIq6NLo1AppwbYOjNLmyU0R1RoQ3rLEBtmjTnElcnz8VEtn11fptj1ECxK0tgURhajw==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@types/node': 18.11.18
-      playwright-core: 1.30.0-alpha-jan-5-2023
+      playwright-core: 1.30.0
     dev: true
 
   /@polka/url/1.0.0-next.21:
@@ -4995,8 +4995,8 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /playwright-core/1.30.0-alpha-jan-5-2023:
-    resolution: {integrity: sha512-EGlCi1ErhX0S7Sr7GjIrqUdIDESI8qXoPqwA6xCDfoHvZmLL0mHJPpvqAKXJ8HoOLDLNiJ3q0PO1t1/C0fgkMQ==}
+  /playwright-core/1.30.0:
+    resolution: {integrity: sha512-7AnRmTCf+GVYhHbLJsGUtskWTE33SwMZkybJ0v6rqR1boxq2x36U7p1vDRV7HO2IwTZgmycracLxPEJI49wu4g==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
