@@ -59,7 +59,7 @@
 		"lint-staged": "^13.1.0",
 		"magic-string": "^0.27.0",
 		"md5": "^2.3.0",
-		"neverthrow": "^5.1.0",
+		"neverthrow": "^6.0.0",
 		"object-to-formdata": "^4.4.2",
 		"pocketbase": "^0.9.1",
 		"postcss": "^8.4.21",
