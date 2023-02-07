@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { SvelteComponent } from "svelte";
-
-	import SideBarItem from "../atoms/SideBarItem.svelte";
+	import LinkItem from "../atoms/LinkItem.svelte";
 
 	interface MenuItem {
 		icon: typeof SvelteComponent;
@@ -17,7 +16,7 @@
 	<ul class="space-y-3 pt-2 text-base">
 		{#each menuItems as item}
 			<li>
-				<SideBarItem
+				<LinkItem
 					isActive={currentPath === item.link}
 					name={item.name}
 					iconComponent={item.icon}

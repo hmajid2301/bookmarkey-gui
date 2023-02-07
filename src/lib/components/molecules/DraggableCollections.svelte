@@ -2,7 +2,7 @@
 	import { invalidateAll } from "$app/navigation";
 	import toast from "svelte-french-toast";
 
-	import CollectionItem from "./CollectionItem.svelte";
+	import CollectionItem from "./Collection.svelte";
 	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
 	import type { CollectionMove } from "~/lib/types/api";
 	import type { Collection as Collection_ } from "~/lib/types/components";

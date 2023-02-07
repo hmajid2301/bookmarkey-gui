@@ -18,7 +18,6 @@
 	$: $selectedGroupStore, showAddCollectionOnStore();
 	// TODO: refactor
 	async function showAddCollectionOnStore() {
-		console.log("HEELLO", $selectedGroupStore);
 		if ($selectedGroupStore.group.id) {
 			return;
 		}

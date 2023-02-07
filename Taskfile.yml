@@ -23,7 +23,7 @@ tasks:
     cmds:
       - pnpm run format:check
 
-  unit_tests:
+  unit:tests:
     cmds:
       - pnpm run test:unit
 

@@ -4,7 +4,7 @@ import { describe, expect, test } from "vitest";
 import CameraUploadButton from "./CameraUploadButton.svelte";
 
 describe("CameraUploadButton", () => {
-	test("Successfully upload button", async () => {
+	test("Successfully render upload button", async () => {
 		const { getByRole } = render(CameraUploadButton, {
 			props: {}
 		});

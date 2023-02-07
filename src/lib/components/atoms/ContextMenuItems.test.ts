@@ -1,6 +1,8 @@
-import { render } from "@testing-library/svelte";
+import { render, screen } from "@testing-library/svelte";
+import userEvent from "@testing-library/user-event";
 import SoapSolid from "svelte-awesome-icons/SoapSolid.svelte";
-import { describe, expect, test } from "vitest";
+import html from "svelte-htm";
+import { describe, expect, test, vi } from "vitest";
 
 import ContextMenuItems from "./ContextMenuItems.svelte";
 
@@ -15,5 +17,17 @@ describe("ContextMenuItems", () => {
 		});
 		const item = getByText("Example");
 		expect(item.getAttribute("href")).toBe("/example");
+	});
+	test("Successfully calls on:click function when clicked", async () => {
+		const mock = vi.fn();
+		const user = userEvent.setup();
+
+		render(html`
+			<${ContextMenuItems} name="example" on:click=${mock} iconComponent=${SoapSolid} />
+		`);
+
+		const item = screen.getByText("example");
+		await user.click(item);
+		expect(mock).toHaveBeenCalled();
 	});
 });
