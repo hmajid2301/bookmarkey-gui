@@ -7,9 +7,7 @@ describe("HelloBar", () => {
 	test("Successfully render hello bar ", async () => {
 		const { getByText } = render(HelloBar, {
 			props: {
-				nickname: "haseeb",
-				avatar: "/user.png",
-				email: "hello@haseebmajid.dev"
+				nickname: "haseeb"
 			}
 		});
 		const hello = getByText("Hello 👋 haseeb");

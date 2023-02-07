@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { DarkMode } from "flowbite-svelte";
 	import UserSolid from "svelte-awesome-icons/UserSolid.svelte";
 
-	import type { ActionData, PageData } from "./$types";
 	import Section from "~/lib/components/atoms/Section.svelte";
 	import UpdatePasswordForm, {
 		type PasswordErrors
@@ -9,6 +9,7 @@
 	import UpdateProfileForm, {
 		type ProfileErrors
 	} from "~/lib/components/organisms/UpdateProfileForm.svelte";
+	import type { ActionData, PageData } from "./$types";
 
 	export let form: ActionData;
 	export let data: PageData;
@@ -48,6 +49,12 @@
 			<UserSolid />
 		</span>
 		<h1 class="text-2xl leading-tight">Manage profile</h1>
+	</div>
+	<div
+		class="relative block cursor-pointer items-center py-2 px-3 text-black hover:text-slate-500 dark:text-white dark:hover:text-slate-400 lg:flex lg:w-16 lg:justify-center">
+		<div class="flex items-center">
+			<DarkMode btnClass="" />
+		</div>
 	</div>
 </section>
 

@@ -5,8 +5,11 @@ import SideBar from "./SideBar.svelte";
 
 describe("SideBar", () => {
 	test("Successfully render SideBar", async () => {
-		const { getByText } = render(SideBar, {
+		const { getByText, getAllByText } = render(SideBar, {
 			props: {
+				nickname: "test",
+				email: "test@bookmarkey.app",
+				avatar: "",
 				collections: {
 					collections: [
 						{
@@ -19,7 +22,7 @@ describe("SideBar", () => {
 				mainPageLink: "/my/dashboard"
 			}
 		});
-		getByText("Settings");
+		getAllByText("Settings");
 		getByText("Dashboard");
 		getByText("my collection");
 	});

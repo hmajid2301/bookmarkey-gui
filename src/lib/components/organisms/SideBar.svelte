@@ -5,16 +5,21 @@
 	import FolderOpenSolid from "svelte-awesome-icons/FolderOpenSolid.svelte";
 	import GearSolid from "svelte-awesome-icons/GearSolid.svelte";
 
-	import CollectionSideBar from "./CollectionSideBar.svelte";
+	import type { CollectionGroups } from "~/lib/types/components";
 	import LinkItem from "../atoms/LinkItem.svelte";
 	import Logo from "../atoms/Logo.svelte";
-	import type { CollectionGroups } from "~/lib/types/components";
+	import AddCollectionButton from "./AddCollectionButton.svelte";
+	import AvatarProfileMenu from "./AvatarProfileMenu.svelte";
+	import CollectionSideBar from "./CollectionSideBar.svelte";
 
+	export let nickname: string;
+	export let email: string;
+	export let avatar: string;
 	export let mainPageLink: string;
 	export let currentPath: string;
 	export let collections: CollectionGroups;
-	export let collectionIcon = FolderOpenSolid;
 	export let showCollections = true;
+	export let showAddGroupForm = false;
 </script>
 
 <div class="min-h-screen flex-col bg-white px-4 py-4 font-bold dark:bg-gray-900">
@@ -22,6 +27,10 @@
 		<NavBrand href={mainPageLink}>
 			<Logo />
 		</NavBrand>
+		<div class="flex flex-row">
+			<AvatarProfileMenu {avatar} {nickname} {email} />
+			<AddCollectionButton bind:showAddGroupForm />
+		</div>
 		<ul class="space-y-3 pt-2 text-base">
 			<li>
 				<LinkItem
@@ -36,14 +45,13 @@
 					link="#"
 					on:click={() => {
 						showCollections = !showCollections;
-						collectionIcon = showCollections ? FolderOpenSolid : FolderClosedSolid;
 					}}
 					name="Collections"
-					iconComponent={collectionIcon} />
+					iconComponent={showCollections ? FolderOpenSolid : FolderClosedSolid} />
 
 				{#if showCollections}
 					<div class="ml-7">
-						<CollectionSideBar {currentPath} {collections} />
+						<CollectionSideBar bind:showAddGroupForm {currentPath} {collections} />
 					</div>
 				{/if}
 			</li>

@@ -2,6 +2,7 @@
 	import * as Sentry from "@sentry/svelte";
 	import { Replay } from "@sentry/svelte";
 	import { BrowserTracing } from "@sentry/tracing";
+	import { DarkMode } from "flowbite-svelte";
 	import { onMount } from "svelte";
 	import { Toaster } from "svelte-french-toast";
 	import { pwaInfo } from "virtual:pwa-info";
@@ -36,6 +37,7 @@
 </svelte:head>
 
 <Toaster toastOptions={{ style: "background: #334155; color: #fff" }} />
+<DarkMode btnClass="hidden" />
 <main class="bg-blue-100 font-sans font-medium text-gray-800 dark:bg-slate-800 dark:text-white">
 	<slot />
 </main>

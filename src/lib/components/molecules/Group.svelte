@@ -5,12 +5,12 @@
 	import EllipsisSolid from "svelte-awesome-icons/EllipsisSolid.svelte";
 	import toast from "svelte-french-toast";
 
-	import ContextMenu from "./ContextMenu.svelte";
-	import DraggableCollections from "./DraggableCollections.svelte";
-	import AddCollectionForm from "../organisms/AddCollectionForm.svelte";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 	import type { Group } from "~/lib/types/components";
 	import { clickOutside } from "~/lib/use/clickOutside";
+	import AddCollectionForm from "../organisms/AddCollectionForm.svelte";
+	import ContextMenu from "./ContextMenu.svelte";
+	import DraggableCollections from "./DraggableCollections.svelte";
 
 	export let currentPath: string;
 	export let hideGroups: Set<string>;
@@ -18,6 +18,7 @@
 	export let showAddCollectionForm = false;
 
 	$: $selectedGroupStore, showAddCollectionOnStore();
+	// TODO: refactor
 	async function showAddCollectionOnStore() {
 		if ($selectedGroupStore.group.id !== group.id && $selectedGroupStore.addCollection) {
 			return;
