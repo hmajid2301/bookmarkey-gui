@@ -48,7 +48,7 @@
 	</div>
 </a>
 
-<div class="relative z-10 {showMenu ? 'block' : 'hidden'}">
+<div data-testid={collection.id} class="relative z-10 {showMenu ? 'block' : 'hidden'}">
 	<ContextMenu
 		menuItems={[
 			{

@@ -1,12 +1,12 @@
 <script lang="ts">
+	import CaretDownSolid from "svelte-awesome-icons/CaretDownSolid.svelte";
 	import GearSolid from "svelte-awesome-icons/GearSolid.svelte";
 	import RightFromBracketSolid from "svelte-awesome-icons/RightFromBracketSolid.svelte";
 	import UserSolid from "svelte-awesome-icons/UserSolid.svelte";
 
-	import CaretDownSolid from "svelte-awesome-icons/CaretDownSolid.svelte";
+	import ContextMenu from "../molecules/ContextMenu.svelte";
 	import Avatar from "~/lib/components/atoms/Avatar.svelte";
 	import { clickOutside } from "~/lib/use/clickOutside";
-	import ContextMenu from "../molecules/ContextMenu.svelte";
 
 	export let nickname: string;
 	export let avatar: string;

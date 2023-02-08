@@ -2,6 +2,7 @@
 	import { DarkMode } from "flowbite-svelte";
 	import UserSolid from "svelte-awesome-icons/UserSolid.svelte";
 
+	import type { ActionData, PageData } from "./$types";
 	import Section from "~/lib/components/atoms/Section.svelte";
 	import UpdatePasswordForm, {
 		type PasswordErrors
@@ -9,7 +10,6 @@
 	import UpdateProfileForm, {
 		type ProfileErrors
 	} from "~/lib/components/organisms/UpdateProfileForm.svelte";
-	import type { ActionData, PageData } from "./$types";
 
 	export let form: ActionData;
 	export let data: PageData;

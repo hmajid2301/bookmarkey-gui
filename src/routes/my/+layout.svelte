@@ -2,10 +2,10 @@
 	import { page } from "$app/stores";
 	import { swipe } from "svelte-gestures";
 
+	import type { LayoutData } from "./$types";
 	import Header from "~/lib/components/molecules/Header.svelte";
 	import HelloBar from "~/lib/components/organisms/HelloBar.svelte";
 	import SideBar from "~/lib/components/organisms/SideBar.svelte";
-	import type { LayoutData } from "./$types";
 
 	export let data: LayoutData;
 	let showMenu = false;

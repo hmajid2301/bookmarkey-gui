@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { tick } from "svelte";
-	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
-	import type { CollectionGroups } from "~/lib/types/components";
-	import Collections from "../molecules/Collections.svelte";
+
 	import AddCollectionForm from "./AddCollectionForm.svelte";
 	import AddGroupForm from "./AddGroupForm.svelte";
+	import Collections from "../molecules/CollectionGroups.svelte";
+	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
+	import type { CollectionGroups } from "~/lib/types/components";
 
 	let showAddCollectionForm = false;
 

@@ -5,12 +5,12 @@
 	import FolderOpenSolid from "svelte-awesome-icons/FolderOpenSolid.svelte";
 	import GearSolid from "svelte-awesome-icons/GearSolid.svelte";
 
-	import type { CollectionGroups } from "~/lib/types/components";
-	import LinkItem from "../atoms/LinkItem.svelte";
-	import Logo from "../atoms/Logo.svelte";
 	import AddCollectionButton from "./AddCollectionButton.svelte";
 	import AvatarProfileMenu from "./AvatarProfileMenu.svelte";
 	import CollectionSideBar from "./CollectionSideBar.svelte";
+	import LinkItem from "../atoms/LinkItem.svelte";
+	import Logo from "../atoms/Logo.svelte";
+	import type { CollectionGroups } from "~/lib/types/components";
 
 	export let nickname: string;
 	export let email: string;

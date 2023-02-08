@@ -8,6 +8,7 @@
 
 <script lang="ts">
 	import type { SvelteComponent } from "svelte";
+
 	import LinkItem from "../atoms/LinkItem.svelte";
 
 	export let currentPath: string;
