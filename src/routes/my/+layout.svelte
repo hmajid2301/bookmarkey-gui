@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from "$app/stores";
+	import { onMount } from "svelte";
 	import { swipe } from "svelte-gestures";
 
 	import type { LayoutData } from "./$types";
@@ -63,7 +64,7 @@
 			mainPageLink="/my/dashboard" />
 	</aside>
 	<div
-		class="w-2 cursor-ew-resize bg-slate-800 transition-all duration-300 hover:bg-yellow-400"
+		class="cursor-ew-resize bg-slate-800 transition-all duration-300 hover:bg-yellow-400 lg:w-2"
 		on:mousedown={(e) => {
 			expanding = e;
 			start = e.pageX;

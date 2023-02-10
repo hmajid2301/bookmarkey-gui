@@ -15,7 +15,7 @@
 	aria-modal="true"
 	role="dialog">
 	<div
-		class="flex h-full max-h-screen w-full max-w-2xl p-4 md:h-auto"
+		class="flex h-auto w-full max-w-2xl p-4"
 		use:clickOutside={() => {
 			show = false;
 		}}>

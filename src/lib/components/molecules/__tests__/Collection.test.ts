@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/svelte";
+import { render } from "@testing-library/svelte";
 import { describe, expect, test } from "vitest";
 
 import Collection from "../Collection.svelte";
@@ -20,20 +20,33 @@ describe("Collection", () => {
 	});
 
 	test("Successfully show context menu", async () => {
-		const { getByText, getByTestId } = render(Collection, {
+		const { getByTestId } = render(Collection, {
 			props: {
 				currentPath: "/my/dashboard",
 				collection: {
 					id: "idabc",
 					name: "My Collection"
-				}
+				},
+				showMenu: true
+			}
+		});
+
+		expect(getByTestId("idabc").className).toContain("block");
+	});
+
+	test("Successfully does not show context menu", async () => {
+		const { getByTestId } = render(Collection, {
+			props: {
+				currentPath: "/my/dashboard",
+				collection: {
+					id: "idabc",
+					name: "My Collection"
+				},
+				showMenu: false
 			}
 		});
 
 		expect(getByTestId("idabc").className).toContain("hidden");
-		const collectionName = getByText("My Collection");
-		await fireEvent.contextMenu(collectionName);
-		expect(getByTestId("idabc").className).toContain("block");
 	});
 
 	test("Successfully render active class", async () => {

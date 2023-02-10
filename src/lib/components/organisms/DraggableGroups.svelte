@@ -14,6 +14,7 @@
 	let hideGroups = new Set<string>();
 	let animatingCards = new Set();
 	let swapFromindex: number | undefined;
+	const collectionIdOpenMenuMap: { [key: string]: boolean } = {};
 
 	async function changeGroupOrder(swapToIndex: number) {
 		if (swapFromindex === swapToIndex || animatingCards.has(swapToIndex)) return;
@@ -54,6 +55,9 @@
 	<div
 		class="flex w-full grow flex-col"
 		animate:flip={{ duration: dragDuration }}
+		on:contextmenu={() => {
+			collectionIdOpenMenuMap[group.id] = true;
+		}}
 		draggable={$draggableStore.draggingType === DraggingType.Collection ? "false" : "true"}
 		on:dragstart={() => {
 			if ($draggableStore.draggingType !== DraggingType.Collection) {
@@ -73,6 +77,10 @@
 			}
 		}}
 		on:dragover|preventDefault>
-		<Group {group} bind:hideGroups {currentPath} />
+		<Group
+			{group}
+			bind:showMenu={collectionIdOpenMenuMap[group.id]}
+			bind:hideGroups
+			{currentPath} />
 	</div>
 {/each}

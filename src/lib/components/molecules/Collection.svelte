@@ -10,11 +10,7 @@
 	export let currentPath: string;
 	export let collection: Collection;
 
-	let showMenu = false;
-
-	async function openMenu() {
-		showMenu = true;
-	}
+	export let showMenu: boolean | undefined = false;
 
 	function closeMenu() {
 		showMenu = false;
@@ -38,7 +34,6 @@
 	class=" flex grow flex-row space-x-4 rounded-lg py-2 px-2"
 	class:active={currentPath === `/my/collections/${collection.id}`}
 	href={`/my/collections/${collection.id}`}
-	on:contextmenu|preventDefault={openMenu}
 	use:clickOutside={closeMenu}>
 	<div>
 		<FolderClosedSolid />
@@ -58,5 +53,5 @@
 				}
 			}
 		]}
-		{showMenu} />
+		showMenu={showMenu ?? false} />
 </div>

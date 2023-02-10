@@ -51,6 +51,7 @@ specifiers:
   svelte: ^3.55.1
   svelte-awesome-icons: ^0.2.16
   svelte-check: ^2.10.3
+  svelte-drag-drop-touch: ^0.1.9
   svelte-french-toast: ^1.0.3
   svelte-gestures: ^1.4.1
   svelte-htm: ^1.2.0
@@ -117,6 +118,7 @@ devDependencies:
   svelte: 3.55.1
   svelte-awesome-icons: 0.2.16
   svelte-check: 2.10.3_pehl75e5jsy22vp33udjja4soi
+  svelte-drag-drop-touch: 0.1.9
   svelte-french-toast: 1.0.3_svelte@3.55.1
   svelte-gestures: 1.4.1
   svelte-htm: 1.2.0_svelte@3.55.1
@@ -3139,6 +3141,10 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
+  /dragdroptouch-bug-fixed/1.0.8:
+    resolution: {integrity: sha512-moNgBeWMeUk4zhV3B+a4TZUPmHVJz+cvjWEXENLEU3toVnm3lpS+ZkSwVbBxArDUQ8HSm1qA0UmKWWy1y7nvng==}
+    dev: true
+
   /eastasianwidth/0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
@@ -5796,6 +5802,12 @@ packages:
       - sass
       - stylus
       - sugarss
+    dev: true
+
+  /svelte-drag-drop-touch/0.1.9:
+    resolution: {integrity: sha512-DWAMC+6xBRkl5OuVR7ze+znSKERlX9t9cx4/kzoWOnPwLFvv4g8YTtQxmO8wfWfETi9qgg/cnw58gmhZKY9vyw==}
+    dependencies:
+      dragdroptouch-bug-fixed: 1.0.8
     dev: true
 
   /svelte-eslint-parser/0.22.4_svelte@3.55.1:

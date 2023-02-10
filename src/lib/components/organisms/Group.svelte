@@ -16,8 +16,7 @@
 	export let hideGroups: Set<string>;
 	export let group: Group;
 	export let showAddCollectionForm = false;
-
-	let showMenu = false;
+	export let showMenu: boolean | undefined = false;
 	let collectionRef: HTMLInputElement;
 
 	$: $selectedGroupStore, showAddCollectionOnStore();
@@ -105,7 +104,7 @@
 						}
 					}
 				]}
-				{showMenu} />
+				showMenu={showMenu ?? false} />
 		</div>
 	</button>
 </button>

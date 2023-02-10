@@ -69,6 +69,7 @@
 		"svelte": "^3.55.1",
 		"svelte-awesome-icons": "^0.2.16",
 		"svelte-check": "^2.10.3",
+		"svelte-drag-drop-touch": "^0.1.9",
 		"svelte-french-toast": "^1.0.3",
 		"svelte-gestures": "^1.4.1",
 		"svelte-htm": "^1.2.0",

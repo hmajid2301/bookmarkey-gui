@@ -40,7 +40,7 @@
 
 <Modal title="Create a new group" {show}>
 	<form
-		class="space-y-4 md:space-y-6"
+		class="h-min space-y-4 md:space-y-6"
 		action="/my/groups?/addGroup"
 		method="post"
 		use:enhance={submitAddGroupForm}>

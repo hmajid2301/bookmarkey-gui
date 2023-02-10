@@ -29,6 +29,7 @@
 			toast.error("Failed to move collection");
 		}
 	}
+	const collectionIdOpenMenuMap: { [key: string]: boolean } = {};
 </script>
 
 {#if collections.length === 0}
@@ -50,6 +51,9 @@
 	<div
 		class="flex grow"
 		draggable="true"
+		on:contextmenu={() => {
+			collectionIdOpenMenuMap[collection.id] = true;
+		}}
 		on:dragstart={() => {
 			$draggableStore.collection.id = collection.id;
 			$draggableStore.draggingType = DraggingType.Collection;
@@ -63,6 +67,9 @@
 			$draggableStore.collection.newGroupId = groupId || "";
 		}}
 		on:dragover|preventDefault>
-		<Collection {collection} {currentPath} />
+		<Collection
+			{collection}
+			{currentPath}
+			bind:showMenu={collectionIdOpenMenuMap[collection.id]} />
 	</div>
 {/each}
