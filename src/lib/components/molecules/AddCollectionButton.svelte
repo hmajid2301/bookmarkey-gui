@@ -1,12 +1,12 @@
 <script lang="ts">
 	import PlusSolid from "svelte-awesome-icons/PlusSolid.svelte";
 
-	import ContextMenu from "../molecules/ContextMenu.svelte";
-	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 	import { clickOutside } from "~/lib/use/clickOutside";
+	import ContextMenu from "./ContextMenu.svelte";
 
 	let showMenu = false;
 	export let showAddGroupForm = false;
+	export let isAddingCollection = false;
 </script>
 
 <div
@@ -15,6 +15,7 @@
 	}}
 	class="flex flex-col pr-5 text-blue-800 dark:text-blue-200">
 	<button
+		aria-label="add"
 		on:click={() => {
 			showMenu = !showMenu;
 		}}>
@@ -30,7 +31,7 @@
 					divider: true,
 					onClick: async () => {
 						showMenu = false;
-						$selectedGroupStore.addCollection = true;
+						isAddingCollection = true;
 					}
 				},
 				{

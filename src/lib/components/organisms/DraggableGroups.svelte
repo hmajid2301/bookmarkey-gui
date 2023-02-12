@@ -1,17 +1,19 @@
 <script lang="ts">
-	import { flip } from "svelte/animate";
 	import toast from "svelte-french-toast";
+	import { flip } from "svelte/animate";
 
-	import Group from "./Group.svelte";
 	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
+	import type { Drag } from "~/lib/stores/SelectedGroup";
 	import type { GroupSwap } from "~/lib/types/api";
 	import type { Group as Group_ } from "~/lib/types/components";
+	import Group from "./Group.svelte";
 
 	export let groups: Group_[] = [];
+	export let drag: Drag;
 	export let currentPath: string;
 
 	const dragDuration = 300;
-	let hideGroups = new Set<string>();
+	let hiddenGroups = new Set<string>();
 	let animatingCards = new Set();
 	let swapFromindex: number | undefined;
 	const collectionIdOpenMenuMap: { [key: string]: boolean } = {};
@@ -78,9 +80,10 @@
 		}}
 		on:dragover|preventDefault>
 		<Group
+			{drag}
 			{group}
 			bind:showMenu={collectionIdOpenMenuMap[group.id]}
-			bind:hideGroups
+			bind:hiddenGroups
 			{currentPath} />
 	</div>
 {/each}

@@ -7,6 +7,10 @@ describe("CollectionGroups", () => {
 	test("Successfully render collections and groups", async () => {
 		const { getByText } = render(CollectionGroups, {
 			props: {
+				drag: {
+					group: {},
+					addCollection: false
+				},
 				currentPath: "/my/dashboard",
 				collections: {
 					groups: [

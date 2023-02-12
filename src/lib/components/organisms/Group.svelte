@@ -5,31 +5,34 @@
 	import EllipsisSolid from "svelte-awesome-icons/EllipsisSolid.svelte";
 	import toast from "svelte-french-toast";
 
-	import AddCollectionForm from "./AddCollectionForm.svelte";
-	import DraggableCollection from "./DraggableCollections.svelte";
-	import ContextMenu from "../molecules/ContextMenu.svelte";
-	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
+	import type { Drag } from "~/lib/stores/SelectedGroup";
 	import type { Group } from "~/lib/types/components";
 	import { clickOutside } from "~/lib/use/clickOutside";
+	import ContextMenu from "../molecules/ContextMenu.svelte";
+	import AddCollectionForm from "./AddCollectionForm.svelte";
+	import DraggableCollection from "./DraggableCollections.svelte";
 
 	export let currentPath: string;
-	export let hideGroups: Set<string>;
+	export let hiddenGroups: Set<string>;
 	export let group: Group;
 	export let showAddCollectionForm = false;
 	export let showMenu: boolean | undefined = false;
+	export let drag: Drag;
+
 	let collectionRef: HTMLInputElement;
 
-	$: $selectedGroupStore, showAddCollectionOnStore();
-	// TODO: refactor
+	// TODO: refactor in draggable
+	$: showAddCollectionOnStore();
+
 	async function showAddCollectionOnStore() {
-		if ($selectedGroupStore.group.id !== group.id && $selectedGroupStore.addCollection) {
+		if (drag.group && drag.group.id !== group.id && drag.addCollection) {
 			return;
 		}
-		if (!$selectedGroupStore.addCollection) {
+		if (!drag.addCollection) {
 			return;
 		}
 		await showAddCollection();
-		$selectedGroupStore.addCollection = false;
+		drag.addCollection = false;
 	}
 
 	async function showAddCollection() {
@@ -64,14 +67,15 @@
 <button on:contextmenu|preventDefault={openMenu} class="flex w-full grow justify-between">
 	<button
 		on:click={() => {
-			if (hideGroups.has(group.id)) {
-				hideGroups.delete(group.id);
+			console.log("HELLo");
+			if (hiddenGroups.has(group.id)) {
+				hiddenGroups.delete(group.id);
 				/* eslint no-self-assign: "off" */
-				hideGroups = hideGroups; //
+				hiddenGroups = hiddenGroups; //
 			} else {
-				hideGroups.add(group.id);
+				hiddenGroups.add(group.id);
 				/* eslint no-self-assign: "off" */
-				hideGroups = hideGroups;
+				hiddenGroups = hiddenGroups;
 			}
 		}}
 		id={group.id}
@@ -80,7 +84,7 @@
 	</button>
 	<button on:click={openMenu} on:keyup={openMenu} use:clickOutside={closeMenu}>
 		<div class="my-2 flex flex-col items-start space-y-1">
-			{#if !hideGroups.has(group.id)}
+			{#if !hiddenGroups.has(group.id)}
 				<EllipsisSolid />
 			{:else}
 				<CaretDownSolid />
@@ -113,7 +117,7 @@
 	<AddCollectionForm bind:ref={collectionRef} bind:showInput={showAddCollectionForm} />
 {/if}
 
-{#if !hideGroups.has(group.id)}
+{#if !hiddenGroups.has(group.id)}
 	<div class="my-2 flex flex-col items-start space-y-1">
 		<DraggableCollection groupId={group.id} collections={group.collections} {currentPath} />
 	</div>

@@ -5,13 +5,15 @@
 	import FolderOpenSolid from "svelte-awesome-icons/FolderOpenSolid.svelte";
 	import GearSolid from "svelte-awesome-icons/GearSolid.svelte";
 
-	import AddCollectionButton from "./AddCollectionButton.svelte";
-	import AvatarProfileMenu from "./AvatarProfileMenu.svelte";
-	import CollectionSideBar from "./CollectionSideBar.svelte";
+	import type { Drag } from "~/lib/stores/SelectedGroup";
+	import type { CollectionGroups } from "~/lib/types/components";
 	import LinkItem from "../atoms/LinkItem.svelte";
 	import Logo from "../atoms/Logo.svelte";
-	import type { CollectionGroups } from "~/lib/types/components";
+	import AddCollectionButton from "../molecules/AddCollectionButton.svelte";
+	import AvatarProfileMenu from "./AvatarProfileMenu.svelte";
+	import CollectionSideBar from "./CollectionSideBar.svelte";
 
+	// TODO: simplify
 	export let nickname: string;
 	export let email: string;
 	export let avatar: string;
@@ -20,6 +22,7 @@
 	export let collections: CollectionGroups;
 	export let showCollections = true;
 	export let showAddGroupForm = false;
+	export let drag: Drag;
 </script>
 
 <div class="min-h-screen flex-col bg-white px-4 py-4 font-bold dark:bg-gray-900">
@@ -51,7 +54,11 @@
 
 				{#if showCollections}
 					<div class="ml-7">
-						<CollectionSideBar bind:showAddGroupForm {currentPath} {collections} />
+						<CollectionSideBar
+							{drag}
+							bind:showAddGroupForm
+							{currentPath}
+							{collections} />
 					</div>
 				{/if}
 			</li>

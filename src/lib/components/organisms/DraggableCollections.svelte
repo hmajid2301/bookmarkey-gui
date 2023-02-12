@@ -2,15 +2,16 @@
 	import { invalidateAll } from "$app/navigation";
 	import toast from "svelte-french-toast";
 
-	import Collection from "../molecules/Collection.svelte";
 	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
 	import type { CollectionMove } from "~/lib/types/api";
 	import type { Collection as Collection_ } from "~/lib/types/components";
+	import Collection from "../molecules/Collection.svelte";
 
 	export let currentPath: string;
 	export let collections: Collection_[];
 	export let groupId: string | undefined = undefined;
 
+	// TODO: refactoe store
 	async function moveCollection(swapToIndex: number) {
 		const collectionMove: CollectionMove = {
 			new_order: swapToIndex + 1,

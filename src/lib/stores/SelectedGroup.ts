@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 
-interface Drag {
+export interface Drag {
 	group: {
 		id?: string;
 	};

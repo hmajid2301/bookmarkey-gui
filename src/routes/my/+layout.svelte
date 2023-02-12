@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { page } from "$app/stores";
-	import { onMount } from "svelte";
 	import { swipe } from "svelte-gestures";
 
-	import type { LayoutData } from "./$types";
 	import Header from "~/lib/components/molecules/Header.svelte";
 	import HelloBar from "~/lib/components/organisms/HelloBar.svelte";
 	import SideBar from "~/lib/components/organisms/SideBar.svelte";
+	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
+	import type { LayoutData } from "./$types";
 
 	export let data: LayoutData;
 	let showMenu = false;
@@ -56,6 +56,7 @@
 			? ''
 			: '-ml-64'} min-w-64 flex w-64 flex-shrink-0 flex-col transition-all duration-300 lg:ml-0">
 		<SideBar
+			drag={$selectedGroupStore}
 			avatar={data.user.avatar}
 			email={data.user.email}
 			nickname={data.user.nickname}
