@@ -18,7 +18,11 @@ describe("DraggableCollections", () => {
 						id: "collection2",
 						name: "My Other Collection"
 					}
-				]
+				],
+				dragging: {
+					collection: {},
+					group: {}
+				}
 			}
 		});
 
@@ -39,7 +43,11 @@ describe("DraggableCollections", () => {
 						id: "collection2",
 						name: "My Other Collection"
 					}
-				]
+				],
+				dragging: {
+					collection: {},
+					group: {}
+				}
 			}
 		});
 		const fetchMock = createFetchMock(vi);
@@ -66,7 +74,11 @@ describe("DraggableCollections", () => {
 		const { getByText } = render(DraggableCollections, {
 			props: {
 				currentPath: "/my/dashboard",
-				collections: []
+				collections: [],
+				dragging: {
+					collection: {},
+					group: {}
+				}
 			}
 		});
 

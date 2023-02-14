@@ -21,9 +21,13 @@ describe("Group", () => {
 					name: "Test",
 					collections: []
 				},
-				drag: {
+				selectedDrag: {
 					group: {},
 					addCollection: false
+				},
+				dragging: {
+					collection: {},
+					group: {}
 				}
 			}
 		});
@@ -58,9 +62,13 @@ describe("Group", () => {
 					name: "Test",
 					collections: []
 				},
-				drag: {
+				selectedDrag: {
 					group: {},
 					addCollection: false
+				},
+				dragging: {
+					collection: {},
+					group: {}
 				}
 			}
 		});
@@ -93,9 +101,13 @@ describe("Group", () => {
 						}
 					]
 				},
-				drag: {
+				selectedDrag: {
 					group: {},
 					addCollection: false
+				},
+				dragging: {
+					collection: {},
+					group: {}
 				}
 			}
 		});

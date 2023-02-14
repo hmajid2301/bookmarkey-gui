@@ -8,13 +8,17 @@ describe("GroupsCollections", () => {
 		const { getByPlaceholderText, getByRole, getByText } = render(GroupsCollections, {
 			props: {
 				currentPath: "/my/dashboard",
-				drag: {
+				selectedDrag: {
 					group: {},
 					addCollection: true
 				},
 				collections: {
 					groups: [],
 					collections: []
+				},
+				dragging: {
+					collection: {},
+					group: {}
 				}
 			}
 		});
@@ -30,13 +34,17 @@ describe("GroupsCollections", () => {
 			props: {
 				currentPath: "/my/dashboard",
 				showAddGroupForm: true,
-				drag: {
+				selectedDrag: {
 					group: {},
 					addCollection: false
 				},
 				collections: {
 					groups: [],
 					collections: []
+				},
+				dragging: {
+					collection: {},
+					group: {}
 				}
 			}
 		});
@@ -49,7 +57,7 @@ describe("GroupsCollections", () => {
 		const { getByText, queryByText } = render(GroupsCollections, {
 			props: {
 				currentPath: "/my/dashboard",
-				drag: {
+				selectedDrag: {
 					group: {},
 					addCollection: false
 				},
@@ -65,6 +73,10 @@ describe("GroupsCollections", () => {
 							name: "Second Collection"
 						}
 					]
+				},
+				dragging: {
+					collection: {},
+					group: {}
 				}
 			}
 		});
@@ -78,7 +90,7 @@ describe("GroupsCollections", () => {
 		const { getByText, queryAllByText } = render(GroupsCollections, {
 			props: {
 				currentPath: "/my/dashboard",
-				drag: {
+				selectedDrag: {
 					group: {},
 					addCollection: false
 				},
@@ -96,6 +108,10 @@ describe("GroupsCollections", () => {
 						}
 					],
 					collections: []
+				},
+				dragging: {
+					collection: {},
+					group: {}
 				}
 			}
 		});

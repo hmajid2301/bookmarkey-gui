@@ -20,9 +20,13 @@ describe("SideBar", () => {
 				},
 				currentPath: "/my/settings",
 				mainPageLink: "/my/dashboard",
-				drag: {
+				selectedDrag: {
 					group: {},
 					addCollection: false
+				},
+				dragging: {
+					collection: {},
+					group: {}
 				}
 			}
 		});
@@ -70,9 +74,13 @@ describe("SideBar", () => {
 				},
 				currentPath: "/my/settings",
 				mainPageLink: "/my/dashboard",
-				drag: {
+				selectedDrag: {
 					group: {},
 					addCollection: false
+				},
+				dragging: {
+					collection: {},
+					group: {}
 				}
 			}
 		});

@@ -5,7 +5,7 @@ export enum DraggingType {
 	Group = "group"
 }
 
-interface Drag {
+export interface Dragging {
 	collection: {
 		newGroupId?: string;
 		id?: string;
@@ -16,7 +16,7 @@ interface Drag {
 	draggingType?: DraggingType | null;
 }
 
-export const draggableStore = writable<Drag>({
+export const draggableStore = writable<Dragging>({
 	collection: {},
 	group: {}
 });

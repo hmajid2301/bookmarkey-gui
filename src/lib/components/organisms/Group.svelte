@@ -8,7 +8,8 @@
 	import AddCollectionForm from "./AddCollectionForm.svelte";
 	import DraggableCollection from "./DraggableCollections.svelte";
 	import ContextMenu from "../molecules/ContextMenu.svelte";
-	import type { Drag } from "~/lib/stores/SelectedGroup";
+	import type { Dragging } from "~/lib/stores/DraggableStore";
+	import type { DragSelectedGroup } from "~/lib/stores/SelectedGroup";
 	import type { Group } from "~/lib/types/components";
 	import { clickOutside } from "~/lib/use/clickOutside";
 
@@ -17,7 +18,8 @@
 	export let group: Group;
 	export let showAddCollectionForm = false;
 	export let showMenu: boolean | undefined = false;
-	export let drag: Drag;
+	export let selectedDrag: DragSelectedGroup;
+	export let dragging: Dragging;
 
 	let collectionRef: HTMLInputElement;
 
@@ -25,14 +27,18 @@
 	$: showAddCollectionOnStore();
 
 	async function showAddCollectionOnStore() {
-		if (drag.group && drag.group.id !== group.id && drag.addCollection) {
+		if (
+			selectedDrag.group &&
+			selectedDrag.group.id !== group.id &&
+			selectedDrag.addCollection
+		) {
 			return;
 		}
-		if (!drag.addCollection) {
+		if (!selectedDrag.addCollection) {
 			return;
 		}
 		await showAddCollection();
-		drag.addCollection = false;
+		selectedDrag.addCollection = false;
 	}
 
 	async function showAddCollection() {
@@ -67,7 +73,6 @@
 <button on:contextmenu|preventDefault={openMenu} class="flex w-full grow justify-between">
 	<button
 		on:click={() => {
-			console.log("HELLo");
 			if (hiddenGroups.has(group.id)) {
 				hiddenGroups.delete(group.id);
 				/* eslint no-self-assign: "off" */
@@ -119,6 +124,10 @@
 
 {#if !hiddenGroups.has(group.id)}
 	<div class="my-2 flex flex-col items-start space-y-1">
-		<DraggableCollection groupId={group.id} collections={group.collections} {currentPath} />
+		<DraggableCollection
+			{dragging}
+			groupId={group.id}
+			collections={group.collections}
+			{currentPath} />
 	</div>
 {/if}

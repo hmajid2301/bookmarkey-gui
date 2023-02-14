@@ -10,7 +10,8 @@
 	import LinkItem from "../atoms/LinkItem.svelte";
 	import Logo from "../atoms/Logo.svelte";
 	import AddCollectionButton from "../molecules/AddCollectionButton.svelte";
-	import type { Drag } from "~/lib/stores/SelectedGroup";
+	import type { Dragging } from "~/lib/stores/DraggableStore";
+	import type { DragSelectedGroup } from "~/lib/stores/SelectedGroup";
 	import type { CollectionGroups } from "~/lib/types/components";
 
 	// TODO: simplify
@@ -22,11 +23,8 @@
 	export let collections: CollectionGroups;
 	export let showCollections = true;
 	export let showAddGroupForm = false;
-	export let drag: Drag;
-
-	$: {
-		console.log("SIEBDER", showAddGroupForm);
-	}
+	export let selectedDrag: DragSelectedGroup;
+	export let dragging: Dragging;
 </script>
 
 <div class="min-h-screen flex-col bg-white px-4 py-4 font-bold dark:bg-gray-900">
@@ -59,8 +57,9 @@
 				{#if showCollections}
 					<div class="ml-7">
 						<CollectionSideBar
-							{drag}
 							bind:showAddGroupForm
+							{dragging}
+							{selectedDrag}
 							{currentPath}
 							{collections} />
 					</div>
