@@ -1,8 +1,8 @@
 <script lang="ts">
 	import PlusSolid from "svelte-awesome-icons/PlusSolid.svelte";
 
-	import { clickOutside } from "~/lib/use/clickOutside";
 	import ContextMenu from "./ContextMenu.svelte";
+	import { clickOutside } from "~/lib/use/clickOutside";
 
 	let showMenu = false;
 	export let showAddGroupForm = false;

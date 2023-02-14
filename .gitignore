@@ -55,3 +55,4 @@ coverage
 .pnpm-store
 .*mjs
 pb_data/
+.nyc_output/

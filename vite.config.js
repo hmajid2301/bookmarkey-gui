@@ -1,9 +1,10 @@
 import sentryVitePlugin from "@sentry/vite-plugin";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { SvelteKitPWA } from "@vite-pwa/sveltekit";
+import istanbul from "vite-plugin-istanbul";
+import { defineConfig } from "vitest/config";
 
-/** @type {import('vite').UserConfig} */
-const config = {
+export default defineConfig({
 	build: {
 		sourcemap: true
 	},
@@ -41,6 +42,12 @@ const config = {
 			include: "./dist",
 			authToken: process.env.SENTRY_AUTH_TOKEN,
 			dryRun: process.env.NODE_ENV === "production" ? false : true
+		}),
+		istanbul({
+			include: "src/*",
+			exclude: ["node_modules", "test", "coverage"],
+			extension: [".ts", ".svelte"],
+			requireEnv: true
 		})
 	],
 	test: {
@@ -56,6 +63,4 @@ const config = {
 			reporter: ["text", "cobertura"]
 		}
 	}
-};
-
-export default config;
+});

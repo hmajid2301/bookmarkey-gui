@@ -1,0 +1,6 @@
+{
+	"all": true,
+	"src": ["src"],
+	"include": ["src"],
+	"reporter": ["lcov", "text", "json"]
+}

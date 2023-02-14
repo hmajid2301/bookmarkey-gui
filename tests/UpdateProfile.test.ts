@@ -1,6 +1,7 @@
 import type { Page } from "@playwright/test";
-import { expect, test } from "@playwright/test";
 import pocketbase from "pocketbase";
+
+import { expect, test } from "./baseFixtures.js";
 
 test.describe(() => {
 	const email = "test+update_password@bookmarkey.app";

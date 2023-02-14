@@ -34,7 +34,7 @@ coverage:unit:
     - main
   extends: .task
   script:
-    - time task coverage
+    - task coverage
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   artifacts:
     reports:
@@ -52,14 +52,25 @@ tests:e2e:
   variables:
     VITE_TEST_POCKET_BASE_URL: "http://docker:9090"
     VITE_POCKET_BASE_URL: "http://docker:9090"
-  allow_failure: true # dind not working again on gitlab ci
+    DOCKER_DRIVER: overlay2
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
   parallel: 2
   extends: .task
+  allow_failure: true
   script:
     - npx playwright install
     - echo "VITE_TEST_POCKET_BASE_URL='http://docker:9090'" >> .env.test
     - task e2e:tests -- --shard=$CI_NODE_INDEX/$CI_NODE_TOTAL
+    - npx nyc report --report-dir ./coverage --temp-dir .nyc_output --reporter=cobertura --exclude-after-remap false
+    - npx nyc report --report-dir ./coverage --temp-dir .nyc_output --reporter=text --exclude-after-remap false
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   artifacts:
+    reports:
+      # junit: test-results/junit.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
     when: always
     paths:
       - test-results/

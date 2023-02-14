@@ -5,12 +5,12 @@
 	import EllipsisSolid from "svelte-awesome-icons/EllipsisSolid.svelte";
 	import toast from "svelte-french-toast";
 
+	import AddCollectionForm from "./AddCollectionForm.svelte";
+	import DraggableCollection from "./DraggableCollections.svelte";
+	import ContextMenu from "../molecules/ContextMenu.svelte";
 	import type { Drag } from "~/lib/stores/SelectedGroup";
 	import type { Group } from "~/lib/types/components";
 	import { clickOutside } from "~/lib/use/clickOutside";
-	import ContextMenu from "../molecules/ContextMenu.svelte";
-	import AddCollectionForm from "./AddCollectionForm.svelte";
-	import DraggableCollection from "./DraggableCollections.svelte";
 
 	export let currentPath: string;
 	export let hiddenGroups: Set<string>;

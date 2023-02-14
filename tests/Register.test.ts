@@ -1,5 +1,6 @@
-import { expect, test } from "@playwright/test";
 import pocketbase from "pocketbase";
+
+import { expect, test } from "./baseFixtures.js";
 
 const email = "test+signup@bookmarkey.app";
 test("Successfully register an account", async ({ page, baseURL }) => {

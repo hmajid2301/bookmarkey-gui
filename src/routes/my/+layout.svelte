@@ -2,11 +2,11 @@
 	import { page } from "$app/stores";
 	import { swipe } from "svelte-gestures";
 
+	import type { LayoutData } from "./$types";
 	import Header from "~/lib/components/molecules/Header.svelte";
 	import HelloBar from "~/lib/components/organisms/HelloBar.svelte";
 	import SideBar from "~/lib/components/organisms/SideBar.svelte";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
-	import type { LayoutData } from "./$types";
 
 	export let data: LayoutData;
 	let showMenu = false;
@@ -65,7 +65,7 @@
 			mainPageLink="/my/dashboard" />
 	</aside>
 	<div
-		class="cursor-ew-resize bg-slate-800 transition-all duration-300 hover:bg-yellow-400 lg:w-2"
+		class="cursor-ew-resize bg-blue-50 transition-all duration-300 hover:bg-yellow-400 dark:bg-slate-800 lg:w-2"
 		on:mousedown={(e) => {
 			expanding = e;
 			start = e.pageX;

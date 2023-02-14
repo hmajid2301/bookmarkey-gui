@@ -1,12 +1,12 @@
 <script lang="ts">
-	import toast from "svelte-french-toast";
 	import { flip } from "svelte/animate";
+	import toast from "svelte-french-toast";
 
+	import Group from "./Group.svelte";
 	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
 	import type { Drag } from "~/lib/stores/SelectedGroup";
 	import type { GroupSwap } from "~/lib/types/api";
 	import type { Group as Group_ } from "~/lib/types/components";
-	import Group from "./Group.svelte";
 
 	export let groups: Group_[] = [];
 	export let drag: Drag;
