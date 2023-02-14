@@ -16,6 +16,10 @@
 	export let collections: CollectionGroups;
 	export let drag: Drag;
 
+	$: {
+		console.log("CollectionSidebar", showAddGroupForm);
+	}
+
 	$: showAddCollectionOnStore();
 	async function showAddCollectionOnStore() {
 		if (drag.group.id || !drag.addCollection) {

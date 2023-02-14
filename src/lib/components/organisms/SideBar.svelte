@@ -23,6 +23,10 @@
 	export let showCollections = true;
 	export let showAddGroupForm = false;
 	export let drag: Drag;
+
+	$: {
+		console.log("SIEBDER", showAddGroupForm);
+	}
 </script>
 
 <div class="min-h-screen flex-col bg-white px-4 py-4 font-bold dark:bg-gray-900">
@@ -30,7 +34,7 @@
 		<NavBrand href={mainPageLink}>
 			<Logo />
 		</NavBrand>
-		<div class="flex flex-row truncate">
+		<div class="flex flex-row">
 			<AvatarProfileMenu {avatar} {nickname} {email} />
 			<AddCollectionButton bind:showAddGroupForm />
 		</div>

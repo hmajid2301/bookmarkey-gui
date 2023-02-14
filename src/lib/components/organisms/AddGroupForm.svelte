@@ -24,7 +24,6 @@
 			switch (result.type) {
 				case "success":
 					await update();
-					show = false;
 					toast.success("Created group");
 					break;
 				case "error":
@@ -34,11 +33,12 @@
 					await update();
 			}
 			loading = false;
+			show = false;
 		};
 	};
 </script>
 
-<Modal title="Create a new group" {show}>
+<Modal title="Create a new group" bind:show>
 	<form
 		class="h-min space-y-4 md:space-y-6"
 		action="/my/groups?/addGroup"

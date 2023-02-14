@@ -65,7 +65,7 @@
 			mainPageLink="/my/dashboard" />
 	</aside>
 	<div
-		class="cursor-ew-resize bg-blue-50 transition-all duration-300 hover:bg-yellow-400 dark:bg-slate-800 lg:w-2"
+		class="cursor-ew-resize bg-blue-50 transition-all duration-300 hover:bg-yellow-400 dark:bg-slate-800 hover:dark:bg-yellow-400 lg:w-2"
 		on:mousedown={(e) => {
 			expanding = e;
 			start = e.pageX;

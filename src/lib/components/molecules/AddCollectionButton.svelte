@@ -39,6 +39,7 @@
 					onClick: async () => {
 						showMenu = false;
 						showAddGroupForm = true;
+						console.log("SHOW COL ogL", showAddGroupForm);
 					}
 				}
 			]}

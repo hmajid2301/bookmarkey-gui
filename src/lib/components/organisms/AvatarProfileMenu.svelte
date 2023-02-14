@@ -21,7 +21,7 @@
 	on:click={() => {
 		showAvatarMenu = !showAvatarMenu;
 	}}
-	class="max-h-screen-menu top-14 left-0 z-20 w-screen overflow-y-auto bg-slate-100 shadow-lg dark:bg-slate-800 lg:static lg:flex lg:w-auto lg:overflow-visible lg:shadow-none">
+	class="max-h-screen-menu bg-slate-100 dark:bg-slate-800 lg:static lg:flex lg:overflow-y-visible">
 	<div
 		class="relative block cursor-pointer items-center text-black hover:text-slate-500 dark:text-white dark:hover:text-slate-400 lg:flex lg:py-2 lg:px-3">
 		<div
@@ -30,10 +30,10 @@
 				<Avatar {avatar} {nickname} {email} />
 			</div>
 		</div>
-		<p class="flex flex-row text-xs">
+		<p class="flex w-32 flex-row truncate text-xs">
 			{nickname}
-			<CaretDownSolid class="h-4 w-4" />
 		</p>
+		<CaretDownSolid class="h-4 w-4" />
 		<ContextMenu
 			menuItems={[
 				{
