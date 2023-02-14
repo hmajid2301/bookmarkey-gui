@@ -30,7 +30,7 @@
 		<NavBrand href={mainPageLink}>
 			<Logo />
 		</NavBrand>
-		<div class="flex flex-row">
+		<div class="flex flex-row truncate">
 			<AvatarProfileMenu {avatar} {nickname} {email} />
 			<AddCollectionButton bind:showAddGroupForm />
 		</div>
