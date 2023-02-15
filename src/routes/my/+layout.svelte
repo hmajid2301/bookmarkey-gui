@@ -31,31 +31,24 @@
 	const maxWidth = 50;
 
 	let expanding: MouseEvent | null = null;
-	let start: number | null = null;
 </script>
 
 <svelte:window
 	on:mouseup={() => {
 		expanding = null;
-		start = null;
 	}} />
 
 <div
 	class="flex h-screen overflow-x-hidden"
 	on:mousemove={(e) => {
 		if (!expanding) return;
-
-		const delta = e.pageX - (start || 0);
-		width = initialWidth + Math.floor(delta / 7);
-		width = initialWidth + delta;
+		width = e.pageX;
 	}}
 	use:swipe={{ timeframe: 300, minSwipeDistance: 60, touchAction: "pan-y" }}
 	on:swipe={onSwipe}>
 	<aside
 		style={`width: ${width}px !important; min-width: ${initialWidth}rem; max-width: ${maxWidth}rem`}
-		class="{showMenu
-			? ''
-			: '-ml-64'} min-w-64 flex w-64 flex-shrink-0 flex-col transition-all duration-300 lg:ml-0">
+		class="{showMenu ? '' : '-ml-64'} min-w-64 flex w-64 flex-shrink-0 flex-col lg:ml-0">
 		<SideBar
 			dragging={$draggableStore}
 			selectedDrag={$selectedGroupStore}
@@ -70,7 +63,6 @@
 		class="cursor-ew-resize bg-blue-50 transition-all duration-300 hover:bg-yellow-400 dark:bg-slate-800 hover:dark:bg-yellow-400 lg:w-2"
 		on:mousedown={(e) => {
 			expanding = e;
-			start = e.pageX;
 		}} />
 	<div class="flex-1">
 		<Header bind:showMenu />
