@@ -21,11 +21,11 @@
 	on:click={() => {
 		showAvatarMenu = !showAvatarMenu;
 	}}
-	class="max-h-screen-menu w-full bg-slate-100 dark:bg-slate-800 lg:static lg:flex lg:overflow-y-visible">
+	class="max-h-screen-menu static my-1 flex w-full bg-slate-100 dark:bg-slate-800 lg:overflow-y-visible">
 	<div
-		class="relative block cursor-pointer items-center text-black hover:text-slate-500 dark:text-white dark:hover:text-slate-400 lg:flex lg:py-2 lg:px-3">
+		class="relative flex cursor-pointer items-center py-2 px-3 text-black hover:text-slate-500 dark:text-white dark:hover:text-slate-400">
 		<div
-			class="flex items-center bg-gray-100 p-3 dark:bg-slate-800 lg:bg-transparent lg:p-0 lg:dark:bg-transparent">
+			class="flex items-center bg-gray-100 bg-transparent dark:bg-slate-800 dark:bg-transparent lg:p-3">
 			<div class="mr-3 inline-flex h-6 w-6">
 				<Avatar {avatar} {nickname} {email} />
 			</div>
