@@ -48,7 +48,9 @@
 	on:swipe={onSwipe}>
 	<aside
 		style={`width: ${width}px !important; min-width: ${initialWidth}rem; max-width: ${maxWidth}rem`}
-		class="{showMenu ? '' : '-ml-64'} min-w-64 flex w-64 flex-shrink-0 flex-col lg:ml-0">
+		class="{showMenu
+			? ''
+			: '-ml-64'} min-w-64 translate-all flex w-64 flex-shrink-0 flex-col duration-200 lg:ml-0 lg:transition-none">
 		<SideBar
 			dragging={$draggableStore}
 			selectedDrag={$selectedGroupStore}
