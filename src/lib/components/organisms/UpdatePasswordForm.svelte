@@ -11,24 +11,13 @@
 		currentPassword: string[] | undefined;
 		password: string[] | undefined;
 	}
-
-	let passwordScore = 0;
-	let passwordValue = "";
-	function updatePassword(event: Event) {
-		const target = event.target as HTMLInputElement;
-		const value = target.value;
-		passwordScore = passwordStrength(value).id;
-		passwordValue = value;
-	}
 </script>
 
 <script lang="ts">
 	import { enhance } from "$app/forms";
 	import { invalidateAll } from "$app/navigation";
-	import { passwordStrength } from "check-password-strength";
 
-	import PasswordIndicator from "../molecules/PasswordIndicator.svelte";
-	import PasswordRules from "../molecules/PasswordRules.svelte";
+	import Password from "../molecules/Password.svelte";
 	import Button from "~/lib/components/atoms/Button.svelte";
 	import PasswordInput from "~/lib/components/molecules/PasswordInput.svelte";
 
@@ -76,18 +65,7 @@
 			labelName="Current Password"
 			value={values.currentPassword}
 			errors={errors.currentPassword} />
-		<PasswordInput
-			autocomplete="new-password"
-			disabled={loading}
-			on:input={updatePassword}
-			name="password"
-			labelName="Password"
-			placeholder="Your new password"
-			note="Required. Your new password"
-			value={values.password}
-			errors={errors.password} />
-		<PasswordRules password={passwordValue} />
-		<PasswordIndicator {passwordScore} />
+		<Password {loading} value={values?.password} errors={errors?.password || []} />
 	</div>
 
 	<div class="p-6">

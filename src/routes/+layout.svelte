@@ -38,7 +38,8 @@
 
 <Toaster toastOptions={{ style: "background: #334155; color: #fff" }} />
 <DarkMode btnClass="hidden" />
-<main class="bg-blue-100 font-sans font-medium text-gray-800 dark:bg-slate-800 dark:text-white">
+<main
+	class="min-h-screen bg-blue-100 font-sans font-medium text-gray-800 dark:bg-slate-800 dark:text-white">
 	<slot />
 </main>
 

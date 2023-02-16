@@ -12,6 +12,10 @@
 	export let placeholder = "Your password";
 	export let disabled = false;
 	let show = false;
+
+	$: {
+		console.log("ERRORS", errors);
+	}
 </script>
 
 <div class="relative mb-6 w-full last:mb-0">
@@ -27,7 +31,8 @@
 		{errors}
 		{note}>
 		<span
-			class=" pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center {errors
+			class=" pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center {errors &&
+			errors.length > 0
 				? 'text-red-500'
 				: 'text-slate-500 dark:text-slate-400'}">
 			<LockSolid class="inline-block h-4 w-4" />

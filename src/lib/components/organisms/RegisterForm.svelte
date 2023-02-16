@@ -1,14 +1,11 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
 	import type { ActionResult } from "@sveltejs/kit";
-	import { passwordStrength } from "check-password-strength";
 	import toast from "svelte-french-toast";
 
-	import PasswordIndicator from "../molecules/PasswordIndicator.svelte";
-	import PasswordRules from "../molecules/PasswordRules.svelte";
+	import Password from "../molecules/Password.svelte";
 	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
 	import EmailInput from "~/lib/components/molecules/EmailInput.svelte";
-	import PasswordInput from "~/lib/components/molecules/PasswordInput.svelte";
 	import type { Register } from "~/lib/types/form";
 
 	export let register: Register | undefined;
@@ -43,15 +40,6 @@
 			loading = false;
 		};
 	};
-
-	let passwordScore = 0;
-	let passwordValue = "";
-	function updatePassword(event: Event) {
-		const target = event.target as HTMLInputElement;
-		const value = target.value;
-		passwordScore = passwordStrength(value).id;
-		passwordValue = value;
-	}
 </script>
 
 <h1
@@ -64,16 +52,6 @@
 		disabled={loading}
 		value={register?.email}
 		errors={errors?.email} />
-	<PasswordInput
-		autocomplete="new-password"
-		note="Required. Your password"
-		on:input={updatePassword}
-		disabled={loading}
-		name="password"
-		labelName="Password"
-		value={register?.password}
-		errors={errors?.password} />
-	<PasswordRules password={passwordValue} />
-	<PasswordIndicator {passwordScore} />
+	<Password {loading} value={register?.password || ""} errors={errors?.password || []} />
 	<FullWidthButton>Create Account</FullWidthButton>
 </form>

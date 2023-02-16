@@ -19,16 +19,12 @@
 	}
 </script>
 
-<div>
-	<IconButton
-		iconComponent={GithubBrand}
-		on:click={() => gotoAuthProvider("github")}
-		name="Sign in with GitHub" />
-</div>
+<IconButton
+	iconComponent={GithubBrand}
+	on:click={() => gotoAuthProvider("github")}
+	name="Sign in with GitHub" />
 
-<div>
-	<IconButton
-		iconComponent={GitlabBrand}
-		on:click={() => gotoAuthProvider("github")}
-		name="Sign in with GitLab" />
-</div>
+<IconButton
+	iconComponent={GitlabBrand}
+	on:click={() => gotoAuthProvider("github")}
+	name="Sign in with GitLab" />

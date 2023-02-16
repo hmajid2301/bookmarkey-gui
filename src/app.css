@@ -12,4 +12,8 @@
 	nav a.active svg {
 		@apply text-blue-600;
 	}
+
+	a.activel {
+		@apply bg-blue-500;
+	}
 }
