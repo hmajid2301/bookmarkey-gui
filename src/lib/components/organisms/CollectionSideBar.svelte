@@ -3,31 +3,28 @@
 
 	import AddCollectionForm from "./AddCollectionForm.svelte";
 	import AddGroupForm from "./AddGroupForm.svelte";
-	import Collections from "../molecules/CollectionGroups.svelte";
-	import type { Dragging } from "~/lib/stores/DraggableStore";
-	import type { DragSelectedGroup } from "~/lib/stores/SelectedGroup";
+	import Collections from "./CollectionGroups.svelte";
+	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 	import type { CollectionGroups } from "~/lib/types/components";
 
-	let showAddCollectionForm = false;
 	let collectionRef: HTMLInputElement;
 	let groupRef: HTMLInputElement;
+	let showAddCollectionForm = false;
 
 	export let showAddGroupForm = false;
 	export let currentPath: string;
 	export let collections: CollectionGroups;
-	export let selectedDrag: DragSelectedGroup;
-	export let dragging: Dragging;
 
-	$: showAddCollectionOnStore();
+	$: $selectedGroupStore, showAddCollectionOnStore();
 	async function showAddCollectionOnStore() {
-		if (selectedDrag.group.id || !selectedDrag.addCollection) {
+		if ($selectedGroupStore.group.id || !$selectedGroupStore.addCollection) {
 			return;
 		}
 
 		showAddCollectionForm = true;
 		await tick();
 		collectionRef?.focus();
-		selectedDrag.addCollection = false;
+		$selectedGroupStore.addCollection = false;
 	}
 </script>
 
@@ -35,4 +32,4 @@
 	<AddCollectionForm bind:ref={collectionRef} bind:showInput={showAddCollectionForm} />
 {/if}
 <AddGroupForm bind:ref={groupRef} bind:show={showAddGroupForm} />
-<Collections {collections} {dragging} {currentPath} {selectedDrag} />
+<Collections {collections} {currentPath} />

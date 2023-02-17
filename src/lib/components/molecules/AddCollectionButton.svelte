@@ -2,11 +2,11 @@
 	import PlusSolid from "svelte-awesome-icons/PlusSolid.svelte";
 
 	import ContextMenu from "./ContextMenu.svelte";
+	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 	import { clickOutside } from "~/lib/use/clickOutside";
 
 	let showMenu = false;
 	export let showAddGroupForm = false;
-	export let isAddingCollection = false;
 </script>
 
 <div
@@ -31,7 +31,7 @@
 					divider: true,
 					onClick: async () => {
 						showMenu = false;
-						isAddingCollection = true;
+						$selectedGroupStore.addCollection = true;
 					}
 				},
 				{

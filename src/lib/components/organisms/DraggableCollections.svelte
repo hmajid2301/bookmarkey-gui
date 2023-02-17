@@ -3,21 +3,19 @@
 	import toast from "svelte-french-toast";
 
 	import Collection from "../molecules/Collection.svelte";
-	import type { Dragging } from "~/lib/stores/DraggableStore";
-	import { DraggingType } from "~/lib/stores/DraggableStore";
+	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
 	import type { CollectionMove } from "~/lib/types/api";
 	import type { Collection as Collection_ } from "~/lib/types/components";
 
 	export let currentPath: string;
 	export let collections: Collection_[];
 	export let groupId: string | undefined = undefined;
-	export let dragging: Dragging;
 
 	async function moveCollection(swapToIndex: number) {
 		const collectionMove: CollectionMove = {
 			new_order: swapToIndex + 1,
-			collection_id: dragging.collection.id || "",
-			group_id: dragging.collection.newGroupId || ""
+			collection_id: $draggableStore.collection.id || "",
+			group_id: $draggableStore.collection.newGroupId || ""
 		};
 
 		const response = await fetch(`/my/collections/move`, {
@@ -42,7 +40,7 @@
 			moveCollection(0);
 		}}
 		on:dragenter={() => {
-			dragging.collection.newGroupId = groupId || "";
+			$draggableStore.collection.newGroupId = groupId || "";
 		}}
 		on:dragover|preventDefault>
 		<p class="text-xs text-gray-800 dark:text-gray-200">Empty Collection</p>
@@ -57,16 +55,16 @@
 			collectionIdOpenMenuMap[collection.id] = true;
 		}}
 		on:dragstart={() => {
-			dragging.collection.id = collection.id;
-			dragging.draggingType = DraggingType.Collection;
+			$draggableStore.collection.id = collection.id;
+			$draggableStore.draggingType = DraggingType.Collection;
 		}}
 		on:dragend={() => {
 			moveCollection(index);
-			dragging.draggingType = null;
-			dragging.collection = {};
+			$draggableStore.draggingType = null;
+			$draggableStore.collection = {};
 		}}
 		on:dragenter={() => {
-			dragging.collection.newGroupId = groupId || "";
+			$draggableStore.collection.newGroupId = groupId || "";
 		}}
 		on:dragover|preventDefault>
 		<Collection

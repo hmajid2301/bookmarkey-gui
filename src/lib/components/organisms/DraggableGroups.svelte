@@ -3,15 +3,11 @@
 	import toast from "svelte-french-toast";
 
 	import Group from "./Group.svelte";
-	import type { Dragging } from "~/lib/stores/DraggableStore";
-	import { DraggingType } from "~/lib/stores/DraggableStore";
-	import type { DragSelectedGroup } from "~/lib/stores/SelectedGroup";
+	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
 	import type { GroupSwap } from "~/lib/types/api";
 	import type { Group as Group_ } from "~/lib/types/components";
 
 	export let groups: Group_[] = [];
-	export let selectedDrag: DragSelectedGroup;
-	export let dragging: Dragging;
 	export let currentPath: string;
 
 	const dragDuration = 300;
@@ -62,11 +58,11 @@
 		on:contextmenu={() => {
 			collectionIdOpenMenuMap[group.id] = true;
 		}}
-		draggable={dragging.draggingType === DraggingType.Collection ? "false" : "true"}
+		draggable={$draggableStore.draggingType === DraggingType.Collection ? "false" : "true"}
 		on:dragstart={() => {
-			if (dragging.draggingType !== DraggingType.Collection) {
-				dragging.draggingType = DraggingType.Group;
-				dragging.group.id = group.id || "";
+			if ($draggableStore.draggingType !== DraggingType.Collection) {
+				$draggableStore.draggingType = DraggingType.Group;
+				$draggableStore.group.id = group.id || "";
 				swapFromindex = index;
 			}
 		}}
@@ -74,16 +70,14 @@
 			swapFromindex = undefined;
 		}}
 		on:dragenter={() => {
-			if (dragging.draggingType !== DraggingType.Collection) {
+			if ($draggableStore.draggingType !== DraggingType.Collection) {
 				changeGroupOrder(index);
-				dragging.draggingType = null;
-				dragging.group = {};
+				$draggableStore.draggingType = null;
+				$draggableStore.group = {};
 			}
 		}}
 		on:dragover|preventDefault>
 		<Group
-			{dragging}
-			{selectedDrag}
 			{group}
 			bind:showMenu={collectionIdOpenMenuMap[group.id]}
 			bind:hiddenGroups

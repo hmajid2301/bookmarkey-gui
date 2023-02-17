@@ -6,8 +6,6 @@
 	import Header from "~/lib/components/molecules/Header.svelte";
 	import HelloBar from "~/lib/components/organisms/HelloBar.svelte";
 	import SideBar from "~/lib/components/organisms/SideBar.svelte";
-	import { draggableStore } from "~/lib/stores/DraggableStore";
-	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 
 	export let data: LayoutData;
 	let showMenu = false;
@@ -52,8 +50,6 @@
 			? ''
 			: '-ml-64'} min-w-64 translate-all flex w-64 flex-shrink-0 flex-col duration-200 lg:ml-0 lg:transition-none">
 		<SideBar
-			dragging={$draggableStore}
-			selectedDrag={$selectedGroupStore}
 			avatar={data.user.avatar}
 			email={data.user.email}
 			nickname={data.user.nickname}

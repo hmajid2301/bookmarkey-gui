@@ -11,7 +11,7 @@ describe("AddCollectionForm", () => {
 		const ref: HTMLInputElement = document.createElement("input");
 
 		const { container } = render(html`
-		<${AddCollectionForm} bind:${ref} {value} {errors}>
+		<${AddCollectionForm} bind:${ref}>
         button
 		</${AddCollectionForm}>
 	`);

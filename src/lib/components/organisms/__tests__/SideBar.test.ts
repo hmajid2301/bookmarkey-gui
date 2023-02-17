@@ -19,15 +19,7 @@ describe("SideBar", () => {
 					]
 				},
 				currentPath: "/my/settings",
-				mainPageLink: "/my/dashboard",
-				selectedDrag: {
-					group: {},
-					addCollection: false
-				},
-				dragging: {
-					collection: {},
-					group: {}
-				}
+				mainPageLink: "/my/dashboard"
 			}
 		});
 
@@ -73,15 +65,7 @@ describe("SideBar", () => {
 					]
 				},
 				currentPath: "/my/settings",
-				mainPageLink: "/my/dashboard",
-				selectedDrag: {
-					group: {},
-					addCollection: false
-				},
-				dragging: {
-					collection: {},
-					group: {}
-				}
+				mainPageLink: "/my/dashboard"
 			}
 		});
 

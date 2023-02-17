@@ -12,10 +12,6 @@
 	export let placeholder = "Your password";
 	export let disabled = false;
 	let show = false;
-
-	$: {
-		console.log("ERRORS", errors);
-	}
 </script>
 
 <div class="relative mb-6 w-full last:mb-0">

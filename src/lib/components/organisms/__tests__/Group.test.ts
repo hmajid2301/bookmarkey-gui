@@ -20,14 +20,6 @@ describe("Group", () => {
 					id: "abcd",
 					name: "Test",
 					collections: []
-				},
-				selectedDrag: {
-					group: {},
-					addCollection: false
-				},
-				dragging: {
-					collection: {},
-					group: {}
 				}
 			}
 		});
@@ -61,14 +53,6 @@ describe("Group", () => {
 					id: "abcd",
 					name: "Test",
 					collections: []
-				},
-				selectedDrag: {
-					group: {},
-					addCollection: false
-				},
-				dragging: {
-					collection: {},
-					group: {}
 				}
 			}
 		});
@@ -100,14 +84,6 @@ describe("Group", () => {
 							name: "My Collection"
 						}
 					]
-				},
-				selectedDrag: {
-					group: {},
-					addCollection: false
-				},
-				dragging: {
-					collection: {},
-					group: {}
 				}
 			}
 		});

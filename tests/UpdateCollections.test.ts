@@ -15,7 +15,7 @@ test.describe(() => {
 		await login(page, baseURL || "");
 		await page.getByRole("link", { name: "folder open Collections" }).click();
 		await page.getByRole("link", { name: "folder closed Collections" }).click();
-		await page.getByRole("button", { name: "plus" }).click();
+		await page.getByRole("button", { name: "add" }).click();
 		await page.getByRole("button", { name: "Create Collection" }).click();
 		await page.getByPlaceholder("Collection Name").fill("test collection");
 		await page.getByPlaceholder("Collection Name").press("Enter");
@@ -26,7 +26,7 @@ test.describe(() => {
 
 	test("Successfully delete collection in app", async ({ page, baseURL }) => {
 		await login(page, baseURL || "");
-		await page.getByRole("button", { name: "plus" }).click();
+		await page.getByRole("button", { name: "add" }).click();
 		await page.getByRole("button", { name: "Create Collection" }).click();
 		await page.getByPlaceholder("Collection Name").fill("abcd");
 		await page.getByPlaceholder("Collection Name").press("Enter");

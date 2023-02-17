@@ -13,7 +13,7 @@ test.describe(() => {
 
 	test("Successfully add group in app", async ({ page, baseURL }) => {
 		await login(page, baseURL || "");
-		await page.getByRole("button", { name: "plus" }).click();
+		await page.getByRole("button", { name: "add" }).click();
 		await page.getByRole("button", { name: "Create Group" }).click();
 		await page.getByPlaceholder("Group Name").fill("New Group");
 		await page.getByRole("button", { name: "Add Group" }).click();
@@ -24,7 +24,7 @@ test.describe(() => {
 
 	test("Successfully delete group in app", async ({ page, baseURL }) => {
 		await login(page, baseURL || "");
-		await page.getByRole("button", { name: "plus" }).click();
+		await page.getByRole("button", { name: "add" }).click();
 		await page.getByRole("button", { name: "Create Group" }).click();
 		await page.getByPlaceholder("Group Name").fill("Group to delete");
 		await page.getByRole("button", { name: "Add Group" }).click();

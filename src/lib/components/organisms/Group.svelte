@@ -8,8 +8,7 @@
 	import AddCollectionForm from "./AddCollectionForm.svelte";
 	import DraggableCollection from "./DraggableCollections.svelte";
 	import ContextMenu from "../molecules/ContextMenu.svelte";
-	import type { Dragging } from "~/lib/stores/DraggableStore";
-	import type { DragSelectedGroup } from "~/lib/stores/SelectedGroup";
+	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 	import type { Group } from "~/lib/types/components";
 	import { clickOutside } from "~/lib/use/clickOutside";
 
@@ -18,8 +17,6 @@
 	export let group: Group;
 	export let showAddCollectionForm = false;
 	export let showMenu: boolean | undefined = false;
-	export let selectedDrag: DragSelectedGroup;
-	export let dragging: Dragging;
 
 	let collectionRef: HTMLInputElement;
 
@@ -28,17 +25,17 @@
 
 	async function showAddCollectionOnStore() {
 		if (
-			selectedDrag.group &&
-			selectedDrag.group.id !== group.id &&
-			selectedDrag.addCollection
+			$selectedGroupStore.group &&
+			$selectedGroupStore.group.id !== group.id &&
+			$selectedGroupStore.addCollection
 		) {
 			return;
 		}
-		if (!selectedDrag.addCollection) {
+		if (!$selectedGroupStore.addCollection) {
 			return;
 		}
 		await showAddCollection();
-		selectedDrag.addCollection = false;
+		$selectedGroupStore.addCollection = false;
 	}
 
 	async function showAddCollection() {
@@ -124,10 +121,6 @@
 
 {#if !hiddenGroups.has(group.id)}
 	<div class="my-2 flex flex-col items-start space-y-1">
-		<DraggableCollection
-			{dragging}
-			groupId={group.id}
-			collections={group.collections}
-			{currentPath} />
+		<DraggableCollection groupId={group.id} collections={group.collections} {currentPath} />
 	</div>
 {/if}

@@ -13,6 +13,10 @@ tasks:
 
   lint:
     cmds:
+      - pnpm run lint
+
+  lint:fix:
+    cmds:
       - pnpm run lint --fix
 
   format:
@@ -36,7 +40,6 @@ tasks:
       - docker compose pull
       - docker compose -f tests/docker-compose.test.yml up  -d
       - pnpm run test {{.CLI_ARGS}}
-      # - pnpm run test {{.CLI_ARGS}}
     env:
       VITE_COVERAGE: true
       VITE_POCKET_BASE_URL: "http://localhost:9090"

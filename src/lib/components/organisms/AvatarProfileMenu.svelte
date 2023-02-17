@@ -25,7 +25,7 @@
 	<div
 		class="relative flex cursor-pointer items-center py-2 px-3 text-black hover:text-slate-500 dark:text-white dark:hover:text-slate-400">
 		<div
-			class="flex items-center bg-gray-100 bg-transparent dark:bg-slate-800 dark:bg-transparent lg:p-3">
+			class="flex items-center bg-gray-100 bg-transparent dark:bg-slate-800 dark:bg-transparent">
 			<div class="mr-3 inline-flex h-6 w-6">
 				<Avatar {avatar} {nickname} {email} />
 			</div>
