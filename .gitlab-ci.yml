@@ -3,6 +3,7 @@ include:
   - template: Security/License-Scanning.gitlab-ci.yml
   - template: Security/SAST.gitlab-ci.yml
   - template: Code-Quality.gitlab-ci.yml
+  - template: Verify/Browser-Performance.gitlab-ci.yml
 
 image: registry.gitlab.com/hmajid2301/pnpm-docker-ci:6faf9994486627a07ff45fa574f5c9e8df669413
 
@@ -27,6 +28,12 @@ format:check:
   extends: .task
   script:
     - task format:check
+
+browser_performance:
+  only:
+    - merge_requests
+  variables:
+    URL: https://deploy-preview-${CI_MERGE_REQUEST_IID}--bookmarkey.netlify.app
 
 coverage:unit:
   only:
