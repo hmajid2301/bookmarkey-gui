@@ -45,6 +45,10 @@ tasks:
       VITE_POCKET_BASE_URL: "http://localhost:9090"
       VITE_TEST_POCKET_BASE_URL: "http://localhost:9090"
 
+  generate:types:
+    cmds:
+      - npx pocketbase-typegen --db tests/pb_data/data.db --out src/lib/pocketbase/types.generated.ts
+
   check:
     cmds:
       - pnpm run check

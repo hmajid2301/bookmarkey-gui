@@ -1,7 +1,7 @@
 import { redirect } from "@sveltejs/kit";
 
 import type { LayoutServerLoad } from "./$types";
-import type { CollectionsResponse, GroupsResponse } from "~/lib/pocketbase-types";
+import type { CollectionsResponse, GroupsResponse } from "~/lib/pocketbase/types.generated";
 import type { Collection, CollectionGroups, Group } from "~/lib/types/components";
 
 export type OutputType = { collections: CollectionGroups };

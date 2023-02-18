@@ -1,5 +1,5 @@
 import type { PageServerLoad } from "./$types";
-import type { CollectionsResponse } from "~/lib/pocketbase-types";
+import type { CollectionsResponse } from "~/lib/pocketbase/types.generated";
 
 interface OutputType {
 	collection: CollectionsResponse;

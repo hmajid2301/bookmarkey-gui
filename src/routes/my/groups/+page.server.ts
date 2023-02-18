@@ -2,7 +2,7 @@ import * as Sentry from "@sentry/node";
 import { error, fail, type Actions } from "@sveltejs/kit";
 import { z } from "zod";
 
-import type { GroupsResponse } from "~/lib/pocketbase-types";
+import type { GroupsResponse } from "~/lib/pocketbase/types.generated";
 
 interface AddGroup {
 	group: string;
