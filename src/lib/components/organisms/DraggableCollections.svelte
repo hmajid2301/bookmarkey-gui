@@ -51,7 +51,7 @@
 	<div
 		class="flex grow"
 		draggable="true"
-		on:contextmenu={() => {
+		on:contextmenu|preventDefault={() => {
 			collectionIdOpenMenuMap[collection.id] = true;
 		}}
 		on:dragstart={() => {

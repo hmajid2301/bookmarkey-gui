@@ -20,7 +20,7 @@
 <PasswordInput
 	autocomplete="new-password"
 	note="Required. Your password"
-	on:input={updatePassword}
+	on:change={updatePassword}
 	disabled={loading}
 	name="password"
 	labelName="Password"

@@ -7,6 +7,7 @@
 
 	import AddCollectionForm from "./AddCollectionForm.svelte";
 	import DraggableCollection from "./DraggableCollections.svelte";
+	import Input from "../atoms/Input.svelte";
 	import ContextMenu from "../molecules/ContextMenu.svelte";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 	import type { Group } from "~/lib/types/components";
@@ -19,9 +20,10 @@
 	export let showMenu: boolean | undefined = false;
 
 	let collectionRef: HTMLInputElement;
+	let edittingName = false;
+	let groupRef: HTMLInputElement;
 
-	// TODO: refactor in draggable
-	$: showAddCollectionOnStore();
+	$: $selectedGroupStore, showAddCollectionOnStore();
 
 	async function showAddCollectionOnStore() {
 		if (
@@ -45,14 +47,6 @@
 		collectionRef?.focus();
 	}
 
-	async function openMenu() {
-		showMenu = true;
-	}
-
-	function closeMenu() {
-		showMenu = false;
-	}
-
 	async function deleteGroup() {
 		showMenu = false;
 		const response = await fetch(`/my/groups/${group.id}`, {
@@ -64,6 +58,36 @@
 		} else {
 			toast.error("Failed to delete group");
 		}
+	}
+
+	async function patchGroupName(newGroupName: string) {
+		showMenu = false;
+		edittingName = false;
+
+		const response = await fetch(`/my/groups/${group.id}`, {
+			method: "PATCH",
+			body: JSON.stringify({ name: newGroupName })
+		});
+		if (response.ok) {
+			toast.success("Renamed group");
+			await invalidateAll();
+		} else {
+			toast.error("Failed to rename group");
+		}
+	}
+
+	async function renameGroup(event: Event) {
+		const target = event.target as HTMLInputElement;
+		const newGroupName = target.value;
+		await patchGroupName(newGroupName);
+	}
+
+	function openMenu() {
+		showMenu = true;
+	}
+
+	function closeMenu() {
+		showMenu = false;
 	}
 </script>
 
@@ -82,7 +106,21 @@
 		}}
 		id={group.id}
 		class="mb-1 text-sm">
-		{group.name}
+		{#if edittingName}
+			<Input
+				bind:ref={groupRef}
+				on:change={async (event) => {
+					await renameGroup(event);
+				}}
+				on:blur={() => {
+					edittingName = false;
+				}}
+				placeholder="New Group Name"
+				type="text"
+				name="group" />
+		{:else}
+			{group.name}
+		{/if}
 	</button>
 	<button on:click={openMenu} on:keyup={openMenu} use:clickOutside={closeMenu}>
 		<div class="my-2 flex flex-col items-start space-y-1">
@@ -107,6 +145,15 @@
 						name: "Create Collection",
 						onClick: async () => {
 							await showAddCollection();
+						}
+					},
+					{
+						name: "Rename Group",
+						onClick: async () => {
+							edittingName = true;
+							await tick();
+							groupRef?.focus();
+							groupRef?.select();
 						}
 					}
 				]}

@@ -43,6 +43,29 @@ test.describe(() => {
 		expect(toastMessage).toBe("Deleted group");
 	});
 
+	test("Successfully rename group in app", async ({ page, baseURL }) => {
+		await login(page, baseURL || "");
+		await page.getByRole("button", { name: "add" }).click();
+		await page.getByRole("button", { name: "Create Group" }).click();
+		await page.getByPlaceholder("Group Name").fill("Group to rename");
+		await page.getByRole("button", { name: "Add Group" }).click();
+
+		// Wait for `created group` message to disappear
+		// await expect(page.locator(".message")).toHaveCount(0);
+		await page.waitForTimeout(3000);
+		await page
+			.getByRole("button", { name: "Group to rename ellipsis" })
+			.first()
+			.getByRole("button", { name: "ellipsis" })
+			.click();
+		await page.getByRole("button", { name: "Rename Group", exact: true }).click();
+		await page.getByPlaceholder("New Group Name").fill("renamed group");
+		await page.getByPlaceholder("New Group Name").press("Enter");
+
+		const toastMessage = await page.locator(".message").innerText();
+		expect(toastMessage).toBe("Renamed group");
+	});
+
 	// TODO: work out how to fix
 	// test("Successfully swap two group in app", async ({ page, baseURL }) => {
 	// 	await login(page, baseURL || "");

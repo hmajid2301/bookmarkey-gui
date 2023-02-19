@@ -8,7 +8,7 @@ import AddGroupForm from "../AddGroupForm.svelte";
 describe("AddGroupForm", () => {
 	test("Successfully render add group form", async () => {
 		const user = userEvent.setup();
-		const ref: HTMLInputElement = document.createElement("input");
+		const ref = document.createElement("change") as HTMLInputElement;
 
 		const { container } = render(html`
 			<${AddGroupForm} bind:${ref} />

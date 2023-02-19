@@ -24,6 +24,24 @@ test.describe(() => {
 		expect(toastMessage).toBe("Created collection");
 	});
 
+	test("Successfully rename collection in app", async ({ page, baseURL }) => {
+		await login(page, baseURL || "");
+		await page.getByRole("button", { name: "add" }).click();
+		await page.getByRole("button", { name: "Create Collection" }).click();
+		await page.getByPlaceholder("Collection Name").fill("rename collection");
+		await page.getByPlaceholder("Collection Name").press("Enter");
+
+		await page.getByRole("link", { name: "folder closed rename collection" }).click({
+			button: "right"
+		});
+		await page.getByRole("button", { name: "Rename Collection" }).click();
+		await page.getByPlaceholder("New Collection Name").fill("rename collection2");
+		await page.getByPlaceholder("New Collection Name").press("Enter");
+
+		const toastMessage = await page.locator(".message").innerText();
+		expect(toastMessage).toBe("Renamed collection");
+	});
+
 	test("Successfully delete collection in app", async ({ page, baseURL }) => {
 		await login(page, baseURL || "");
 		await page.getByRole("button", { name: "add" }).click();

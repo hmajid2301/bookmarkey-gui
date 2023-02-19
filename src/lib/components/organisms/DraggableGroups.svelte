@@ -55,7 +55,7 @@
 	<div
 		class="flex w-full grow flex-col"
 		animate:flip={{ duration: dragDuration }}
-		on:contextmenu={() => {
+		on:contextmenu|preventDefault={() => {
 			collectionIdOpenMenuMap[group.id] = true;
 		}}
 		draggable={$draggableStore.draggingType === DraggingType.Collection ? "false" : "true"}

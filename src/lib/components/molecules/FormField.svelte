@@ -28,7 +28,7 @@
 	<div class="relative">
 		<Input
 			bind:ref
-			on:input
+			on:change
 			on:change
 			on:blur
 			{autocomplete}

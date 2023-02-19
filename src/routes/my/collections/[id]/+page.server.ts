@@ -8,7 +8,7 @@ interface OutputType {
 export const load: PageServerLoad<OutputType> = async ({ locals, params }) => {
 	const collection = await locals.pb
 		?.collection("collections")
-		.getOne<CollectionsResponse>(params.name);
+		.getOne<CollectionsResponse>(params.id);
 	if (!collection) {
 		throw Error("failed to get collection id");
 	}

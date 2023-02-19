@@ -8,7 +8,7 @@ import AddCollectionForm from "../AddCollectionForm.svelte";
 describe("AddCollectionForm", () => {
 	test("Successfully render add collection form", async () => {
 		const user = userEvent.setup();
-		const ref: HTMLInputElement = document.createElement("input");
+		const ref = document.createElement("change") as HTMLInputElement;
 
 		const { container } = render(html`
 		<${AddCollectionForm} bind:${ref}>

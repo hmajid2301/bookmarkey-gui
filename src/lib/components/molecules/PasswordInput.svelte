@@ -21,7 +21,7 @@
 		{autocomplete}
 		{name}
 		{value}
-		on:input
+		on:change
 		{disabled}
 		{labelName}
 		{errors}
