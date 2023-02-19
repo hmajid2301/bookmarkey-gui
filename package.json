@@ -20,6 +20,7 @@
 	},
 	"devDependencies": {
 		"@go-task/cli": "^3.20.0",
+		"@macfja/svelte-multi-adapter": "^1.0.2",
 		"@playwright/test": "1.30.0",
 		"@popperjs/core": "^2.11.6",
 		"@sentry/browser": "^7.29.0",
@@ -75,6 +76,7 @@
 		"svelte-gestures": "^1.4.1",
 		"svelte-htm": "^1.2.0",
 		"svelte-preprocess": "^4.10.7",
+		"sveltekit-adapter-chrome-extension": "^1.5.0",
 		"tailwindcss": "^3.2.4",
 		"tslib": "^2.5.0",
 		"typescript": "^4.9.5",

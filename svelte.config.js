@@ -1,5 +1,7 @@
 import { withSentryConfig } from "@sentry/svelte";
-import adapter from "@sveltejs/adapter-netlify";
+import Netlifyadapter from "@sveltejs/adapter-netlify";
+import MultiAdapter from "@macfja/svelte-multi-adapter";
+import ChromeExtensionAdapter from "sveltekit-adapter-chrome-extension";
 import preprocess from "svelte-preprocess";
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -11,10 +13,20 @@ const config = {
 		enableSourcemap: true
 	},
 	kit: {
-		adapter: adapter({
-			edge: false,
-			split: true
-		}),
+		adapter: MultiAdapter([
+			Netlifyadapter({
+				edge: false,
+				split: true
+			}),
+			ChromeExtensionAdapter({
+				pages: "build",
+				assets: "build",
+				fallback: null,
+				precompress: false,
+				manifest: "manifest.json",
+				emptyOutDir: true
+			})
+		]),
 		alias: {
 			"~": "./src/"
 		}

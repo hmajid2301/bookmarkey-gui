@@ -1,0 +1,12 @@
+{
+	"name": "Bookmarkey",
+	"description": "A browser extension to make it easier to interact with the Bookmarkey app.",
+	"version": "0.1.0",
+	"manifest_version": 3,
+	"permissions": ["activeTab"],
+	"action": {
+		"default_title": "Svelte Extension",
+		"default_icon": "favicon.png",
+		"default_popup": "index.html"
+	}
+}
