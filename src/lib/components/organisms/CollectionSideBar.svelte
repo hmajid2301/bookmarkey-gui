@@ -15,7 +15,14 @@
 	export let currentPath: string;
 	export let collections: CollectionGroups;
 
+	$: (async () => {
+		if (showAddGroupForm) {
+			await tick();
+			groupRef?.focus();
+		}
+	})();
 	$: $selectedGroupStore, showAddCollectionOnStore();
+
 	async function showAddCollectionOnStore() {
 		if ($selectedGroupStore.group.id || !$selectedGroupStore.addCollection) {
 			return;

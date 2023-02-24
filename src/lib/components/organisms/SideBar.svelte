@@ -20,7 +20,7 @@
 	export let currentPath: string;
 	export let collections: CollectionGroups;
 	export let showCollections = true;
-	export let showAddGroupForm = false;
+	let showAddGroupForm = false;
 </script>
 
 <div class="min-h-screen flex-col bg-white px-4 py-4 font-bold dark:bg-gray-900">

@@ -135,16 +135,16 @@
 			<ContextMenu
 				menuItems={[
 					{
-						name: "Delete Group",
-						onClick: async function () {
-							await deleteGroup();
+						name: "Create Collection",
+						onClick: async () => {
+							await showAddCollection();
 						},
 						divider: true
 					},
 					{
-						name: "Create Collection",
-						onClick: async () => {
-							await showAddCollection();
+						name: "Delete Group",
+						onClick: async function () {
+							await deleteGroup();
 						}
 					},
 					{

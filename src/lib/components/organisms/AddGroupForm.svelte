@@ -10,8 +10,8 @@
 
 	let loading = false;
 	export let ref: HTMLInputElement;
-
 	export let show = false;
+
 	const submitAddGroupForm = () => {
 		loading = true;
 		return async ({
