@@ -41,7 +41,7 @@
 					<a
 						class:activel={currentPath === `/register`}
 						href="/register"
-						class="rounded py-2 px-2 text-white transition duration-300 hover:bg-slate-800">
+						class="rounded py-2 px-2 transition duration-300 hover:bg-slate-800 hover:text-white">
 						Register
 					</a>
 				</div>
