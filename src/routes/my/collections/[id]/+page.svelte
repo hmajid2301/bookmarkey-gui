@@ -64,8 +64,11 @@
 	Add
 </Button>
 
-{#each data.bookmarks as bookmark}
-	<div
+{#each data.collection.bookmarks as bookmark}
+	<a
+		href={bookmark.url}
+		target="_blank"
+		rel="noreferrer"
 		class="mb-6 flex flex-col rounded-2xl bg-white transition-shadow duration-500 last:mb-0 hover:shadow-lg dark:bg-slate-900/70">
 		<div class="flex-1 p-6">
 			<div class="block items-center justify-between md:flex">
@@ -74,15 +77,16 @@
 						<div class="mb-6 flex items-center justify-center md:mb-0">
 							<div class="h-12 w-12 md:mr-6">
 								<img
-									src="https://avatars.dicebear.com/api/bottts/Refined-Soft Chicken.svg"
-									alt="Refined Soft Chicken"
+									src={bookmark.image}
+									alt="Bookmark Image {bookmark.url}"
 									class="block h-auto w-full max-w-full rounded-full bg-gray-100 dark:bg-slate-800" />
 							</div>
 						</div>
 						<div class="flex items-center justify-center">
 							<div class="text-center md:text-left">
-								<h4 class="text-xl">{bookmark.url}</h4>
-								<p class="text-gray-500">{bookmark.created}</p>
+								<h4 class="text-xl">{bookmark.title}</h4>
+								<p>{bookmark.description}</p>
+								<p class="text-gray-500">{bookmark.createdAt}</p>
 							</div>
 						</div>
 					</div>
@@ -94,22 +98,19 @@
 								<div
 									class="mr-1.5 mb-3 inline-flex items-center rounded-full border border-emerald-500 bg-emerald-500 py-1 px-3 text-xs capitalize leading-none text-white last:mr-0">
 									<!---->
-									<span>Licensed</span>
+									<span>Example tag</span>
 								</div>
 								<div
 									class="mr-1.5 mb-3 inline-flex items-center rounded-full border border-blue-500 bg-blue-500 py-1 px-3 text-xs capitalize leading-none text-white last:mr-0">
 									<!---->
-									<span>Rubber</span>
+									<span>Another Tag</span>
 								</div>
 								<div
 									class="mr-1.5 mb-3 inline-flex items-center rounded-full border border-yellow-500 bg-yellow-500 py-1 px-3 text-xs capitalize leading-none text-white last:mr-0">
 									<!---->
-									<span>Hat</span>
+									<span>Final Tag</span>
 								</div>
 							</div>
-						</div>
-						<div class="mb-6 flex items-center justify-center md:mb-0">
-							<h4 class="text-xl md:mx-6">$431</h4>
 						</div>
 						<div class="flex items-center justify-center">
 							<div data-headlessui-state="" class="relative inline-block text-left">
@@ -147,7 +148,7 @@
 			</div>
 		</div>
 		<!---->
-	</div>
+	</a>
 {/each}
 
 <Modal title="Add a new bookmark" bind:show>

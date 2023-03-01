@@ -1,8 +1,8 @@
+import MultiAdapter from "@macfja/svelte-multi-adapter";
 import { withSentryConfig } from "@sentry/svelte";
 import Netlifyadapter from "@sveltejs/adapter-netlify";
-import MultiAdapter from "@macfja/svelte-multi-adapter";
-import ChromeExtensionAdapter from "sveltekit-adapter-chrome-extension";
 import preprocess from "svelte-preprocess";
+import ChromeExtensionAdapter from "sveltekit-adapter-chrome-extension";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {

@@ -5,6 +5,7 @@
 export enum Collections {
 	BookmarkTags = "bookmark_tags",
 	Bookmarks = "bookmarks",
+	BookmarksMetadata = "bookmarks_metadata",
 	Collections = "collections",
 	Groups = "groups",
 	Tags = "tags",
@@ -40,11 +41,17 @@ export type BookmarkTagsRecord = {
 };
 
 export type BookmarksRecord = {
-	user: RecordIdString;
 	collection: RecordIdString;
-	url: string;
-	favourite: boolean;
+	favourite?: boolean;
 	custom_order?: number;
+	bookmark_metadata: RecordIdString;
+};
+
+export type BookmarksMetadataRecord = {
+	url: string;
+	image: string;
+	description: string;
+	title: string;
 };
 
 export type CollectionsRecord = {
@@ -73,6 +80,7 @@ export type UsersRecord = {
 // Response types include system fields and match responses from the PocketBase API
 export type BookmarkTagsResponse = BookmarkTagsRecord & BaseSystemFields;
 export type BookmarksResponse = BookmarksRecord & BaseSystemFields;
+export type BookmarksMetadataResponse = BookmarksMetadataRecord & BaseSystemFields;
 export type CollectionsResponse = CollectionsRecord & BaseSystemFields;
 export type GroupsResponse = GroupsRecord & BaseSystemFields;
 export type TagsResponse = TagsRecord & BaseSystemFields;
@@ -81,6 +89,7 @@ export type UsersResponse = UsersRecord & AuthSystemFields;
 export type CollectionRecords = {
 	bookmark_tags: BookmarkTagsRecord;
 	bookmarks: BookmarksRecord;
+	bookmarks_metadata: BookmarksMetadataRecord;
 	collections: CollectionsRecord;
 	groups: GroupsRecord;
 	tags: TagsRecord;
