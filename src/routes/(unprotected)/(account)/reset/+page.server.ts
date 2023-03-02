@@ -13,7 +13,7 @@ const resetSchema: z.ZodType<Reset> = z.object({
 });
 
 export const actions: Actions = {
-	resetPassword: async ({ locals, request }) => {
+	default: async ({ locals, request }) => {
 		const data = Object.fromEntries((await request.formData()) as Iterable<[Reset]>);
 		const result = resetSchema.safeParse(data);
 

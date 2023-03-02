@@ -16,7 +16,7 @@ const loginSchema: z.ZodType<Login> = z.object({
 });
 
 export const actions: Actions = {
-	login: async ({ locals, request }) => {
+	default: async ({ locals, request }) => {
 		const data = Object.fromEntries((await request.formData()) as Iterable<[Login]>);
 		const result = loginSchema.safeParse(data);
 

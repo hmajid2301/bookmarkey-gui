@@ -14,7 +14,7 @@ describe("AvatarProfileMenu", () => {
 			}
 		});
 
-		["My Dashboard", "My Settings", "Log Out"].forEach((element) => {
+		["Dashboard", "Settings", "Log Out"].forEach((element) => {
 			getByText(element);
 		});
 	});

@@ -37,12 +37,12 @@
 		<ContextMenu
 			menuItems={[
 				{
-					name: "My Dashboard",
+					name: "Dashboard",
 					link: "/my/dashboard",
 					icon: UserSolid
 				},
 				{
-					name: "My Settings",
+					name: "Settings",
 					link: "/my/settings",
 					icon: GearSolid
 				},

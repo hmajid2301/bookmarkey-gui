@@ -46,7 +46,7 @@
 	class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
 	Create an account
 </h1>
-<form class="space-y-4 md:space-y-6" action="?/register" method="post" use:enhance={submitRegister}>
+<form class="space-y-4 md:space-y-6" method="post" use:enhance={submitRegister}>
 	<EmailInput
 		autocomplete="username"
 		disabled={loading}

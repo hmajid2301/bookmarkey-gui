@@ -34,11 +34,7 @@
 	};
 </script>
 
-<form
-	class="space-y-4 md:space-y-6"
-	action="?/sendEmailVerification"
-	method="post"
-	use:enhance={submitVerifyEmail}>
+<form class="space-y-4 md:space-y-6" method="post" use:enhance={submitVerifyEmail}>
 	<EmailInput disabled={loading} value={email} {errors} />
 	<FullWidthButton>Resend Email Verification</FullWidthButton>
 </form>

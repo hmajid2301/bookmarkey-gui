@@ -5,7 +5,7 @@ import SideBar from "../SideBar.svelte";
 
 describe("SideBar", () => {
 	test("Successfully render SideBar", async () => {
-		const { getByText } = render(SideBar, {
+		const { getByText, getByRole } = render(SideBar, {
 			props: {
 				nickname: "test",
 				email: "test@bookmarkey.app",
@@ -23,15 +23,9 @@ describe("SideBar", () => {
 			}
 		});
 
-		const s = getByText("Settings").parentElement;
-		if (!s) {
-			throw Error("settings not found");
-		}
+		const s = getByRole("link", { name: "Settings" });
 		expect(s.getAttribute("href")).toBe("/my/settings");
-		const d = getByText("Dashboard").parentElement;
-		if (!d) {
-			throw Error("dashboard not found");
-		}
+		const d = getByRole("link", { name: "Dashboard" });
 		expect(d.getAttribute("href")).toBe("/my/dashboard");
 		const c = getByText("my collection").parentElement;
 		if (!c) {

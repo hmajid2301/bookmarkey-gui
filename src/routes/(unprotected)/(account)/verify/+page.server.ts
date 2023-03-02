@@ -13,7 +13,7 @@ const verificationLinkSchema: z.ZodType<EmailVerification> = z.object({
 });
 
 export const actions: Actions = {
-	resetPassword: async ({ locals, request }) => {
+	default: async ({ locals, request }) => {
 		const data = Object.fromEntries((await request.formData()) as Iterable<[EmailVerification]>);
 		const result = verificationLinkSchema.safeParse(data);
 

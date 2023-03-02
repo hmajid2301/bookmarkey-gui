@@ -34,11 +34,7 @@
 	};
 </script>
 
-<form
-	class="space-y-4 md:space-y-6"
-	action="?/resetPassword"
-	method="post"
-	use:enhance={submitPasswordReset}>
+<form class="space-y-4 md:space-y-6" method="post" use:enhance={submitPasswordReset}>
 	<EmailInput disabled={loading} value={email} {errors} />
 	<FullWidthButton>Reset Password</FullWidthButton>
 </form>

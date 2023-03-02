@@ -28,7 +28,7 @@ const registerSchema: z.ZodType<Register> = z.object({
 });
 
 export const actions: Actions = {
-	register: async ({ locals, request }) => {
+	default: async ({ locals, request }) => {
 		const data: Register = Object.fromEntries((await request.formData()) as Iterable<[Register]>);
 		const result = await registerSchema.safeParseAsync(data);
 
