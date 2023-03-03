@@ -4,6 +4,7 @@
 	import { navigating } from "$app/stores";
 	import type { ActionResult } from "@sveltejs/kit";
 	import { tick } from "svelte";
+	import FolderClosedSolid from "svelte-awesome-icons/FolderClosedSolid.svelte";
 	import LinkSolid from "svelte-awesome-icons/LinkSolid.svelte";
 	import toast from "svelte-french-toast";
 
@@ -54,7 +55,10 @@
 	<title>My Collection: {data.collection.name}</title>
 </svelte:head>
 
-<p>{data.collection.name}</p>
+<div class="my-2 flex space-x-5">
+	<FolderClosedSolid />
+	<p>{data.collection.name}</p>
+</div>
 <Button
 	on:click={async () => {
 		show = true;
@@ -116,7 +120,6 @@
 							<div data-headlessui-state="" class="relative inline-block text-left">
 								<div>
 									<button
-										id="headlessui-menu-button-37"
 										type="button"
 										aria-haspopup="menu"
 										aria-expanded="false"
