@@ -85,6 +85,8 @@
 		"vite-plugin-pwa": "^0.14.1",
 		"vitest": "^0.28.4",
 		"vitest-fetch-mock": "^0.2.1",
+		"workbox-precaching": "^6.5.4",
+		"workbox-routing": "^6.5.4",
 		"workbox-window": "^6.5.4",
 		"zod": "^3.20.2",
 		"zod-form-data": "^1.2.4"

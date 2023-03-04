@@ -67,6 +67,8 @@ specifiers:
   vite-plugin-pwa: ^0.14.1
   vitest: ^0.28.4
   vitest-fetch-mock: ^0.2.1
+  workbox-precaching: ^6.5.4
+  workbox-routing: ^6.5.4
   workbox-window: ^6.5.4
   zod: ^3.20.2
   zod-form-data: ^1.2.4
@@ -138,6 +140,8 @@ devDependencies:
   vite-plugin-pwa: 0.14.1_xp2zqafvd45jbxqxxvnpcv3lzm
   vitest: 0.28.4_jsdom@20.0.3
   vitest-fetch-mock: 0.2.1_vitest@0.28.4
+  workbox-precaching: 6.5.4
+  workbox-routing: 6.5.4
   workbox-window: 6.5.4
   zod: 3.20.2
   zod-form-data: 1.2.4_zod@3.20.2

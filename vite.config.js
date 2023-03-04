@@ -11,6 +11,14 @@ export default defineConfig({
 	plugins: [
 		sveltekit(),
 		SvelteKitPWA({
+			srcDir: "./src",
+			mode: process.env.NODE_ENV,
+			strategies: "injectManifest",
+			registerType: "autoUpdate",
+			injectRegister: "auto",
+			filename: "prompt-sw.ts",
+			scope: "/",
+			base: "/",
 			manifest: {
 				short_name: "Bookmarkey",
 				name: "Bookmarkey",
@@ -18,12 +26,28 @@ export default defineConfig({
 				start_url: "/my/dashboard?source=pwa",
 				scope: "/",
 				display: "standalone",
-				theme_color: "#006aa3",
+				theme_color: "#0f172a",
 				background_color: "#fff",
+				orientation: "portrait",
+				display_override: [
+					"standalone",
+					"fullscreen",
+					"minimal-ui",
+					"browser",
+					"window-controls-overlay"
+				],
+				categories: ["productivity"],
+				shortcuts: [
+					{
+						name: "Settings",
+						url: "/my/settings",
+						description: "Go to your settings page"
+					}
+				],
 				icons: [
 					{
 						src: "/logo.png",
-						sizes: "196x196",
+						sizes: "512x512",
 						type: "image/png",
 						purpose: "any"
 					},
@@ -34,6 +58,14 @@ export default defineConfig({
 						purpose: "maskable"
 					}
 				]
+			},
+			injectManifest: {
+				globPatterns: ["client/**/*.{js,css,ico,png,svg,webp,woff,woff2}"]
+			},
+			devOptions: {
+				enabled: true,
+				type: "module",
+				navigateFallback: "/"
 			}
 		}),
 		sentryVitePlugin({

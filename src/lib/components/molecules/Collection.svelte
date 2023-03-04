@@ -4,10 +4,10 @@
 	import FolderClosedSolid from "svelte-awesome-icons/FolderClosedSolid.svelte";
 	import toast from "svelte-french-toast";
 
-	import ContextMenu from "./ContextMenu.svelte";
-	import Input from "../atoms/Input.svelte";
 	import type { Collection } from "~/lib/types/components";
 	import { clickOutside } from "~/lib/use/clickOutside";
+	import Input from "../atoms/Input.svelte";
+	import ContextMenu from "./ContextMenu.svelte";
 
 	export let collection: Collection;
 	export let showMenu: boolean | undefined = false;
@@ -86,7 +86,6 @@
 			</div>
 		{/if}
 	</div>
-	bookmarkCount
 </a>
 
 <div data-testid={collection.id} class="relative z-10 {showMenu ? 'block' : 'hidden'}">

@@ -16,7 +16,23 @@ VITE_SENTRY_DSN = "https://38be6117d9454303a80c3875e56eec02@o247056.ingest.sentr
 
 [[plugins]]
 package = "@sentry/netlify-build-plugin"
+
 [plugins.inputs]
 sentryOrg = "bookmarkey"
 sentryProject = "gui"
 sentryRepository = "Bookmarkey / gui"
+
+[[headers]]
+for = "/manifest.webmanifest"
+
+[headers.values]
+Content-Type = "application/manifest+json"
+
+[[headers]]
+for = "/assets/*"
+
+[headers.values]
+cache-control = '''
+    max-age=31536000,
+    immutable
+    '''
