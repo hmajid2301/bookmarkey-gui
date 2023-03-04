@@ -9,7 +9,7 @@ import type {
 	CollectionsResponse
 } from "~/lib/pocketbase/types";
 
-interface Bookmark {
+export interface Bookmark {
 	id: string;
 	image: string;
 	url: string;

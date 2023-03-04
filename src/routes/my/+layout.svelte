@@ -4,7 +4,6 @@
 
 	import type { LayoutData } from "./$types";
 	import Header from "~/lib/components/molecules/Header.svelte";
-	import HelloBar from "~/lib/components/organisms/HelloBar.svelte";
 	import SideBar from "~/lib/components/organisms/SideBar.svelte";
 
 	export let data: LayoutData;
@@ -73,7 +72,6 @@
 				showMenu = false;
 			}}
 			class="flex flex-1 flex-col overflow-hidden bg-blue-50  px-4 py-4 dark:bg-slate-800 lg:py-8 lg:px-6 xl:px-8">
-			<HelloBar nickname={data.user.nickname} />
 			<slot />
 		</div>
 	</div>
