@@ -9,7 +9,6 @@
 	import type { Collection } from "~/lib/types/components";
 	import { clickOutside } from "~/lib/use/clickOutside";
 
-	export let currentPath: string;
 	export let collection: Collection;
 	export let showMenu: boolean | undefined = false;
 
@@ -57,8 +56,7 @@
 </script>
 
 <a
-	class=" flex grow flex-row space-x-4 rounded-lg py-2 px-2"
-	class:active={currentPath === `/my/collections/${collection.id}`}
+	class=" flex grow flex-row space-x-4 rounded-lg py-1"
 	href={`/my/collections/${collection.id}`}
 	use:clickOutside={closeMenu}>
 	<div>
@@ -78,9 +76,17 @@
 				type="text"
 				name="collection" />
 		{:else}
-			{collection.name}
+			<div class="flex grow justify-between">
+				<div>
+					{collection.name}
+				</div>
+				<div class="text-sm font-bold text-black dark:text-gray-200">
+					{collection.bookmarkCount}
+				</div>
+			</div>
 		{/if}
 	</div>
+	bookmarkCount
 </a>
 
 <div data-testid={collection.id} class="relative z-10 {showMenu ? 'block' : 'hidden'}">

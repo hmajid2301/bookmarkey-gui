@@ -81,7 +81,8 @@ describe("Group", () => {
 					collections: [
 						{
 							id: "zxy",
-							name: "My Collection"
+							name: "My Collection",
+							bookmarkCount: 10
 						}
 					]
 				}

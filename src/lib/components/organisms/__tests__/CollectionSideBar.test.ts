@@ -47,11 +47,13 @@ describe("GroupsCollections", () => {
 					collections: [
 						{
 							id: "id1",
-							name: "First Collection"
+							name: "First Collection",
+							bookmarkCount: 0
 						},
 						{
 							id: "id2",
-							name: "Second Collection"
+							name: "Second Collection",
+							bookmarkCount: 10
 						}
 					]
 				}

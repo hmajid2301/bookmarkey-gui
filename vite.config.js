@@ -12,8 +12,8 @@ export default defineConfig({
 		sveltekit(),
 		SvelteKitPWA({
 			manifest: {
-				short_name: "bookmarkey",
-				name: "bookmarkey",
+				short_name: "Bookmarkey",
+				name: "Bookmarkey",
 				description: "Bookmarking & RSS reader 2 in 1 app.",
 				start_url: "/my/dashboard?source=pwa",
 				scope: "/",

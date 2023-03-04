@@ -1,10 +1,26 @@
 import { redirect } from "@sveltejs/kit";
 
 import type { LayoutServerLoad } from "./$types";
-import type { CollectionsResponse, GroupsResponse } from "~/lib/pocketbase/types";
+import type {
+	BookmarksResponse,
+	CollectionsResponse,
+	GroupsResponse
+} from "~/lib/pocketbase/types";
 import type { Collection, CollectionGroups, Group } from "~/lib/types/components";
 
 export type OutputType = { collections: CollectionGroups };
+
+type CollectionExpand = CollectionsResponse & {
+	expand: {
+		"bookmarks(collections)": BookmarksResponse[];
+	};
+};
+
+type GroupExpand = GroupsResponse & {
+	expand: {
+		"collections(group)": CollectionExpand[];
+	};
+};
 
 export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
 	if (!locals.pb?.authStore.isValid) {
@@ -13,11 +29,15 @@ export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
 
 	const collectionsWithoutGroup = await locals.pb
 		?.collection("collections")
-		.getList<CollectionsResponse>(1, 30, { sort: "-created", filter: "group = NULL" });
+		.getList<CollectionExpand>(1, 30, {
+			filter: "group = NULL",
+			sort: "-created",
+			expand: "bookmarks(collection),group"
+		});
 
-	const groups = await locals.pb?.collection("groups").getList<GroupsResponse>(1, 30, {
+	const groups = await locals.pb?.collection("groups").getList<GroupExpand>(1, 30, {
 		sort: "custom_order,-created",
-		expand: "collections(group)"
+		expand: "collections(group).bookmarks(collection)"
 	});
 
 	const groupWithCollections: Group[] = [];
@@ -29,22 +49,30 @@ export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
 			collections: collectionInGroup
 		};
 
-		if (group.expand && "collections(group)" in group.expand) {
-			group.expand["collections(group)"].forEach((coll: Collection) => {
-				collectionInGroup.push({
-					name: coll["name"],
-					id: coll["id"]
-				});
+		group.expand["collections(group)"].forEach((coll) => {
+			let bookmarkCount = 0;
+			if (coll.expand["bookmarks(collection)"]) {
+				bookmarkCount = coll.expand["bookmarks(collection)"].length;
+			}
+			collectionInGroup.push({
+				name: coll["name"],
+				id: coll["id"],
+				bookmarkCount: bookmarkCount
 			});
-		}
+		});
 		groupWithCollections.push(item);
 	});
 
 	const collections: Collection[] = [];
 	collectionsWithoutGroup.items.forEach((collection) => {
+		let bookmarkCount = 0;
+		if (collection.expand["bookmarks(collection)"]) {
+			bookmarkCount = collection.expand["bookmarks(collection)"].length;
+		}
 		collections.push({
 			id: collection.id,
-			name: collection.name
+			name: collection.name,
+			bookmarkCount: bookmarkCount
 		});
 	});
 

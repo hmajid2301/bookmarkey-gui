@@ -1,6 +1,7 @@
 export interface Collection {
 	id: string;
 	name: string;
+	bookmarkCount: number;
 }
 
 export interface Group {
@@ -12,4 +13,11 @@ export interface Group {
 export interface CollectionGroups {
 	collections: Collection[];
 	groups?: Group[];
+}
+
+export interface User {
+	isLoggedIn: boolean;
+	email: string;
+	avatar?: string;
+	nickname: string;
 }

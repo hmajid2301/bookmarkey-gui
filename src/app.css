@@ -13,6 +13,10 @@
 		@apply text-blue-600;
 	}
 
+	div.active {
+		@apply bg-slate-200 dark:bg-slate-700;
+	}
+
 	a.activel {
 		@apply bg-blue-500 text-slate-100 dark:text-slate-900;
 	}

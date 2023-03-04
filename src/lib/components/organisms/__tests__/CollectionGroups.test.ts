@@ -16,7 +16,7 @@ describe("CollectionGroups", () => {
 							collections: []
 						}
 					],
-					collections: [{ id: "collection", name: "No Group Collection" }]
+					collections: [{ id: "collection", name: "No Group Collection", bookmarkCount: 10 }]
 				}
 			}
 		});

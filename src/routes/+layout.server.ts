@@ -1,13 +1,7 @@
 import * as Sentry from "@sentry/node";
 
 import type { LayoutServerLoad } from "./$types";
-
-interface User {
-	isLoggedIn: boolean;
-	email: string;
-	avatar?: string;
-	nickname: string;
-}
+import type { User } from "~/lib/types/components";
 
 export type OutputType = { user: User };
 

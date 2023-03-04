@@ -41,6 +41,7 @@ export const load: PageServerLoad<OutputType> = async ({ locals, params }) => {
 		.getOne<CollectionsResponse>(params.id);
 
 	const bookmarkRecords = await locals.pb?.collection("bookmarks").getList<BookmarkExpand>(1, 30, {
+		filter: `collection = "${params.id}"`,
 		sort: "custom_order,-created",
 		expand: "bookmark_metadata"
 	});

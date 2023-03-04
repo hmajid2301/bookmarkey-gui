@@ -50,10 +50,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	const response = await resolve(event);
 	const isProd = process.env.NODE_ENV === "production" ? true : false;
+	response.headers.set("set-cookie", event.locals.client.exportToCookie(isProd));
 	response.headers.set(
 		"set-cookie",
 		event.locals.pb.authStore.exportToCookie({ secure: isProd, sameSite: "Lax" })
 	);
-	response.headers.set("set-cookie", event.locals.client.exportToCookie(isProd));
 	return response;
 };

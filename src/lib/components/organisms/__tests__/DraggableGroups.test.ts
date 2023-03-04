@@ -12,11 +12,13 @@ describe("DraggableCollections", () => {
 				collections: [
 					{
 						id: "collection",
-						name: "My Collection"
+						name: "My Collection",
+						bookmarkCount: 0
 					},
 					{
 						id: "collection2",
-						name: "My Other Collection"
+						name: "My Other Collection",
+						bookmarkCount: 0
 					}
 				]
 			}
@@ -33,11 +35,13 @@ describe("DraggableCollections", () => {
 				collections: [
 					{
 						id: "collection",
-						name: "My Collection"
+						name: "My Collection",
+						bookmarkCount: 0
 					},
 					{
 						id: "collection2",
-						name: "My Other Collection"
+						name: "My Other Collection",
+						bookmarkCount: 0
 					}
 				]
 			}

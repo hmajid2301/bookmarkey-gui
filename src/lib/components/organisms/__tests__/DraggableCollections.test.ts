@@ -12,11 +12,13 @@ describe("DraggableCollections", () => {
 				collections: [
 					{
 						id: "collection",
-						name: "My Collection"
+						name: "My Collection",
+						bookmarkCount: 0
 					},
 					{
 						id: "collection2",
-						name: "My Other Collection"
+						name: "My Other Collection",
+						bookmarkCount: 0
 					}
 				]
 			}
@@ -33,11 +35,13 @@ describe("DraggableCollections", () => {
 				collections: [
 					{
 						id: "collection",
-						name: "My Collection"
+						name: "My Collection",
+						bookmarkCount: 0
 					},
 					{
 						id: "collection2",
-						name: "My Other Collection"
+						name: "My Other Collection",
+						bookmarkCount: 10
 					}
 				]
 			}
@@ -71,5 +75,41 @@ describe("DraggableCollections", () => {
 		});
 
 		getByText("Empty Collection");
+	});
+
+	test("Successfully render active class", async () => {
+		const { getByTestId } = render(DraggableCollections, {
+			props: {
+				currentPath: "/my/collections/collection",
+				collections: [
+					{
+						id: "collection",
+						name: "My Collection",
+						bookmarkCount: 0
+					}
+				]
+			}
+		});
+
+		const collectionLink = getByTestId("DraggableCollection-collection");
+		expect(collectionLink.className).toContain("active");
+	});
+
+	test("Successfully should not render active class", async () => {
+		const { getByTestId } = render(DraggableCollections, {
+			props: {
+				currentPath: "/my/collections/collection123",
+				collections: [
+					{
+						id: "collection",
+						name: "My Collection",
+						bookmarkCount: 0
+					}
+				]
+			}
+		});
+
+		const collectionLink = getByTestId("DraggableCollection-collection");
+		expect(collectionLink.className).not.toContain("active");
 	});
 });
