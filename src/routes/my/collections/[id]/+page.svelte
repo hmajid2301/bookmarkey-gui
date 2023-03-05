@@ -1,16 +1,14 @@
 <script lang="ts">
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-nocheck caused by https://github.com/maciekgrzybek/svelte-inview/issues/37
 	import { navigating } from "$app/stores";
 	import { inview } from "svelte-inview";
 	import { Circle } from "svelte-loading-spinners";
 
-	import type { PageData } from "./$types";
-	import type { Collection } from "./+page.server";
 	import Bookmark from "~/lib/components/molecules/Bookmarks.svelte";
 	import TopBar from "~/lib/components/molecules/TopBar.svelte";
 	import AddBookmarkModal from "~/lib/components/organisms/AddBookmarkModal.svelte";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
+	import type { PageData } from "./$types";
+	import type { Collection } from "./+page.server";
 
 	export let data: PageData;
 

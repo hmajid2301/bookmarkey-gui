@@ -1,4 +1,6 @@
 <script lang="ts">
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-nocheck caused by https://github.com/maciekgrzybek/svelte-inview/issues/37
 	export let type: string;
 	export let name: string;
 	export let value: string | undefined = "";

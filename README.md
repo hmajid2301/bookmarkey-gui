@@ -1,38 +1,30 @@
 # Bookmarkey GUI
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Bookmarkey is a convenient bookmarking app that lets you save web pages and add RSS feeds. It is an open-source project built using SvelteKit and leveraging Pocketbase as it's backend. Its modern interface is easy to use and allows you to organize bookmarks.
 
-## Creating a project
+You can save articles for offline reading or share them with others. Bookmarkey simplifies your web browsing experience and keeps you organized.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Production
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+You can visit the site at: https://bookmarkey.app
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+## Run Locally
 
-## Developing
+Install [`go-task`](https://taskfile.dev/installation/),
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+To setup the project locally you can do:
 
 ```bash
-npm run dev
+git@gitlab.com:bookmarkey/gui.git
+cd gui
+pnpm install
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+# starts docker with backend server and frontend gui
+task start
 ```
 
-## Building
+## Related
 
-To create a production version of your app:
+Here are some related projects:
 
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+[Bookmarkey API](https://gitlab.com/bookmarkey/api)

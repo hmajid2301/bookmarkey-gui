@@ -22,6 +22,8 @@
 		{name}
 		{value}
 		on:change
+		on:blur
+		on:input
 		{disabled}
 		{labelName}
 		{errors}
