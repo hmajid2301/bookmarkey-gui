@@ -48,7 +48,11 @@
 		class="{showMenu
 			? ''
 			: '-ml-64'} min-w-64 translate-all flex w-64 flex-shrink-0 flex-col duration-200 lg:ml-0 lg:transition-none">
-		<SideBar user={data.user} collections={data.collections} currentPath={$page.url.pathname} />
+		<SideBar
+			{width}
+			user={data.user}
+			collections={data.collections}
+			currentPath={$page.url.pathname} />
 	</aside>
 	<div
 		class="cursor-ew-resize bg-blue-50 transition-all duration-300 hover:bg-yellow-400 dark:bg-slate-800 hover:dark:bg-yellow-400 lg:w-2"

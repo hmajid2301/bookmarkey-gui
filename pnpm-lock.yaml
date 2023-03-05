@@ -57,6 +57,8 @@ specifiers:
   svelte-french-toast: ^1.0.3
   svelte-gestures: ^1.4.1
   svelte-htm: ^1.2.0
+  svelte-inview: ^3.0.4
+  svelte-loading-spinners: ^0.3.4
   svelte-preprocess: ^4.10.7
   sveltekit-adapter-chrome-extension: ^1.5.0
   tailwindcss: ^3.2.4
@@ -130,6 +132,8 @@ devDependencies:
   svelte-french-toast: 1.0.3_svelte@3.55.1
   svelte-gestures: 1.4.1
   svelte-htm: 1.2.0_svelte@3.55.1
+  svelte-inview: 3.0.4_svelte@3.55.1
+  svelte-loading-spinners: 0.3.4
   svelte-preprocess: 4.10.7_k4bhxdknaltjvjwprbm23edr5q
   sveltekit-adapter-chrome-extension: 1.5.0
   tailwindcss: 3.2.4_postcss@8.4.21
@@ -6305,6 +6309,18 @@ packages:
       '@babel/runtime-corejs3': 7.20.13
       core-js: 3.27.2
       svelte: 3.55.1
+    dev: true
+
+  /svelte-inview/3.0.4_svelte@3.55.1:
+    resolution: {integrity: sha512-dJZMZ7qN+z2lsxHA7mK1vS35qOCfl1BNSs712a2AnulbRm371n2eoaNa5ICVYAViWpj2zCy1XGZllrxJ0Tjp5A==}
+    peerDependencies:
+      svelte: ^3.0.0
+    dependencies:
+      svelte: 3.55.1
+    dev: true
+
+  /svelte-loading-spinners/0.3.4:
+    resolution: {integrity: sha512-vKaW71QMCBcTNijAGc0mUl8k3DQ66iYmp6MB8BMGCXyWk82bTrcLy8FOnSm9fE+8q6TwzD6PLUoYFHt0II93Xw==}
     dev: true
 
   /svelte-preprocess/4.10.7_k4bhxdknaltjvjwprbm23edr5q:

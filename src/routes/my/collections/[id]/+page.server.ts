@@ -1,5 +1,6 @@
 import * as Sentry from "@sentry/node";
 import { error, fail, type Actions } from "@sveltejs/kit";
+import type pocketbase from "pocketbase";
 import { z } from "zod";
 
 import type { PageServerLoad } from "./$types";
@@ -18,11 +19,12 @@ export interface Bookmark {
 	createdAt: string;
 }
 
-interface Collection {
+export interface Collection {
 	id: string;
 	name: string;
 	group: string;
 	bookmarks: Bookmark[];
+	moreBookmarks: boolean;
 }
 
 interface OutputType {
@@ -36,50 +38,9 @@ type BookmarkExpand = BookmarksResponse & {
 };
 
 export const load: PageServerLoad<OutputType> = async ({ locals, params }) => {
-	const collection = await locals.pb
-		?.collection("collections")
-		.getOne<CollectionsResponse>(params.id);
-
-	const bookmarkRecords = await locals.pb?.collection("bookmarks").getList<BookmarkExpand>(1, 30, {
-		filter: `collection = "${params.id}"`,
-		sort: "custom_order,-created",
-		expand: "bookmark_metadata"
-	});
-
-	if (!collection) {
-		throw Error("failed to get collection");
-	}
-	if (!bookmarkRecords) {
-		throw Error("failed to get bookmarks");
-	}
-
-	const bookmarks: Bookmark[] = [];
-	bookmarkRecords.items.forEach((bookmarkRecord) => {
-		const createdAt = new Date(bookmarkRecord.created);
-		const formattedCreatedAt = createdAt.toLocaleDateString(undefined, {
-			year: "numeric",
-			month: "2-digit",
-			day: "2-digit"
-		});
-		const bookmark: Bookmark = {
-			id: bookmarkRecord.id,
-			url: bookmarkRecord.expand.bookmark_metadata.url,
-			image: bookmarkRecord.expand.bookmark_metadata.image,
-			title: bookmarkRecord.expand.bookmark_metadata.title,
-			description: bookmarkRecord.expand.bookmark_metadata.description,
-			createdAt: formattedCreatedAt
-		};
-		bookmarks.push(bookmark);
-	});
-
-	return {
-		collection: {
-			id: collection.id,
-			name: collection.name,
-			group: collection.group || "",
-			bookmarks: bookmarks
-		}
-	};
+	const collectionId = params.id;
+	const pageNumber = 0;
+	return await _getBookmarks(locals.pb, collectionId, pageNumber);
 };
 
 interface Addbookmark {
@@ -119,3 +80,50 @@ export const actions: Actions = {
 		return;
 	}
 };
+
+export async function _getBookmarks(pb: pocketbase, collectionId: string, page: number) {
+	const batchSize = 10;
+	const collection = await pb?.collection("collections").getOne<CollectionsResponse>(collectionId);
+	const bookmarkRecords = await pb
+		.collection("bookmarks")
+		.getList<BookmarkExpand>(page, batchSize, {
+			filter: `collection = "${collectionId}"`,
+			sort: "custom_order,-created",
+			expand: "bookmark_metadata"
+		});
+
+	if (!collection) {
+		throw Error("failed to get collection");
+	}
+	if (!bookmarkRecords) {
+		throw Error("failed to get bookmarks");
+	}
+
+	const bookmarks: Bookmark[] = [];
+	bookmarkRecords.items.forEach((bookmarkRecord) => {
+		const createdAt = new Date(bookmarkRecord.created);
+		const formattedCreatedAt = createdAt.toLocaleDateString(undefined, {
+			year: "numeric",
+			month: "2-digit",
+			day: "2-digit"
+		});
+		const bookmark: Bookmark = {
+			id: bookmarkRecord.id,
+			url: bookmarkRecord.expand.bookmark_metadata.url,
+			image: bookmarkRecord.expand.bookmark_metadata.image,
+			title: bookmarkRecord.expand.bookmark_metadata.title,
+			description: bookmarkRecord.expand.bookmark_metadata.description,
+			createdAt: formattedCreatedAt
+		};
+		bookmarks.push(bookmark);
+	});
+	return {
+		collection: {
+			id: collection.id,
+			name: collection.name,
+			group: collection.group || "",
+			bookmarks: bookmarks,
+			moreBookmarks: bookmarks.length !== bookmarkRecords.totalItems
+		}
+	};
+}

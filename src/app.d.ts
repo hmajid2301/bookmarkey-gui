@@ -6,8 +6,8 @@
 declare namespace App {
 	type PocketBase = import("pocketbase").default;
 	interface Locals {
-		user?: import("pocketbase").Record | import("pocketbase").Admin | null | undefined;
-		pb?: PocketBase;
+		user: import("pocketbase").Record | import("pocketbase").Admin | null | undefined;
+		pb: PocketBase;
 		client?: import("~/lib/pocketbase/client").PBClient;
 	}
 }

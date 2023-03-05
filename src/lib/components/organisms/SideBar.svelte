@@ -10,11 +10,16 @@
 	export let user: User;
 	export let currentPath: string;
 	export let collections: CollectionGroups;
+	export let width = 16;
+	const initialWidth = 16;
+	const maxWidth = 50;
 
 	let showAddGroupForm = false;
 </script>
 
-<div class="min-h-screen flex-1 bg-white px-1 py-4 pl-2 font-bold dark:bg-gray-900">
+<div
+	style={`width: ${width}px !important; min-width: ${initialWidth}rem; max-width: ${maxWidth}rem`}
+	class="fixed min-h-screen flex-1 bg-white px-1 py-4 pl-2 font-bold dark:bg-gray-900">
 	<NavBrand href="/my/dashboard">
 		<Logo />
 	</NavBrand>
