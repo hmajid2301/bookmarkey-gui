@@ -55,12 +55,12 @@
 		<EmailInput
 			autocomplete="username"
 			disabled={loading}
-			value={form?.data.email}
+			value={form?.data?.email}
 			errors={form?.errors?.email} />
 		<PasswordInput
 			name="password"
 			labelName="Password"
-			value={form?.data.password}
+			value={form?.data?.password}
 			disabled={loading}
 			errors={form?.errors?.password} />
 		<div class="flex items-center justify-between">

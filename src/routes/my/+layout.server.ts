@@ -49,17 +49,23 @@ export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
 			collections: collectionInGroup
 		};
 
-		group.expand["collections(group)"].forEach((coll) => {
-			let bookmarkCount = 0;
-			if (coll.expand["bookmarks(collection)"]) {
-				bookmarkCount = coll.expand["bookmarks(collection)"].length;
-			}
-			collectionInGroup.push({
-				name: coll["name"],
-				id: coll["id"],
-				bookmarkCount: bookmarkCount
+		const collectionExapnd = group.expand["collections(group)"];
+		if (collectionExapnd) {
+			collectionExapnd.forEach((coll) => {
+				let bookmarkCount = 0;
+				const bookmarkExpand = coll.expand["bookmarks(collection)"];
+				if (bookmarkExpand) {
+					bookmarkCount = bookmarkExpand.length;
+				}
+
+				collectionInGroup.push({
+					name: coll["name"],
+					id: coll["id"],
+					bookmarkCount: bookmarkCount
+				});
 			});
-		});
+		}
+
 		groupWithCollections.push(item);
 	});
 

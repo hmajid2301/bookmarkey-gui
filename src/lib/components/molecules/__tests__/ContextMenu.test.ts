@@ -47,7 +47,7 @@ describe("ContextMenu", () => {
 	});
 
 	test("Successfully links to correct location", async () => {
-		const { getByText } = render(ContextMenu, {
+		const { getByRole } = render(ContextMenu, {
 			props: {
 				showMenu: true,
 				menuItems: [
@@ -59,7 +59,7 @@ describe("ContextMenu", () => {
 			}
 		});
 
-		const item = getByText("link");
+		const item = getByRole("link");
 		expect(item.getAttribute("href")).toBe("/example");
 	});
 

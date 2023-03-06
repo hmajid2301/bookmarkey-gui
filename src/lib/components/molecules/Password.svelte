@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { passwordStrength } from "check-password-strength";
 
-	import PasswordInput from "~/lib/components/molecules/PasswordInput.svelte";
 	import PasswordIndicator from "./PasswordIndicator.svelte";
 	import PasswordRules from "./PasswordRules.svelte";
+	import PasswordInput from "~/lib/components/molecules/PasswordInput.svelte";
 
 	export let loading = false;
 	export let value = "";

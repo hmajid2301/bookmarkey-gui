@@ -8,14 +8,15 @@ import ContextMenuItem from "../ContextMenuItem.svelte";
 
 describe("ContextMenuItems", () => {
 	test("Successfully renders context menu item", async () => {
-		const { getByText } = render(ContextMenuItem, {
+		const { getByText, getByRole } = render(ContextMenuItem, {
 			props: {
 				link: "/example",
 				name: "Example",
 				iconComponent: SoapSolid
 			}
 		});
-		const item = getByText("Example");
+		getByText("Example");
+		const item = getByRole("link");
 		expect(item.getAttribute("href")).toBe("/example");
 	});
 	test("Successfully calls on:click function when clicked", async () => {

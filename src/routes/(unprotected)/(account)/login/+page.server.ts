@@ -31,12 +31,13 @@ export const actions: Actions = {
 			await locals.pb
 				?.collection("users")
 				.authWithPassword(result.data.email, result.data.password);
-			if (!locals.pb?.authStore?.model?.verified) {
-				locals.pb?.authStore.clear();
-				return {
-					notVerified: true
-				};
-			}
+			// TODO: what to do with unverified users
+			// if (!locals.pb?.authStore?.model?.verified) {
+			// 	locals.pb?.authStore.clear();
+			// 	return {
+			// 		notVerified: true
+			// 	};
+			// }
 		} catch (err) {
 			if (err instanceof ClientResponseError) {
 				if (err.status === 400) {

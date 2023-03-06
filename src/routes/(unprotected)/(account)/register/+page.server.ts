@@ -47,7 +47,7 @@ export const actions: Actions = {
 				passwordConfirm: result.data.password
 			});
 		} catch (err) {
-			console.log("err", err);
+			console.log("Failed to create account", err);
 			Sentry.captureException(err);
 			throw error(500, "Failed to create account.");
 		}
