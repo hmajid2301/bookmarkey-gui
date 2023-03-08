@@ -3,7 +3,9 @@
 
 	import AddCollectionForm from "./AddCollectionForm.svelte";
 	import AddGroupForm from "./AddGroupForm.svelte";
-	import Collections from "./CollectionGroups.svelte";
+	import DraggableCollections from "./DraggableCollections.svelte";
+	import DraggableGroups from "./DraggableGroups.svelte";
+	import Collection from "../molecules/Collection.svelte";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 	import type { CollectionGroups } from "~/lib/types/components";
 
@@ -39,4 +41,15 @@
 	<AddCollectionForm bind:ref={collectionRef} bind:showInput={showAddCollectionForm} />
 {/if}
 <AddGroupForm bind:ref={groupRef} bind:show={showAddGroupForm} />
-<Collections {collections} {currentPath} />
+
+<Collection
+	collection={{
+		id: "-1",
+		name: "Unsorted",
+		bookmarkCount: collections.unsortedBookmarkCount
+	}}
+	showMenu={false} />
+<div class="my-2 flex flex-col items-start space-y-1">
+	<DraggableGroups {currentPath} groups={collections.groups || []} />
+	<DraggableCollections collections={collections.collections} {currentPath} />
+</div>

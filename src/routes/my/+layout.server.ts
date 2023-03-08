@@ -27,6 +27,10 @@ export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
 		throw redirect(303, "/login");
 	}
 
+	const unsortedBookmark = await locals.pb?.collection("bookmarks").getFullList(undefined, {
+		filter: "collection = '-1'"
+	});
+
 	const collectionsWithoutGroup = await locals.pb
 		?.collection("collections")
 		.getList<CollectionExpand>(1, 30, {
@@ -84,6 +88,7 @@ export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
 
 	return {
 		collections: {
+			unsortedBookmarkCount: unsortedBookmark.length,
 			collections,
 			groups: groupWithCollections
 		}

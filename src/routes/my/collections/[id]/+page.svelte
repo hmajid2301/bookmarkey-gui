@@ -20,6 +20,7 @@
 	let loading = false;
 
 	async function getBookmarks() {
+		console.log("HELLO");
 		loading = true;
 		const resp = await fetch(`/my/collections/${data.collection.id}?page=${page}`, {
 			method: "GET"
@@ -46,7 +47,9 @@
 <div
 	use:inview={{}}
 	on:enter={async () => {
+		console.log("HELLO");
 		if (collection.moreBookmarks) {
+			console.log("HELLO");
 			page += 1;
 			await getBookmarks();
 		}

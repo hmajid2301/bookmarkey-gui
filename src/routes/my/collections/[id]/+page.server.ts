@@ -70,6 +70,7 @@ export const actions: Actions = {
 					Accept: "application/json",
 					"Content-Type": "application/json"
 				},
+				timeout: 5000,
 				body: JSON.stringify({ url: result.data.url })
 			});
 		} catch (err) {
@@ -82,14 +83,27 @@ export const actions: Actions = {
 };
 
 export async function _getBookmarks(pb: pocketbase, collectionId: string, page: number) {
-	const batchSize = 10;
-	const collection = await pb?.collection("collections").getOne<CollectionsResponse>(collectionId);
+	const batchSize = 30;
+
+	// TODO: is this redundant?
+	let collection: { id: string; name: string; group?: string };
+	if (collectionId === "-1") {
+		collection = {
+			id: "-1",
+			name: "Unsorted"
+		};
+	} else {
+		collection = await pb?.collection("collections").getOne<CollectionsResponse>(collectionId);
+	}
+
+	// TODO: fix autocancel
 	const bookmarkRecords = await pb
 		.collection("bookmarks")
 		.getList<BookmarkExpand>(page, batchSize, {
 			filter: `collection = "${collectionId}"`,
 			sort: "custom_order,-created",
-			expand: "bookmark_metadata"
+			expand: "bookmark_metadata",
+			$autoCancel: false
 		});
 
 	if (!collection) {

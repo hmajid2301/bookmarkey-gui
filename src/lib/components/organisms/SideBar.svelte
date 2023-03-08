@@ -2,7 +2,7 @@
 	import { NavBrand } from "flowbite-svelte";
 
 	import AvatarProfileMenu from "./AvatarProfileMenu.svelte";
-	import CollectionSideBar from "./CollectionSideBar.svelte";
+	import Groups from "./Groups.svelte";
 	import Logo from "../atoms/Logo.svelte";
 	import AddCollectionButton from "../molecules/AddCollectionButton.svelte";
 	import type { CollectionGroups, User } from "~/lib/types/components";
@@ -31,5 +31,5 @@
 		<AddCollectionButton bind:showAddGroupForm />
 	</div>
 
-	<CollectionSideBar bind:showAddGroupForm {currentPath} {collections} />
+	<Groups bind:showAddGroupForm {currentPath} {collections} />
 </div>

@@ -1,7 +1,7 @@
 import { render } from "@testing-library/svelte";
 import { describe, expect, test } from "vitest";
 
-import GroupsCollections from "../CollectionSideBar.svelte";
+import Groups from "../Groups.svelte";
 
 describe("GroupsCollections", () => {
 	// TODO: work out how to test with stores
@@ -23,13 +23,14 @@ describe("GroupsCollections", () => {
 	// });
 
 	test("Successfully show add group form", async () => {
-		const { getByRole } = render(GroupsCollections, {
+		const { getByRole } = render(Groups, {
 			props: {
 				currentPath: "/my/dashboard",
 				showAddGroupForm: true,
 				collections: {
 					groups: [],
-					collections: []
+					collections: [],
+					unsortedBookmarkCount: 0
 				}
 			}
 		});
@@ -39,10 +40,11 @@ describe("GroupsCollections", () => {
 	});
 
 	test("Successfully show all collections without any groups", async () => {
-		const { getByText, queryByText } = render(GroupsCollections, {
+		const { getByText, queryByText } = render(Groups, {
 			props: {
 				currentPath: "/my/dashboard",
 				collections: {
+					unsortedBookmarkCount: 2,
 					groups: [],
 					collections: [
 						{
@@ -66,10 +68,11 @@ describe("GroupsCollections", () => {
 	});
 
 	test("Successfully show all groups without any collections", async () => {
-		const { getByText, queryAllByText } = render(GroupsCollections, {
+		const { getByText, queryAllByText } = render(Groups, {
 			props: {
 				currentPath: "/my/dashboard",
 				collections: {
+					unsortedBookmarkCount: 1,
 					groups: [
 						{
 							id: "id1",

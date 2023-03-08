@@ -14,6 +14,7 @@ describe("SideBar", () => {
 					avatar: ""
 				},
 				collections: {
+					unsortedBookmarkCount: 5,
 					collections: [
 						{
 							id: "id",
@@ -33,6 +34,9 @@ describe("SideBar", () => {
 
 		getByText("10");
 		getByText("my collection");
+
+		getByText("Unsorted");
+		getByText("5");
 	});
 
 	test("Successfully render groups and collections", async () => {
@@ -45,6 +49,7 @@ describe("SideBar", () => {
 					avatar: ""
 				},
 				collections: {
+					unsortedBookmarkCount: 0,
 					groups: [
 						{
 							name: "My Group",

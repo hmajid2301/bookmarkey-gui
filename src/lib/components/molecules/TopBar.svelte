@@ -4,8 +4,8 @@
 	import MagnifyingGlassSolid from "svelte-awesome-icons/MagnifyingGlassSolid.svelte";
 
 	import Button from "~/lib/components/atoms/Button.svelte";
+	import HelloBar from "~/lib/components/atoms/HelloBar.svelte";
 	import FormField from "~/lib/components/molecules/FormField.svelte";
-	import HelloBar from "~/lib/components/organisms/HelloBar.svelte";
 
 	export let collectionName: string;
 	export let nickname: string;

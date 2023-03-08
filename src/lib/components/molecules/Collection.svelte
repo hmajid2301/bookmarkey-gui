@@ -56,7 +56,7 @@
 </script>
 
 <a
-	class=" flex grow flex-row space-x-4 rounded-lg py-1"
+	class="flex grow flex-row space-x-4 rounded-lg py-1 transition-all duration-100 hover:bg-slate-200 dark:hover:bg-slate-700"
 	href={`/my/collections/${collection.id}`}
 	use:clickOutside={closeMenu}>
 	<div>
