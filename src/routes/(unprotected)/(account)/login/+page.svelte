@@ -3,16 +3,25 @@
 	import type { ActionResult } from "@sveltejs/kit";
 	import toast from "svelte-french-toast";
 
-	import type { ActionData, PageData } from "./$types";
 	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
 	import EmailInput from "~/lib/components/molecules/EmailInput.svelte";
 	import OAuthLoginGroup from "~/lib/components/molecules/OAuthLoginButton.svelte";
 	import PasswordInput from "~/lib/components/molecules/PasswordInput.svelte";
+	import type { ActionData, PageData, Snapshot } from "./$types";
 
 	export let form: ActionData;
 	export let data: PageData;
 
 	let loading = false;
+
+	export const snapshot: Snapshot = {
+		capture: () => form?.data,
+		restore: (value) => {
+			if (form) {
+				form.data = value;
+			}
+		}
+	};
 
 	const submitLogin = () => {
 		loading = true;

@@ -1,10 +1,19 @@
 <script lang="ts">
-	import type { ActionData, PageData } from "./$types";
 	import OAuthLoginGroup from "~/lib/components/molecules/OAuthLoginButton.svelte";
 	import RegisterForm from "~/lib/components/organisms/RegisterForm.svelte";
+	import type { ActionData, PageData, Snapshot } from "./$types";
 
 	export let form: ActionData;
 	export let data: PageData;
+
+	export const snapshot: Snapshot = {
+		capture: () => form?.data,
+		restore: (value) => {
+			if (form) {
+				form.data = value;
+			}
+		}
+	};
 </script>
 
 <svelte:head>
