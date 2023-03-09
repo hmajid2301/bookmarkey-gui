@@ -13,7 +13,7 @@ specifiers:
   '@sentry/vite-plugin': ^0.3.0
   '@svelte-put/avatar': ^2.0.0
   '@sveltejs/adapter-auto': 2.0.0
-  '@sveltejs/adapter-netlify': 2.0.5
+  '@sveltejs/adapter-netlify': 2.0.6
   '@sveltejs/kit': ^1.11.0
   '@testing-library/dom': ^9.0.0
   '@testing-library/jest-dom': ^5.16.5
@@ -88,7 +88,7 @@ devDependencies:
   '@sentry/vite-plugin': 0.3.0
   '@svelte-put/avatar': 2.0.0_svelte@3.55.1
   '@sveltejs/adapter-auto': 2.0.0_@sveltejs+kit@1.11.0
-  '@sveltejs/adapter-netlify': 2.0.5_@sveltejs+kit@1.11.0
+  '@sveltejs/adapter-netlify': 2.0.6_@sveltejs+kit@1.11.0
   '@sveltejs/kit': 1.11.0_svelte@3.55.1+vite@4.1.1
   '@testing-library/dom': 9.0.0
   '@testing-library/jest-dom': 5.16.5
@@ -1973,8 +1973,8 @@ packages:
       import-meta-resolve: 2.2.1
     dev: true
 
-  /@sveltejs/adapter-netlify/2.0.5_@sveltejs+kit@1.11.0:
-    resolution: {integrity: sha512-i0qkxuH2/mLfk9T6uHAc/a3KU6mm9QhYdqqoIWWSAhst1lchLt9FzZfX9u6zzltOX+w+78/9E/+KPEwib7xenA==}
+  /@sveltejs/adapter-netlify/2.0.6_@sveltejs+kit@1.11.0:
+    resolution: {integrity: sha512-9guxI9jG/v/JTr/I1E1YGKppKWRyvs60VuhPJcGBrj2MfoBxR40vhxkrWPFcNJoAdyQUSjqxbg7sZLA4WbNfgA==}
     peerDependencies:
       '@sveltejs/kit': ^1.5.0
     dependencies:
