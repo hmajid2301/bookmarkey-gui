@@ -30,6 +30,7 @@
 		"@sentry/utils": "^7.29.0",
 		"@sentry/vite-plugin": "^0.3.0",
 		"@svelte-put/avatar": "^2.0.0",
+		"@svelte-put/clickoutside": "^2.0.0",
 		"@sveltejs/adapter-auto": "2.0.0",
 		"@sveltejs/adapter-netlify": "2.0.6",
 		"@sveltejs/kit": "^1.11.0",

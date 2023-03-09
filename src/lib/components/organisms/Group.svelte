@@ -5,13 +5,13 @@
 	import EllipsisSolid from "svelte-awesome-icons/EllipsisSolid.svelte";
 	import toast from "svelte-french-toast";
 
-	import AddCollectionForm from "./AddCollectionForm.svelte";
-	import DraggableCollection from "./DraggableCollections.svelte";
-	import Input from "../atoms/Input.svelte";
-	import ContextMenu from "../molecules/ContextMenu.svelte";
+	import { clickoutside } from "@svelte-put/clickoutside";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 	import type { Group } from "~/lib/types/components";
-	import { clickOutside } from "~/lib/use/clickOutside";
+	import Input from "../atoms/Input.svelte";
+	import ContextMenu from "../molecules/ContextMenu.svelte";
+	import AddCollectionForm from "./AddCollectionForm.svelte";
+	import DraggableCollection from "./DraggableCollections.svelte";
 
 	export let currentPath: string;
 	export let hiddenGroups: Set<string>;
@@ -122,7 +122,7 @@
 			{group.name}
 		{/if}
 	</button>
-	<button on:click={openMenu} on:keyup={openMenu} use:clickOutside={closeMenu}>
+	<button on:click={openMenu} on:keyup={openMenu} use:clickoutside on:clickoutside={closeMenu}>
 		<div class="my-2 flex flex-col items-start space-y-1">
 			{#if !hiddenGroups.has(group.id)}
 				<EllipsisSolid />

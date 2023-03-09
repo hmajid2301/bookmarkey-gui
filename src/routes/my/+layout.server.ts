@@ -1,12 +1,12 @@
 import { redirect } from "@sveltejs/kit";
 
-import type { LayoutServerLoad } from "./$types";
 import type {
 	BookmarksResponse,
 	CollectionsResponse,
 	GroupsResponse
 } from "~/lib/pocketbase/types";
 import type { Collection, CollectionGroups, Group } from "~/lib/types/components";
+import type { LayoutServerLoad } from "./$types";
 
 export type OutputType = { collections: CollectionGroups };
 
@@ -27,22 +27,21 @@ export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
 		throw redirect(303, "/login");
 	}
 
-	const unsortedBookmark = await locals.pb?.collection("bookmarks").getFullList(undefined, {
-		filter: "collection = '-1'"
-	});
+	const [unsortedBookmark, collectionsWithoutGroup, groups] = await Promise.all([
+		locals.pb.collection("bookmarks").getFullList(undefined, {
+			filter: "collection = '-1'"
+		}),
 
-	const collectionsWithoutGroup = await locals.pb
-		?.collection("collections")
-		.getList<CollectionExpand>(1, 30, {
+		locals.pb.collection("collections").getList<CollectionExpand>(1, 30, {
 			filter: "group = NULL",
 			sort: "-created",
 			expand: "bookmarks(collection),group"
-		});
-
-	const groups = await locals.pb?.collection("groups").getList<GroupExpand>(1, 30, {
-		sort: "custom_order,-created",
-		expand: "collections(group).bookmarks(collection)"
-	});
+		}),
+		locals.pb.collection("groups").getList<GroupExpand>(1, 30, {
+			sort: "custom_order,-created",
+			expand: "collections(group).bookmarks(collection)"
+		})
+	]);
 
 	const groupWithCollections: Group[] = [];
 	groups.items.forEach((group) => {

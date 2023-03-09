@@ -4,10 +4,10 @@
 	import FolderClosedSolid from "svelte-awesome-icons/FolderClosedSolid.svelte";
 	import toast from "svelte-french-toast";
 
-	import ContextMenu from "./ContextMenu.svelte";
-	import Input from "../atoms/Input.svelte";
+	import { clickoutside } from "@svelte-put/clickoutside";
 	import type { Collection } from "~/lib/types/components";
-	import { clickOutside } from "~/lib/use/clickOutside";
+	import Input from "../atoms/Input.svelte";
+	import ContextMenu from "./ContextMenu.svelte";
 
 	export let collection: Collection;
 	export let showMenu: boolean | undefined = false;
@@ -58,7 +58,8 @@
 <a
 	class="flex grow flex-row space-x-4 rounded-lg py-1 transition-all duration-100 hover:bg-slate-200 dark:hover:bg-slate-700"
 	href={`/my/collections/${collection.id}`}
-	use:clickOutside={closeMenu}>
+	use:clickoutside
+	on:clickoutside={closeMenu}>
 	<div>
 		<FolderClosedSolid />
 	</div>

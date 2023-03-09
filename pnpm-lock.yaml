@@ -12,6 +12,7 @@ specifiers:
   '@sentry/utils': ^7.29.0
   '@sentry/vite-plugin': ^0.3.0
   '@svelte-put/avatar': ^2.0.0
+  '@svelte-put/clickoutside': ^2.0.0
   '@sveltejs/adapter-auto': 2.0.0
   '@sveltejs/adapter-netlify': 2.0.6
   '@sveltejs/kit': ^1.11.0
@@ -87,6 +88,7 @@ devDependencies:
   '@sentry/utils': 7.29.0
   '@sentry/vite-plugin': 0.3.0
   '@svelte-put/avatar': 2.0.0_svelte@3.55.1
+  '@svelte-put/clickoutside': 2.0.0
   '@sveltejs/adapter-auto': 2.0.0_@sveltejs+kit@1.11.0
   '@sveltejs/adapter-netlify': 2.0.6_@sveltejs+kit@1.11.0
   '@sveltejs/kit': 1.11.0_svelte@3.55.1+vite@4.1.1
@@ -1962,6 +1964,10 @@ packages:
     dependencies:
       md5: 2.3.0
       svelte: 3.55.1
+    dev: true
+
+  /@svelte-put/clickoutside/2.0.0:
+    resolution: {integrity: sha512-04xYxOT5Ti+VlP70+uY/a5tGnVWl3XFgnRiO9bMSHbkwOlzHxSgXyM1NCS4NV09B3i41LRuShgeMrbgU0J5cPg==}
     dev: true
 
   /@sveltejs/adapter-auto/2.0.0_@sveltejs+kit@1.11.0:

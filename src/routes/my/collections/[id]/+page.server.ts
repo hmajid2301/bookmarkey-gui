@@ -3,12 +3,12 @@ import { error, fail, type Actions } from "@sveltejs/kit";
 import type pocketbase from "pocketbase";
 import { z } from "zod";
 
-import type { PageServerLoad } from "./$types";
 import type {
 	BookmarksMetadataResponse,
 	BookmarksResponse,
 	CollectionsResponse
 } from "~/lib/pocketbase/types";
+import type { PageServerLoad } from "./$types";
 
 export interface Bookmark {
 	id: string;
@@ -40,7 +40,11 @@ type BookmarkExpand = BookmarksResponse & {
 export const load: PageServerLoad<OutputType> = async ({ locals, params }) => {
 	const collectionId = params.id;
 	const pageNumber = 0;
-	return await _getBookmarks(locals.pb, collectionId, pageNumber);
+	try {
+		return await _getBookmarks(locals.pb, collectionId, pageNumber);
+	} catch (err) {
+		throw error(500, "Failed to get bookmarks");
+	}
 };
 
 interface Addbookmark {

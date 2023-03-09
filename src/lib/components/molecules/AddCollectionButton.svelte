@@ -1,18 +1,21 @@
 <script lang="ts">
+	import { clickoutside } from "@svelte-put/clickoutside";
 	import PlusSolid from "svelte-awesome-icons/PlusSolid.svelte";
 
-	import ContextMenu from "./ContextMenu.svelte";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
-	import { clickOutside } from "~/lib/use/clickOutside";
+	import ContextMenu from "./ContextMenu.svelte";
 
 	let showMenu = false;
 	export let showAddGroupForm = false;
+
+	function closeMenu() {
+		showMenu = false;
+	}
 </script>
 
 <div
-	use:clickOutside={() => {
-		showMenu = false;
-	}}
+	use:clickoutside
+	on:clickoutside={closeMenu}
 	class="flex flex-col pr-5 text-blue-800 dark:text-blue-200">
 	<button
 		aria-label="add"
@@ -30,14 +33,14 @@
 					name: "Create Collection",
 					divider: true,
 					onClick: async () => {
-						showMenu = false;
+						closeMenu();
 						$selectedGroupStore.addCollection = true;
 					}
 				},
 				{
 					name: "Create Group",
 					onClick: async () => {
-						showMenu = false;
+						closeMenu();
 						showAddGroupForm = true;
 					}
 				}

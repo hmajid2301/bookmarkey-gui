@@ -15,9 +15,9 @@ export const DELETE: RequestHandler = async ({ locals, params }: RequestEvent) =
 
 export const PATCH: RequestHandler = async ({ locals, params, request }: RequestEvent) => {
 	try {
-		const json_ = await request.json();
+		const updatedGroup = await request.json();
 		await locals.pb?.collection("groups").update(params.id, {
-			...json_
+			...updatedGroup
 		});
 		return new Response(null, { status: 200 });
 	} catch (err) {
