@@ -7,17 +7,16 @@
 		@apply text-sm font-medium text-blue-600 hover:text-black dark:text-blue-400 dark:hover:text-white;
 	}
 	nav a.active {
-		@apply dark:bg-slate-800;
+		@apply bg-slate-200 dark:bg-slate-800;
 	}
 	nav a.active svg {
 		@apply text-blue-600;
 	}
 
-	div.active {
+	div.activeCollection {
 		@apply bg-slate-200 dark:bg-slate-700;
 	}
-
-	a.activel {
+	a.activeLinkButton {
 		@apply bg-blue-500 text-slate-100 dark:text-slate-900;
 	}
 }

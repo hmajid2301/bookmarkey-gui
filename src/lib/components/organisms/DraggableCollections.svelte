@@ -2,10 +2,10 @@
 	import { invalidateAll } from "$app/navigation";
 	import toast from "svelte-french-toast";
 
-	import Collection from "../molecules/Collection.svelte";
 	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
 	import type { CollectionMove } from "~/lib/types/api";
 	import type { Collection as Collection_ } from "~/lib/types/components";
+	import Collection from "../molecules/Collection.svelte";
 
 	export let currentPath: string;
 	export let collections: Collection_[];
@@ -51,7 +51,7 @@
 	<div
 		data-testid={`DraggableCollection-${collection.id}`}
 		class="flex w-full grow px-1 transition-all duration-100 hover:bg-slate-200 dark:hover:bg-slate-700"
-		class:active={currentPath === `/my/collections/${collection.id}`}
+		class:activeCollection={currentPath === `/my/collections/${collection.id}`}
 		draggable="true"
 		on:contextmenu|preventDefault|stopPropagation={() => {
 			collectionIdOpenMenuMap[collection.id] = true;

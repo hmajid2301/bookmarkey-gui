@@ -33,13 +33,13 @@
 
 				<div class="hidden items-center space-x-3 font-bold md:flex">
 					<a
-						class:activel={currentPath === `/login`}
+						class:activeLinkButton={currentPath === `/login`}
 						href="/login"
 						class="rounded py-2 px-2 transition duration-300 hover:bg-slate-800 hover:text-white">
 						Login
 					</a>
 					<a
-						class:activel={currentPath === `/register`}
+						class:activeLinkButton={currentPath === `/register`}
 						href="/register"
 						class="rounded py-2 px-2 transition duration-300 hover:bg-slate-800 hover:text-white">
 						Register
