@@ -35,6 +35,7 @@ export const load: PageServerLoad<OutputType> = async ({ locals, params }) => {
 	try {
 		return await _getBookmarks(locals.pb, collectionId, pageNumber);
 	} catch (err) {
+		Sentry.captureException(err);
 		throw error(500, "Failed to get bookmarks");
 	}
 };
@@ -101,7 +102,7 @@ export async function _getBookmarks(pb: pocketbase, collectionId: string, page: 
 	const bookmarkRecords = await pb
 		.collection("bookmarks")
 		.getList<BookmarkExpand>(page, batchSize, {
-			filter: `collection = "${collectionId}"`,
+			filter: collectionId !== "0" ? `collection = "${collectionId}"` : "",
 			sort: "custom_order,-created",
 			expand: "bookmark_metadata",
 			$autoCancel: false
