@@ -96,6 +96,11 @@ export async function _getBookmarks(pb: pocketbase, collectionId: string, page: 
 			id: "-1",
 			name: "Unsorted"
 		};
+	} else if (collectionId === "0") {
+		collection = {
+			id: "0",
+			name: "All Bookmarks"
+		};
 	} else {
 		collection = await pb?.collection("collections").getOne<CollectionsResponse>(collectionId);
 	}

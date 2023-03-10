@@ -1,11 +1,11 @@
 <script lang="ts">
+	import BookmarkSolid from "svelte-awesome-icons/BookmarkSolid.svelte";
 	import CaretDownSolid from "svelte-awesome-icons/CaretDownSolid.svelte";
 	import GearSolid from "svelte-awesome-icons/GearSolid.svelte";
 	import RightFromBracketSolid from "svelte-awesome-icons/RightFromBracketSolid.svelte";
-	import UserSolid from "svelte-awesome-icons/UserSolid.svelte";
 
-	import ContextMenu from "../molecules/ContextMenu.svelte";
 	import Avatar from "~/lib/components/atoms/Avatar.svelte";
+	import ContextMenu from "../molecules/ContextMenu.svelte";
 
 	export let nickname: string;
 	export let avatar: string;
@@ -37,9 +37,9 @@
 		<ContextMenu
 			menuItems={[
 				{
-					name: "Dashboard",
-					link: "/my/dashboard",
-					icon: UserSolid
+					name: "Bookmarks",
+					link: "/my/collections/0",
+					icon: BookmarkSolid
 				},
 				{
 					name: "Settings",

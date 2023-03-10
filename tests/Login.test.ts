@@ -10,7 +10,7 @@ test("Successfully login to app", async ({ page, baseURL }) => {
 	await page.locator('[name="password"]').type(password);
 
 	await page.locator('button[type="submit"]').click();
-	await page.waitForURL(`${baseURL}/my/dashboard`);
+	await page.waitForURL(`${baseURL}/my/collections/0`);
 });
 
 test("Fail to login to app using in correct credentials", async ({ page, baseURL }) => {

@@ -27,10 +27,8 @@ export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
 		throw redirect(303, "/login");
 	}
 
-	const [unsortedBookmark, collectionsWithoutGroup, groups] = await Promise.all([
-		locals.pb.collection("bookmarks").getFullList(undefined, {
-			filter: "collection = '-1'"
-		}),
+	const [bookmarks, collectionsWithoutGroup, groups] = await Promise.all([
+		locals.pb.collection("bookmarks").getFullList<BookmarksResponse>(),
 
 		locals.pb.collection("collections").getList<CollectionExpand>(1, 30, {
 			filter: "group = NULL",
@@ -85,9 +83,16 @@ export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
 		});
 	});
 
+	const unsortedBookmarks = bookmarks.filter((bookmark) => {
+		return bookmark.collectionId === "-1";
+	});
+
 	return {
 		collections: {
-			unsortedBookmarkCount: unsortedBookmark.length,
+			bookmarks: {
+				unsortedBookmarkCount: unsortedBookmarks.length,
+				bookmarkCount: bookmarks.length
+			},
 			collections,
 			groups: groupWithCollections
 		}

@@ -8,7 +8,7 @@ describe("DraggableCollections", () => {
 	test("Successfully render draggable collections", async () => {
 		const { getByText } = render(DraggableCollections, {
 			props: {
-				currentPath: "/my/dashboard",
+				currentPath: "/my/collections/0",
 				collections: [
 					{
 						id: "collection",
@@ -31,7 +31,7 @@ describe("DraggableCollections", () => {
 	test("Successfully drags and drops collections then makes API request", async () => {
 		const { getByText } = render(DraggableCollections, {
 			props: {
-				currentPath: "/my/dashboard",
+				currentPath: "/my/collections/0",
 				collections: [
 					{
 						id: "collection",
@@ -69,7 +69,7 @@ describe("DraggableCollections", () => {
 	test("Successfully render empty collections", async () => {
 		const { getByText } = render(DraggableCollections, {
 			props: {
-				currentPath: "/my/dashboard",
+				currentPath: "/my/collections/0",
 				collections: []
 			}
 		});

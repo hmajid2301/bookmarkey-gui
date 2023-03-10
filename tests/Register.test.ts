@@ -12,7 +12,7 @@ test("Successfully register an account", async ({ page, baseURL }) => {
 	await page.locator('[name="password"]').type(password);
 
 	await page.locator('button[type="submit"]').click();
-	await page.waitForURL(`${baseURL}/my/dashboard`);
+	await page.waitForURL(`${baseURL}/my/collections/0`);
 });
 
 test("Fail to register an account with an email that exists", async ({ page, baseURL }) => {

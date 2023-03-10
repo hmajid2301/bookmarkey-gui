@@ -14,7 +14,7 @@ describe("Group", () => {
 
 		const { getByText, getByTestId } = render(Group, {
 			props: {
-				currentPath: "/my/dashboard",
+				currentPath: "/my/collections/0",
 				hiddenGroups: new Set<string>(),
 				group: {
 					id: "abcd",
@@ -47,7 +47,7 @@ describe("Group", () => {
 		const user = userEvent.setup();
 		const { getByPlaceholderText, getByText } = render(Group, {
 			props: {
-				currentPath: "/my/dashboard",
+				currentPath: "/my/collections/0",
 				hiddenGroups: new Set<string>(),
 				group: {
 					id: "abcd",
@@ -73,7 +73,7 @@ describe("Group", () => {
 		const hiddenGroups = new Set<string>(["abcd"]);
 		const { queryByText } = render(Group, {
 			props: {
-				currentPath: "/my/dashboard",
+				currentPath: "/my/collections/0",
 				hiddenGroups: hiddenGroups,
 				group: {
 					id: "abcd",
@@ -97,7 +97,7 @@ describe("Group", () => {
 	// 	const user = userEvent.setup();
 	// 	const { queryByText, getByText } = render(Group, {
 	// 		props: {
-	// 			currentPath: "/my/dashboard",
+	// 			currentPath: "/my/collections/0",
 	// 			hiddenGroups: new Set<string>(),
 	// 			group: {
 	// 				id: "abcd",

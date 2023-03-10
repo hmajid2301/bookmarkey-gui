@@ -11,7 +11,10 @@ export interface Group {
 }
 
 export interface CollectionGroups {
-	unsortedBookmarkCount: number;
+	bookmarks: {
+		unsortedBookmarkCount: number;
+		bookmarkCount: number;
+	};
 	collections: Collection[];
 	groups?: Group[];
 }

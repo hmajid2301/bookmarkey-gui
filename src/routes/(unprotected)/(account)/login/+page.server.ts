@@ -48,6 +48,6 @@ export const actions: Actions = {
 			throw error(500, "Failed to login, please try again later.");
 		}
 
-		throw redirect(303, "/my/dashboard");
+		throw redirect(303, "/my/collections/0");
 	}
 };

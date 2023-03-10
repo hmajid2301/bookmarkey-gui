@@ -23,7 +23,7 @@ export default defineConfig({
 				short_name: "Bookmarkey",
 				name: "Bookmarkey",
 				description: "Bookmarking & RSS reader 2 in 1 app.",
-				start_url: "/my/dashboard?source=pwa",
+				start_url: "/my/collections/0?source=pwa",
 				scope: "/",
 				display: "standalone",
 				theme_color: "#0f172a",

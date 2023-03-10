@@ -14,7 +14,10 @@ describe("SideBar", () => {
 					avatar: ""
 				},
 				collections: {
-					unsortedBookmarkCount: 5,
+					bookmarks: {
+						unsortedBookmarkCount: 5,
+						bookmarkCount: 15
+					},
 					collections: [
 						{
 							id: "id",
@@ -37,6 +40,10 @@ describe("SideBar", () => {
 
 		getByText("Unsorted");
 		getByText("5");
+
+		// TODO: check it adds up all bookmark
+		getByText("All Bookmarks");
+		getByText("15");
 	});
 
 	test("Successfully render groups and collections", async () => {
@@ -49,7 +56,10 @@ describe("SideBar", () => {
 					avatar: ""
 				},
 				collections: {
-					unsortedBookmarkCount: 0,
+					bookmarks: {
+						unsortedBookmarkCount: 5,
+						bookmarkCount: 15
+					},
 					groups: [
 						{
 							name: "My Group",

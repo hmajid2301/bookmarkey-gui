@@ -45,7 +45,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (event.url.pathname.startsWith("/my") && !event.locals.pb.authStore.isValid) {
 		throw redirect(303, "/");
 	} else if (event.url.pathname.startsWith("/login") && event.locals.pb.authStore.isValid) {
-		throw redirect(303, "/my/dashboard");
+		throw redirect(303, "/my/collections/0");
 	}
 
 	const response = await resolve(event);

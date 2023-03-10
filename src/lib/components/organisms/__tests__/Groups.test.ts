@@ -8,7 +8,7 @@ describe("GroupsCollections", () => {
 	// test("Successfully show add collection form, with empty groups and collections", async () => {
 	// 	const { getByPlaceholderText, getByRole, getByText } = render(GroupsCollections, {
 	// 		props: {
-	// 			currentPath: "/my/dashboard",
+	// 			currentPath: "/my/collections/0",
 	// 			collections: {
 	// 				groups: [],
 	// 				collections: []
@@ -25,12 +25,15 @@ describe("GroupsCollections", () => {
 	test("Successfully show add group form", async () => {
 		const { getByRole } = render(Groups, {
 			props: {
-				currentPath: "/my/dashboard",
+				currentPath: "/my/collections/0",
 				showAddGroupForm: true,
 				collections: {
 					groups: [],
 					collections: [],
-					unsortedBookmarkCount: 0
+					bookmarks: {
+						unsortedBookmarkCount: 0,
+						bookmarkCount: 0
+					}
 				}
 			}
 		});
@@ -42,9 +45,12 @@ describe("GroupsCollections", () => {
 	test("Successfully show all collections without any groups", async () => {
 		const { getByText, queryByText } = render(Groups, {
 			props: {
-				currentPath: "/my/dashboard",
+				currentPath: "/my/collections/0",
 				collections: {
-					unsortedBookmarkCount: 2,
+					bookmarks: {
+						unsortedBookmarkCount: 2,
+						bookmarkCount: 0
+					},
 					groups: [],
 					collections: [
 						{
@@ -70,9 +76,12 @@ describe("GroupsCollections", () => {
 	test("Successfully show all groups without any collections", async () => {
 		const { getByText, queryAllByText } = render(Groups, {
 			props: {
-				currentPath: "/my/dashboard",
+				currentPath: "/my/collections/0",
 				collections: {
-					unsortedBookmarkCount: 1,
+					bookmarks: {
+						unsortedBookmarkCount: 1,
+						bookmarkCount: 0
+					},
 					groups: [
 						{
 							id: "id1",

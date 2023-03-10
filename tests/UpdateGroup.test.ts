@@ -99,6 +99,6 @@ test.describe(() => {
 		await page.locator('[name="email"]').type(email);
 		await page.locator('[name="password"]').type(password);
 		await page.locator('button[type="submit"]').click();
-		await page.waitForURL(`${baseURL}/my/dashboard`);
+		await page.waitForURL(`${baseURL}/my/collections/0`);
 	}
 });
