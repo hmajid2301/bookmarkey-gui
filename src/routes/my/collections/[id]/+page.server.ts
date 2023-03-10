@@ -8,18 +8,10 @@ import type {
 	BookmarksResponse,
 	CollectionsResponse
 } from "~/lib/pocketbase/types";
+import type { Bookmark } from "~/lib/types/components";
 import type { PageServerLoad } from "./$types";
 
-export interface Bookmark {
-	id: string;
-	image: string;
-	url: string;
-	description: string;
-	title: string;
-	createdAt: string;
-}
-
-export interface Collection {
+export interface CollectionBookmarks {
 	id: string;
 	name: string;
 	group: string;
@@ -28,7 +20,7 @@ export interface Collection {
 }
 
 interface OutputType {
-	collection: Collection;
+	collection: CollectionBookmarks;
 }
 
 type BookmarkExpand = BookmarksResponse & {

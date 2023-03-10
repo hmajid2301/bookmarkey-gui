@@ -31,7 +31,7 @@ describe("Collection", () => {
 			}
 		});
 
-		expect(getByTestId("idabc").className).toContain("block");
+		expect(getByTestId("ContextMenu").className).toContain("block");
 	});
 
 	test("Successfully does not show context menu", async () => {
@@ -46,6 +46,6 @@ describe("Collection", () => {
 			}
 		});
 
-		expect(getByTestId("idabc").className).toContain("hidden");
+		expect(getByTestId("ContextMenu").className).toContain("hidden");
 	});
 });

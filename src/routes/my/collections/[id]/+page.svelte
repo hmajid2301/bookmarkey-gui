@@ -2,13 +2,13 @@
 	import { navigating } from "$app/stores";
 	import { inview } from "svelte-inview";
 	import { Circle } from "svelte-loading-spinners";
+	import Bookmark from "~/lib/components/molecules/Bookmark.svelte";
 
-	import type { PageData } from "./$types";
-	import type { Collection } from "./+page.server";
-	import Bookmark from "~/lib/components/molecules/Bookmarks.svelte";
 	import TopBar from "~/lib/components/molecules/TopBar.svelte";
 	import AddBookmarkModal from "~/lib/components/organisms/AddBookmarkModal.svelte";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
+	import type { PageData } from "./$types";
+	import type { CollectionBookmarks } from "./+page.server";
 
 	export let data: PageData;
 
@@ -16,16 +16,15 @@
 	let show = false;
 	let page = 1;
 	let collection = data.collection;
-	let newCollection: Collection;
+	let newCollection: CollectionBookmarks;
 	let loading = false;
 
 	async function getBookmarks() {
-		console.log("HELLO");
 		loading = true;
 		const resp = await fetch(`/my/collections/${data.collection.id}?page=${page}`, {
 			method: "GET"
 		});
-		newCollection = (await resp.json()) as Collection;
+		newCollection = (await resp.json()) as CollectionBookmarks;
 		loading = false;
 	}
 
@@ -43,13 +42,14 @@
 
 <TopBar collectionName={collection.name} nickname={data.user.nickname} bind:show bind:ref />
 
-<Bookmark bookmarks={collection.bookmarks} />
+{#each collection.bookmarks as bookmark}
+	<Bookmark {bookmark} />
+{/each}
+
 <div
 	use:inview={{}}
 	on:enter={async () => {
-		console.log("HELLO");
 		if (collection.moreBookmarks) {
-			console.log("HELLO");
 			page += 1;
 			await getBookmarks();
 		}

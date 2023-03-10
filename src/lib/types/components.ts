@@ -25,3 +25,12 @@ export interface User {
 	avatar?: string;
 	nickname: string;
 }
+
+export interface Bookmark {
+	id: string;
+	image: string;
+	url: string;
+	description: string;
+	title: string;
+	createdAt: string;
+}

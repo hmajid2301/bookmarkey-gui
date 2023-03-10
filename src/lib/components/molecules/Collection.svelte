@@ -89,24 +89,22 @@
 	</div>
 </a>
 
-<div data-testid={collection.id} class="relative z-10 {showMenu ? 'block' : 'hidden'}">
-	<ContextMenu
-		menuItems={[
-			{
-				name: "Rename Collection",
-				onClick: async function () {
-					edittingName = true;
-					await tick();
-					ref?.focus();
-					ref?.select();
-				}
-			},
-			{
-				name: "Delete Collection",
-				onClick: async function () {
-					await deleteCollection();
-				}
+<ContextMenu
+	menuItems={[
+		{
+			name: "Rename Collection",
+			onClick: async function () {
+				edittingName = true;
+				await tick();
+				ref?.focus();
+				ref?.select();
 			}
-		]}
-		showMenu={showMenu ?? false} />
-</div>
+		},
+		{
+			name: "Delete Collection",
+			onClick: async function () {
+				await deleteCollection();
+			}
+		}
+	]}
+	showMenu={showMenu ?? false} />
