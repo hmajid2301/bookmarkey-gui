@@ -79,7 +79,7 @@
 		"svelte-inview": "^3.0.4",
 		"svelte-loading-spinners": "^0.3.4",
 		"svelte-preprocess": "^4.10.7",
-		"sveltekit-adapter-chrome-extension": "^1.5.0",
+		"sveltekit-adapter-chrome-extension": "^2.0.0",
 		"tailwindcss": "^3.2.4",
 		"tslib": "^2.5.0",
 		"typescript": "^4.9.5",
