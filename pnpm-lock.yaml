@@ -74,7 +74,7 @@ specifiers:
   workbox-routing: ^6.5.4
   workbox-window: ^6.5.4
   zod: ^3.20.2
-  zod-form-data: ^1.2.4
+  zod-form-data: ^2.0.0
 
 devDependencies:
   '@go-task/cli': 3.20.0
@@ -150,7 +150,7 @@ devDependencies:
   workbox-routing: 6.5.4
   workbox-window: 6.5.4
   zod: 3.20.2
-  zod-form-data: 1.2.4_zod@3.20.2
+  zod-form-data: 2.0.0_zod@3.20.2
 
 packages:
 
@@ -7468,8 +7468,8 @@ packages:
     engines: {node: '>=12.20'}
     dev: true
 
-  /zod-form-data/1.2.4_zod@3.20.2:
-    resolution: {integrity: sha512-mI/rgItfvYQpvzEqGuBda/nuTHrMNoFZJ5cpiGLC5O3ZaVwI0XVo3/yTY2RreVMu57wGcDrfQcTRe5aMq2ijYA==}
+  /zod-form-data/2.0.0_zod@3.20.2:
+    resolution: {integrity: sha512-NmQVAcL4/W1PEWaS3hGXM3DxRSiOsX8p7vHPF3rt6aQs2+Nqxs4QuapZ1ncv3E+iRN86zthbZJRvz6q9Jl5A/g==}
     peerDependencies:
       zod: ^3.11.x
     dependencies:
