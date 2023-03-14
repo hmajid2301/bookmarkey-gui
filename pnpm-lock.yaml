@@ -60,7 +60,7 @@ specifiers:
   svelte-htm: ^1.2.0
   svelte-inview: ^3.0.4
   svelte-loading-spinners: ^0.3.4
-  svelte-preprocess: ^4.10.7
+  svelte-preprocess: ^5.0.0
   sveltekit-adapter-chrome-extension: ^2.0.0
   tailwindcss: ^3.2.4
   tslib: ^2.5.0
@@ -136,7 +136,7 @@ devDependencies:
   svelte-htm: 1.2.0_svelte@3.55.1
   svelte-inview: 3.0.4_svelte@3.55.1
   svelte-loading-spinners: 0.3.4
-  svelte-preprocess: 4.10.7_k4bhxdknaltjvjwprbm23edr5q
+  svelte-preprocess: 5.0.1_k4bhxdknaltjvjwprbm23edr5q
   sveltekit-adapter-chrome-extension: 2.0.0
   tailwindcss: 3.2.4_postcss@8.4.21
   tslib: 2.5.0
@@ -6058,16 +6058,6 @@ packages:
       is-fullwidth-code-point: 4.0.0
     dev: true
 
-  /sorcery/0.10.0:
-    resolution: {integrity: sha512-R5ocFmKZQFfSTstfOtHjJuAwbpGyf9qjQa1egyhvXSbM7emjrtLXtGdZsDJDABC85YBfVvrOiGWKSYXPKdvP1g==}
-    hasBin: true
-    dependencies:
-      buffer-crc32: 0.2.13
-      minimist: 1.2.7
-      sander: 0.5.1
-      sourcemap-codec: 1.4.8
-    dev: true
-
   /sorcery/0.11.0:
     resolution: {integrity: sha512-J69LQ22xrQB1cIFJhPfgtLuI6BpWRiWu1Y3vSsIwK/eAScqJxd/+CJlUuHQRdX2C9NGFamq+KqNywGgaThwfHw==}
     hasBin: true
@@ -6400,58 +6390,6 @@ packages:
 
   /svelte-loading-spinners/0.3.4:
     resolution: {integrity: sha512-vKaW71QMCBcTNijAGc0mUl8k3DQ66iYmp6MB8BMGCXyWk82bTrcLy8FOnSm9fE+8q6TwzD6PLUoYFHt0II93Xw==}
-    dev: true
-
-  /svelte-preprocess/4.10.7_k4bhxdknaltjvjwprbm23edr5q:
-    resolution: {integrity: sha512-sNPBnqYD6FnmdBrUmBCaqS00RyCsCpj2BG58A1JBswNF7b0OKviwxqVrOL/CKyJrLSClrSeqQv5BXNg2RUbPOw==}
-    engines: {node: '>= 9.11.2'}
-    requiresBuild: true
-    peerDependencies:
-      '@babel/core': ^7.10.2
-      coffeescript: ^2.5.1
-      less: ^3.11.3 || ^4.0.0
-      node-sass: '*'
-      postcss: ^7 || ^8
-      postcss-load-config: ^2.1.0 || ^3.0.0 || ^4.0.0
-      pug: ^3.0.0
-      sass: ^1.26.8
-      stylus: ^0.55.0
-      sugarss: ^2.0.0
-      svelte: ^3.23.0
-      typescript: ^3.9.5 || ^4.0.0
-    peerDependenciesMeta:
-      '@babel/core':
-        optional: true
-      coffeescript:
-        optional: true
-      less:
-        optional: true
-      node-sass:
-        optional: true
-      postcss:
-        optional: true
-      postcss-load-config:
-        optional: true
-      pug:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      typescript:
-        optional: true
-    dependencies:
-      '@types/pug': 2.0.6
-      '@types/sass': 1.43.1
-      detect-indent: 6.1.0
-      magic-string: 0.25.9
-      postcss: 8.4.21
-      sorcery: 0.10.0
-      strip-indent: 3.0.0
-      svelte: 3.55.1
-      typescript: 4.9.5
     dev: true
 
   /svelte-preprocess/5.0.1_k4bhxdknaltjvjwprbm23edr5q:
