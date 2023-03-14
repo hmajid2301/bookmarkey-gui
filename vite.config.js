@@ -1,4 +1,4 @@
-import sentryVitePlugin from "@sentry/vite-plugin";
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { SvelteKitPWA } from "@vite-pwa/sveltekit";
 import istanbul from "vite-plugin-istanbul";
