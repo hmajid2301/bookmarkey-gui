@@ -48,7 +48,7 @@
 
 <div
 	use:inview={{}}
-	on:enter={async () => {
+	on:inview_enter={async () => {
 		if (collection.moreBookmarks) {
 			page += 1;
 			await getBookmarks();

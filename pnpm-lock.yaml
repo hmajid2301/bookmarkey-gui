@@ -53,12 +53,12 @@ specifiers:
   prettier-plugin-tailwindcss: ^0.2.2
   svelte: ^3.55.1
   svelte-awesome-icons: ^0.2.16
-  svelte-check: ^3.0.4
+  svelte-check: ^3.1.0
   svelte-drag-drop-touch: ^0.1.9
   svelte-french-toast: ^1.0.3
   svelte-gestures: ^1.4.1
   svelte-htm: ^1.2.0
-  svelte-inview: ^3.0.4
+  svelte-inview: 4.0.0
   svelte-loading-spinners: ^0.3.4
   svelte-preprocess: ^5.0.0
   sveltekit-adapter-chrome-extension: ^2.0.0
@@ -129,12 +129,12 @@ devDependencies:
   prettier-plugin-tailwindcss: 0.2.2_2x43trzvpzis5oa6w3yxl4exgi
   svelte: 3.55.1
   svelte-awesome-icons: 0.2.16
-  svelte-check: 3.0.4_pehl75e5jsy22vp33udjja4soi
+  svelte-check: 3.1.4_pehl75e5jsy22vp33udjja4soi
   svelte-drag-drop-touch: 0.1.9
   svelte-french-toast: 1.0.3_svelte@3.55.1
   svelte-gestures: 1.4.1
   svelte-htm: 1.2.0_svelte@3.55.1
-  svelte-inview: 3.0.4_svelte@3.55.1
+  svelte-inview: 4.0.0_svelte@3.55.1
   svelte-loading-spinners: 0.3.4
   svelte-preprocess: 5.0.1_k4bhxdknaltjvjwprbm23edr5q
   sveltekit-adapter-chrome-extension: 2.0.0_2mpmikmgyjawmfh5fnuti4sqde
@@ -6287,8 +6287,8 @@ packages:
     resolution: {integrity: sha512-HyiFSLaCmHKV/YYfYP4Ms2i38hbtE+kWVq38Sj7CpM1tWGfvs1rumPT3FqlKlnw7jx1yxv79/MPLnkmQYGoSsg==}
     dev: true
 
-  /svelte-check/3.0.4_pehl75e5jsy22vp33udjja4soi:
-    resolution: {integrity: sha512-feIyBAA5cSIxq4vq6mwGvGQTHy/wBVQbs5b+/VvE21WN8X7nonAuSqwvZv0UDBowzRka3Rh4gmLPH8rPePz3/w==}
+  /svelte-check/3.1.4_pehl75e5jsy22vp33udjja4soi:
+    resolution: {integrity: sha512-25Lb46ZS4IK/XpBMe4IBMrtYf23V8alqBX+szXoccb7uM0D2Wqq5rMRzYBONZnFVuU1bQG3R50lyIT5eRewv2g==}
     hasBin: true
     peerDependencies:
       svelte: ^3.55.0
@@ -6387,8 +6387,8 @@ packages:
       svelte: 3.55.1
     dev: true
 
-  /svelte-inview/3.0.4_svelte@3.55.1:
-    resolution: {integrity: sha512-dJZMZ7qN+z2lsxHA7mK1vS35qOCfl1BNSs712a2AnulbRm371n2eoaNa5ICVYAViWpj2zCy1XGZllrxJ0Tjp5A==}
+  /svelte-inview/4.0.0_svelte@3.55.1:
+    resolution: {integrity: sha512-2lvfkJRkmHt19RvDe5MrIK/pFiPJhyXbKL6JrEyRNC73EYTmFSMBc7481UIw01s5+/+uRQXRPvrtC0zA45HLaA==}
     peerDependencies:
       svelte: ^3.0.0
     dependencies:
