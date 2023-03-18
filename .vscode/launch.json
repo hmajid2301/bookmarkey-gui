@@ -8,7 +8,7 @@
 			"type": "firefox",
 			"request": "launch",
 			"name": "",
-			"url": "http://localhost:5173",
+			"url": "http://localhost:5174",
 			"webRoot": "${workspaceFolder}/src"
 		}
 	]

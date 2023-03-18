@@ -1,24 +1,23 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
-	import { clickoutside } from "@svelte-put/clickoutside";
 	import { tick } from "svelte";
 	import CaretDownSolid from "svelte-awesome-icons/CaretDownSolid.svelte";
 	import EllipsisSolid from "svelte-awesome-icons/EllipsisSolid.svelte";
+	import ContextMenu, { Item } from "svelte-contextmenu";
 	import toast from "svelte-french-toast";
 
-	import AddCollectionForm from "./AddCollectionForm.svelte";
-	import DraggableCollection from "./DraggableCollections.svelte";
-	import Input from "../atoms/Input.svelte";
-	import ContextMenu from "../molecules/ContextMenu.svelte";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 	import type { Group } from "~/lib/types/components";
+	import Input from "../atoms/Input.svelte";
+	import AddCollectionForm from "./AddCollectionForm.svelte";
+	import DraggableCollection from "./DraggableCollections.svelte";
 
 	export let currentPath: string;
 	export let hiddenGroups: Set<string>;
 	export let group: Group;
 	export let showAddCollectionForm = false;
-	export let showMenu: boolean | undefined = false;
 
+	let contextMenu: ContextMenu;
 	let collectionRef: HTMLInputElement;
 	let edittingName = false;
 	let groupRef: HTMLInputElement;
@@ -41,14 +40,12 @@
 	}
 
 	async function showAddCollection() {
-		showMenu = false;
 		showAddCollectionForm = true;
 		await tick();
 		collectionRef?.focus();
 	}
 
 	async function deleteGroup() {
-		showMenu = false;
 		const response = await fetch(`/my/groups/${group.id}`, {
 			method: "DELETE"
 		});
@@ -61,7 +58,6 @@
 	}
 
 	async function patchGroupName(newGroupName: string) {
-		showMenu = false;
 		edittingName = false;
 
 		const response = await fetch(`/my/groups/${group.id}`, {
@@ -81,17 +77,13 @@
 		const newGroupName = target.value;
 		await patchGroupName(newGroupName);
 	}
-
-	function openMenu() {
-		showMenu = true;
-	}
-
-	function closeMenu() {
-		showMenu = false;
-	}
 </script>
 
-<button on:contextmenu|preventDefault={openMenu} class="flex w-full grow justify-between">
+<button
+	on:contextmenu={(e) => {
+		contextMenu.show(e);
+	}}
+	class="flex w-full grow justify-between">
 	<button
 		on:click={() => {
 			if (hiddenGroups.has(group.id)) {
@@ -122,7 +114,8 @@
 			{group.name}
 		{/if}
 	</button>
-	<button on:click={openMenu} on:keyup={openMenu} use:clickoutside on:clickoutside={closeMenu}>
+
+	<button on:click={contextMenu.createHandler()}>
 		<div class="my-2 flex flex-col items-start space-y-1">
 			{#if !hiddenGroups.has(group.id)}
 				<EllipsisSolid />
@@ -131,34 +124,29 @@
 			{/if}
 		</div>
 
-		<div class="relative block w-full">
-			<ContextMenu
-				menuItems={[
-					{
-						name: "Create Collection",
-						onClick: async () => {
-							await showAddCollection();
-						},
-						divider: true
-					},
-					{
-						name: "Delete Group",
-						onClick: async function () {
-							await deleteGroup();
-						}
-					},
-					{
-						name: "Rename Group",
-						onClick: async () => {
-							edittingName = true;
-							await tick();
-							groupRef?.focus();
-							groupRef?.select();
-						}
-					}
-				]}
-				showMenu={showMenu ?? false} />
-		</div>
+		<ContextMenu bind:this={contextMenu}>
+			<Item
+				on:click={async () => {
+					await showAddCollection();
+				}}>
+				Create Collection
+			</Item>
+			<Item
+				on:click={async function () {
+					await deleteGroup();
+				}}>
+				Delete Group
+			</Item>
+			<Item
+				on:click={async () => {
+					edittingName = true;
+					await tick();
+					groupRef?.focus();
+					groupRef?.select();
+				}}>
+				Rename Group
+			</Item>
+		</ContextMenu>
 	</button>
 </button>
 

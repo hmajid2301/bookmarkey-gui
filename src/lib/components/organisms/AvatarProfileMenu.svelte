@@ -3,24 +3,19 @@
 	import CaretDownSolid from "svelte-awesome-icons/CaretDownSolid.svelte";
 	import GearSolid from "svelte-awesome-icons/GearSolid.svelte";
 	import RightFromBracketSolid from "svelte-awesome-icons/RightFromBracketSolid.svelte";
+	import ContextMenu, { Item } from "svelte-contextmenu";
 
-	import ContextMenu from "../molecules/ContextMenu.svelte";
 	import Avatar from "~/lib/components/atoms/Avatar.svelte";
 
+	let contextMenu: ContextMenu;
 	export let nickname: string;
 	export let avatar: string;
 	export let email: string;
-	let showAvatarMenu = false;
 </script>
 
 <button
 	aria-label="avatar"
-	on:keydown={() => {
-		showAvatarMenu = !showAvatarMenu;
-	}}
-	on:click={() => {
-		showAvatarMenu = !showAvatarMenu;
-	}}
+	on:click={contextMenu.createHandler()}
 	class="max-h-screen-menu static my-1 flex w-full bg-slate-100 dark:bg-slate-800 lg:overflow-y-visible">
 	<div
 		class="relative flex cursor-pointer items-center py-2 px-3 text-black hover:text-slate-500 dark:text-white dark:hover:text-slate-400">
@@ -34,24 +29,19 @@
 			{nickname}
 		</p>
 		<CaretDownSolid class="h-4 w-4" />
-		<ContextMenu
-			menuItems={[
-				{
-					name: "Bookmarks",
-					link: "/my/collections/0",
-					icon: BookmarkSolid
-				},
-				{
-					name: "Settings",
-					link: "/my/settings",
-					icon: GearSolid
-				},
-				{
-					name: "Log Out",
-					link: "/logout",
-					icon: RightFromBracketSolid
-				}
-			]}
-			showMenu={showAvatarMenu} />
+		<ContextMenu bind:this={contextMenu}>
+			<Item href="/my/collections/0">
+				<BookmarkSolid />
+				Bookmarks
+			</Item>
+			<Item href="/my/settings">
+				<GearSolid />
+				Settings
+			</Item>
+			<Item href="/logout">
+				<RightFromBracketSolid />
+				Log Out
+			</Item>
+		</ContextMenu>
 	</div>
 </button>

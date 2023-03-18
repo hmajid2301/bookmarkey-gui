@@ -1,26 +1,20 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
-	import { clickoutside } from "@svelte-put/clickoutside";
 	import { tick } from "svelte";
 	import FolderClosedSolid from "svelte-awesome-icons/FolderClosedSolid.svelte";
+	import ContextMenu, { Item } from "svelte-contextmenu";
 	import toast from "svelte-french-toast";
 
-	import ContextMenu from "./ContextMenu.svelte";
-	import Input from "../atoms/Input.svelte";
 	import type { Collection } from "~/lib/types/components";
+	import Input from "../atoms/Input.svelte";
 
 	export let collection: Collection;
-	export let showMenu: boolean | undefined = false;
 
 	let edittingName = false;
+	let contextMenu: ContextMenu;
 	let ref: HTMLInputElement;
 
-	function closeMenu() {
-		showMenu = false;
-	}
-
 	async function patchCollectionName(newCollectionName: string) {
-		showMenu = false;
 		edittingName = false;
 
 		const response = await fetch(`/my/collections/${collection.id}`, {
@@ -36,7 +30,6 @@
 	}
 
 	async function deleteCollection() {
-		showMenu = false;
 		const response = await fetch(`/my/collections/${collection.id}`, {
 			method: "DELETE"
 		});
@@ -56,10 +49,11 @@
 </script>
 
 <a
+	on:contextmenu={(e) => {
+		contextMenu.show(e);
+	}}
 	class="flex grow flex-row space-x-4 rounded-lg py-1 transition-all duration-100 hover:bg-slate-200 dark:hover:bg-slate-700"
-	href={`/my/collections/${collection.id}`}
-	use:clickoutside
-	on:clickoutside={closeMenu}>
+	href={`/my/collections/${collection.id}`}>
 	<div>
 		<FolderClosedSolid />
 	</div>
@@ -89,22 +83,20 @@
 	</div>
 </a>
 
-<ContextMenu
-	menuItems={[
-		{
-			name: "Rename Collection",
-			onClick: async function () {
-				edittingName = true;
-				await tick();
-				ref?.focus();
-				ref?.select();
-			}
-		},
-		{
-			name: "Delete Collection",
-			onClick: async function () {
-				await deleteCollection();
-			}
-		}
-	]}
-	showMenu={showMenu ?? false} />
+<ContextMenu bind:this={contextMenu}>
+	<Item
+		on:click={async function () {
+			edittingName = true;
+			await tick();
+			ref?.focus();
+			ref?.select();
+		}}>
+		Rename Collection
+	</Item>
+	<Item
+		on:click={async function () {
+			await deleteCollection();
+		}}>
+		Delete Collection
+	</Item>
+</ContextMenu>

@@ -2,10 +2,10 @@
 	import { invalidateAll } from "$app/navigation";
 	import toast from "svelte-french-toast";
 
-	import Collection from "../molecules/Collection.svelte";
 	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
 	import type { CollectionMove } from "~/lib/types/api";
 	import type { Collection as Collection_ } from "~/lib/types/components";
+	import Collection from "../organisms/Collection.svelte";
 
 	export let currentPath: string;
 	export let collections: Collection_[];
@@ -29,7 +29,6 @@
 			toast.error("Failed to move collection");
 		}
 	}
-	const collectionIdOpenMenuMap: { [key: string]: boolean } = {};
 </script>
 
 {#if collections.length === 0}
@@ -53,9 +52,6 @@
 		class="flex w-full grow px-1 transition-all duration-100 hover:bg-slate-200 dark:hover:bg-slate-700"
 		class:activeCollection={currentPath === `/my/collections/${collection.id}`}
 		draggable="true"
-		on:contextmenu|preventDefault|stopPropagation={() => {
-			collectionIdOpenMenuMap[collection.id] = true;
-		}}
 		on:dragstart={() => {
 			$draggableStore.collection.id = collection.id;
 			$draggableStore.draggingType = DraggingType.Collection;
@@ -69,6 +65,6 @@
 			$draggableStore.collection.newGroupId = groupId || "";
 		}}
 		on:dragover|preventDefault>
-		<Collection {collection} bind:showMenu={collectionIdOpenMenuMap[collection.id]} />
+		<Collection {collection} />
 	</div>
 {/each}

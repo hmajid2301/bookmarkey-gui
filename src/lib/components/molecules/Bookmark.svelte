@@ -1,16 +1,15 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
 	import Avatar from "@svelte-put/avatar/Avatar.svelte";
+	import ContextMenu, { Item } from "svelte-contextmenu";
 	import toast from "svelte-french-toast";
 
-	import ContextMenu from "./ContextMenu.svelte";
 	import type { Bookmark } from "~/lib/types/components";
 
 	export let bookmark: Bookmark;
-	let showMenu = false;
+	let contextMenu: ContextMenu;
 
 	async function deleteBookmark() {
-		showMenu = false;
 		const response = await fetch(`/my/bookmarks/${bookmark.id}`, {
 			method: "DELETE"
 		});
@@ -24,9 +23,7 @@
 </script>
 
 <a
-	on:contextmenu|preventDefault={() => {
-		showMenu = true;
-	}}
+	on:contextmenu={contextMenu.createHandler()}
 	href={bookmark.url}
 	target="_blank"
 	rel="noreferrer"
@@ -57,13 +54,6 @@
 	</div>
 </a>
 
-<ContextMenu
-	menuItems={[
-		{
-			name: "Delete Bookmark",
-			onClick: async function () {
-				await deleteBookmark();
-			}
-		}
-	]}
-	{showMenu} />
+<ContextMenu bind:this={contextMenu}>
+	<Item on:click={deleteBookmark}>Delete Bookmark</Item>
+</ContextMenu>

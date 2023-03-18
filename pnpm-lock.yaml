@@ -52,6 +52,7 @@ specifiers:
   svelte: ^3.55.1
   svelte-awesome-icons: ^0.2.16
   svelte-check: ^3.1.0
+  svelte-contextmenu: gitlab:hmajid2301/svelte-contextmenu
   svelte-drag-drop-touch: ^0.1.9
   svelte-french-toast: ^1.0.3
   svelte-gestures: ^1.4.1
@@ -126,6 +127,7 @@ devDependencies:
   svelte: 3.55.1
   svelte-awesome-icons: 0.2.16
   svelte-check: 3.1.4_pehl75e5jsy22vp33udjja4soi
+  svelte-contextmenu: gitlab.com/hmajid2301/svelte-contextmenu/503df5c42da8a9b139fbd76bd3b5637a011bf697_svelte@3.55.1
   svelte-drag-drop-touch: 0.1.9
   svelte-french-toast: 1.0.3_svelte@3.55.1
   svelte-gestures: 1.4.1
@@ -7420,4 +7422,15 @@ packages:
 
   /zod/3.20.2:
     resolution: {integrity: sha512-1MzNQdAvO+54H+EaK5YpyEy0T+Ejo/7YLHS93G3RnYWh5gaotGHwGeN/ZO687qEDU2y4CdStQYXVHIgrUl5UVQ==}
+    dev: true
+
+  gitlab.com/hmajid2301/svelte-contextmenu/503df5c42da8a9b139fbd76bd3b5637a011bf697_svelte@3.55.1:
+    resolution: {tarball: https://gitlab.com/api/v4/projects/hmajid2301%2Fsvelte-contextmenu/repository/archive.tar.gz?ref=503df5c42da8a9b139fbd76bd3b5637a011bf697}
+    id: gitlab.com/hmajid2301/svelte-contextmenu/503df5c42da8a9b139fbd76bd3b5637a011bf697
+    name: svelte-contextmenu
+    version: 0.0.1
+    peerDependencies:
+      svelte: ^3.54.0
+    dependencies:
+      svelte: 3.55.1
     dev: true

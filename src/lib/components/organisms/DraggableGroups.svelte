@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { flip } from "svelte/animate";
 	import toast from "svelte-french-toast";
+	import { flip } from "svelte/animate";
 
-	import Group from "./Group.svelte";
 	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
 	import type { GroupSwap } from "~/lib/types/api";
 	import type { Group as Group_ } from "~/lib/types/components";
+	import Group from "./Group.svelte";
 
 	export let groups: Group_[] = [];
 	export let currentPath: string;
@@ -14,7 +14,6 @@
 	let hiddenGroups = new Set<string>();
 	let animatingCards = new Set();
 	let swapFromindex: number | undefined;
-	const collectionIdOpenMenuMap: { [key: string]: boolean } = {};
 
 	async function changeGroupOrder(swapToIndex: number) {
 		if (swapFromindex === swapToIndex || animatingCards.has(swapToIndex)) return;
@@ -55,9 +54,6 @@
 	<div
 		class="flex w-full grow flex-col"
 		animate:flip={{ duration: dragDuration }}
-		on:contextmenu|preventDefault={() => {
-			collectionIdOpenMenuMap[group.id] = true;
-		}}
 		draggable={$draggableStore.draggingType === DraggingType.Collection ? "false" : "true"}
 		on:dragstart={() => {
 			if ($draggableStore.draggingType !== DraggingType.Collection) {
@@ -77,10 +73,6 @@
 			}
 		}}
 		on:dragover|preventDefault>
-		<Group
-			{group}
-			bind:showMenu={collectionIdOpenMenuMap[group.id]}
-			bind:hiddenGroups
-			{currentPath} />
+		<Group {group} bind:hiddenGroups {currentPath} />
 	</div>
 {/each}
