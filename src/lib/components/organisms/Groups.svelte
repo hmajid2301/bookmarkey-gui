@@ -51,7 +51,7 @@
 <Collection
 	collection={{
 		id: "-1",
-		name: "Unsorted",
+		name: "Unsorted Bookmarks",
 		bookmarkCount: collections.bookmarks.unsortedBookmarkCount
 	}} />
 <div class="my-2 flex flex-col items-start space-y-1">

@@ -1,12 +1,12 @@
 import { redirect } from "@sveltejs/kit";
 
-import type { LayoutServerLoad } from "./$types";
 import type {
 	BookmarksResponse,
 	CollectionsResponse,
 	GroupsResponse
 } from "~/lib/pocketbase/types";
 import type { Collection, CollectionGroups, Group } from "~/lib/types/components";
+import type { LayoutServerLoad } from "./$types";
 
 export type OutputType = { collections: CollectionGroups };
 
@@ -31,7 +31,7 @@ export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
 		locals.pb.collection("bookmarks").getFullList<BookmarksResponse>(),
 
 		locals.pb.collection("collections").getList<CollectionExpand>(1, 30, {
-			filter: "group = NULL",
+			filter: "group = NULL && user != NULL",
 			sort: "-created",
 			expand: "bookmarks(collection),group"
 		}),

@@ -38,7 +38,9 @@ describe("SideBar", () => {
 		getByText("10");
 		getByText("my collection");
 
-		getByText("Unsorted");
+		getByText("All Bookmarks");
+		getByText("15");
+		getByText("Unsorted Bookmarks");
 		getByText("5");
 
 		// TODO: check it adds up all bookmark
