@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
+	import { clickoutside } from "@svelte-put/clickoutside";
 	import { tick } from "svelte";
 	import FolderClosedSolid from "svelte-awesome-icons/FolderClosedSolid.svelte";
 	import toast from "svelte-french-toast";
 
-	import { clickoutside } from "@svelte-put/clickoutside";
-	import type { Collection } from "~/lib/types/components";
-	import Input from "../atoms/Input.svelte";
 	import ContextMenu from "./ContextMenu.svelte";
+	import Input from "../atoms/Input.svelte";
+	import type { Collection } from "~/lib/types/components";
 
 	export let collection: Collection;
 	export let showMenu: boolean | undefined = false;

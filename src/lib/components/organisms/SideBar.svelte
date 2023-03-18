@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { NavBrand } from "flowbite-svelte";
 
-	import type { CollectionGroups, User } from "~/lib/types/components";
-	import Logo from "../atoms/Logo.svelte";
-	import AddCollectionButton from "../molecules/AddCollectionButton.svelte";
 	import AvatarProfileMenu from "./AvatarProfileMenu.svelte";
 	import Groups from "./Groups.svelte";
+	import Logo from "../atoms/Logo.svelte";
+	import AddCollectionButton from "../molecules/AddCollectionButton.svelte";
+	import type { CollectionGroups, User } from "~/lib/types/components";
 
 	export let user: User;
 	export let currentPath: string;

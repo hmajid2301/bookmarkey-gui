@@ -3,13 +3,13 @@ import { error, fail, type Actions } from "@sveltejs/kit";
 import type pocketbase from "pocketbase";
 import { z } from "zod";
 
+import type { PageServerLoad } from "./$types";
 import type {
 	BookmarksMetadataResponse,
 	BookmarksResponse,
 	CollectionsResponse
 } from "~/lib/pocketbase/types";
 import type { Bookmark } from "~/lib/types/components";
-import type { PageServerLoad } from "./$types";
 
 export interface CollectionBookmarks {
 	id: string;
@@ -87,9 +87,10 @@ export async function _getBookmarks(pb: pocketbase, collectionId: string, page: 
 	if (collectionId === "-1") {
 		collection = {
 			id: "-1",
-			name: "Unsorted"
+			name: "Unsorted Bookmarks"
 		};
-	} else if (collectionId === "0") {
+	}
+	if (collectionId === "0") {
 		collection = {
 			id: "0",
 			name: "All Bookmarks"

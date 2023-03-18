@@ -4,8 +4,8 @@
 	import GearSolid from "svelte-awesome-icons/GearSolid.svelte";
 	import RightFromBracketSolid from "svelte-awesome-icons/RightFromBracketSolid.svelte";
 
-	import Avatar from "~/lib/components/atoms/Avatar.svelte";
 	import ContextMenu from "../molecules/ContextMenu.svelte";
+	import Avatar from "~/lib/components/atoms/Avatar.svelte";
 
 	export let nickname: string;
 	export let avatar: string;

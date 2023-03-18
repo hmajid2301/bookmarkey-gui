@@ -2,8 +2,9 @@
 	import { invalidateAll } from "$app/navigation";
 	import Avatar from "@svelte-put/avatar/Avatar.svelte";
 	import toast from "svelte-french-toast";
-	import type { Bookmark } from "~/lib/types/components";
+
 	import ContextMenu from "./ContextMenu.svelte";
+	import type { Bookmark } from "~/lib/types/components";
 
 	export let bookmark: Bookmark;
 	let showMenu = false;

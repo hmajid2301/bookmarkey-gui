@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from "$app/stores";
+	import * as Sentry from "@sentry/svelte";
 	import { swipe } from "svelte-gestures";
 
 	import type { LayoutData } from "./$types";

@@ -2,8 +2,8 @@
 	import { clickoutside } from "@svelte-put/clickoutside";
 	import PlusSolid from "svelte-awesome-icons/PlusSolid.svelte";
 
-	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 	import ContextMenu from "./ContextMenu.svelte";
+	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 
 	let showMenu = false;
 	export let showAddGroupForm = false;

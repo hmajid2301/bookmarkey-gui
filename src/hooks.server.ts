@@ -8,7 +8,7 @@ import { PBClient } from "./lib/pocketbase/client";
 
 SentryNode.init({
 	dsn: config.SentryDNS,
-	environment: config.PROD ? "production" : "development",
+	environment: config.MY_ENV,
 	tracesSampleRate: 1.0,
 	integrations: [new SentryNode.Integrations.Http()]
 });

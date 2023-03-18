@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
+	import { clickoutside } from "@svelte-put/clickoutside";
 	import { tick } from "svelte";
 	import CaretDownSolid from "svelte-awesome-icons/CaretDownSolid.svelte";
 	import EllipsisSolid from "svelte-awesome-icons/EllipsisSolid.svelte";
 	import toast from "svelte-french-toast";
 
-	import { clickoutside } from "@svelte-put/clickoutside";
-	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
-	import type { Group } from "~/lib/types/components";
-	import Input from "../atoms/Input.svelte";
-	import ContextMenu from "../molecules/ContextMenu.svelte";
 	import AddCollectionForm from "./AddCollectionForm.svelte";
 	import DraggableCollection from "./DraggableCollections.svelte";
+	import Input from "../atoms/Input.svelte";
+	import ContextMenu from "../molecules/ContextMenu.svelte";
+	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
+	import type { Group } from "~/lib/types/components";
 
 	export let currentPath: string;
 	export let hiddenGroups: Set<string>;

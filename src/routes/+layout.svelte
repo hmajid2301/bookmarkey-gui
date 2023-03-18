@@ -1,14 +1,10 @@
 <script lang="ts">
-	import * as Sentry from "@sentry/svelte";
-	import { Replay } from "@sentry/svelte";
-	import { BrowserTracing } from "@sentry/tracing";
 	import { DarkMode } from "flowbite-svelte";
 	import { onMount } from "svelte";
 	import { Toaster } from "svelte-french-toast";
 	import { pwaInfo } from "virtual:pwa-info";
 
 	import "~/app.css";
-	import { config } from "~/config";
 	import type ReloadPrompt from "~/lib/components/organisms/ReloadPrompt.svelte";
 
 	let reloadPrompt: typeof ReloadPrompt;
@@ -16,16 +12,6 @@
 		pwaInfo &&
 			(reloadPrompt = (await import("~/lib/components/organisms/ReloadPrompt.svelte"))
 				.default);
-	});
-
-	Sentry.init({
-		dsn: config.SentryDNS,
-		environment: config.PROD ? "production" : "development",
-		integrations: [new BrowserTracing(), new Replay()],
-		// tweak these numbers
-		replaysSessionSampleRate: 1.0,
-		replaysOnErrorSampleRate: 1.0,
-		tracesSampleRate: 1.0
 	});
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : "";
