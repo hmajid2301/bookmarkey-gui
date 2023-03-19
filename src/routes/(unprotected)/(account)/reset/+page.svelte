@@ -1,8 +1,7 @@
 <script lang="ts">
-	import type { ActionData, Snapshot } from "./$types";
 	import ResetPasswordForm from "~/lib/components/organisms/ResetPasswordForm.svelte";
 
-	export const snapshot: Snapshot = {
+	export const snapshot = {
 		capture: () => form?.data,
 		restore: (value) => {
 			if (form) {
@@ -11,7 +10,7 @@
 		}
 	};
 
-	export let form: ActionData;
+	export let form;
 </script>
 
 <svelte:head>

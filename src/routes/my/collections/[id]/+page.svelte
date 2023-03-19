@@ -3,14 +3,13 @@
 	import { inview } from "svelte-inview";
 	import { Circle } from "svelte-loading-spinners";
 
-	import type { PageData } from "./$types";
-	import type { CollectionBookmarks } from "./+page.server";
 	import Bookmark from "~/lib/components/molecules/Bookmark.svelte";
 	import TopBar from "~/lib/components/molecules/TopBar.svelte";
 	import AddBookmarkModal from "~/lib/components/organisms/AddBookmarkModal.svelte";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
+	import type { CollectionBookmarks } from "./+page.server";
 
-	export let data: PageData;
+	export let data;
 
 	let ref: HTMLInputElement;
 	let show = false;

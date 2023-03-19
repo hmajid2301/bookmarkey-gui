@@ -1,9 +1,7 @@
 import * as Sentry from "@sentry/node";
 import { error } from "@sveltejs/kit";
 
-import type { RequestEvent, RequestHandler } from "./$types";
-
-export const DELETE: RequestHandler = async ({ locals, params }: RequestEvent) => {
+export const DELETE = async ({ locals, params }) => {
 	try {
 		await locals.pb?.collection("groups").delete(params.id);
 		return new Response(null, { status: 200 });
@@ -13,7 +11,7 @@ export const DELETE: RequestHandler = async ({ locals, params }: RequestEvent) =
 	}
 };
 
-export const PATCH: RequestHandler = async ({ locals, params, request }: RequestEvent) => {
+export const PATCH = async ({ locals, params, request }) => {
 	try {
 		const updatedGroup = await request.json();
 		await locals.pb?.collection("groups").update(params.id, {

@@ -1,8 +1,6 @@
 import { redirect } from "@sveltejs/kit";
 
-import type { RequestEvent, RequestHandler } from "./$types";
-
-export const GET: RequestHandler = ({ locals }: RequestEvent) => {
+export const GET = ({ locals }) => {
 	locals.pb?.authStore.clear();
 	locals.user = undefined;
 	throw redirect(303, "/");

@@ -1,10 +1,9 @@
 import * as Sentry from "@sentry/node";
 import { error } from "@sveltejs/kit";
 
-import type { RequestEvent, RequestHandler } from "./$types";
 import { _getBookmarks } from "./+page.server";
 
-export const GET: RequestHandler = async ({ locals, params, url }: RequestEvent) => {
+export const GET = async ({ locals, params, url }) => {
 	try {
 		const page = parseInt(url.searchParams.get("page") || "1");
 		const bookmarks = await _getBookmarks(locals.pb, params.id, page);
@@ -15,7 +14,7 @@ export const GET: RequestHandler = async ({ locals, params, url }: RequestEvent)
 	}
 };
 
-export const DELETE: RequestHandler = async ({ locals, params }: RequestEvent) => {
+export const DELETE = async ({ locals, params }) => {
 	try {
 		await locals.pb?.collection("collections").delete(params.id);
 		return new Response(null, { status: 200 });
@@ -25,7 +24,7 @@ export const DELETE: RequestHandler = async ({ locals, params }: RequestEvent) =
 	}
 };
 
-export const PATCH: RequestHandler = async ({ locals, params, request }: RequestEvent) => {
+export const PATCH = async ({ locals, params, request }) => {
 	try {
 		const json_ = await request.json();
 		await locals.pb?.collection("collections").update(params.id, {

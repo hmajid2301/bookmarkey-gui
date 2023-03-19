@@ -7,14 +7,13 @@
 	import EmailInput from "~/lib/components/molecules/EmailInput.svelte";
 	import OAuthLoginGroup from "~/lib/components/molecules/OAuthLoginButton.svelte";
 	import PasswordInput from "~/lib/components/molecules/PasswordInput.svelte";
-	import type { ActionData, PageData, Snapshot } from "./$types";
 
-	export let form: ActionData;
-	export let data: PageData;
+	export let form;
+	export let data;
 
 	let loading = false;
 
-	export const snapshot: Snapshot = {
+	export const snapshot = {
 		capture: () => form?.data,
 		restore: (value) => {
 			if (form) {

@@ -1,11 +1,6 @@
 import * as Sentry from "@sentry/node";
 
-import type { LayoutServerLoad } from "./$types";
-import type { User } from "~/lib/types/components";
-
-export type OutputType = { user: User };
-
-export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
+export const load = async ({ locals }) => {
 	let avatar: string | undefined;
 	if (locals.user?.avatar) {
 		avatar = `${locals.pb?.baseUrl}/api/files/${locals.user?.collectionId}/${locals.user?.id}/${locals.user?.avatar}`;

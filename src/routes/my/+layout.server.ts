@@ -1,14 +1,11 @@
 import { redirect } from "@sveltejs/kit";
 
-import type { LayoutServerLoad } from "./$types";
 import type {
 	BookmarksResponse,
 	CollectionsResponse,
 	GroupsResponse
 } from "~/lib/pocketbase/types";
-import type { Collection, CollectionGroups, Group } from "~/lib/types/components";
-
-export type OutputType = { collections: CollectionGroups };
+import type { Collection, Group } from "~/lib/types/components";
 
 type CollectionExpand = CollectionsResponse & {
 	expand: {
@@ -22,7 +19,7 @@ type GroupExpand = GroupsResponse & {
 	};
 };
 
-export const load: LayoutServerLoad<OutputType> = async ({ locals }) => {
+export const load = async ({ locals }) => {
 	if (!locals.pb?.authStore.isValid) {
 		throw redirect(303, "/login");
 	}

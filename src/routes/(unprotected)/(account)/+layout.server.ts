@@ -1,11 +1,8 @@
 import type { AuthMethodsList } from "pocketbase";
 
-import type { LayoutServerLoad } from "./$types";
 import type { AuthProviderWithRedirect } from "~/lib/types/api";
 
-export type OutputType = { authProviders: Record<string, AuthProviderWithRedirect> };
-
-export const load: LayoutServerLoad<OutputType> = async ({ locals, url }) => {
+export const load = async ({ locals, url }) => {
 	let authMethods: AuthMethodsList | undefined;
 	try {
 		authMethods = await locals.pb?.collection("users").listAuthMethods();

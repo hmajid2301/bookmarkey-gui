@@ -1,10 +1,9 @@
 import * as Sentry from "@sentry/node";
 import { error } from "@sveltejs/kit";
 
-import type { RequestEvent, RequestHandler } from "./$types";
 import type { CollectionMove } from "~/lib/types/api";
 
-export const POST: RequestHandler = async ({ locals, request }: RequestEvent) => {
+export const POST = async ({ locals, request }) => {
 	try {
 		const collection: CollectionMove = await request.json();
 		await locals.pb?.collection("collections").update(collection.collection_id, {

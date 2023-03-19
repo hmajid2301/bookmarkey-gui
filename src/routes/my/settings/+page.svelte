@@ -2,7 +2,6 @@
 	import { DarkMode } from "flowbite-svelte";
 	import UserSolid from "svelte-awesome-icons/UserSolid.svelte";
 
-	import type { ActionData, PageData, Snapshot } from "./$types";
 	import Section from "~/lib/components/atoms/Section.svelte";
 	import UpdatePasswordForm, {
 		type PasswordErrors
@@ -11,10 +10,10 @@
 		type ProfileErrors
 	} from "~/lib/components/organisms/UpdateProfileForm.svelte";
 
-	export let form: ActionData;
-	export let data: PageData;
+	export let form;
+	export let data;
 
-	export const snapshot: Snapshot = {
+	export const snapshot = {
 		capture: () => form?.data,
 		restore: (value) => {
 			if (form) {

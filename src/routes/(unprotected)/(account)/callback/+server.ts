@@ -1,8 +1,6 @@
 import { redirect } from "@sveltejs/kit";
 
-import type { RequestEvent, RequestHandler } from "./$types";
-
-export const GET: RequestHandler = async ({ locals, url, cookies }: RequestEvent) => {
+export const GET = async ({ locals, url, cookies }) => {
 	const redirectURL = `${url.origin}/callback`;
 	const providerName = cookies.get("provider");
 	const expectedState = cookies.get("state");

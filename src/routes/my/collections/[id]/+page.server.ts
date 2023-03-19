@@ -3,7 +3,6 @@ import { error, fail, type Actions } from "@sveltejs/kit";
 import type pocketbase from "pocketbase";
 import { z } from "zod";
 
-import type { PageServerLoad } from "./$types";
 import type {
 	BookmarksMetadataResponse,
 	BookmarksResponse,
@@ -19,17 +18,13 @@ export interface CollectionBookmarks {
 	moreBookmarks: boolean;
 }
 
-interface OutputType {
-	collection: CollectionBookmarks;
-}
-
 type BookmarkExpand = BookmarksResponse & {
 	expand: {
 		bookmark_metadata: BookmarksMetadataResponse;
 	};
 };
 
-export const load: PageServerLoad<OutputType> = async ({ locals, params }) => {
+export const load = async ({ locals, params }) => {
 	const collectionId = params.id;
 	const pageNumber = 0;
 	try {
@@ -89,8 +84,7 @@ export async function _getBookmarks(pb: pocketbase, collectionId: string, page: 
 			id: "-1",
 			name: "Unsorted Bookmarks"
 		};
-	}
-	if (collectionId === "0") {
+	} else if (collectionId === "0") {
 		collection = {
 			id: "0",
 			name: "All Bookmarks"

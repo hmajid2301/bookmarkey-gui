@@ -1,10 +1,9 @@
 import * as Sentry from "@sentry/node";
 import { error } from "@sveltejs/kit";
 
-import type { RequestEvent, RequestHandler } from "./$types";
 import type { GroupSwap } from "~/lib/types/api";
 
-export const POST: RequestHandler = async ({ locals, request }: RequestEvent) => {
+export const POST = async ({ locals, request }) => {
 	try {
 		const groups: GroupSwap[] = await request.json();
 		groups.forEach(async (group) => {

@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { page } from "$app/stores";
-	import * as Sentry from "@sentry/svelte";
 	import { swipe } from "svelte-gestures";
 
-	import type { LayoutData } from "./$types";
 	import Header from "~/lib/components/molecules/Header.svelte";
 	import SideBar from "~/lib/components/organisms/SideBar.svelte";
 
-	export let data: LayoutData;
+	export let data;
 	let showMenu = false;
 
 	function onSwipe(
