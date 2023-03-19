@@ -6,11 +6,11 @@
 	import ContextMenu, { Item } from "svelte-contextmenu";
 	import toast from "svelte-french-toast";
 
-	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
-	import type { Group } from "~/lib/types/components";
-	import Input from "../atoms/Input.svelte";
 	import AddCollectionForm from "./AddCollectionForm.svelte";
 	import DraggableCollection from "./DraggableCollections.svelte";
+	import Input from "../atoms/Input.svelte";
+	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
+	import type { Group } from "~/lib/types/components";
 
 	export let currentPath: string;
 	export let hiddenGroups: Set<string>;

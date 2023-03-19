@@ -1,69 +1,81 @@
+import { expect, test, type Page } from "@playwright/test";
 import pocketbase from "pocketbase";
 
-import { expect, test } from "./baseFixtures.js";
+test.describe("Register", () => {
+	const email = "test+signup@bookmarkey.app";
+	const adminEmail = "admin@bookmarkey.app";
+	const adminPassword = "password11";
 
-const email = "test+signup@bookmarkey.app";
-test("Successfully register an account", async ({ page, baseURL }) => {
-	await page.goto("/register");
+	let page: Page;
 
-	await page.locator('[name="email"]').type(email);
+	test.beforeEach(async ({ browser }) => {
+		const loginContext = await browser.newContext({
+			storageState: "tests/auth/not_logged_in.json"
+		});
+		page = await loginContext.newPage();
+	});
 
-	const password = "sec9rePa@sword@11789";
-	await page.locator('[name="password"]').type(password);
+	test("Successfully register an account", async ({ baseURL }) => {
+		await page.goto("/register");
 
-	await page.locator('button[type="submit"]').click();
-	await page.waitForURL(`${baseURL}/my/collections/0`);
-});
+		await page.locator('[name="email"]').type(email);
 
-test("Fail to register an account with an email that exists", async ({ page, baseURL }) => {
-	await page.goto("/register");
+		const password = "sec9rePa@sword@11789";
+		await page.locator('[name="password"]').type(password);
 
-	const email = "test@bookmarkey.app";
-	await page.locator('[name="email"]').type(email);
+		await page.locator('button[type="submit"]').click();
+		await page.waitForURL(`${baseURL}/my/collections/0`);
+	});
 
-	const password = "sec9rePa@sword@11789";
-	await page.locator('[name="password"]').type(password);
+	test("Fail to register an account with an email that is already registerd", async ({
+		baseURL
+	}) => {
+		await page.goto("/register");
 
-	await page.locator('button[type="submit"]').click();
+		const email = "test@bookmarkey.app";
+		await page.locator('[name="email"]').type(email);
 
-	const toastMessage = await page.locator(".message").innerText();
-	expect(toastMessage).toBe("Failed to create account.");
-	await page.waitForURL(`${baseURL}/register`);
-});
+		const password = "sec9rePa@sword@11789";
+		await page.locator('[name="password"]').type(password);
 
-test("Fail to register an account with a compromised password", async ({ page, baseURL }) => {
-	await page.goto("/register");
+		await page.locator('button[type="submit"]').click();
 
-	const email = "test@bookmarkey.app";
-	await page.locator('[name="email"]').type(email);
+		const toastMessage = await page.locator(".message").innerText();
+		expect(toastMessage).toBe("Failed to create account.");
+		await page.waitForURL(`${baseURL}/register`);
+	});
 
-	const password = "password";
-	await page.locator('[name="password"]').type(password);
+	test("Fail to register an account with a compromised password", async ({ baseURL }) => {
+		await page.goto("/register");
 
-	await page.locator('button[type="submit"]').click();
+		const email = "test@bookmarkey.app";
+		await page.locator('[name="email"]').type(email);
 
-	// expect error message to be present and to be red
-	const error = page.locator("p.text-red-500").first();
-	expect(error).toHaveText("Password has been compromised, please try again");
+		const password = "password";
+		await page.locator('[name="password"]').type(password);
 
-	// expect 4 password strength blocks to be gray
-	const span = page.locator("span.bg-gray-200");
-	const passwordStrengthItems = await span.count();
-	expect(passwordStrengthItems).toBe(4);
+		await page.locator('button[type="submit"]').click();
 
-	await page.waitForURL(`${baseURL}/register`);
-});
+		// expect error message to be present and to be red
+		const error = page.locator("p.text-red-500").first();
+		expect(error).toHaveText("Password has been compromised, please try again");
 
-const ADMIN_EMAIL = "admin@bookmarkey.app";
-const ADMIN_PASSWORD = "password11";
+		// expect 4 password strength blocks to be gray
+		const span = page.locator("span.bg-gray-200");
+		const passwordStrengthItems = await span.count();
+		expect(passwordStrengthItems).toBe(4);
 
-test.afterEach(async () => {
-	try {
-		const pb = new pocketbase(process.env.VITE_TEST_POCKET_BASE_URL);
-		await pb.admins.authWithPassword(ADMIN_EMAIL, ADMIN_PASSWORD);
-		const record = await pb.collection("users").getFirstListItem(`email = "${email}"`);
-		await pb.collection("users").delete(record.id);
-	} catch (err) {
-		console.log("failed to delete email", err);
-	}
+		await page.waitForURL(`${baseURL}/register`);
+	});
+
+	test.afterEach(async () => {
+		try {
+			const pb = new pocketbase(process.env.VITE_POCKET_BASE_URL);
+			await pb.admins.authWithPassword(adminEmail, adminPassword);
+			const record = await pb.collection("users").getFirstListItem(`email = "${email}"`);
+			await pb.collection("users").delete(record.id);
+		} catch (err) {
+			console.log("failed to delete email");
+		}
+	});
 });

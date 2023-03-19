@@ -66,16 +66,20 @@ tests:e2e:
     DOCKER_DRIVER: overlay2
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
+    NODE_ENV: test
   parallel: 2
   extends: .task
-  allow_failure: true
   script:
+    # TODO: move to docker image
+    - curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --yes --dearmor -o /usr/share/keyrings/yarnkey.gpg
+    - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list > /dev/null
+    - npx playwright install-deps
     - npx playwright install
-    - echo "VITE_TEST_POCKET_BASE_URL='http://docker:9090'" >> .env.test
     - task e2e:tests -- --shard=$CI_NODE_INDEX/$CI_NODE_TOTAL
     - npx nyc report --report-dir ./coverage --temp-dir .nyc_output --reporter=cobertura --exclude-after-remap false
     - npx nyc report --report-dir ./coverage --temp-dir .nyc_output --reporter=text --exclude-after-remap false
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  allow_failure: true
   artifacts:
     reports:
       # junit: test-results/junit.xml

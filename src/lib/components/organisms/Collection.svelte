@@ -5,8 +5,8 @@
 	import ContextMenu, { Item } from "svelte-contextmenu";
 	import toast from "svelte-french-toast";
 
-	import type { Collection } from "~/lib/types/components";
 	import Input from "../atoms/Input.svelte";
+	import type { Collection } from "~/lib/types/components";
 
 	export let collection: Collection;
 

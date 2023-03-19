@@ -1,12 +1,12 @@
 import { redirect } from "@sveltejs/kit";
 
+import type { LayoutServerLoad } from "./$types";
 import type {
 	BookmarksResponse,
 	CollectionsResponse,
 	GroupsResponse
 } from "~/lib/pocketbase/types";
 import type { Collection, CollectionGroups, Group } from "~/lib/types/components";
-import type { LayoutServerLoad } from "./$types";
 
 export type OutputType = { collections: CollectionGroups };
 

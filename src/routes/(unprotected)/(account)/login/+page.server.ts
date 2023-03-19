@@ -39,12 +39,13 @@ export const actions: Actions = {
 			// 	};
 			// }
 		} catch (err) {
+			console.error(err);
+			Sentry.captureException(err);
 			if (err instanceof ClientResponseError) {
 				if (err.status === 400) {
 					throw error(err.status, "Wrong email and password combination.");
 				}
 			}
-			Sentry.captureException(err);
 			throw error(500, "Failed to login, please try again later.");
 		}
 

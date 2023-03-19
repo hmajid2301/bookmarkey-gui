@@ -1,30 +1,43 @@
+import type { Page } from "@playwright/test";
+
 import { expect, test } from "./baseFixtures.js";
 
-test("Successfully login to app", async ({ page, baseURL }) => {
-	await page.goto("/login");
+test.describe("Login", () => {
+	let page: Page;
 
-	const email = "test@bookmarkey.app";
-	await page.locator('[name="email"]').type(email);
+	test.beforeEach(async ({ browser }) => {
+		const loginContext = await browser.newContext({
+			storageState: "tests/auth/not_logged_in.json"
+		});
+		page = await loginContext.newPage();
+	});
 
-	const password = "password@11";
-	await page.locator('[name="password"]').type(password);
+	test("Successfully login to app", async ({ baseURL }) => {
+		await page.goto("/login");
 
-	await page.locator('button[type="submit"]').click();
-	await page.waitForURL(`${baseURL}/my/collections/0`);
-});
+		const email = "test@bookmarkey.app";
+		await page.locator('[name="email"]').type(email);
 
-test("Fail to login to app using in correct credentials", async ({ page, baseURL }) => {
-	await page.goto("/login");
+		const password = "password@11";
+		await page.locator('[name="password"]').type(password);
 
-	const email = "test@bookmarkey.app";
-	await page.locator('[name="email"]').type(email);
+		await page.locator('button[type="submit"]').click();
+		await page.waitForURL(`${baseURL}/my/collections/0`);
+	});
 
-	const password = "wrong_password";
-	await page.locator('[name="password"]').type(password);
+	test("Fail to login to app using incorrect credentials", async ({ baseURL }) => {
+		await page.goto("/login");
 
-	await page.locator('button[type="submit"]').click();
+		const email = "test@bookmarkey.app";
+		await page.locator('[name="email"]').type(email);
 
-	const toastMessage = await page.locator(".message").innerText();
-	expect(toastMessage).toBe("Wrong email and password combination.");
-	await page.waitForURL(`${baseURL}/login`);
+		const password = "wrong_password";
+		await page.locator('[name="password"]').type(password);
+
+		await page.locator('button[type="submit"]').click();
+
+		const toastMessage = await page.locator(".message").innerText();
+		expect(toastMessage).toBe("Wrong email and password combination.");
+		await page.waitForURL(`${baseURL}/login`);
+	});
 });

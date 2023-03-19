@@ -2,10 +2,10 @@
 	import { invalidateAll } from "$app/navigation";
 	import toast from "svelte-french-toast";
 
+	import Collection from "../organisms/Collection.svelte";
 	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
 	import type { CollectionMove } from "~/lib/types/api";
 	import type { Collection as Collection_ } from "~/lib/types/components";
-	import Collection from "../organisms/Collection.svelte";
 
 	export let currentPath: string;
 	export let collections: Collection_[];

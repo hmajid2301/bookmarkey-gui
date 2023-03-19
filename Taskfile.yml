@@ -41,6 +41,7 @@ tasks:
       - docker compose -f tests/docker-compose.test.yml up  -d
       - pnpm run test {{.CLI_ARGS}}
     env:
+      NODE_ENV: test
       VITE_COVERAGE: true
       VITE_POCKET_BASE_URL: "http://localhost:9090"
       VITE_TEST_POCKET_BASE_URL: "http://localhost:9090"

@@ -1,21 +1,33 @@
-import type { PlaywrightTestConfig } from "@playwright/test";
+import { defineConfig, devices } from "@playwright/test";
 
-const config: PlaywrightTestConfig = {
-	// globalSetup: "./global-setup",
+export default defineConfig({
 	webServer: {
-		command: "NODE_ENV=test DEBUG=pw:webserver npm run build && NODE_ENV=test npm run preview",
+		command: "pnpm run build && pnpm run preview",
 		port: 4173,
-		timeout: 240000,
-		reuseExistingServer: !process.env.CI
+		timeout: 240000
 	},
+	testDir: "tests",
 	use: {
 		trace: "retain-on-failure",
 		video: "retain-on-failure"
-		// headless: !process.env.CI
-		// browserName: "firefox",
-		// storageState: "storageState.json"
 	},
-	testDir: "./tests"
-};
-
-export default config;
+	projects: [
+		{ name: "setup", testMatch: /.*\.setup\.ts/ },
+		// {
+		// 	name: "chromium",
+		// 	use: {
+		// 		...devices["Desktop Chrome"],
+		//    storageState: "tests/auth/user.json"
+		// 	},
+		// 	dependencies: ["setup"]
+		// },
+		{
+			name: "firefox",
+			use: {
+				...devices["Desktop Firefox"],
+				storageState: "tests/auth/user.json"
+			},
+			dependencies: ["setup"]
+		}
+	]
+});

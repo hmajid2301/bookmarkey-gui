@@ -112,9 +112,6 @@ export async function _getBookmarks(pb: pocketbase, collectionId: string, page: 
 	if (!collection) {
 		throw Error("failed to get collection");
 	}
-	if (!bookmarkRecords) {
-		throw Error("failed to get bookmarks");
-	}
 
 	const bookmarks: Bookmark[] = [];
 	bookmarkRecords.items.forEach((bookmarkRecord) => {
