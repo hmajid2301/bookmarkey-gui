@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { invalidateAll } from "$app/navigation";
 	import { navigating } from "$app/stores";
+	import toast from "svelte-french-toast";
 	import { inview } from "svelte-inview";
 	import { Circle } from "svelte-loading-spinners";
 
@@ -7,6 +9,7 @@
 	import TopBar from "~/lib/components/molecules/TopBar.svelte";
 	import AddBookmarkModal from "~/lib/components/organisms/AddBookmarkModal.svelte";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
+
 	import type { CollectionBookmarks } from "./+page.server";
 
 	export let data;
@@ -17,6 +20,7 @@
 	let collection = data.collection;
 	let newCollection: CollectionBookmarks;
 	let loading = false;
+	let dragging = false;
 
 	async function getBookmarks() {
 		loading = true;
@@ -25,6 +29,31 @@
 		});
 		newCollection = (await resp.json()) as CollectionBookmarks;
 		loading = false;
+	}
+
+	async function createBookmark(e: DragEvent) {
+		const url = e.dataTransfer?.getData("URL");
+		if (!url) {
+			return;
+		}
+
+		// if current collection is all bookmarks, add new bookmark to unsorted bookmark collection
+		let collectionID = data.collection.id;
+		if (collectionID === "0") {
+			collectionID = "-1";
+		}
+
+		await fetch(`/my/collections/${collectionID}/bookmarks`, {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({ url: url })
+		});
+		dragging = false;
+		await invalidateAll();
+		toast.success("Added bookmark");
 	}
 
 	$: {
@@ -39,24 +68,37 @@
 	<title>My Collection: {collection.name}</title>
 </svelte:head>
 
-<TopBar collectionName={collection.name} nickname={data.user.nickname} bind:show bind:ref />
-
-{#each collection.bookmarks as bookmark}
-	<Bookmark {bookmark} />
-{/each}
-
 <div
-	use:inview={{}}
-	on:inview_enter={async () => {
-		if (collection.moreBookmarks) {
-			page += 1;
-			await getBookmarks();
-		}
-	}} />
+	class="{dragging ? 'bg-blue-500 transition-all duration-100' : ''} p-4 lg:p-8"
+	on:dragenter|preventDefault|stopPropagation={() => {
+		dragging = true;
+	}}
+	on:dragend|preventDefault|stopPropagation={() => {
+		dragging = false;
+	}}
+	on:dragover|preventDefault|stopPropagation
+	on:drop|preventDefault|stopPropagation={async (e) => {
+		await createBookmark(e);
+	}}>
+	<TopBar collectionName={collection.name} nickname={data.user.nickname} bind:show bind:ref />
 
-{#if loading}
-	<div class="flex content-center justify-center text-white">
-		<Circle size="60" color="#FACC14" unit="px" duration="1s" />
-	</div>
-{/if}
-<AddBookmarkModal collectionID={collection.id} bind:show bind:ref />
+	{#each collection.bookmarks as bookmark}
+		<Bookmark {bookmark} />
+	{/each}
+
+	<div
+		use:inview={{}}
+		on:inview_enter={async () => {
+			if (collection.moreBookmarks) {
+				page += 1;
+				await getBookmarks();
+			}
+		}} />
+
+	{#if loading}
+		<div class="flex content-center justify-center text-white">
+			<Circle size="60" color="#FACC14" unit="px" duration="1s" />
+		</div>
+	{/if}
+	<AddBookmarkModal collectionID={collection.id} bind:show bind:ref />
+</div>

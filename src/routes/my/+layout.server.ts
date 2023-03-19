@@ -81,7 +81,7 @@ export const load = async ({ locals }) => {
 	});
 
 	const unsortedBookmarks = bookmarks.filter((bookmark) => {
-		return bookmark.collectionId === "-1";
+		return bookmark.collection === "-1";
 	});
 
 	return {

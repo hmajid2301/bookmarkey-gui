@@ -55,36 +55,33 @@ export const actions: Actions = {
 			});
 		}
 
-		try {
-			await locals.pb?.send(`/collections/${params.id}/bookmark`, {
-				method: "POST",
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json"
-				},
-				timeout: 5000,
-				body: JSON.stringify({ url: result.data.url })
-			});
-		} catch (err) {
-			Sentry.captureException(err);
-			throw error(500, "Failed to add bookmark, please try again later.");
-		}
-
+		await _createBookmark(locals.pb, params.id || "", result.data.url);
 		return;
 	}
 };
 
+export async function _createBookmark(pb: pocketbase, collectionID: string, url: string) {
+	try {
+		await pb.send(`/collections/${collectionID}/bookmark`, {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json"
+			},
+			timeout: 5000,
+			body: JSON.stringify({ url })
+		});
+	} catch (err) {
+		Sentry.captureException(err);
+		throw error(500, "Failed to add bookmark, please try again later.");
+	}
+}
+
 export async function _getBookmarks(pb: pocketbase, collectionId: string, page: number) {
 	const batchSize = 30;
 
-	// TODO: is this redundant?
 	let collection: { id: string; name: string; group?: string };
-	if (collectionId === "-1") {
-		collection = {
-			id: "-1",
-			name: "Unsorted Bookmarks"
-		};
-	} else if (collectionId === "0") {
+	if (collectionId === "0") {
 		collection = {
 			id: "0",
 			name: "All Bookmarks"
