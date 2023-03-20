@@ -5,7 +5,21 @@
 	import Groups from "./Groups.svelte";
 	import Logo from "../atoms/Logo.svelte";
 	import AddCollectionButton from "../molecules/AddCollectionButton.svelte";
+	import InstallPrompt from "../molecules/InstallPrompt.svelte";
 	import type { CollectionGroups, User } from "~/lib/types/components";
+
+	interface BeforeInstallPromptEvent extends Event {
+		prompt: () => Promise<void>;
+		readonly userChoice: Promise<{
+			outcome: "accepted" | "dismissed";
+			platform: string;
+		}>;
+	}
+
+	async function showInstallPrompt(e: Event) {
+		deferredPrompt = e as BeforeInstallPromptEvent;
+		showInstall = true;
+	}
 
 	export let user: User;
 	export let currentPath: string;
@@ -15,7 +29,11 @@
 	const maxWidth = 50;
 
 	let showAddGroupForm = false;
+	let deferredPrompt: BeforeInstallPromptEvent | null;
+	let showInstall = false;
 </script>
+
+<svelte:window on:beforeinstallprompt|preventDefault={showInstallPrompt} />
 
 <div
 	style={`width: ${width}px !important; min-width: ${initialWidth}rem; max-width: ${maxWidth}rem`}
@@ -32,4 +50,12 @@
 	</div>
 
 	<Groups bind:showAddGroupForm {currentPath} {collections} />
+	<InstallPrompt
+		bind:showInstall
+		on:click={async () => {
+			showInstall = false;
+			deferredPrompt?.prompt();
+			await deferredPrompt?.userChoice;
+			deferredPrompt = null;
+		}} />
 </div>

@@ -1,5 +1,5 @@
-import { render } from "@testing-library/svelte";
-import { describe, test } from "vitest";
+import { createEvent, fireEvent, render } from "@testing-library/svelte";
+import { describe, expect, test } from "vitest";
 
 import SideBar from "../SideBar.svelte";
 
@@ -97,5 +97,36 @@ describe("SideBar", () => {
 				getByText(elem);
 			}
 		);
+	});
+
+	test("Successfully show install prompt on event fire", async () => {
+		const event = createEvent("beforeinstallprompt", window, {
+			userChoice: new Promise((res) => res({ outcome: "accepted", platform: "" })),
+			prompt: () => new Promise((res) => res(undefined))
+		});
+		const { getByText, queryByText } = render(SideBar, {
+			props: {
+				user: {
+					isLoggedIn: false,
+					nickname: "test",
+					email: "test@bookmarkey.app",
+					avatar: ""
+				},
+				collections: {
+					bookmarks: {
+						unsortedBookmarkCount: 5,
+						bookmarkCount: 15
+					},
+					groups: [],
+					collections: []
+				},
+				currentPath: "/my/settings"
+			}
+		});
+
+		const promptText = queryByText("Make managing your bookmarks easier with our free app!");
+		expect(promptText).toBe(null);
+		await fireEvent(window, event);
+		getByText("Make managing your bookmarks easier with our free app!");
 	});
 });

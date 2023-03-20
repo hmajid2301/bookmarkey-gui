@@ -1,19 +1,16 @@
 <script lang="ts">
+	import type ReloadPrompt from "$lib/ReloadPrompt.svelte";
 	import { DarkMode } from "flowbite-svelte";
 	import { onMount } from "svelte";
 	import { Toaster } from "svelte-french-toast";
 	import { pwaInfo } from "virtual:pwa-info";
 
 	import "~/app.css";
-	import type ReloadPrompt from "~/lib/components/organisms/ReloadPrompt.svelte";
 
 	let reloadPrompt: typeof ReloadPrompt;
 	onMount(async () => {
-		pwaInfo &&
-			(reloadPrompt = (await import("~/lib/components/organisms/ReloadPrompt.svelte"))
-				.default);
+		pwaInfo && (reloadPrompt = (await import("$lib/ReloadPrompt.svelte")).default);
 	});
-
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : "";
 </script>
 
