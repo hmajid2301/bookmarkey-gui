@@ -61,6 +61,10 @@ export const actions: Actions = {
 };
 
 export async function _createBookmark(pb: pocketbase, collectionID: string, url: string) {
+	// if current collection is all bookmarks, add new bookmark to unsorted bookmark collection
+	if (collectionID === "0") {
+		collectionID = "-1";
+	}
 	try {
 		await pb.send(`/collections/${collectionID}/bookmark`, {
 			method: "POST",
