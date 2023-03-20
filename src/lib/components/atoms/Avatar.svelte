@@ -6,8 +6,10 @@
 	export let nickname = "";
 </script>
 
-<Avatar
-	class="block h-auto w-full max-w-full rounded-full bg-gray-100 dark:bg-slate-800"
-	src={avatar}
-	gravatar={email}
-	uiAvatar={nickname} />
+{#key avatar}
+	<Avatar
+		class="block h-auto w-full max-w-full rounded-full bg-gray-100 dark:bg-slate-800"
+		src={avatar}
+		gravatar={email}
+		uiAvatar={nickname} />
+{/key}
