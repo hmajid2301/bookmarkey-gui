@@ -5,11 +5,12 @@
 	import { inview } from "svelte-inview";
 	import { Circle } from "svelte-loading-spinners";
 
-	import Bookmark from "~/lib/components/molecules/Bookmark.svelte";
+	import type { CollectionBookmarks } from "./+page.server";
 	import TopBar from "~/lib/components/molecules/TopBar.svelte";
 	import AddBookmarkModal from "~/lib/components/organisms/AddBookmarkModal.svelte";
+	import DraggableBookmark from "~/lib/components/organisms/DraggableBookmark.svelte";
+	import { draggableStore } from "~/lib/stores/DraggableStore";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
-	import type { CollectionBookmarks } from "./+page.server";
 
 	export let data;
 
@@ -64,19 +65,27 @@
 <div
 	class="{dragging ? 'bg-blue-500 transition-all duration-100' : ''} p-4 lg:p-8"
 	on:dragenter|preventDefault|stopPropagation={() => {
+		if ($draggableStore.draggingType !== null) {
+			return;
+		}
 		dragging = true;
 	}}
 	on:dragend|preventDefault|stopPropagation={() => {
 		dragging = false;
 	}}
 	on:dragover|preventDefault|stopPropagation
+	on:dragstart|preventDefault|stopPropagation
 	on:drop|preventDefault|stopPropagation={async (e) => {
+		if ($draggableStore.draggingType !== null) {
+			return;
+		}
+
 		await createBookmark(e);
 	}}>
 	<TopBar collectionName={collection.name} nickname={data.user.nickname} bind:show bind:ref />
 
 	{#each collection.bookmarks as bookmark}
-		<Bookmark {bookmark} />
+		<DraggableBookmark {bookmark} />
 	{/each}
 
 	<div

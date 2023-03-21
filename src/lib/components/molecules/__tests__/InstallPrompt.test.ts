@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/svelte";
 import userEvent from "@testing-library/user-event";
-import html from "svelte-htm";
 import { get, writable } from "svelte/store";
+import html from "svelte-htm";
 import { describe, expect, test, vi } from "vitest";
 
 import InstallPrompt from "../InstallPrompt.svelte";

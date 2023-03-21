@@ -1,9 +1,10 @@
 <script lang="ts">
-	import type ReloadPrompt from "$lib/ReloadPrompt.svelte";
 	import { DarkMode } from "flowbite-svelte";
 	import { onMount } from "svelte";
 	import { Toaster } from "svelte-french-toast";
 	import { pwaInfo } from "virtual:pwa-info";
+
+	import type ReloadPrompt from "$lib/ReloadPrompt.svelte";
 
 	import "~/app.css";
 

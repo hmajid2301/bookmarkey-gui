@@ -38,7 +38,7 @@
 								src={bookmark.image}
 								uiAvatar={bookmark.url}
 								alt="Bookmark Image {bookmark.url}"
-								class="block h-auto w-full max-w-full rounded-md bg-gray-100 dark:bg-slate-800" />
+								class="block h-auto w-full max-w-xs rounded-md bg-gray-100 dark:bg-slate-800" />
 						</div>
 					</div>
 					<div class="flex items-center justify-center">

@@ -11,6 +11,10 @@ export interface CollectionMove {
 	group_id?: string;
 }
 
+export interface BookmarkMove {
+	new_collection_id: string;
+}
+
 export interface AuthProviderWithRedirect extends AuthProviderInfo {
 	redirect: string;
 }

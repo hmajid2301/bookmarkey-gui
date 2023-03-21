@@ -4,7 +4,7 @@
 
 	import Collection from "../organisms/Collection.svelte";
 	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
-	import type { CollectionMove } from "~/lib/types/api";
+	import type { BookmarkMove, CollectionMove } from "~/lib/types/api";
 	import type { Collection as Collection_ } from "~/lib/types/components";
 
 	export let currentPath: string;
@@ -29,6 +29,23 @@
 			toast.error("Failed to move collection");
 		}
 	}
+
+	async function moveBookmark(bookmarkID: string, newCollectionID: string) {
+		const collectionMove: BookmarkMove = {
+			new_collection_id: newCollectionID
+		};
+
+		const response = await fetch(`/my/bookmarks/${bookmarkID}/move`, {
+			method: "POST",
+			body: JSON.stringify(collectionMove)
+		});
+		if (response.ok) {
+			toast.success("Moved bookmark");
+			invalidateAll();
+		} else {
+			toast.error("Failed to move bookmark");
+		}
+	}
 </script>
 
 {#if collections.length === 0}
@@ -40,6 +57,9 @@
 		}}
 		on:dragenter={() => {
 			$draggableStore.collection.newGroupId = groupId || "";
+		}}
+		on:drop|preventDefault={(e) => {
+			console.log(e);
 		}}
 		on:dragover|preventDefault>
 		<p class="text-xs text-gray-800 dark:text-gray-200">Empty Collection</p>
@@ -56,13 +76,20 @@
 			$draggableStore.collection.id = collection.id;
 			$draggableStore.draggingType = DraggingType.Collection;
 		}}
-		on:dragend={() => {
-			moveCollection(index);
+		on:dragend={async () => {
+			await moveCollection(index);
 			$draggableStore.draggingType = null;
 			$draggableStore.collection = {};
 		}}
 		on:dragenter={() => {
 			$draggableStore.collection.newGroupId = groupId || "";
+		}}
+		on:drop|preventDefault={async () => {
+			if ($draggableStore.draggingType === DraggingType.Bookmark) {
+				await moveBookmark($draggableStore.bookmark.id || "", collection.id);
+				$draggableStore.draggingType = null;
+				$draggableStore.collection = {};
+			}
 		}}
 		on:dragover|preventDefault>
 		<Collection {collection} />
