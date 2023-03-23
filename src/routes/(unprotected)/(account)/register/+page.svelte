@@ -1,17 +1,44 @@
 <script lang="ts">
-	import OAuthLoginGroup from "~/lib/components/molecules/OAuthLoginButton.svelte";
-	import RegisterForm from "~/lib/components/organisms/RegisterForm.svelte";
+	import type { ActionResult } from "@sveltejs/kit";
+	import toast from "svelte-french-toast";
+	import { superForm } from "sveltekit-superforms/client";
 
-	export let form;
+	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
+	import EmailInput from "~/lib/components/molecules/EmailInput.svelte";
+	import OAuthLoginGroup from "~/lib/components/molecules/OAuthLoginButton.svelte";
+	import Password from "~/lib/components/molecules/Password.svelte";
+
 	export let data;
 
+	const { form, capture, restore, errors, enhance } = superForm(data.form, {});
 	export const snapshot = {
-		capture: () => form?.data,
-		restore: (value) => {
-			if (form) {
-				form.data = value;
+		capture,
+		restore
+	};
+
+	let loading = false;
+
+	const submitRegister = () => {
+		loading = true;
+		return async ({
+			result,
+			update
+		}: {
+			result: ActionResult;
+			update: () => Promise<void>;
+		}) => {
+			switch (result.type) {
+				case "success":
+					await update();
+					break;
+				case "error":
+					toast.error(result.error.message);
+					break;
+				default:
+					await update();
 			}
-		}
+			loading = false;
+		};
 	};
 </script>
 
@@ -20,7 +47,19 @@
 </svelte:head>
 
 <div class="space-y-4 p-6 sm:p-8 md:space-y-6">
-	<RegisterForm register={form?.data} errors={form?.errors} />
+	<h1
+		class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
+		Create an account
+	</h1>
+	<form class="space-y-4 md:space-y-6" method="post" use:enhance on:submit={submitRegister}>
+		<EmailInput
+			autocomplete="username"
+			disabled={loading}
+			bind:value={$form.email}
+			errors={$errors.email} />
+		<Password {loading} bind:value={$form.password} errors={$errors.password || []} />
+		<FullWidthButton>Create Account</FullWidthButton>
+	</form>
 
 	<div class="my-5 flex items-center justify-center space-x-2">
 		<span class="h-px w-16 bg-gray-100" />

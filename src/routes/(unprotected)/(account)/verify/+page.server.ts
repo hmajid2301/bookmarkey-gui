@@ -1,31 +1,33 @@
 import * as Sentry from "@sentry/node";
 import { error, fail, type Actions } from "@sveltejs/kit";
+import { superValidate } from "sveltekit-superforms/server";
 import { z } from "zod";
 
-interface EmailVerification {
-	email: string;
-}
-
-const verificationLinkSchema: z.ZodType<EmailVerification> = z.object({
+const verificationLinkSchema = z.object({
 	email: z
 		.string({ required_error: "Email is required" })
 		.email({ message: "Email must be a valid email." })
 });
 
-export const actions: Actions = {
-	default: async ({ locals, request }) => {
-		const data = Object.fromEntries((await request.formData()) as Iterable<[EmailVerification]>);
-		const result = verificationLinkSchema.safeParse(data);
+export const load = async (event) => {
+	const form = await superValidate(event, verificationLinkSchema);
+	return {
+		form
+	};
+};
 
-		if (!result.success) {
+export const actions: Actions = {
+	default: async (event) => {
+		const form = await superValidate(event, verificationLinkSchema);
+
+		if (!form.valid) {
 			return fail(400, {
-				data: data,
-				errors: result.error.flatten().fieldErrors
+				form
 			});
 		}
 
 		try {
-			await locals.pb?.collection("users").requestVerification(result.data.email);
+			await event.locals.pb?.collection("users").requestVerification(form.data.email);
 			return {
 				success: true
 			};

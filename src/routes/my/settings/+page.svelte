@@ -1,50 +1,77 @@
 <script lang="ts">
+	import { applyAction } from "$app/forms";
+	import { invalidateAll } from "$app/navigation";
+	import type { ActionResult } from "@sveltejs/kit";
 	import { DarkMode } from "flowbite-svelte";
 	import UserSolid from "svelte-awesome-icons/UserSolid.svelte";
+	import toast from "svelte-french-toast";
+	import { superForm } from "sveltekit-superforms/client";
 
+	import Button from "~/lib/components/atoms/Button.svelte";
 	import Section from "~/lib/components/atoms/Section.svelte";
-	import UpdatePasswordForm, {
-		type PasswordErrors
-	} from "~/lib/components/organisms/UpdatePasswordForm.svelte";
-	import UpdateProfileForm, {
-		type ProfileErrors
-	} from "~/lib/components/organisms/UpdateProfileForm.svelte";
+	import Password from "~/lib/components/molecules/Password.svelte";
+	import PasswordInput from "~/lib/components/molecules/PasswordInput.svelte";
+	import UpdateProfileForm from "~/lib/components/organisms/UpdateProfileForm.svelte";
 
-	export let form;
 	export let data;
 
-	export const snapshot = {
-		capture: () => form?.data,
-		restore: (value) => {
-			if (form) {
-				form.data = value;
+	const {
+		form: profileForm,
+		errors: ProfileErrors,
+		enhance: profileEnhance
+	} = superForm(data.profileForm, {});
+	const {
+		form: passwordForm,
+		errors: passwordErrors,
+		enhance: passwordEnhance
+	} = superForm(data.passwordForm, {});
+
+	let loading = false;
+	const submitUpdateProfile = () => {
+		loading = true;
+		return async ({ result }: { result: ActionResult }) => {
+			switch (result.type) {
+				case "success":
+					toast.success("Updated profile");
+					await invalidateAll();
+					break;
+				case "error":
+					toast.error(result.error.message);
+					break;
+				default:
+					await applyAction(result);
 			}
-		}
+			loading = false;
+		};
 	};
 
-	let profileErrors: ProfileErrors = {
-		nickname: undefined,
-		email: undefined
+	const submitUpdatePassword = () => {
+		loading = true;
+		return async ({
+			result,
+			update
+		}: {
+			result: ActionResult;
+			update: () => Promise<void>;
+		}) => {
+			switch (result.type) {
+				case "success":
+					toast.success("Updated password");
+					await invalidateAll();
+					break;
+				case "failure":
+					toast.error("Invalid password data");
+					await update();
+					break;
+				case "error":
+					toast.error(result.error.message);
+					break;
+				default:
+					await update();
+			}
+			loading = false;
+		};
 	};
-
-	let passwordErrors: PasswordErrors = {
-		currentPassword: undefined,
-		password: undefined
-	};
-
-	if (form !== undefined && form?.errors !== undefined) {
-		if ("nickname" in form.errors) {
-			profileErrors = {
-				nickname: form?.errors?.nickname,
-				email: form?.errors?.email
-			};
-		} else if ("password" in form.errors) {
-			passwordErrors = {
-				currentPassword: form?.errors?.currentPassword,
-				password: form?.errors?.password
-			};
-		}
-	}
 </script>
 
 <svelte:head>
@@ -68,21 +95,51 @@
 
 <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
 	<Section>
-		<UpdateProfileForm
-			values={{
-				nickname: form?.data?.nickname ?? data.user.nickname,
-				email: form?.data?.email ?? data.user.email
-			}}
-			errors={profileErrors}
-			avatar={data.user.avatar} />
+		<form
+			action="?/updateProfile"
+			enctype="multipart/form-data"
+			method="post"
+			on:submit={submitUpdateProfile}
+			use:profileEnhance>
+			<UpdateProfileForm
+				{loading}
+				values={{
+					nickname: $profileForm.nickname ?? data.user.nickname,
+					email: $profileForm.email ?? data.user.email
+				}}
+				errors={{
+					nickname: $ProfileErrors.nickname,
+					email: $ProfileErrors.email
+				}}
+				avatar={data.user.avatar} />
+		</form>
 	</Section>
 
 	<Section>
-		<UpdatePasswordForm
-			values={{
-				currentPassword: form?.data?.currentPassword,
-				password: form?.data?.password
-			}}
-			errors={passwordErrors} />
+		<form
+			class="flex h-full flex-col"
+			action="?/updatePassword"
+			method="post"
+			use:passwordEnhance
+			on:submit={submitUpdatePassword}>
+			<div class="flex-1 p-6">
+				<PasswordInput
+					disabled={loading}
+					name="currentPassword"
+					labelName="Current Password"
+					bind:value={$passwordForm.currentPassword}
+					errors={$passwordErrors.currentPassword} />
+				<Password
+					{loading}
+					bind:value={$passwordForm.password}
+					errors={$passwordErrors.password || []} />
+			</div>
+
+			<div class="p-6">
+				<div class="-mb-3 flex flex-wrap items-center justify-start">
+					<Button type="submit">Change Password</Button>
+				</div>
+			</div>
+		</form>
 	</Section>
 </div>

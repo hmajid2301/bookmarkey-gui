@@ -1,36 +1,37 @@
 import * as Sentry from "@sentry/node";
 import { error, fail, redirect, type Actions } from "@sveltejs/kit";
 import { ClientResponseError } from "pocketbase";
+import { superValidate } from "sveltekit-superforms/server";
 import { z } from "zod";
 
-interface Login {
-	email: string;
-	password: string;
-}
-
-const loginSchema: z.ZodType<Login> = z.object({
+const loginSchema = z.object({
 	email: z
 		.string({ required_error: "Email is required" })
 		.email({ message: "Email must be a valid email." }),
 	password: z.string({ required_error: "Password is required" })
 });
 
-export const actions: Actions = {
-	default: async ({ locals, request }) => {
-		const data = Object.fromEntries((await request.formData()) as Iterable<[Login]>);
-		const result = loginSchema.safeParse(data);
+export const load = async (event) => {
+	const form = await superValidate(event, loginSchema);
+	return {
+		form
+	};
+};
 
-		if (!result.success) {
+export const actions: Actions = {
+	default: async (event) => {
+		const form = await superValidate(event, loginSchema);
+
+		if (!form.valid) {
 			return fail(400, {
-				data: data,
-				errors: result.error.flatten().fieldErrors
+				form
 			});
 		}
 
 		try {
-			await locals.pb
+			await event.locals.pb
 				?.collection("users")
-				.authWithPassword(result.data.email, result.data.password);
+				.authWithPassword(form.data.email, form.data.password);
 			// TODO: what to do with unverified users
 			// if (!locals.pb?.authStore?.model?.verified) {
 			// 	locals.pb?.authStore.clear();

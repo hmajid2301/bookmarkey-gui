@@ -1,9 +1,8 @@
 import * as Sentry from "@sentry/node";
 import { error, fail, redirect, type Actions } from "@sveltejs/kit";
 import { pwnedPassword } from "hibp";
+import { superValidate } from "sveltekit-superforms/server";
 import { z } from "zod";
-
-import type { Register } from "~/lib/types/form";
 
 const isSafePassword = async (ph: string) => {
 	try {
@@ -15,7 +14,7 @@ const isSafePassword = async (ph: string) => {
 	}
 };
 
-const registerSchema: z.ZodType<Register> = z.object({
+const registerSchema = z.object({
 	email: z
 		.string({ required_error: "Email is required" })
 		.email({ message: "Email must be a valid email." }),
@@ -27,24 +26,29 @@ const registerSchema: z.ZodType<Register> = z.object({
 		}))
 });
 
-export const actions: Actions = {
-	default: async ({ locals, request }) => {
-		const data: Register = Object.fromEntries((await request.formData()) as Iterable<[Register]>);
-		const result = await registerSchema.safeParseAsync(data);
+export const load = async (event) => {
+	const form = await superValidate(event, registerSchema);
+	return {
+		form
+	};
+};
 
-		if (!result.success) {
+export const actions: Actions = {
+	default: async (event) => {
+		const form = await superValidate(event, registerSchema);
+
+		if (!form.valid) {
 			return fail(400, {
-				data: data,
-				errors: result.error.flatten().fieldErrors
+				form
 			});
 		}
 
 		try {
-			await locals.pb?.collection("users").create({
+			await event.locals.pb?.collection("users").create({
 				username: "",
-				email: result.data.email,
-				password: result.data.password,
-				passwordConfirm: result.data.password
+				email: form.data.email,
+				password: form.data.password,
+				passwordConfirm: form.data.password
 			});
 		} catch (err) {
 			console.log("Failed to create account", err);
@@ -53,16 +57,16 @@ export const actions: Actions = {
 		}
 
 		try {
-			await locals.pb?.collection("users").requestVerification(result.data.email);
+			await event.locals.pb?.collection("users").requestVerification(form.data.email);
 		} catch (err) {
 			Sentry.captureException(err);
 			throw error(500, "Failed to send verification email.");
 		}
 
 		try {
-			await locals.pb
+			await event.locals.pb
 				?.collection("users")
-				.authWithPassword(result.data.email, result.data.password);
+				.authWithPassword(form.data.email, form.data.password);
 		} catch (err) {
 			Sentry.captureException(err);
 			throw error(500, "Failed to automatically log you in.");

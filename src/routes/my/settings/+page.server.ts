@@ -2,6 +2,7 @@ import * as Sentry from "@sentry/node";
 import { error, fail, type Actions } from "@sveltejs/kit";
 import { pwnedPassword } from "hibp";
 import { serialize } from "object-to-formdata";
+import { superValidate } from "sveltekit-superforms/server";
 import { z } from "zod";
 
 const imageTypes = [
@@ -16,17 +17,6 @@ const imageTypes = [
 // Max limit for avatars 5KB
 const MAX_AVATAR_FILE_LIMIT = 500_000;
 
-interface updatePassword {
-	currentPassword: string;
-	password: string;
-}
-
-interface updateProfile {
-	nickname: string;
-	email: string;
-	avatar?: Blob | undefined;
-}
-
 const isSafePassword = async (ph: string) => {
 	try {
 		const pwned = await pwnedPassword(ph);
@@ -37,7 +27,7 @@ const isSafePassword = async (ph: string) => {
 	}
 };
 
-const updatePasswordSchema: z.ZodType<updatePassword> = z.object({
+const updatePasswordSchema = z.object({
 	currentPassword: z.string({ required_error: "Current password is required" }),
 	password: z
 		.string({ required_error: "Password is required" })
@@ -50,7 +40,7 @@ const updatePasswordSchema: z.ZodType<updatePassword> = z.object({
 		}))
 });
 
-const updateProfileSchema: z.ZodType<updateProfile> = z.object({
+const updateProfileSchema = z.object({
 	nickname: z.string().max(64, { message: "Name must be 64 characters or less" }).trim(),
 	avatar:
 		typeof window === "undefined"
@@ -81,22 +71,34 @@ const updateProfileSchema: z.ZodType<updateProfile> = z.object({
 		.email({ message: "Email must be a valid email." })
 });
 
-export const actions: Actions = {
-	updatePassword: async ({ locals, request }) => {
-		const data = Object.fromEntries((await request.formData()) as Iterable<[updatePassword]>);
-		const result = await updatePasswordSchema.safeParseAsync(data);
+export const load = async (event) => {
+	const passwordForm = await superValidate(event, updatePasswordSchema, {
+		id: "update-password-form"
+	});
+	const profileForm = await superValidate(event, updateProfileSchema, {
+		id: "update-profile-form"
+	});
+	return {
+		passwordForm,
+		profileForm
+	};
+};
 
-		if (!result.success) {
+export const actions: Actions = {
+	updatePassword: async (event) => {
+		const form = await superValidate(event, updatePasswordSchema);
+
+		if (!form.valid) {
 			return fail(400, {
-				data: data,
-				errors: result.error.flatten().fieldErrors
+				form
 			});
 		}
+
 		try {
-			await locals.pb?.collection("users").update(locals?.user?.id as string, {
-				oldPassword: result.data.currentPassword,
-				password: result.data.password,
-				passwordConfirm: result.data.password
+			await event.locals.pb?.collection("users").update(event.locals?.user?.id as string, {
+				oldPassword: form.data.currentPassword,
+				password: form.data.password,
+				passwordConfirm: form.data.password
 			});
 			return {
 				updatePasswordSuccess: true
@@ -106,36 +108,34 @@ export const actions: Actions = {
 			throw error(500, "Failed to update password.");
 		}
 	},
-	updateProfile: async ({ locals, request }) => {
-		const data = Object.fromEntries((await request.formData()) as Iterable<[updateProfile]>);
-		const result = updateProfileSchema.safeParse(data);
+	updateProfile: async (event) => {
+		const form = await superValidate(event, updateProfileSchema);
 
-		if (!result.success) {
+		if (!form.valid) {
 			return fail(400, {
-				data: data,
-				errors: result.error.flatten().fieldErrors
+				form
 			});
 		}
 
-		const updatedProfile: Record<string, string | Blob> = { name: result.data.nickname };
-		if (result?.data?.avatar && result.data.avatar.size > 0) {
-			updatedProfile["avatar"] = result.data.avatar;
+		const updatedProfile: Record<string, string | Blob> = { name: form.data.nickname };
+		if (form?.data?.avatar && form.data.avatar.size > 0) {
+			updatedProfile["avatar"] = form.data.avatar;
 		}
 		try {
-			const record = await locals.pb
+			const record = await event.locals.pb
 				?.collection("users")
-				.update(locals?.user?.id as string, serialize(updatedProfile));
+				.update(event.locals?.user?.id as string, serialize(updatedProfile));
 
-			if (locals.user?.email !== result.data.email) {
-				await locals.pb?.collection("users").requestEmailChange(result.data.email);
+			if (event.locals.user?.email !== form.data.email) {
+				await event.locals.pb?.collection("users").requestEmailChange(form.data.email);
 			}
 
-			if (locals.user) {
-				locals.user.name = result.data.nickname;
-				locals.user.email = result.data.email;
+			if (event.locals.user) {
+				event.locals.user.name = form.data.nickname;
+				event.locals.user.email = form.data.email;
 
 				if (record) {
-					locals.user.avatar = `${locals.pb?.baseUrl}/api/files/${locals.user?.collectionId}/${locals.user?.id}/${record["avatar"]}`;
+					event.locals.user.avatar = `${event.locals.pb?.baseUrl}/api/files/${event.locals.user?.collectionId}/${event.locals.user?.id}/${record["avatar"]}`;
 				}
 			}
 			return {
