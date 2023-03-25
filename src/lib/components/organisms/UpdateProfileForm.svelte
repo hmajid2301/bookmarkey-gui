@@ -11,7 +11,6 @@
 	export let values: ProfileValues;
 	export let errors: ProfileErrors;
 	export let avatar: string;
-	export let loading: boolean;
 
 	interface ProfileValues {
 		nickname: string;
@@ -44,14 +43,13 @@
 			{#key avatar}
 				<Avatar {avatar} email={values.email} nickname={values.nickname} />
 			{/key}
-			<CameraUploadButton on:change={showPreview} {loading} />
+			<CameraUploadButton on:change={showPreview} />
 		</div>
 		<Note>Max 500KB</Note>
 	</div>
 
 	<FormField
 		name="nickname"
-		disabled={loading}
 		type="text"
 		labelName="Nickname"
 		note="Your nickname"

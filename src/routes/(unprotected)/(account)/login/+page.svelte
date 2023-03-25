@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { ActionResult } from "@sveltejs/kit";
 	import toast from "svelte-french-toast";
 	import { superForm } from "sveltekit-superforms/client";
 
@@ -10,39 +9,20 @@
 
 	export let data;
 
-	const { form, capture, restore, errors, enhance } = superForm(data.form, {});
+	const { form, capture, restore, errors, enhance, constraints } = superForm(data.form, {
+		onResult: async ({ result }) => {
+			if (result.type === "failure") {
+				toast.error("Invalid credentials");
+			}
+		},
+		onError: async ({ result }) => {
+			toast.error(result.error.message);
+		}
+	});
 
 	export const snapshot = {
 		capture,
 		restore
-	};
-
-	let loading = false;
-	const submitLogin = () => {
-		loading = true;
-		return async ({
-			result,
-			update
-		}: {
-			result: ActionResult;
-			update: () => Promise<void>;
-		}) => {
-			switch (result.type) {
-				case "success":
-					await update();
-					break;
-				case "failure":
-					toast.error("Invalid credentials");
-					await update();
-					break;
-				case "error":
-					toast.error(result.error.message);
-					break;
-				default:
-					await update();
-			}
-			loading = false;
-		};
 	};
 </script>
 
@@ -55,18 +35,18 @@
 		class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
 		Login to your account
 	</h1>
-	<form class="space-y-4 md:space-y-6" method="post" on:submit={submitLogin} use:enhance>
+	<form class="space-y-4 md:space-y-6" method="post" use:enhance>
 		<EmailInput
 			autocomplete="username"
-			disabled={loading}
 			bind:value={$form.email}
-			errors={$errors.email} />
+			errors={$errors.email}
+			{...$constraints.email} />
 		<PasswordInput
 			name="password"
 			labelName="Password"
 			bind:value={$form.password}
-			disabled={loading}
-			errors={$errors.password} />
+			errors={$errors.password}
+			{...$constraints.password} />
 		<div class="flex items-center justify-between">
 			<a href="/reset" class="link">Forgot password?</a>
 		</div>

@@ -20,7 +20,7 @@
 		type={show ? "text" : "password"}
 		{autocomplete}
 		{name}
-		{value}
+		bind:value
 		on:change
 		on:blur
 		on:input

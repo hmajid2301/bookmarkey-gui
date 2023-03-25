@@ -1,6 +1,5 @@
 import { captureException, init, Replay, setTag } from "@sentry/svelte";
 import { BrowserTracing } from "@sentry/tracing";
-import type { HandleClientError } from "@sveltejs/kit";
 
 import { config } from "./config";
 
@@ -15,7 +14,7 @@ init({
 
 setTag("svelteKit", "browser");
 
-export const handleError: HandleClientError = ({ error, event }) => {
+export const handleError = ({ error, event }) => {
 	captureException(error, { contexts: { sveltekit: { event } } });
 
 	return {

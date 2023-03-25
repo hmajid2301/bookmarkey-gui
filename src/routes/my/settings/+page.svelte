@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { applyAction } from "$app/forms";
 	import { invalidateAll } from "$app/navigation";
-	import type { ActionResult } from "@sveltejs/kit";
 	import { DarkMode } from "flowbite-svelte";
 	import UserSolid from "svelte-awesome-icons/UserSolid.svelte";
 	import toast from "svelte-french-toast";
@@ -19,59 +17,35 @@
 		form: profileForm,
 		errors: ProfileErrors,
 		enhance: profileEnhance
-	} = superForm(data.profileForm, {});
+	} = superForm(data.profileForm, {
+		onResult: async ({ result }) => {
+			if (result.type === "success") {
+				toast.success("Updated profile");
+				await invalidateAll();
+			}
+		},
+		onError: async ({ result }) => {
+			toast.error(result.error.message);
+		}
+	});
+
 	const {
 		form: passwordForm,
 		errors: passwordErrors,
 		enhance: passwordEnhance
-	} = superForm(data.passwordForm, {});
-
-	let loading = false;
-	const submitUpdateProfile = () => {
-		loading = true;
-		return async ({ result }: { result: ActionResult }) => {
-			switch (result.type) {
-				case "success":
-					toast.success("Updated profile");
-					await invalidateAll();
-					break;
-				case "error":
-					toast.error(result.error.message);
-					break;
-				default:
-					await applyAction(result);
+	} = superForm(data.passwordForm, {
+		onResult: async ({ result }) => {
+			if (result.type === "success") {
+				toast.success("Updated password");
+				await invalidateAll();
+			} else if (result.type === "failure") {
+				toast.success("Invalid password data");
 			}
-			loading = false;
-		};
-	};
-
-	const submitUpdatePassword = () => {
-		loading = true;
-		return async ({
-			result,
-			update
-		}: {
-			result: ActionResult;
-			update: () => Promise<void>;
-		}) => {
-			switch (result.type) {
-				case "success":
-					toast.success("Updated password");
-					await invalidateAll();
-					break;
-				case "failure":
-					toast.error("Invalid password data");
-					await update();
-					break;
-				case "error":
-					toast.error(result.error.message);
-					break;
-				default:
-					await update();
-			}
-			loading = false;
-		};
-	};
+		},
+		onError: async ({ result }) => {
+			toast.error(result.error.message);
+		}
+	});
 </script>
 
 <svelte:head>
@@ -99,10 +73,8 @@
 			action="?/updateProfile"
 			enctype="multipart/form-data"
 			method="post"
-			on:submit={submitUpdateProfile}
 			use:profileEnhance>
 			<UpdateProfileForm
-				{loading}
 				values={{
 					nickname: $profileForm.nickname ?? data.user.nickname,
 					email: $profileForm.email ?? data.user.email
@@ -120,17 +92,14 @@
 			class="flex h-full flex-col"
 			action="?/updatePassword"
 			method="post"
-			use:passwordEnhance
-			on:submit={submitUpdatePassword}>
+			use:passwordEnhance>
 			<div class="flex-1 p-6">
 				<PasswordInput
-					disabled={loading}
 					name="currentPassword"
 					labelName="Current Password"
 					bind:value={$passwordForm.currentPassword}
 					errors={$passwordErrors.currentPassword} />
 				<Password
-					{loading}
 					bind:value={$passwordForm.password}
 					errors={$passwordErrors.password || []} />
 			</div>

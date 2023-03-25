@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { ActionResult } from "@sveltejs/kit";
 	import toast from "svelte-french-toast";
 	import { superForm } from "sveltekit-superforms/client";
 
@@ -10,35 +9,15 @@
 
 	export let data;
 
-	const { form, capture, restore, errors, enhance } = superForm(data.form, {});
+	const { form, capture, restore, errors, enhance } = superForm(data.form, {
+		onError: async ({ result }) => {
+			toast.error(result.error.message);
+		}
+	});
+
 	export const snapshot = {
 		capture,
 		restore
-	};
-
-	let loading = false;
-
-	const submitRegister = () => {
-		loading = true;
-		return async ({
-			result,
-			update
-		}: {
-			result: ActionResult;
-			update: () => Promise<void>;
-		}) => {
-			switch (result.type) {
-				case "success":
-					await update();
-					break;
-				case "error":
-					toast.error(result.error.message);
-					break;
-				default:
-					await update();
-			}
-			loading = false;
-		};
 	};
 </script>
 
@@ -51,13 +30,9 @@
 		class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
 		Create an account
 	</h1>
-	<form class="space-y-4 md:space-y-6" method="post" use:enhance on:submit={submitRegister}>
-		<EmailInput
-			autocomplete="username"
-			disabled={loading}
-			bind:value={$form.email}
-			errors={$errors.email} />
-		<Password {loading} bind:value={$form.password} errors={$errors.password || []} />
+	<form class="space-y-4 md:space-y-6" method="post" use:enhance>
+		<EmailInput autocomplete="username" bind:value={$form.email} errors={$errors.email} />
+		<Password bind:value={$form.password} errors={$errors.password || []} />
 		<FullWidthButton>Create Account</FullWidthButton>
 	</form>
 

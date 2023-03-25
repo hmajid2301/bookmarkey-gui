@@ -36,7 +36,7 @@
 			{required}
 			{type}
 			{placeholder}
-			{value}
+			bind:value
 			{disabled}
 			extraClasses={errors
 				? "border-red-500 text-red-500 focus:ring-red-900"

@@ -15,8 +15,7 @@ describe("UpdateProfile", () => {
 					nickname: [],
 					email: []
 				},
-				avatar: "user.png",
-				loading: false
+				avatar: "user.png"
 			}
 		});
 		getByLabelText("Nickname");

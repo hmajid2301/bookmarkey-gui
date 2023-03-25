@@ -22,7 +22,7 @@
 	required={true}
 	{placeholder}
 	{note}
-	{value}
+	bind:value
 	{errors}>
 	<span
 		class="pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center {errors

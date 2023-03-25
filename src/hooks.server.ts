@@ -1,6 +1,6 @@
 import * as SentryNode from "@sentry/node";
 import "@sentry/tracing";
-import { redirect, type Handle, type HandleServerError } from "@sveltejs/kit";
+import { redirect } from "@sveltejs/kit";
 import PocketBase from "pocketbase";
 
 import { config } from "./config";
@@ -15,7 +15,7 @@ SentryNode.init({
 
 SentryNode.setTag("svelteKit", "server");
 
-export const handleError: HandleServerError = ({ error, event }) => {
+export const handleError = ({ error, event }) => {
 	SentryNode.captureException(error, { contexts: { sveltekit: { event } } });
 	console.error(error);
 
@@ -24,7 +24,7 @@ export const handleError: HandleServerError = ({ error, event }) => {
 	};
 };
 
-export const handle: Handle = async ({ event, resolve }) => {
+export const handle = async ({ event, resolve }) => {
 	event.locals.client = new PBClient(config.PocketBaseURL);
 	event.locals.pb = new PocketBase(config.PocketBaseURL);
 	event.locals.pb.authStore.loadFromCookie(event.request.headers.get("cookie") || "");
