@@ -1,10 +1,9 @@
 import { expect, test, type Page } from "@playwright/test";
-import pocketbase from "pocketbase";
+
+import { getAdminLoginPB } from "./common.js";
 
 test.describe("Register", () => {
 	const email = "test+signup@bookmarkey.app";
-	const adminEmail = "admin@bookmarkey.app";
-	const adminPassword = "password11";
 
 	let page: Page;
 
@@ -68,10 +67,9 @@ test.describe("Register", () => {
 		await page.waitForURL(`${baseURL}/register`);
 	});
 
-	test.afterEach(async () => {
+	test.afterAll(async () => {
 		try {
-			const pb = new pocketbase(process.env.VITE_POCKET_BASE_URL);
-			await pb.admins.authWithPassword(adminEmail, adminPassword);
+			const pb = await getAdminLoginPB();
 			const record = await pb.collection("users").getFirstListItem(`email = "${email}"`);
 			await pb.collection("users").delete(record.id);
 		} catch (err) {

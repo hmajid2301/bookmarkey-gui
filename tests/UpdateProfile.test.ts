@@ -42,7 +42,7 @@ test.describe(() => {
 
 	test.afterEach(async () => {
 		try {
-			const pb = new pocketbase(process.env.VITE_TEST_POCKET_BASE_URL);
+			const pb = new pocketbase(process.env.VITE_TEST_POCKET_BASE_URL || "http://localhost:9090");
 			const record = await pb.collection("users").authWithPassword(email, newPassword);
 
 			await pb?.collection("users").update(record.record.id as string, {

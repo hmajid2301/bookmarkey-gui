@@ -15,15 +15,10 @@
 	export let disabled = false;
 	export let errors: string[] | undefined = [];
 	export let ref: HTMLInputElement | undefined = undefined;
-
-	// TODO: remove this logic
-	if (errors?.length === 0) {
-		errors = undefined;
-	}
 </script>
 
 <div class="mb-6 last:mb-0">
-	<Label {labelName} {name} extraClasses={errors ? "text-red-600" : ""} />
+	<Label {labelName} {name} extraClasses={errors?.length ? "text-red-600" : ""} />
 
 	<div class="relative">
 		<Input
@@ -38,7 +33,7 @@
 			{placeholder}
 			bind:value
 			{disabled}
-			extraClasses={errors
+			extraClasses={errors?.length
 				? "border-red-500 text-red-500 focus:ring-red-900"
 				: "border-gray-300"} />
 		<slot />
@@ -48,7 +43,7 @@
 		<Note>{note}</Note>
 	{/if}
 
-	{#if errors}
+	{#if errors?.length}
 		<ErrorText>{errors[0]}</ErrorText>
 	{/if}
 </div>

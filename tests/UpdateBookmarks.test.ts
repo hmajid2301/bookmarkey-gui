@@ -1,14 +1,11 @@
-import pocketbase from "pocketbase";
-
 import { expect, test } from "./baseFixtures.js";
+import { getAdminLoginPB, getCurrentDate } from "./common.js";
 
 test.describe("Update Bookmarks", () => {
 	const email = "test@bookmarkey.app";
 	const password = "password@11";
 
-	const adminEmail = "admin@bookmarkey.app";
-	const adminPassword = "password11";
-	const date = new Date();
+	const date = getCurrentDate();
 
 	test.beforeEach(async ({ page }) => {
 		await page.goto("/my/collections/0");
@@ -26,13 +23,11 @@ test.describe("Update Bookmarks", () => {
 
 	test.afterEach(async () => {
 		try {
-			const pb = new pocketbase(process.env.VITE_TEST_POCKET_BASE_URL);
-			await pb.admins.authWithPassword(adminEmail, adminPassword);
-
+			const pb = await getAdminLoginPB();
 			const record = await pb.collection("users").authWithPassword(email, password);
 			const collections = await pb.collection("bookmarks").getList(1, 300, {
 				user: record.record.id,
-				filter: `created >= ${date.toISOString().replace("T", " ")}`
+				filter: `created > ${date}`
 			});
 			collections.items.forEach(async (elem) => {
 				await pb.collection("bookmarks").delete(elem.id);
