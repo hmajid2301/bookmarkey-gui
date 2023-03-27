@@ -9,8 +9,6 @@ image: registry.gitlab.com/hmajid2301/pnpm-docker-ci:6faf9994486627a07ff45fa574f
 
 stages:
   - test
-  - deploy
-  - notify
 
 .task:
   stage: test
@@ -39,24 +37,26 @@ format:check:
 #     - echo $URL > environment_url.txt
 #     - echo $URL
 
-coverage:unit:
+check:
+  extends: .task
+  script:
+    - cp .env.sample .env
+    - task check
+
+tests:unit:
   only:
     - merge_request
     - main
   extends: .task
   script:
-    - task coverage
-  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+    - task unit:tests
   artifacts:
     reports:
       junit: test-results/junit.xml
-      coverage_report:
-        coverage_format: cobertura
-        path: coverage/cobertura-coverage.xml
 
 tests:e2e:
   image:
-    name: registry.gitlab.com/hmajid2301/playwright-docker:bfb03856092c2fa9d0f4d3db97034e7aab78d727
+    name: registry.gitlab.com/hmajid2301/playwright-docker:25aca466f78e9d4f413e75cdb19fd9209c4fab10
     entrypoint: [""]
   services:
     - name: docker:dind
@@ -66,32 +66,20 @@ tests:e2e:
     DOCKER_DRIVER: overlay2
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
-    NODE_ENV: test
-  parallel: 2
   extends: .task
   script:
-    # TODO: move to docker image
-    - curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --yes --dearmor -o /usr/share/keyrings/yarnkey.gpg
-    - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list > /dev/null
-    - npx playwright install-deps
     - npx playwright install
-    - task e2e:tests -- --shard=$CI_NODE_INDEX/$CI_NODE_TOTAL
+    - task e2e:tests -- --reporter=junit
     - npx nyc report --report-dir ./coverage --temp-dir .nyc_output --reporter=cobertura --exclude-after-remap false
     - npx nyc report --report-dir ./coverage --temp-dir .nyc_output --reporter=text --exclude-after-remap false
-  # coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   artifacts:
-    # reports:
-    #   # junit: test-results/junit.xml
-    #   coverage_report:
-    #     coverage_format: cobertura
-    #     path: coverage/cobertura-coverage.xml
+    reports:
+      junit: results.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
     when: always
     paths:
       - test-results/
     expire_in: 1 week
-
-check:
-  extends: .task
-  script:
-    - cp .env.sample .env
-    - task check

@@ -2,9 +2,6 @@ import { expect, test } from "./baseFixtures.js";
 import { getAdminLoginPB, getCurrentDate } from "./common.js";
 
 test.describe("Update Bookmarks", () => {
-	const email = "test@bookmarkey.app";
-	const password = "password@11";
-
 	const date = getCurrentDate();
 
 	test.beforeEach(async ({ page }) => {
@@ -24,13 +21,18 @@ test.describe("Update Bookmarks", () => {
 	test.afterEach(async () => {
 		try {
 			const pb = await getAdminLoginPB();
-			const record = await pb.collection("users").authWithPassword(email, password);
-			const collections = await pb.collection("bookmarks").getList(1, 300, {
-				user: record.record.id,
-				filter: `created > ${date}`
+			const collections = await pb.collection("bookmarks").getFullList({
+				filter: `created > "${date}"`
 			});
-			collections.items.forEach(async (elem) => {
+			collections.forEach(async (elem) => {
 				await pb.collection("bookmarks").delete(elem.id);
+			});
+
+			const coll = await pb.collection("bookmarks_metadata").getFullList({
+				filter: `created > "${date}"`
+			});
+			coll.forEach(async (elem) => {
+				await pb.collection("bookmarks_metadata").delete(elem.id);
 			});
 		} catch (err) {
 			console.log("failed to delete bookmarks", err);

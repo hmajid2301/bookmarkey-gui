@@ -8,15 +8,23 @@ export async function getAdminLoginPB() {
 	return pb;
 }
 
+function padTo2Digits(num: number) {
+	return num.toString().padStart(2, "0");
+}
+
 export function getCurrentDate() {
-	return new Date()
-		.toLocaleDateString(undefined, {
-			year: "numeric",
-			month: "2-digit",
-			day: "2-digit",
-			hour: "2-digit",
-			minute: "2-digit",
-			second: "2-digit"
-		})
-		.replace("/", "-");
+	const date = new Date();
+	return (
+		[
+			date.getUTCFullYear(),
+			padTo2Digits(date.getUTCMonth() + 1),
+			padTo2Digits(date.getUTCDate())
+		].join("-") +
+		" " +
+		[
+			padTo2Digits(date.getUTCHours()),
+			padTo2Digits(date.getUTCMinutes()),
+			padTo2Digits(date.getUTCSeconds())
+		].join(":")
+	);
 }

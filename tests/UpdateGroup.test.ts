@@ -76,11 +76,11 @@ test.describe(() => {
 		try {
 			const pb = await getAdminLoginPB();
 			const record = await pb.collection("users").authWithPassword(email, password);
-			const collections = await pb.collection("groups").getList(1, 300, {
+			const collections = await pb.collection("groups").getFullList({
 				user: record.record.id,
-				filter: `created >= ${date}`
+				filter: `created >= "${date}"`
 			});
-			collections.items.forEach(async (elem) => {
+			collections.forEach(async (elem) => {
 				await pb.collection("groups").delete(elem.id);
 			});
 		} catch (err) {

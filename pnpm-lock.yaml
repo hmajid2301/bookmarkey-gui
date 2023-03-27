@@ -39,9 +39,6 @@ specifiers:
   ioredis: ^5.3.0
   jsdom: ^21.0.0
   lint-staged: ^13.1.0
-  magic-string: ^0.30.0
-  md5: ^2.3.0
-  neverthrow: ^6.0.0
   nyc: ^15.1.0
   object-to-formdata: ^4.4.2
   pocketbase: ^0.12.0
@@ -63,7 +60,6 @@ specifiers:
   sveltekit-adapter-chrome-extension: ^2.0.0
   sveltekit-superforms: ^0.6.2
   tailwindcss: ^3.2.4
-  tslib: ^2.5.0
   typescript: ^5.0.0
   vite: ^4.1.1
   vite-plugin-istanbul: ^4.0.0
@@ -115,9 +111,6 @@ devDependencies:
   ioredis: 5.3.0
   jsdom: 21.1.1
   lint-staged: 13.1.0
-  magic-string: 0.30.0
-  md5: 2.3.0
-  neverthrow: 6.0.0
   nyc: 15.1.0
   object-to-formdata: 4.4.2
   pocketbase: 0.12.0
@@ -139,7 +132,6 @@ devDependencies:
   sveltekit-adapter-chrome-extension: 2.0.0_2mpmikmgyjawmfh5fnuti4sqde
   sveltekit-superforms: 0.6.2_53a77fpgytcw3wivxjg3jck6ga
   tailwindcss: 3.2.4_postcss@8.4.21
-  tslib: 2.5.0
   typescript: 5.0.2
   vite: 4.1.1_@types+node@18.11.18
   vite-plugin-istanbul: 4.0.0_vite@4.1.1
@@ -5123,10 +5115,6 @@ packages:
 
   /natural-compare/1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
-    dev: true
-
-  /neverthrow/6.0.0:
-    resolution: {integrity: sha512-kPZKRs4VkdloCGQXPoP84q4sT/1Z+lYM61AXyV8wWa2hnuo5KpPBF2S3crSFnMrOgUISmEBP8Vo/ngGZX60NhA==}
     dev: true
 
   /node-fetch/2.6.7:

@@ -45,6 +45,7 @@ tasks:
       VITE_COVERAGE: true
       VITE_POCKET_BASE_URL: "http://localhost:9090"
       VITE_TEST_POCKET_BASE_URL: "http://localhost:9090"
+      PLAYWRIGHT_JUNIT_OUTPUT_NAME: results.xml
 
   generate:types:
     cmds:
@@ -53,10 +54,6 @@ tasks:
   check:
     cmds:
       - pnpm run check
-
-  prepare:
-    cmds:
-      - pnpm run prepare
 
   update:types:
     cmds:

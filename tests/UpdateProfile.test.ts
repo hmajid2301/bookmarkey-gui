@@ -45,7 +45,7 @@ test.describe(() => {
 			const pb = new pocketbase(process.env.VITE_TEST_POCKET_BASE_URL || "http://localhost:9090");
 			const record = await pb.collection("users").authWithPassword(email, newPassword);
 
-			await pb?.collection("users").update(record.record.id as string, {
+			await pb?.collection("users").update(record.record.id, {
 				nickname: email,
 				oldPassword: newPassword,
 				password: password,

@@ -7,6 +7,7 @@ export default defineConfig({
 		timeout: 240000,
 		reuseExistingServer: !process.env.CI
 	},
+	reporter: [["junit", { outputFile: "results.xml" }]],
 	testDir: "tests",
 	use: {
 		trace: "retain-on-failure",

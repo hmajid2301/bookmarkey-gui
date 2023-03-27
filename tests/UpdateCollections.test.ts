@@ -64,7 +64,7 @@ test.describe(() => {
 			const record = await pb.collection("users").authWithPassword(email, password);
 			const collections = await pb.collection("collections").getFullList({
 				user: record.record.id,
-				filter: `created > ${date}`
+				filter: `created > "${date}"`
 			});
 			collections.forEach(async (elem) => {
 				await pb.collection("collections").delete(elem.id);

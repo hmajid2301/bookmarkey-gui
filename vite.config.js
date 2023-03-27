@@ -73,13 +73,14 @@ export default defineConfig({
 			project: "gui",
 			include: "./dist",
 			authToken: process.env.SENTRY_AUTH_TOKEN,
-			dryRun: process.env.NODE_ENV === "production" ? false : true
+			dryRun: !(process.env.NODE_ENV === "production")
 		}),
 		istanbul({
 			include: "src/*",
 			exclude: ["node_modules", "test", "coverage"],
 			extension: [".ts", ".svelte"],
-			requireEnv: true
+			requireEnv: !(process.env.NODE_ENV === "test"),
+			forceBuildInstrument: process.env.NODE_ENV === "test"
 		})
 	],
 	test: {
