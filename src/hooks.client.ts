@@ -1,5 +1,4 @@
-import { captureException, init, Replay, setTag } from "@sentry/svelte";
-import { BrowserTracing } from "@sentry/tracing";
+import { BrowserTracing, Replay, captureException, init, setTag } from "@sentry/svelte";
 
 import { config } from "./config";
 

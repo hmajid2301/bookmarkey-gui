@@ -53,7 +53,7 @@ export const handle = async ({ event, resolve }) => {
 	response.headers.set("set-cookie", event.locals.client.exportToCookie(isProd));
 	response.headers.set(
 		"set-cookie",
-		event.locals.pb.authStore.exportToCookie({ secure: isProd, sameSite: "Lax" })
+		event.locals.pb.authStore.exportToCookie({ secure: isProd, sameSite: "Lax", httpOnly: false })
 	);
 	return response;
 };

@@ -5,7 +5,7 @@ include:
   - template: Code-Quality.gitlab-ci.yml
   # - template: Verify/Browser-Performance.gitlab-ci.yml
 
-image: registry.gitlab.com/hmajid2301/pnpm-docker-ci:6faf9994486627a07ff45fa574f5c9e8df669413
+image: registry.gitlab.com/hmajid2301/pnpm-docker-ci:30c413f82825425f223ef4196e82acaea87e8702
 
 stages:
   - test

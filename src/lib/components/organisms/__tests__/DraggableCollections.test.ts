@@ -1,10 +1,11 @@
 import { fireEvent, render } from "@testing-library/svelte";
 import { describe, expect, test, vi } from "vitest";
-import createFetchMock from "vitest-fetch-mock";
 
 import DraggableCollections from "../DraggableCollections.svelte";
+import * as frontend from "~/lib/pocketbase/frontend";
 
 describe("DraggableCollections", () => {
+	// TODO: add new tests for bookmark
 	test("Successfully render draggable collections", async () => {
 		const { getByText } = render(DraggableCollections, {
 			props: {
@@ -29,6 +30,7 @@ describe("DraggableCollections", () => {
 	});
 
 	test("Successfully drags and drops collections then makes API request", async () => {
+		const mock = vi.spyOn(frontend, "moveCollection");
 		const { getByText } = render(DraggableCollections, {
 			props: {
 				currentPath: "/my/collections/0",
@@ -46,9 +48,6 @@ describe("DraggableCollections", () => {
 				]
 			}
 		});
-		const fetchMock = createFetchMock(vi);
-		fetchMock.enableMocks();
-		fetchMock.once(JSON.stringify({}));
 
 		const firstCollection = getByText("My Collection");
 		const secondCollection = getByText("My Other Collection");
@@ -56,14 +55,10 @@ describe("DraggableCollections", () => {
 		await fireEvent.dragEnter(secondCollection);
 		await fireEvent.dragOver(secondCollection);
 		await fireEvent.dragEnd(secondCollection);
-		expect(fetchMock.mock.calls.length).toBe(1);
-		expect(fetchMock.mock.lastCall).toStrictEqual([
-			"/my/collections/move",
-			{
-				body: JSON.stringify({ new_order: 2, collection_id: "collection", group_id: "" }),
-				method: "POST"
-			}
-		]);
+		expect(mock).toHaveBeenCalledWith(undefined, "collection", {
+			groupId: "",
+			newOrder: 2
+		});
 	});
 
 	test("Successfully render empty collections", async () => {

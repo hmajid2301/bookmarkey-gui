@@ -1,5 +1,4 @@
 <script lang="ts">
-	// TODO: fix this dynamic
 	export let type = "text";
 	export let name: string;
 	export let value: string | undefined = "";

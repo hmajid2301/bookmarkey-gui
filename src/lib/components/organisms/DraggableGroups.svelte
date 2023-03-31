@@ -1,8 +1,11 @@
 <script lang="ts">
+	import type pocketbase from "pocketbase";
+	import { onMount } from "svelte";
 	import { flip } from "svelte/animate";
 	import toast from "svelte-french-toast";
 
 	import Group from "./Group.svelte";
+	import { getPB, swapGroup } from "~/lib/pocketbase/frontend";
 	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
 	import type { GroupSwap } from "~/lib/types/api";
 	import type { Group as Group_ } from "~/lib/types/components";
@@ -14,6 +17,12 @@
 	let hiddenGroups = new Set<string>();
 	let animatingCards = new Set();
 	let swapFromindex: number | undefined;
+
+	let pb: pocketbase;
+
+	onMount(() => {
+		pb = getPB();
+	});
 
 	async function changeGroupOrder(swapToIndex: number) {
 		if (swapFromindex === swapToIndex || animatingCards.has(swapToIndex)) return;
@@ -32,20 +41,13 @@
 			}
 		];
 
-		const response = await fetch(`/my/groups/swap`, {
-			method: "POST",
-			body: JSON.stringify(groupSwap)
-		});
-		if (response.ok) {
-			const swappingFrom = groups[swapFromindex];
-			const swappingTo = groups[swapToIndex];
-			if (swappingTo && swappingFrom) {
-				groups[swapFromindex] = swappingTo;
-				groups[swapToIndex] = swappingFrom;
-				toast.success("Moved group");
-			}
-		} else {
-			toast.error("Failed to move group");
+		await swapGroup(pb, groupSwap);
+		const swappingFrom = groups[swapFromindex];
+		const swappingTo = groups[swapToIndex];
+		if (swappingTo && swappingFrom) {
+			groups[swapFromindex] = swappingTo;
+			groups[swapToIndex] = swappingFrom;
+			toast.success("Moved group");
 		}
 	}
 </script>

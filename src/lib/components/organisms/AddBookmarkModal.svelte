@@ -1,56 +1,39 @@
 <script lang="ts">
-	import { enhance } from "$app/forms";
-	import { invalidateAll } from "$app/navigation";
-	import type { ActionResult } from "@sveltejs/kit";
+	import type pocketbase from "pocketbase";
+	import { onMount } from "svelte";
 	import LinkSolid from "svelte-awesome-icons/LinkSolid.svelte";
-	import toast from "svelte-french-toast";
 
 	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
 	import Modal from "~/lib/components/atoms/Modal.svelte";
 	import FormField from "~/lib/components/molecules/FormField.svelte";
+	import { createBookmark, getPB } from "~/lib/pocketbase/frontend";
 
 	export let collectionID: string;
 	export let ref: HTMLInputElement;
 	export let show = false;
 
+	let url: string;
 	let loading = false;
+	let pb: pocketbase;
 
-	const submitAddBookmarkForm = () => {
+	onMount(() => {
+		pb = getPB();
+	});
+
+	async function addBookmark() {
 		loading = true;
-		return async ({
-			result,
-			update
-		}: {
-			result: ActionResult;
-			update: () => Promise<void>;
-		}) => {
-			switch (result.type) {
-				case "success":
-					await update();
-					toast.success("Added bookmark");
-					await invalidateAll();
-					break;
-				case "error":
-					toast.error(result.error.message);
-					break;
-				default:
-					await update();
-			}
-			loading = false;
-			show = false;
-		};
-	};
+		await createBookmark(pb, collectionID, url);
+		loading = false;
+		show = false;
+	}
 </script>
 
 <Modal title="Add a new bookmark" bind:show>
-	<form
-		class="h-min space-y-4 md:space-y-6"
-		action={`/my/collections/${collectionID}?/addBookmark`}
-		method="post"
-		use:enhance={submitAddBookmarkForm}>
+	<div class="h-min space-y-4 md:space-y-6">
 		<FormField
 			bind:ref
 			disabled={loading}
+			bind:value={url}
 			type="text"
 			labelName=""
 			placeholder="Copy URL Here"
@@ -60,6 +43,6 @@
 				<LinkSolid class="inline-block h-4 w-4" />
 			</span>
 		</FormField>
-		<FullWidthButton>Add Bookmark</FullWidthButton>
-	</form>
+		<FullWidthButton on:click={addBookmark}>Add Bookmark</FullWidthButton>
+	</div>
 </Modal>

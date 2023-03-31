@@ -1,25 +1,20 @@
 <script lang="ts">
-	import { invalidateAll } from "$app/navigation";
 	import Avatar from "@svelte-put/avatar/Avatar.svelte";
+	import type pocketbase from "pocketbase";
+	import { onMount } from "svelte";
 	import ContextMenu, { Item } from "svelte-contextmenu";
-	import toast from "svelte-french-toast";
 
+	import { deleteBookmark, getPB } from "~/lib/pocketbase/frontend";
 	import type { Bookmark } from "~/lib/types/components";
 
 	export let bookmark: Bookmark;
 	let contextMenu: ContextMenu;
 
-	async function deleteBookmark() {
-		const response = await fetch(`/my/bookmarks/${bookmark.id}`, {
-			method: "DELETE"
-		});
-		if (response.ok) {
-			toast.success("Deleted bookmark");
-			await invalidateAll();
-		} else {
-			toast.error("Failed to delete bookmark");
-		}
-	}
+	let pb: pocketbase;
+
+	onMount(() => {
+		pb = getPB();
+	});
 </script>
 
 <a
@@ -55,5 +50,10 @@
 </a>
 
 <ContextMenu bind:this={contextMenu}>
-	<Item on:click={deleteBookmark}>Delete Bookmark</Item>
+	<Item
+		on:click={async () => {
+			await deleteBookmark(pb, bookmark.id);
+		}}>
+		Delete Bookmark
+	</Item>
 </ContextMenu>

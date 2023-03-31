@@ -1,15 +1,17 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
 	import { navigating } from "$app/stores";
+	import type pocketbase from "pocketbase";
+	import { onMount } from "svelte";
 	import toast from "svelte-french-toast";
 	import { inview } from "svelte-inview";
 	import { Circle } from "svelte-loading-spinners";
-	import { superForm } from "sveltekit-superforms/client";
 
 	import type { CollectionBookmarks } from "./+page.server";
 	import TopBar from "~/lib/components/molecules/TopBar.svelte";
 	import AddBookmarkModal from "~/lib/components/organisms/AddBookmarkModal.svelte";
 	import DraggableBookmark from "~/lib/components/organisms/DraggableBookmark.svelte";
+	import { createBookmark, getBookmarks, getPB } from "~/lib/pocketbase/frontend";
 	import { draggableStore } from "~/lib/stores/DraggableStore";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 
@@ -23,29 +25,19 @@
 	let loading = false;
 	let dragging = false;
 
-	async function getBookmarks() {
-		loading = true;
-		const resp = await fetch(`/my/collections/${data.collection.id}?page=${page}`, {
-			method: "GET"
-		});
-		newCollection = (await resp.json()) as CollectionBookmarks;
-		loading = false;
-	}
+	let pb: pocketbase;
 
-	async function createBookmark(e: DragEvent) {
+	onMount(() => {
+		pb = getPB();
+	});
+
+	async function createBookmark_(e: DragEvent) {
 		const url = e.dataTransfer?.getData("URL");
 		if (!url) {
 			return;
 		}
 
-		await fetch(`/my/collections/${data.collection.id}/bookmarks`, {
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({ url: url })
-		});
+		await createBookmark(pb, collection.id, url);
 		dragging = false;
 		await invalidateAll();
 		toast.success("Added bookmark");
@@ -81,7 +73,7 @@
 			return;
 		}
 
-		await createBookmark(e);
+		await createBookmark_(e);
 	}}>
 	<TopBar collectionName={collection.name} nickname={data.user.nickname} bind:show bind:ref />
 
@@ -94,7 +86,7 @@
 		on:inview_enter={async () => {
 			if (collection.moreBookmarks) {
 				page += 1;
-				await getBookmarks();
+				await getBookmarks(pb, collection.id, page);
 			}
 		}} />
 

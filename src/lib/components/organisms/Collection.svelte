@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
-	import { tick } from "svelte";
+	import type pocketbase from "pocketbase";
+	import { onMount, tick } from "svelte";
 	import FolderClosedSolid from "svelte-awesome-icons/FolderClosedSolid.svelte";
 	import ContextMenu, { Item } from "svelte-contextmenu";
 	import toast from "svelte-french-toast";
 
 	import Input from "../atoms/Input.svelte";
+	import { deleteCollection, getPB, updateCollection } from "~/lib/pocketbase/frontend";
 	import type { Collection } from "~/lib/types/components";
 
 	export let collection: Collection;
@@ -13,31 +15,20 @@
 	let edittingName = false;
 	let contextMenu: ContextMenu;
 	let ref: HTMLInputElement;
+	let pb: pocketbase;
+
+	onMount(() => {
+		pb = getPB();
+	});
 
 	async function patchCollectionName(newCollectionName: string) {
 		edittingName = false;
-
-		const response = await fetch(`/my/collections/${collection.id}`, {
-			method: "PATCH",
-			body: JSON.stringify({ name: newCollectionName })
-		});
-		if (response.ok) {
+		try {
+			await updateCollection(pb, collection.id, { collectionId: newCollectionName });
 			toast.success("Renamed collection");
 			await invalidateAll();
-		} else {
+		} catch (err) {
 			toast.error("Failed to rename collection");
-		}
-	}
-
-	async function deleteCollection() {
-		const response = await fetch(`/my/collections/${collection.id}`, {
-			method: "DELETE"
-		});
-		if (response.ok) {
-			toast.success("Deleted collection");
-			await invalidateAll();
-		} else {
-			toast.error("Failed to delete collection");
 		}
 	}
 
@@ -95,7 +86,7 @@
 	</Item>
 	<Item
 		on:click={async function () {
-			await deleteCollection();
+			await deleteCollection(pb, collection.id);
 		}}>
 		Delete Collection
 	</Item>

@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { invalidateAll } from "$app/navigation";
-	import { tick } from "svelte";
+	import type pocketbase from "pocketbase";
+	import { onMount, tick } from "svelte";
 	import CaretDownSolid from "svelte-awesome-icons/CaretDownSolid.svelte";
 	import EllipsisSolid from "svelte-awesome-icons/EllipsisSolid.svelte";
 	import ContextMenu, { Item } from "svelte-contextmenu";
-	import toast from "svelte-french-toast";
 
 	import AddCollectionForm from "./AddCollectionForm.svelte";
 	import DraggableCollection from "./DraggableCollections.svelte";
 	import Input from "../atoms/Input.svelte";
+	import { deleteGroup, getPB, updateGroup } from "~/lib/pocketbase/frontend";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 	import type { Group } from "~/lib/types/components";
 
@@ -45,37 +45,16 @@
 		collectionRef?.focus();
 	}
 
-	async function deleteGroup() {
-		const response = await fetch(`/my/groups/${group.id}`, {
-			method: "DELETE"
-		});
-		if (response.ok) {
-			toast.success("Deleted group");
-			await invalidateAll();
-		} else {
-			toast.error("Failed to delete group");
-		}
-	}
+	let pb: pocketbase;
 
-	async function patchGroupName(newGroupName: string) {
-		edittingName = false;
-
-		const response = await fetch(`/my/groups/${group.id}`, {
-			method: "PATCH",
-			body: JSON.stringify({ name: newGroupName })
-		});
-		if (response.ok) {
-			toast.success("Renamed group");
-			await invalidateAll();
-		} else {
-			toast.error("Failed to rename group");
-		}
-	}
+	onMount(() => {
+		pb = getPB();
+	});
 
 	async function renameGroup(event: Event) {
 		const target = event.target as HTMLInputElement;
 		const newGroupName = target.value;
-		await patchGroupName(newGroupName);
+		await updateGroup(pb, group.id, { name: newGroupName });
 	}
 </script>
 
@@ -101,9 +80,7 @@
 		{#if edittingName}
 			<Input
 				bind:ref={groupRef}
-				on:change={async (event) => {
-					await renameGroup(event);
-				}}
+				on:change={renameGroup}
 				on:blur={() => {
 					edittingName = false;
 				}}
@@ -133,7 +110,7 @@
 			</Item>
 			<Item
 				on:click={async function () {
-					await deleteGroup();
+					await deleteGroup(pb, group.id);
 				}}>
 				Delete Group
 			</Item>

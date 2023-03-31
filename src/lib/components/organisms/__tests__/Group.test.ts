@@ -1,18 +1,16 @@
 import { render } from "@testing-library/svelte";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
-import createFetchMock from "vitest-fetch-mock";
 
 import Group from "../Group.svelte";
+import * as frontend from "~/lib/pocketbase/frontend";
 
 describe("Group", () => {
 	test("Should delete group without any collections", async () => {
-		const fetchMock = createFetchMock(vi);
-		fetchMock.enableMocks();
-		fetchMock.once(JSON.stringify({}));
+		const mock = vi.spyOn(frontend, "deleteGroup");
 		const user = userEvent.setup();
 
-		const { getByText, getByTestId } = render(Group, {
+		const { getByText } = render(Group, {
 			props: {
 				currentPath: "/my/collections/0",
 				hiddenGroups: new Set<string>(),
@@ -33,14 +31,7 @@ describe("Group", () => {
 		// expect(getByTestId("ContextMenu").className).toContain("block");
 		const deleteGroup = getByText("Delete Group");
 		await user.click(deleteGroup);
-
-		expect(fetchMock.mock.calls.length).toBe(1);
-		expect(fetchMock.mock.lastCall).toStrictEqual([
-			"/my/groups/abcd",
-			{
-				method: "DELETE"
-			}
-		]);
+		expect(mock).toHaveBeenCalledWith(undefined, "abcd");
 	});
 
 	test("Successfully show add collection form", async () => {

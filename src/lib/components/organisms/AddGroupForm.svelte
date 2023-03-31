@@ -1,51 +1,37 @@
 <script lang="ts">
-	import { enhance } from "$app/forms";
-	import type { ActionResult } from "@sveltejs/kit";
+	import type pocketbase from "pocketbase";
+	import { onMount } from "svelte";
 	import LayerGroupSolid from "svelte-awesome-icons/LayerGroupSolid.svelte";
-	import toast from "svelte-french-toast";
 
 	import Modal from "../atoms/Modal.svelte";
 	import FormField from "../molecules/FormField.svelte";
 	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
+	import { createGroup, getPB } from "~/lib/pocketbase/frontend";
 
-	let loading = false;
 	export let ref: HTMLInputElement;
 	export let show = false;
 
-	const submitAddGroupForm = () => {
+	let groupName: string;
+	let loading = false;
+	let pb: pocketbase;
+
+	onMount(() => {
+		pb = getPB();
+	});
+
+	async function addGroup() {
 		loading = true;
-		return async ({
-			result,
-			update
-		}: {
-			result: ActionResult;
-			update: () => Promise<void>;
-		}) => {
-			switch (result.type) {
-				case "success":
-					await update();
-					toast.success("Created group");
-					break;
-				case "error":
-					toast.error(result.error.message);
-					break;
-				default:
-					await update();
-			}
-			loading = false;
-			show = false;
-		};
-	};
+		await createGroup(pb, groupName);
+		loading = false;
+		show = false;
+	}
 </script>
 
 <Modal title="Create a new group" bind:show>
-	<form
-		class="h-min space-y-4 md:space-y-6"
-		action="/my/groups?/addGroup"
-		method="post"
-		use:enhance={submitAddGroupForm}>
+	<div class="h-min space-y-4 md:space-y-6">
 		<FormField
 			bind:ref
+			bind:value={groupName}
 			disabled={loading}
 			type="text"
 			labelName=""
@@ -56,6 +42,6 @@
 				<LayerGroupSolid class="inline-block h-4 w-4" />
 			</span>
 		</FormField>
-		<FullWidthButton>Add Group</FullWidthButton>
-	</form>
+		<FullWidthButton on:click={addGroup}>Add Group</FullWidthButton>
+	</div>
 </Modal>
