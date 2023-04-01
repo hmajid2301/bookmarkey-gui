@@ -3,11 +3,11 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 
 import Group from "../Group.svelte";
-import * as frontend from "~/lib/pocketbase/frontend";
+import { API } from "~/lib/pocketbase/frontend";
 
 describe("Group", () => {
 	test("Should delete group without any collections", async () => {
-		const mock = vi.spyOn(frontend, "deleteGroup");
+		const mock = vi.spyOn(API.prototype, "deleteGroup");
 		const user = userEvent.setup();
 
 		const { getByText } = render(Group, {
@@ -31,7 +31,7 @@ describe("Group", () => {
 		// expect(getByTestId("ContextMenu").className).toContain("block");
 		const deleteGroup = getByText("Delete Group");
 		await user.click(deleteGroup);
-		expect(mock).toHaveBeenCalledWith(undefined, "abcd");
+		expect(mock).toHaveBeenCalledWith("abcd");
 	});
 
 	test("Successfully show add collection form", async () => {

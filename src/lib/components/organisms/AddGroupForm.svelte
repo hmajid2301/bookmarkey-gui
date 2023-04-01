@@ -1,27 +1,21 @@
 <script lang="ts">
-	import type pocketbase from "pocketbase";
-	import { onMount } from "svelte";
 	import LayerGroupSolid from "svelte-awesome-icons/LayerGroupSolid.svelte";
 
 	import Modal from "../atoms/Modal.svelte";
 	import FormField from "../molecules/FormField.svelte";
 	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
-	import { createGroup, getPB } from "~/lib/pocketbase/frontend";
+	import { API } from "~/lib/pocketbase/frontend";
 
 	export let ref: HTMLInputElement;
 	export let show = false;
 
 	let groupName: string;
 	let loading = false;
-	let pb: pocketbase;
-
-	onMount(() => {
-		pb = getPB();
-	});
+	const api = new API();
 
 	async function addGroup() {
 		loading = true;
-		await createGroup(pb, groupName);
+		await api.createGroup(groupName);
 		loading = false;
 		show = false;
 	}
@@ -32,6 +26,9 @@
 		<FormField
 			bind:ref
 			bind:value={groupName}
+			on:keydown={(e) => {
+				if (e.key === "Enter") addGroup;
+			}}
 			disabled={loading}
 			type="text"
 			labelName=""

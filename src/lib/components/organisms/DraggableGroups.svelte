@@ -1,11 +1,9 @@
 <script lang="ts">
-	import type pocketbase from "pocketbase";
-	import { onMount } from "svelte";
 	import { flip } from "svelte/animate";
 	import toast from "svelte-french-toast";
 
 	import Group from "./Group.svelte";
-	import { getPB, swapGroup } from "~/lib/pocketbase/frontend";
+	import { API } from "~/lib/pocketbase/frontend";
 	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
 	import type { GroupSwap } from "~/lib/types/api";
 	import type { Group as Group_ } from "~/lib/types/components";
@@ -18,12 +16,7 @@
 	let animatingCards = new Set();
 	let swapFromindex: number | undefined;
 
-	let pb: pocketbase;
-
-	onMount(() => {
-		pb = getPB();
-	});
-
+	const api = new API();
 	async function changeGroupOrder(swapToIndex: number) {
 		if (swapFromindex === swapToIndex || animatingCards.has(swapToIndex)) return;
 		animatingCards.add(swapToIndex);
@@ -41,7 +34,7 @@
 			}
 		];
 
-		await swapGroup(pb, groupSwap);
+		await api.swapGroup(groupSwap);
 		const swappingFrom = groups[swapFromindex];
 		const swappingTo = groups[swapToIndex];
 		if (swappingTo && swappingFrom) {

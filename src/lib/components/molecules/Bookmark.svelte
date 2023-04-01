@@ -1,20 +1,14 @@
 <script lang="ts">
 	import Avatar from "@svelte-put/avatar/Avatar.svelte";
-	import type pocketbase from "pocketbase";
-	import { onMount } from "svelte";
 	import ContextMenu, { Item } from "svelte-contextmenu";
 
-	import { deleteBookmark, getPB } from "~/lib/pocketbase/frontend";
+	import { API } from "~/lib/pocketbase/frontend";
 	import type { Bookmark } from "~/lib/types/components";
 
 	export let bookmark: Bookmark;
+
 	let contextMenu: ContextMenu;
-
-	let pb: pocketbase;
-
-	onMount(() => {
-		pb = getPB();
-	});
+	const api = new API();
 </script>
 
 <a
@@ -52,7 +46,7 @@
 <ContextMenu bind:this={contextMenu}>
 	<Item
 		on:click={async () => {
-			await deleteBookmark(pb, bookmark.id);
+			await api.deleteBookmark(bookmark.id);
 		}}>
 		Delete Bookmark
 	</Item>

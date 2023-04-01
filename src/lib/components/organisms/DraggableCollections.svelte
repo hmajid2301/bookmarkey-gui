@@ -1,9 +1,6 @@
 <script lang="ts">
-	import type pocketbase from "pocketbase";
-	import { onMount } from "svelte";
-
 	import Collection from "../organisms/Collection.svelte";
-	import { getPB, moveBookmark, moveCollection } from "~/lib/pocketbase/frontend";
+	import { API } from "~/lib/pocketbase/frontend";
 	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
 	import type { CollectionMove } from "~/lib/types/api";
 	import type { Collection as Collection_ } from "~/lib/types/components";
@@ -12,22 +9,14 @@
 	export let collections: Collection_[];
 	export let groupId: string | undefined = undefined;
 
-	let pb: pocketbase;
+	const api = new API();
 
-	onMount(() => {
-		pb = getPB();
-	});
-
-	async function mCollection(swapToIndex: number) {
+	async function moveCollection(swapToIndex: number) {
 		const collectionMove: CollectionMove = {
 			newOrder: swapToIndex + 1,
 			groupId: $draggableStore.collection.newGroupId || ""
 		};
-		await moveCollection(pb, $draggableStore.collection.id || "", collectionMove);
-	}
-
-	async function mBookmark(bookmarkID: string, newCollectionID: string) {
-		await moveBookmark(pb, bookmarkID, newCollectionID);
+		await api.moveCollection($draggableStore.collection.id || "", collectionMove);
 	}
 </script>
 
@@ -36,7 +25,7 @@
 		class="flex grow"
 		draggable="true"
 		on:dragend={() => {
-			mCollection(0);
+			moveCollection(0);
 		}}
 		on:dragenter={() => {
 			$draggableStore.collection.newGroupId = groupId || "";
@@ -58,7 +47,7 @@
 			$draggableStore.draggingType = DraggingType.Collection;
 		}}
 		on:dragend={async () => {
-			await mCollection(index);
+			await moveCollection(index);
 			$draggableStore.draggingType = null;
 			$draggableStore.collection = {};
 		}}
@@ -67,7 +56,7 @@
 		}}
 		on:drop|preventDefault={async () => {
 			if ($draggableStore.draggingType === DraggingType.Bookmark) {
-				await mBookmark($draggableStore.bookmark.id || "", collection.id);
+				await api.moveBookmark($draggableStore.bookmark.id || "", collection.id);
 				$draggableStore.draggingType = null;
 				$draggableStore.collection = {};
 			}

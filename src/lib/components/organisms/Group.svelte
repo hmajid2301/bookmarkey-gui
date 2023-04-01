@@ -1,6 +1,5 @@
 <script lang="ts">
-	import type pocketbase from "pocketbase";
-	import { onMount, tick } from "svelte";
+	import { tick } from "svelte";
 	import CaretDownSolid from "svelte-awesome-icons/CaretDownSolid.svelte";
 	import EllipsisSolid from "svelte-awesome-icons/EllipsisSolid.svelte";
 	import ContextMenu, { Item } from "svelte-contextmenu";
@@ -8,7 +7,7 @@
 	import AddCollectionForm from "./AddCollectionForm.svelte";
 	import DraggableCollection from "./DraggableCollections.svelte";
 	import Input from "../atoms/Input.svelte";
-	import { deleteGroup, getPB, updateGroup } from "~/lib/pocketbase/frontend";
+	import { API } from "~/lib/pocketbase/frontend";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 	import type { Group } from "~/lib/types/components";
 
@@ -45,16 +44,12 @@
 		collectionRef?.focus();
 	}
 
-	let pb: pocketbase;
-
-	onMount(() => {
-		pb = getPB();
-	});
+	const api = new API();
 
 	async function renameGroup(event: Event) {
 		const target = event.target as HTMLInputElement;
 		const newGroupName = target.value;
-		await updateGroup(pb, group.id, { name: newGroupName });
+		await api.updateGroup(group.id, { name: newGroupName });
 	}
 </script>
 
@@ -110,7 +105,7 @@
 			</Item>
 			<Item
 				on:click={async function () {
-					await deleteGroup(pb, group.id);
+					await api.deleteGroup(group.id);
 				}}>
 				Delete Group
 			</Item>

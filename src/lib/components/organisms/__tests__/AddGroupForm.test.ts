@@ -3,12 +3,12 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 
 import AddGroupForm from "../AddGroupForm.svelte";
-import * as frontend from "~/lib/pocketbase/frontend";
+import { API } from "~/lib/pocketbase/frontend";
 
 describe("AddGroupForm", () => {
 	test("Successfully render add group form", async () => {
 		const user = userEvent.setup();
-		const mock = vi.spyOn(frontend, "createGroup");
+		const mock = vi.spyOn(API.prototype, "createGroup");
 		const ref = document.createElement("change") as HTMLInputElement;
 
 		const { getByRole, getByLabelText } = render(AddGroupForm, {
@@ -25,6 +25,6 @@ describe("AddGroupForm", () => {
 		const button = getByRole("button", { name: "Add Group" });
 		await user.click(button);
 
-		expect(mock).toHaveBeenCalledWith(undefined, "collection");
+		expect(mock).toHaveBeenCalledWith("collection");
 	});
 });

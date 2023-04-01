@@ -1,7 +1,7 @@
 import * as Sentry from "@sentry/node";
 import { error } from "@sveltejs/kit";
 
-import { getBookmarks } from "~/lib/pocketbase/frontend";
+import { API } from "~/lib/pocketbase/frontend";
 import type { Bookmark } from "~/lib/types/components";
 
 export interface CollectionBookmarks {
@@ -16,7 +16,8 @@ export const load = async ({ locals, params }) => {
 	const collectionId = params.id;
 	const pageNumber = 0;
 	try {
-		return await getBookmarks(locals.pb, collectionId, pageNumber);
+		const api = new API(undefined, locals.pb);
+		return await api.getBookmarks(collectionId, pageNumber);
 	} catch (err) {
 		Sentry.captureException(err);
 		throw error(500, "Failed to get bookmarks");

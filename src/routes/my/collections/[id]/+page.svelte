@@ -1,17 +1,14 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
 	import { navigating } from "$app/stores";
-	import type pocketbase from "pocketbase";
-	import { onMount } from "svelte";
 	import toast from "svelte-french-toast";
 	import { inview } from "svelte-inview";
-	import { Circle } from "svelte-loading-spinners";
 
 	import type { CollectionBookmarks } from "./+page.server";
 	import TopBar from "~/lib/components/molecules/TopBar.svelte";
 	import AddBookmarkModal from "~/lib/components/organisms/AddBookmarkModal.svelte";
 	import DraggableBookmark from "~/lib/components/organisms/DraggableBookmark.svelte";
-	import { createBookmark, getBookmarks, getPB } from "~/lib/pocketbase/frontend";
+	import { API } from "~/lib/pocketbase/frontend";
 	import { draggableStore } from "~/lib/stores/DraggableStore";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 
@@ -22,14 +19,8 @@
 	let page = 1;
 	let collection = data.collection;
 	let newCollection: CollectionBookmarks;
-	let loading = false;
 	let dragging = false;
-
-	let pb: pocketbase;
-
-	onMount(() => {
-		pb = getPB();
-	});
+	const api = new API();
 
 	async function createBookmark_(e: DragEvent) {
 		const url = e.dataTransfer?.getData("URL");
@@ -37,7 +28,7 @@
 			return;
 		}
 
-		await createBookmark(pb, collection.id, url);
+		await api.createBookmark(collection.id, url);
 		dragging = false;
 		await invalidateAll();
 		toast.success("Added bookmark");
@@ -86,14 +77,9 @@
 		on:inview_enter={async () => {
 			if (collection.moreBookmarks) {
 				page += 1;
-				await getBookmarks(pb, collection.id, page);
+				await api.getBookmarks(collection.id, page);
 			}
 		}} />
 
-	{#if loading}
-		<div class="flex content-center justify-center text-white">
-			<Circle size="60" color="#FACC14" unit="px" duration="1s" />
-		</div>
-	{/if}
 	<AddBookmarkModal collectionID={collection.id} bind:show bind:ref />
 </div>

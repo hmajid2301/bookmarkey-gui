@@ -3,12 +3,12 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 
 import AddBookmarkModal from "../AddBookmarkModal.svelte";
-import * as frontend from "~/lib/pocketbase/frontend";
+import { API } from "~/lib/pocketbase/frontend";
 
 describe("AddBookmarkModal", () => {
 	test("Successfully render add bookmark modal", async () => {
 		const user = userEvent.setup();
-		const mock = vi.spyOn(frontend, "createBookmark");
+		const mock = vi.spyOn(API.prototype, "createBookmark");
 		const ref = document.createElement("change") as HTMLInputElement;
 
 		const { getByRole, getByLabelText } = render(AddBookmarkModal, {
@@ -25,6 +25,6 @@ describe("AddBookmarkModal", () => {
 		const button = getByRole("button", { name: "Add Bookmark" });
 		await user.click(button);
 
-		expect(mock).toHaveBeenCalledWith(undefined, "ID", "https://haseebmajid.dev");
+		expect(mock).toHaveBeenCalledWith("ID", "https://haseebmajid.dev");
 	});
 });

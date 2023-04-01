@@ -1,12 +1,10 @@
 <script lang="ts">
-	import type pocketbase from "pocketbase";
-	import { onMount } from "svelte";
 	import LinkSolid from "svelte-awesome-icons/LinkSolid.svelte";
 
 	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
 	import Modal from "~/lib/components/atoms/Modal.svelte";
 	import FormField from "~/lib/components/molecules/FormField.svelte";
-	import { createBookmark, getPB } from "~/lib/pocketbase/frontend";
+	import { API } from "~/lib/pocketbase/frontend";
 
 	export let collectionID: string;
 	export let ref: HTMLInputElement;
@@ -14,15 +12,11 @@
 
 	let url: string;
 	let loading = false;
-	let pb: pocketbase;
-
-	onMount(() => {
-		pb = getPB();
-	});
+	const api = new API();
 
 	async function addBookmark() {
 		loading = true;
-		await createBookmark(pb, collectionID, url);
+		await api.createBookmark(collectionID, url);
 		loading = false;
 		show = false;
 	}

@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
-	import type pocketbase from "pocketbase";
-	import { onMount, tick } from "svelte";
+	import { tick } from "svelte";
 	import FolderClosedSolid from "svelte-awesome-icons/FolderClosedSolid.svelte";
 	import ContextMenu, { Item } from "svelte-contextmenu";
 	import toast from "svelte-french-toast";
 
 	import Input from "../atoms/Input.svelte";
-	import { deleteCollection, getPB, updateCollection } from "~/lib/pocketbase/frontend";
+	import { API } from "~/lib/pocketbase/frontend";
 	import type { Collection } from "~/lib/types/components";
 
 	export let collection: Collection;
@@ -15,16 +14,12 @@
 	let edittingName = false;
 	let contextMenu: ContextMenu;
 	let ref: HTMLInputElement;
-	let pb: pocketbase;
-
-	onMount(() => {
-		pb = getPB();
-	});
+	const api = new API();
 
 	async function patchCollectionName(newCollectionName: string) {
 		edittingName = false;
 		try {
-			await updateCollection(pb, collection.id, { collectionId: newCollectionName });
+			await api.updateCollection(collection.id, { collectionId: newCollectionName });
 			toast.success("Renamed collection");
 			await invalidateAll();
 		} catch (err) {
@@ -86,7 +81,7 @@
 	</Item>
 	<Item
 		on:click={async function () {
-			await deleteCollection(pb, collection.id);
+			await api.deleteCollection(collection.id);
 		}}>
 		Delete Collection
 	</Item>

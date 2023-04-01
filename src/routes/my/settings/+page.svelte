@@ -10,6 +10,7 @@
 	import Password from "~/lib/components/molecules/Password.svelte";
 	import PasswordInput from "~/lib/components/molecules/PasswordInput.svelte";
 	import UpdateProfileForm from "~/lib/components/organisms/UpdateProfileForm.svelte";
+	import LoadingStore from "~/lib/stores/LoadingStore";
 
 	export let data;
 
@@ -18,7 +19,11 @@
 		errors: ProfileErrors,
 		enhance: profileEnhance
 	} = superForm(data.profileForm, {
+		onSubmit: async () => {
+			LoadingStore.setLoading(true);
+		},
 		onResult: async ({ result }) => {
+			LoadingStore.setLoading(false);
 			if (result.type === "success") {
 				toast.success("Updated profile");
 				await invalidateAll();
@@ -34,7 +39,11 @@
 		errors: passwordErrors,
 		enhance: passwordEnhance
 	} = superForm(data.passwordForm, {
+		onSubmit: async () => {
+			LoadingStore.setLoading(true);
+		},
 		onResult: async ({ result }) => {
+			LoadingStore.setLoading(false);
 			if (result.type === "success") {
 				toast.success("Updated password");
 				await invalidateAll();

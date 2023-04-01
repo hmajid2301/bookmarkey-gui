@@ -6,10 +6,17 @@
 	import EmailInput from "~/lib/components/molecules/EmailInput.svelte";
 	import OAuthLoginGroup from "~/lib/components/molecules/OAuthLoginButton.svelte";
 	import Password from "~/lib/components/molecules/Password.svelte";
+	import LoadingStore from "~/lib/stores/LoadingStore";
 
 	export let data;
 
 	const { form, capture, restore, errors, enhance } = superForm(data.form, {
+		onSubmit: async () => {
+			LoadingStore.setLoading(true);
+		},
+		onResult: async () => {
+			LoadingStore.setLoading(false);
+		},
 		onError: async ({ result }) => {
 			toast.error(result.error.message);
 		}

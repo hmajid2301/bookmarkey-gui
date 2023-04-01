@@ -2,7 +2,7 @@ import { fireEvent, render } from "@testing-library/svelte";
 import { describe, expect, test, vi } from "vitest";
 
 import DraggableCollections from "../DraggableCollections.svelte";
-import * as frontend from "~/lib/pocketbase/frontend";
+import { API } from "~/lib/pocketbase/frontend";
 
 describe("DraggableCollections", () => {
 	// TODO: add new tests for bookmark
@@ -30,7 +30,7 @@ describe("DraggableCollections", () => {
 	});
 
 	test("Successfully drags and drops collections then makes API request", async () => {
-		const mock = vi.spyOn(frontend, "moveCollection");
+		const mock = vi.spyOn(API.prototype, "moveCollection");
 		const { getByText } = render(DraggableCollections, {
 			props: {
 				currentPath: "/my/collections/0",
@@ -55,7 +55,7 @@ describe("DraggableCollections", () => {
 		await fireEvent.dragEnter(secondCollection);
 		await fireEvent.dragOver(secondCollection);
 		await fireEvent.dragEnd(secondCollection);
-		expect(mock).toHaveBeenCalledWith(undefined, "collection", {
+		expect(mock).toHaveBeenCalledWith("collection", {
 			groupId: "",
 			newOrder: 2
 		});

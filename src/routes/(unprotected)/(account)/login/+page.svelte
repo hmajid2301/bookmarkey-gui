@@ -6,11 +6,16 @@
 	import EmailInput from "~/lib/components/molecules/EmailInput.svelte";
 	import OAuthLoginGroup from "~/lib/components/molecules/OAuthLoginButton.svelte";
 	import PasswordInput from "~/lib/components/molecules/PasswordInput.svelte";
+	import LoadingStore from "~/lib/stores/LoadingStore";
 
 	export let data;
 
 	const { form, capture, restore, errors, enhance, constraints } = superForm(data.form, {
+		onSubmit: async () => {
+			LoadingStore.setLoading(true);
+		},
 		onResult: async ({ result }) => {
+			LoadingStore.setLoading(false);
 			if (result.type === "failure") {
 				toast.error("Invalid credentials");
 			}

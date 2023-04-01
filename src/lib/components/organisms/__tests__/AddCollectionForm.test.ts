@@ -1,32 +1,26 @@
-import { render, screen } from "@testing-library/svelte";
+import { render } from "@testing-library/svelte";
 import userEvent from "@testing-library/user-event";
-import html from "svelte-htm";
 import { describe, expect, test, vi } from "vitest";
 
 import AddCollectionForm from "../AddCollectionForm.svelte";
+import { API } from "~/lib/pocketbase/frontend";
 
 describe("AddCollectionForm", () => {
 	test("Successfully render add collection form", async () => {
 		const user = userEvent.setup();
+		const mock = vi.spyOn(API.prototype, "addCollection");
 		const ref = document.createElement("change") as HTMLInputElement;
 
-		const { container } = render(html`
-		<${AddCollectionForm} bind:${ref}>
-        button
-		</${AddCollectionForm}>
-	`);
+		const { getByLabelText } = render(AddCollectionForm, {
+			props: {
+				ref
+			}
+		});
 
-		const mock = vi.fn();
-		const form = container.querySelector("form");
-		if (form === null) {
-			throw Error("expected form to be present in add collection");
-		}
-		form.addEventListener("submit", mock);
-
-		const input = screen.getByLabelText("");
+		const input = getByLabelText("");
 		await user.clear(input);
 		await user.type(input, "collection{enter}");
 
-		expect(mock).toHaveBeenCalled();
+		expect(mock).toHaveBeenCalledWith("collection");
 	});
 });

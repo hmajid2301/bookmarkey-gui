@@ -1,18 +1,25 @@
 <script lang="ts">
+	import { navigating } from "$app/stores";
 	import { DarkMode } from "flowbite-svelte";
 	import { onMount } from "svelte";
 	import { Toaster } from "svelte-french-toast";
 	import { pwaInfo } from "virtual:pwa-info";
 
-	import type ReloadPrompt from "$lib/ReloadPrompt.svelte";
-
 	import "~/app.css";
+	import Loading from "~/lib/components/organisms/Loading.svelte";
+	import type ReloadPrompt from "~/lib/ReloadPrompt.svelte";
+	import LoadingStore from "~/lib/stores/LoadingStore";
 
 	let reloadPrompt: typeof ReloadPrompt;
 	onMount(async () => {
 		pwaInfo && (reloadPrompt = (await import("$lib/ReloadPrompt.svelte")).default);
 	});
-	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : "";
+
+	let webManifest: string;
+	$: {
+		webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : "";
+		LoadingStore.setNavigate(!!$navigating);
+	}
 </script>
 
 <svelte:head>
@@ -20,6 +27,7 @@
 	{@html webManifest}
 </svelte:head>
 
+<Loading />
 <Toaster toastOptions={{ style: "background: #334155; color: #fff" }} />
 <DarkMode btnClass="hidden" />
 <main

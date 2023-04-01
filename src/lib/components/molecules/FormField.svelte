@@ -26,6 +26,7 @@
 			on:input
 			on:change
 			on:blur
+			on:keydown
 			{autocomplete}
 			{name}
 			{required}

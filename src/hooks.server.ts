@@ -1,5 +1,4 @@
 import * as SentryNode from "@sentry/node";
-import "@sentry/tracing";
 import { redirect } from "@sveltejs/kit";
 import PocketBase from "pocketbase";
 
@@ -17,8 +16,8 @@ SentryNode.setTag("svelteKit", "server");
 
 export const handleError = ({ error, event }) => {
 	SentryNode.captureException(error, { contexts: { sveltekit: { event } } });
-	console.error(error);
 
+	console.error(error);
 	return {
 		message: "Internal Error"
 	};

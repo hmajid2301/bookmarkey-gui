@@ -31,6 +31,7 @@
 	on:input
 	on:change
 	on:blur
+	on:keydown
 	id={name}
 	{accept}
 	{autocomplete}
