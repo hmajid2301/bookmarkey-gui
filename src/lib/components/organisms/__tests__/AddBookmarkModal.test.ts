@@ -9,6 +9,7 @@ describe("AddBookmarkModal", () => {
 	test("Successfully render add bookmark modal", async () => {
 		const user = userEvent.setup();
 		const mock = vi.spyOn(API.prototype, "createBookmark");
+		vi.spyOn(window, "close");
 
 		const { getByRole } = render(AddBookmarkModal, {
 			props: {
