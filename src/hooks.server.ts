@@ -1,6 +1,7 @@
 import * as SentryNode from "@sentry/node";
 import { redirect } from "@sveltejs/kit";
 import PocketBase from "pocketbase";
+import toast from "svelte-french-toast";
 
 import { config } from "./config";
 import { PBClient } from "./lib/pocketbase/client";
@@ -42,7 +43,9 @@ export const handle = async ({ event, resolve }) => {
 	}
 
 	if (event.url.pathname.startsWith("/my") && !event.locals.pb.authStore.isValid) {
-		throw redirect(303, "/");
+		const fromURL = event.url.pathname;
+		toast.error("You must be logged in to view that page!");
+		throw redirect(303, `/login?redirect_to=${fromURL}`);
 	} else if (event.url.pathname.startsWith("/login") && event.locals.pb.authStore.isValid) {
 		throw redirect(303, "/my/collections/0");
 	}

@@ -50,6 +50,7 @@ export const actions: Actions = {
 			throw error(500, "Failed to login, please try again later.");
 		}
 
-		throw redirect(303, "/my/collections/0");
+		const redirectTo = event.url.searchParams.get("redirect_to") || "/my/collections/0";
+		throw redirect(303, `/${redirectTo.slice(1)}`);
 	}
 };
