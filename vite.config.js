@@ -5,6 +5,9 @@ import istanbul from "vite-plugin-istanbul";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
+	define: {
+		"process.env.NODE_ENV": process.env.NODE_ENV === "production" ? '"production"' : '"development"'
+	},
 	build: {
 		sourcemap: true
 	},
@@ -14,14 +17,23 @@ export default defineConfig({
 			srcDir: "./src",
 			mode: process.env.NODE_ENV,
 			strategies: "injectManifest",
+			filename: "prompt-sw.ts",
 			registerType: "autoUpdate",
 			injectRegister: "auto",
-			filename: "prompt-sw.ts",
 			scope: "/",
 			base: "/",
 			manifest: {
 				short_name: "Bookmarkey",
 				name: "Bookmarkey",
+				share_target: {
+					action: "/my/bookmarks",
+					method: "GET",
+					params: {
+						title: "title",
+						text: "text",
+						url: "url"
+					}
+				},
 				description: "Bookmarking & RSS reader 2 in 1 app.",
 				start_url: "/my/collections/0?source=pwa",
 				scope: "/",
@@ -60,6 +72,9 @@ export default defineConfig({
 				]
 			},
 			injectManifest: {
+				globPatterns: ["client/**/*.{js,css,ico,png,svg,webp,woff,woff2}"]
+			},
+			workbox: {
 				globPatterns: ["client/**/*.{js,css,ico,png,svg,webp,woff,woff2}"]
 			},
 			devOptions: {

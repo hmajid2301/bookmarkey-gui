@@ -15,6 +15,12 @@ const config = {
 			edge: false,
 			split: true
 		}),
+		serviceWorker: {
+			register: false
+		},
+		files: {
+			serviceWorker: "src/prompt-sw.ts"
+		},
 		alias: {
 			"~": "./src/"
 		}

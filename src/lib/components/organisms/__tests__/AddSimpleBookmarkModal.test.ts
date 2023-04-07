@@ -2,25 +2,29 @@ import { render } from "@testing-library/svelte";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 
+import AddSimpleBookmarkModal from "../AddSimpleBookmarkModal.svelte";
 import { API } from "~/lib/pocketbase/frontend";
-import AddBookmarkModal from "../AddBookmarkModal.svelte";
 
-describe("AddBookmarkModal", () => {
+describe("AddSimpleBookmarkModal", () => {
 	test("Successfully render add bookmark modal", async () => {
 		const user = userEvent.setup();
 		const mock = vi.spyOn(API.prototype, "createBookmark");
+		const ref = document.createElement("change") as HTMLInputElement;
 
-		const { getByRole } = render(AddBookmarkModal, {
+		const { getByRole, getByLabelText } = render(AddSimpleBookmarkModal, {
 			props: {
-				url: "https://example.com",
-				title: "This is an example site",
-				collections: []
+				ref,
+				collectionID: "ID"
 			}
 		});
+
+		const input = getByLabelText("");
+		await user.clear(input);
+		await user.type(input, "https://haseebmajid.dev");
 
 		const button = getByRole("button", { name: "Add Bookmark" });
 		await user.click(button);
 
-		expect(mock).toHaveBeenCalledWith("-1", "https://example.com");
+		expect(mock).toHaveBeenCalledWith("ID", "https://haseebmajid.dev");
 	});
 });

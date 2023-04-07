@@ -6,7 +6,7 @@
 
 	import type { CollectionBookmarks } from "./+page.server";
 	import TopBar from "~/lib/components/molecules/TopBar.svelte";
-	import AddBookmarkModal from "~/lib/components/organisms/AddBookmarkModal.svelte";
+	import AddSimpleBookmarkModal from "~/lib/components/organisms/AddSimpleBookmarkModal.svelte";
 	import DraggableBookmark from "~/lib/components/organisms/DraggableBookmark.svelte";
 	import { API } from "~/lib/pocketbase/frontend";
 	import { draggableStore } from "~/lib/stores/DraggableStore";
@@ -81,5 +81,5 @@
 			}
 		}} />
 
-	<AddBookmarkModal collectionID={collection.id} bind:show bind:ref />
+	<AddSimpleBookmarkModal collectionID={collection.id} bind:show bind:ref />
 </div>
