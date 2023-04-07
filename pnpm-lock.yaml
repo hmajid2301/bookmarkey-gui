@@ -163,9 +163,6 @@ devDependencies:
   svelte-preprocess:
     specifier: ^5.0.3
     version: 5.0.3(@babel/core@7.20.12)(postcss@8.4.21)(svelte@3.57.0)(typescript@5.0.2)
-  sveltekit-adapter-chrome-extension:
-    specifier: ^2.0.0
-    version: 2.0.0(@sveltejs/adapter-static@2.0.1)
   sveltekit-superforms:
     specifier: ^0.6.6
     version: 0.6.6(@sveltejs/kit@1.12.0)(svelte@3.57.0)(zod@3.20.2)
@@ -2797,10 +2794,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /boolbase@1.0.0:
-    resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
-    dev: true
-
   /brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
     dependencies:
@@ -2960,30 +2953,6 @@ packages:
 
   /check-password-strength@2.0.7:
     resolution: {integrity: sha512-VyklBkB6dOKnCIh63zdVr7QKVMN9/npwUqNAXxWrz8HabVZH/n/d+lyNm1O/vbXFJlT/Hytb5ouYKYGkoeZirQ==}
-    dev: true
-
-  /cheerio-select@2.1.0:
-    resolution: {integrity: sha512-9v9kG0LvzrlcungtnJtpGNxY+fzECQKhK4EGJX2vByejiMX84MFNQw4UxPJl3bFbTMw+Dfs37XaIkCwTZfLh4g==}
-    dependencies:
-      boolbase: 1.0.0
-      css-select: 5.1.0
-      css-what: 6.1.0
-      domelementtype: 2.3.0
-      domhandler: 5.0.3
-      domutils: 3.0.1
-    dev: true
-
-  /cheerio@1.0.0-rc.12:
-    resolution: {integrity: sha512-VqR8m68vM46BNnuZ5NtnGBKIE/DfN0cRIzg9n40EIq9NOv90ayxLBXA8fXC5gquFRGJSTRqBq25Jt2ECLR431Q==}
-    engines: {node: '>= 6'}
-    dependencies:
-      cheerio-select: 2.1.0
-      dom-serializer: 2.0.0
-      domhandler: 5.0.3
-      domutils: 3.0.1
-      htmlparser2: 8.0.1
-      parse5: 7.1.2
-      parse5-htmlparser2-tree-adapter: 7.0.0
     dev: true
 
   /chokidar@3.5.3:
@@ -3167,21 +3136,6 @@ packages:
   /crypto-random-string@2.0.0:
     resolution: {integrity: sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==}
     engines: {node: '>=8'}
-    dev: true
-
-  /css-select@5.1.0:
-    resolution: {integrity: sha512-nwoRF1rvRRnnCqqY7updORDsuqKzqYJ28+oSMaJMMgOauh3fvwHqMS7EZpIPqK8GL+g9mKxF1vP/ZjSeNjEVHg==}
-    dependencies:
-      boolbase: 1.0.0
-      css-what: 6.1.0
-      domhandler: 5.0.3
-      domutils: 3.0.1
-      nth-check: 2.1.1
-    dev: true
-
-  /css-what@6.1.0:
-    resolution: {integrity: sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw==}
-    engines: {node: '>= 6'}
     dev: true
 
   /css.escape@1.5.1:
@@ -3376,38 +3330,11 @@ packages:
     resolution: {integrity: sha512-X7BJ2yElsnOJ30pZF4uIIDfBEVgF4XEBxL9Bxhy6dnrm5hkzqmsWHGTiHqRiITNhMyFLyAiWndIJP7Z1NTteDg==}
     dev: true
 
-  /dom-serializer@2.0.0:
-    resolution: {integrity: sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==}
-    dependencies:
-      domelementtype: 2.3.0
-      domhandler: 5.0.3
-      entities: 4.4.0
-    dev: true
-
-  /domelementtype@2.3.0:
-    resolution: {integrity: sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw==}
-    dev: true
-
   /domexception@4.0.0:
     resolution: {integrity: sha512-A2is4PLG+eeSfoTMA95/s4pvAoSo2mKtiM5jlHkAVewmiO8ISFTFKZjH7UAM1Atli/OT/7JHOrJRJiMKUZKYBw==}
     engines: {node: '>=12'}
     dependencies:
       webidl-conversions: 7.0.0
-    dev: true
-
-  /domhandler@5.0.3:
-    resolution: {integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==}
-    engines: {node: '>= 4'}
-    dependencies:
-      domelementtype: 2.3.0
-    dev: true
-
-  /domutils@3.0.1:
-    resolution: {integrity: sha512-z08c1l761iKhDFtfXO04C7kTdPBLi41zwOZl00WS8b5eiaebNpY00HKbztwBq+e3vyqWNwWF3mP9YLUeqIrF+Q==}
-    dependencies:
-      dom-serializer: 2.0.0
-      domelementtype: 2.3.0
-      domhandler: 5.0.3
     dev: true
 
   /dragdroptouch-bug-fixed@1.0.8:
@@ -4243,15 +4170,6 @@ packages:
 
   /html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
-    dev: true
-
-  /htmlparser2@8.0.1:
-    resolution: {integrity: sha512-4lVbmc1diZC7GUJQtRQ5yBAeUCL1exyMwmForWkRLnwyzWBFxN633SALPMGYaWZvKe9j1pRZJpauvmxENSp/EA==}
-    dependencies:
-      domelementtype: 2.3.0
-      domhandler: 5.0.3
-      domutils: 3.0.1
-      entities: 4.4.0
     dev: true
 
   /http-proxy-agent@5.0.0:
@@ -5234,12 +5152,6 @@ packages:
       path-key: 4.0.0
     dev: true
 
-  /nth-check@2.1.1:
-    resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
-    dependencies:
-      boolbase: 1.0.0
-    dev: true
-
   /nwsapi@2.2.2:
     resolution: {integrity: sha512-90yv+6538zuvUMnN+zCr8LuV6bPFdq50304114vJYJ8RDyK8D5O9Phpbd6SZWgI7PwzmmfN1upeOJlvybDSgCw==}
     dev: true
@@ -5438,13 +5350,6 @@ packages:
     engines: {node: '>=6'}
     dependencies:
       callsites: 3.1.0
-    dev: true
-
-  /parse5-htmlparser2-tree-adapter@7.0.0:
-    resolution: {integrity: sha512-B77tOZrqqfUfnVcOrUvfdLbz4pu4RopLD/4vmu3HUPswwTA8OH0EMW9BlWR2B0RCoiZRAHEUu7IxeP1Pd1UU+g==}
-    dependencies:
-      domhandler: 5.0.3
-      parse5: 7.1.2
     dev: true
 
   /parse5@7.1.2:
@@ -6561,16 +6466,6 @@ packages:
   /svelte@3.57.0:
     resolution: {integrity: sha512-WMXEvF+RtAaclw0t3bPDTUe19pplMlfyKDsixbHQYgCWi9+O9VN0kXU1OppzrB9gPAvz4NALuoca2LfW2bOjTQ==}
     engines: {node: '>= 8'}
-    dev: true
-
-  /sveltekit-adapter-chrome-extension@2.0.0(@sveltejs/adapter-static@2.0.1):
-    resolution: {integrity: sha512-iKde8kCU/B51Ou1yCLAvK5d26B8fRpgHe785Aga/RcqxDF57kzXc3L/dDTii7Ubu9rrvZTRkJ38Uc+qrwzkdjw==}
-    peerDependencies:
-      '@sveltejs/adapter-static': ^2.0.1
-    dependencies:
-      '@sveltejs/adapter-static': 2.0.1(@sveltejs/kit@1.12.0)
-      cheerio: 1.0.0-rc.12
-      tiny-glob: 0.2.9
     dev: true
 
   /sveltekit-superforms@0.6.6(@sveltejs/kit@1.12.0)(svelte@3.57.0)(zod@3.20.2):
