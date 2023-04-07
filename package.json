@@ -19,7 +19,6 @@
 	},
 	"devDependencies": {
 		"@go-task/cli": "^3.20.0",
-		"@macfja/svelte-multi-adapter": "^1.0.2",
 		"@playwright/test": "1.31.2",
 		"@sentry/node": "^7.46.0",
 		"@sentry/svelte": "^7.46.0",
@@ -83,8 +82,7 @@
 		"workbox-precaching": "^6.5.4",
 		"workbox-routing": "^6.5.4",
 		"workbox-window": "^6.5.4",
-		"zod": "^3.20.2",
-		"zod-form-data": "^2.0.0"
+		"zod": "^3.21.4"
 	},
 	"type": "module"
 }

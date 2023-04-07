@@ -1,6 +1,6 @@
 # Bookmarkey GUI
 
-Bookmarkey is a convenient bookmarking app that lets you save web pages and add RSS feeds. It is an open-source project built using SvelteKit and leveraging Pocketbase as it's backend. Its modern interface is easy to use and allows you to organize bookmarks.
+Bookmarkey is a convenient bookmarking app that lets you save web pages and add RSS feeds. It is an open-source project built using SvelteKit and leveraging Pocketbase as its backend. Its modern interface is easy to use and allows you to organize bookmarks.
 
 You can save articles for offline reading or share them with others. Bookmarkey simplifies your web browsing experience and keeps you organized.
 
@@ -27,4 +27,8 @@ task start
 
 Here are some related projects:
 
-[Bookmarkey API](https://gitlab.com/bookmarkey/api)
+- [Bookmarkey API](https://gitlab.com/bookmarkey/api)
+
+## Appendix
+
+- This project is tested with [BrowserStack](https://www.browserstack.com/)
