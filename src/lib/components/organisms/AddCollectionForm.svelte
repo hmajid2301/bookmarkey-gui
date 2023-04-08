@@ -23,9 +23,9 @@
 	disabled={loading}
 	bind:ref
 	bind:value={collectionName}
-	on:keydown={(e) => {
+	on:keydown={async (e) => {
 		if (e.key === "Enter") {
-			addCollection();
+			await addCollection();
 		}
 	}}
 	on:blur={addCollection}

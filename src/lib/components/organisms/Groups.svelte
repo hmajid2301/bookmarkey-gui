@@ -23,7 +23,7 @@
 			groupRef?.focus();
 		}
 	})();
-	$: $selectedGroupStore, showAddCollectionOnStore();
+	$: $selectedGroupStore, void showAddCollectionOnStore();
 
 	async function showAddCollectionOnStore() {
 		if ($selectedGroupStore.group.id || !$selectedGroupStore.addCollection) {

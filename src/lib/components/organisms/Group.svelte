@@ -20,7 +20,7 @@
 	let edittingName = false;
 	let groupRef: HTMLInputElement;
 
-	$: $selectedGroupStore, showAddCollectionOnStore();
+	$: $selectedGroupStore, void showAddCollectionOnStore();
 
 	async function showAddCollectionOnStore() {
 		if (

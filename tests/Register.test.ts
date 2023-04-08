@@ -57,7 +57,7 @@ test.describe("Register", () => {
 
 		// expect error message to be present and to be red
 		const error = page.locator("p.text-red-500").first();
-		expect(error).toHaveText("Password has been compromised, please try again");
+		await expect(error).toHaveText("Password has been compromised, please try again");
 
 		// expect 4 password strength blocks to be gray
 		const span = page.locator("span.bg-gray-200");

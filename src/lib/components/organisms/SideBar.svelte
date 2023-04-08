@@ -54,7 +54,7 @@
 		bind:showInstall
 		on:click={async () => {
 			showInstall = false;
-			deferredPrompt?.prompt();
+			await deferredPrompt?.prompt();
 			await deferredPrompt?.userChoice;
 			deferredPrompt = null;
 		}} />

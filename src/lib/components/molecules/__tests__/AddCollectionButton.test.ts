@@ -14,7 +14,7 @@ describe("AddCollectionButton", () => {
 		// const contextMenu = getByTestId("ContextMenu");
 		// expect(contextMenu.className).toContain("hidden");
 		const addButton = getByRole("button", { name: "add" });
-		user.click(addButton);
+		await user.click(addButton);
 		// expect(contextMenu.className).toContain("block");
 	});
 
@@ -25,9 +25,9 @@ describe("AddCollectionButton", () => {
 		});
 
 		const addButton = getByRole("button", { name: "add" });
-		user.click(addButton);
+		await user.click(addButton);
 		const createCollection = getByText("Create Collection");
-		user.click(createCollection);
+		await user.click(createCollection);
 		// const contextMenu = getByTestId("ContextMenu");
 		// expect(contextMenu.className).toContain("hidden");
 	});

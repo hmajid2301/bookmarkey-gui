@@ -4,9 +4,9 @@
 		onRegistered(r) {
 			//uncomment following code if you want check for updates
 			r &&
-				setInterval(() => {
+				setInterval(async () => {
 					console.log("Checking for sw update");
-					r.update();
+					await r.update();
 				}, 60 * 60 * 1000 /* 1 hour */);
 			console.log(`SW Registered: ${r}`);
 		},

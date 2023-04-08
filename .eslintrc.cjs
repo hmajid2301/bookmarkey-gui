@@ -3,7 +3,9 @@ module.exports = {
 	parser: "@typescript-eslint/parser",
 	parserOptions: {
 		project: "./tsconfig.json",
-		extraFileExtensions: [".svelte"]
+		extraFileExtensions: [".svelte"],
+		sourceType: "module",
+		ecmaVersion: 2020
 	},
 	extends: [
 		"eslint:recommended",
@@ -15,7 +17,15 @@ module.exports = {
 		"plugin:import/typescript"
 	],
 	plugins: ["@typescript-eslint"],
-	ignorePatterns: ["*.cjs", "svelte-french-toast"],
+	ignorePatterns: [
+		"*.cjs",
+		"svelte-french-toast",
+		"vite.config.js",
+		"setupTest.ts",
+		"svelte.config.js",
+		"playwright.config.ts",
+		"prompt-sw.ts"
+	],
 	overrides: [
 		{
 			files: ["*.svelte"],
@@ -26,6 +36,12 @@ module.exports = {
 		}
 	],
 	rules: {
+		"@typescript-eslint/no-floating-promises": [
+			"error",
+			{
+				ignoreIIFE: true
+			}
+		],
 		"import/no-unresolved": "off",
 		"import/order": [
 			"warn",
@@ -52,10 +68,6 @@ module.exports = {
 	settings: {
 		"import/ignore": ["svelte-french-toast"],
 		"svelte3/typescript": () => require("typescript")
-	},
-	parserOptions: {
-		sourceType: "module",
-		ecmaVersion: 2020
 	},
 	env: {
 		browser: true,

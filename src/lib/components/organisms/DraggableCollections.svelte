@@ -24,8 +24,8 @@
 	<div
 		class="flex grow"
 		draggable="true"
-		on:dragend={() => {
-			moveCollection(0);
+		on:dragend={async () => {
+			await moveCollection(0);
 		}}
 		on:dragenter={() => {
 			$draggableStore.collection.newGroupId = groupId || "";

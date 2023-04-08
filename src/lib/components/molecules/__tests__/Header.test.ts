@@ -16,7 +16,7 @@ describe("Header", () => {
 
 		const button = screen.getByRole("button");
 		expect(button).toBeTruthy();
-		user.click(button);
+		await user.click(button);
 	});
 
 	// TODO: work out how to test

@@ -6,7 +6,7 @@ import DraggableGroups from "../DraggableGroups.svelte";
 // TODO: fix
 describe("DraggableGroup", () => {
 	test("Successfully render draggable group", async () => {
-		const { getByText } = render(DraggableGroups, {
+		render(DraggableGroups, {
 			props: {
 				groups: [],
 				currentPath: "/my/collection/0"

@@ -60,9 +60,9 @@
 		on:dragend={() => {
 			swapFromindex = undefined;
 		}}
-		on:dragenter={() => {
+		on:dragenter={async () => {
 			if ($draggableStore.draggingType !== DraggingType.Collection) {
-				changeGroupOrder(index);
+				await changeGroupOrder(index);
 				$draggableStore.draggingType = null;
 				$draggableStore.group = {};
 			}
