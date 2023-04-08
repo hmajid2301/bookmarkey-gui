@@ -2,7 +2,7 @@
 	import FolderSolid from "svelte-awesome-icons/FolderSolid.svelte";
 
 	import FormField from "../molecules/FormField.svelte";
-	import { API } from "~/lib/pocketbase/frontend";
+	import { API } from "~/lib/api/client";
 
 	export let showInput = false;
 	export let ref: HTMLInputElement;

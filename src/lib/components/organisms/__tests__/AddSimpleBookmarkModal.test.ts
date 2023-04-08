@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 
 import AddSimpleBookmarkModal from "../AddSimpleBookmarkModal.svelte";
-import { API } from "~/lib/pocketbase/frontend";
+import { API } from "~/lib/api/client";
 
 describe("AddSimpleBookmarkModal", () => {
 	test("Successfully render add bookmark modal", async () => {

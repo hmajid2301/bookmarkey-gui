@@ -2,7 +2,7 @@
 	import Avatar from "@svelte-put/avatar/Avatar.svelte";
 	import ContextMenu, { Item } from "svelte-contextmenu";
 
-	import { API } from "~/lib/pocketbase/frontend";
+	import { API } from "~/lib/api/client";
 	import type { Bookmark } from "~/lib/types/components";
 
 	export let bookmark: Bookmark;

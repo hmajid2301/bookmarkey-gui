@@ -2,7 +2,7 @@ import { fireEvent, render } from "@testing-library/svelte";
 import { describe, expect, test, vi } from "vitest";
 
 import DraggableCollections from "../DraggableCollections.svelte";
-import { API } from "~/lib/pocketbase/frontend";
+import { API } from "~/lib/api/client";
 
 describe("DraggableCollections", () => {
 	// TODO: add new tests for bookmark

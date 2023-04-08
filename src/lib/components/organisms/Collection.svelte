@@ -6,7 +6,7 @@
 	import toast from "svelte-french-toast";
 
 	import Input from "../atoms/Input.svelte";
-	import { API } from "~/lib/pocketbase/frontend";
+	import { API } from "~/lib/api/client";
 	import type { Collection } from "~/lib/types/components";
 
 	export let collection: Collection;

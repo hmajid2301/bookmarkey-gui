@@ -3,7 +3,7 @@
 	import toast from "svelte-french-toast";
 
 	import Group from "./Group.svelte";
-	import { API } from "~/lib/pocketbase/frontend";
+	import { API } from "~/lib/api/client";
 	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
 	import type { GroupSwap } from "~/lib/types/api";
 	import type { Group as Group_ } from "~/lib/types/components";

@@ -3,8 +3,8 @@
 
 	import Modal from "../atoms/Modal.svelte";
 	import FormField from "../molecules/FormField.svelte";
+	import { API } from "~/lib/api/client";
 	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
-	import { API } from "~/lib/pocketbase/frontend";
 
 	export let ref: HTMLInputElement;
 	export let show = false;

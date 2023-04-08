@@ -2,9 +2,6 @@ import { expect, test } from "./baseFixtures.js";
 import { getAdminLoginPB, getCurrentDate } from "./common.js";
 
 test.describe(() => {
-	const email = "test@bookmarkey.app";
-	const password = "password@11";
-
 	const date = getCurrentDate();
 
 	test.beforeEach(async ({ page }) => {
@@ -60,6 +57,9 @@ test.describe(() => {
 
 	test.afterEach(async () => {
 		try {
+			const email = "test@bookmarkey.app";
+			const password = "password@11";
+
 			const pb = await getAdminLoginPB();
 			const record = await pb.collection("users").authWithPassword(email, password);
 			const collections = await pb.collection("collections").getFullList({

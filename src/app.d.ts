@@ -8,7 +8,7 @@ declare namespace App {
 	interface Locals {
 		user: import("pocketbase").Record | import("pocketbase").Admin | null | undefined;
 		pb: PocketBase;
-		client?: import("~/lib/pocketbase/client").PBClient;
+		client?: import("~/lib/api/client").API;
 	}
 }
 

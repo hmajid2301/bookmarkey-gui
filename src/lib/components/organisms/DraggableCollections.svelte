@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Collection from "../organisms/Collection.svelte";
-	import { API } from "~/lib/pocketbase/frontend";
+	import { API } from "~/lib/api/client";
 	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
 	import type { CollectionMove } from "~/lib/types/api";
 	import type { Collection as Collection_ } from "~/lib/types/components";

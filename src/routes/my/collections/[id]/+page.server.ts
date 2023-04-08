@@ -1,7 +1,7 @@
 import * as Sentry from "@sentry/node";
 import { error } from "@sveltejs/kit";
 
-import { API } from "~/lib/pocketbase/frontend";
+import { API } from "~/lib/api/client";
 import type { Bookmark } from "~/lib/types/components";
 
 export interface CollectionBookmarks {

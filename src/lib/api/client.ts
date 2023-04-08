@@ -53,6 +53,30 @@ export class API {
 		}
 	}
 
+	loadAuthFromCookie(cookie: string) {
+		this.pb.authStore.loadFromCookie(cookie);
+	}
+
+	isAuthValid() {
+		return this.pb.authStore.isValid;
+	}
+
+	async refreshAuth() {
+		await this.pb.collection("users").authRefresh();
+	}
+
+	getAuthModel() {
+		return structuredClone(this.pb.authStore.model);
+	}
+
+	logout() {
+		this.pb.authStore.clear();
+	}
+
+	exportToCookie(isProd: boolean) {
+		return this.pb.authStore.exportToCookie({ secure: isProd, sameSite: "Lax", httpOnly: false });
+	}
+
 	@loader
 	async createGroup(groupName: string) {
 		try {

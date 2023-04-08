@@ -7,7 +7,7 @@
 	import AddCollectionForm from "./AddCollectionForm.svelte";
 	import DraggableCollection from "./DraggableCollections.svelte";
 	import Input from "../atoms/Input.svelte";
-	import { API } from "~/lib/pocketbase/frontend";
+	import { API } from "~/lib/api/client";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 	import type { Group } from "~/lib/types/components";
 

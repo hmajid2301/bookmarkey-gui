@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 
 import AddCollectionForm from "../AddCollectionForm.svelte";
-import { API } from "~/lib/pocketbase/frontend";
+import { API } from "~/lib/api/client";
 
 describe("AddCollectionForm", () => {
 	test("Successfully render add collection form", async () => {

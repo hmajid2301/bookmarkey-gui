@@ -3,7 +3,6 @@ import pocketbase from "pocketbase";
 import { expect, test } from "./baseFixtures.js";
 
 test.describe(() => {
-	const email = "test+update_password@bookmarkey.app";
 	const newPassword = "mY$$ecureP@ssword@112";
 	const password = "password@11";
 	// const nickname = "haseeb";
@@ -42,6 +41,7 @@ test.describe(() => {
 
 	test.afterEach(async () => {
 		try {
+			const email = "test@bookmarkey.app";
 			const pb = new pocketbase(process.env.VITE_TEST_POCKET_BASE_URL || "http://localhost:9090");
 			const record = await pb.collection("users").authWithPassword(email, newPassword);
 

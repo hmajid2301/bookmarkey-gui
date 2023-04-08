@@ -1,10 +1,10 @@
 <script lang="ts">
 	import LinkSolid from "svelte-awesome-icons/LinkSolid.svelte";
 
+	import { API } from "~/lib/api/client";
 	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
 	import Modal from "~/lib/components/atoms/Modal.svelte";
 	import FormField from "~/lib/components/molecules/FormField.svelte";
-	import { API } from "~/lib/pocketbase/frontend";
 
 	export let collectionID: string;
 	export let ref: HTMLInputElement;

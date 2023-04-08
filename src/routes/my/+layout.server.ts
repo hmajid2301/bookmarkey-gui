@@ -1,11 +1,7 @@
 import * as Sentry from "@sentry/node";
 import { redirect } from "@sveltejs/kit";
 
-import type {
-	BookmarksResponse,
-	CollectionsResponse,
-	GroupsResponse
-} from "~/lib/pocketbase/types";
+import type { BookmarksResponse, CollectionsResponse, GroupsResponse } from "~/lib/api/types";
 import type { Collection, Group } from "~/lib/types/components";
 
 type CollectionExpand = CollectionsResponse & {

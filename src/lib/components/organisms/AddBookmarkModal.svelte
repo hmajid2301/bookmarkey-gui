@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { API } from "~/lib/api/client";
 	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
 	import FormField from "~/lib/components/molecules/FormField.svelte";
-	import { API } from "~/lib/pocketbase/frontend";
 	import type { Collection } from "~/lib/types/components";
 
 	export let url: string;

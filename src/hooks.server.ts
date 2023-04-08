@@ -4,7 +4,7 @@ import PocketBase from "pocketbase";
 import toast from "svelte-french-toast";
 
 import { config } from "./config";
-import { PBClient } from "./lib/pocketbase/client";
+import { API } from "./lib/api/client";
 
 SentryNode.init({
 	dsn: config.SentryDNS,
@@ -25,7 +25,7 @@ export const handleError = ({ error, event }) => {
 };
 
 export const handle = async ({ event, resolve }) => {
-	event.locals.client = new PBClient(config.PocketBaseURL);
+	event.locals.client = new API(config.PocketBaseURL);
 	event.locals.pb = new PocketBase(config.PocketBaseURL);
 	event.locals.pb.authStore.loadFromCookie(event.request.headers.get("cookie") || "");
 	event.locals.client.loadAuthFromCookie(event.request.headers.get("cookie") || "");

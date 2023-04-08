@@ -5,10 +5,10 @@
 	import { inview } from "svelte-inview";
 
 	import type { CollectionBookmarks } from "./+page.server";
+	import { API } from "~/lib/api/client";
 	import TopBar from "~/lib/components/molecules/TopBar.svelte";
 	import AddSimpleBookmarkModal from "~/lib/components/organisms/AddSimpleBookmarkModal.svelte";
 	import DraggableBookmark from "~/lib/components/organisms/DraggableBookmark.svelte";
-	import { API } from "~/lib/pocketbase/frontend";
 	import { draggableStore } from "~/lib/stores/DraggableStore";
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
 

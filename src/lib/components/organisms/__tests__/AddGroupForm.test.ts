@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 
 import AddGroupForm from "../AddGroupForm.svelte";
-import { API } from "~/lib/pocketbase/frontend";
+import { API } from "~/lib/api/client";
 
 describe("AddGroupForm", () => {
 	test("Successfully render add group form", async () => {

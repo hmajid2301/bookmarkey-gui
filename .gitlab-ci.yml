@@ -3,7 +3,6 @@ include:
   - template: Security/License-Scanning.gitlab-ci.yml
   - template: Security/SAST.gitlab-ci.yml
   - template: Code-Quality.gitlab-ci.yml
-  # - template: Verify/Browser-Performance.gitlab-ci.yml
 
 image: registry.gitlab.com/hmajid2301/pnpm-docker-ci:30c413f82825425f223ef4196e82acaea87e8702
 
@@ -22,20 +21,10 @@ lint:
   script:
     - task lint
 
-format:check:
+format:
   extends: .task
   script:
-    - task format:check
-
-# browser_performance:
-#   stage: test
-#   only:
-#     - merge_request
-#   variables:
-#     URL: https://deploy-preview-${CI_MERGE_REQUEST_IID}--bookmarkey.netlify.app
-#   before_script:
-#     - echo $URL > environment_url.txt
-#     - echo $URL
+    - task format
 
 check:
   extends: .task
@@ -49,7 +38,7 @@ tests:unit:
     - main
   extends: .task
   script:
-    - task unit:tests
+    - task tests:unit
   artifacts:
     reports:
       junit: test-results/junit.xml
@@ -69,7 +58,7 @@ tests:e2e:
   extends: .task
   script:
     - npx playwright install
-    - task e2e:tests -- --reporter=junit
+    - task tests:e2e -- --reporter=junit
     - npx nyc report --report-dir ./coverage --temp-dir .nyc_output --reporter=cobertura --exclude-after-remap false
     - npx nyc report --report-dir ./coverage --temp-dir .nyc_output --reporter=text --exclude-after-remap false
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
