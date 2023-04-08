@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Draggable from "./Draggable.svelte";
 	import Collection from "../organisms/Collection.svelte";
 	import { API } from "~/lib/api/client";
 	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
@@ -21,27 +22,21 @@
 </script>
 
 {#if collections.length === 0}
-	<div
-		class="flex grow"
-		draggable="true"
+	<Draggable
+		classes="flex grow"
 		on:dragend={async () => {
 			await moveCollection(0);
 		}}
 		on:dragenter={() => {
 			$draggableStore.collection.newGroupId = groupId || "";
-		}}
-		on:drop|preventDefault
-		on:dragover|preventDefault>
+		}}>
 		<p class="text-xs text-gray-800 dark:text-gray-200">Empty Collection</p>
-	</div>
+	</Draggable>
 {/if}
 
 {#each collections as collection, index (collection)}
-	<div
-		data-testid={`DraggableCollection-${collection.id}`}
-		class="flex w-full grow px-1 transition-all duration-100 hover:bg-slate-200 dark:hover:bg-slate-700"
-		class:activeCollection={currentPath === `/my/collections/${collection.id}`}
-		draggable="true"
+	<Draggable
+		classes="flex w-full grow px-1 transition-all duration-100 hover:bg-slate-200 dark:hover:bg-slate-700"
 		on:dragstart={() => {
 			$draggableStore.collection.id = collection.id;
 			$draggableStore.draggingType = DraggingType.Collection;
@@ -54,14 +49,17 @@
 		on:dragenter={() => {
 			$draggableStore.collection.newGroupId = groupId || "";
 		}}
-		on:drop|preventDefault={async () => {
+		on:drop={async () => {
 			if ($draggableStore.draggingType === DraggingType.Bookmark) {
 				await api.moveBookmark($draggableStore.bookmark.id || "", collection.id);
 				$draggableStore.draggingType = null;
 				$draggableStore.collection = {};
 			}
-		}}
-		on:dragover|preventDefault>
-		<Collection {collection} />
-	</div>
+		}}>
+		<div
+			data-testid={`DraggableCollection-${collection.id}`}
+			class:activeCollection={currentPath === `/my/collections/${collection.id}`}>
+			<Collection {collection} />
+		</div>
+	</Draggable>
 {/each}

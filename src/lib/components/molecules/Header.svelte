@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Icon from "@iconify/svelte";
+	import BarsSolid from "svelte-awesome-icons/BarsSolid.svelte";
 
 	import Button from "../atoms/Button.svelte";
 
@@ -12,6 +12,6 @@
 		on:click={() => {
 			showMenu = !showMenu;
 		}}>
-		<Icon icon="fa6-solid:bars" />
+		<BarsSolid />
 	</Button>
 </header>

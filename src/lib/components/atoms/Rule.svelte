@@ -1,5 +1,6 @@
 <script lang="ts">
-	import Icon from "@iconify/svelte";
+	import CircleCheckSolid from "svelte-awesome-icons/CircleCheckSolid.svelte";
+	import CircleXmarkSolid from "svelte-awesome-icons/CircleXmarkSolid.svelte";
 
 	export let check: boolean;
 	export let errorText: string;
@@ -9,13 +10,13 @@
 <li class="flex">
 	<div class="rounded-full fill-current text-sm font-medium">
 		{#if check}
-			<span class="mr-2 inline-flex text-green-700 dark:text-green-500">
-				<Icon icon="fa-solid:check-circle" />
+			<span class="text-green-700 dark:text-green-500">
+				<CircleCheckSolid class="mr-2 inline-flex" />
 				{successText}
 			</span>
 		{:else}
-			<span class="mr-2 inline-flex text-red-700 dark:text-red-500">
-				<Icon icon="fa6-solid:circle-xmark" />
+			<span class="text-red-700 dark:text-red-500">
+				<CircleXmarkSolid class="mr-2 inline-flex" />
 				{errorText}
 			</span>
 		{/if}

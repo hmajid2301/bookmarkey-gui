@@ -1,6 +1,7 @@
 <script lang="ts">
-	import Icon from "@iconify/svelte";
 	import { tick } from "svelte";
+	import FolderClosedSolid from "svelte-awesome-icons/FolderClosedSolid.svelte";
+	import MagnifyingGlassSolid from "svelte-awesome-icons/MagnifyingGlassSolid.svelte";
 
 	import Button from "~/lib/components/atoms/Button.svelte";
 	import HelloBar from "~/lib/components/atoms/HelloBar.svelte";
@@ -18,18 +19,14 @@
 	<FormField type="text" labelName="" placeholder="Search" name="search">
 		<span
 			class="pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center text-slate-500 dark:text-slate-400">
-			<span class="inline-block h-4 w-4">
-				<Icon icon="fa6-solid:magnifying-glass" />
-			</span>
+			<MagnifyingGlassSolid class="inline-block h-4 w-4" />
 		</span>
 	</FormField>
 </div>
 
 <div class="my-2 mt-5 flex justify-between">
 	<div class="flex space-x-5 text-blue-800 dark:text-blue-100">
-		<span class="inline-block h-4 w-4">
-			<Icon icon="fa6-solid:folder-closed" />
-		</span>
+		<FolderClosedSolid class="text-blue-800 dark:text-blue-100" />
 		<p class="font-bold">{collectionName}</p>
 	</div>
 

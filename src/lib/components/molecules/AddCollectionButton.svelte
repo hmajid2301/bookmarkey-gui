@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Icon from "@iconify/svelte";
+	import PlusSolid from "svelte-awesome-icons/PlusSolid.svelte";
 	import ContextMenu, { Item } from "svelte-contextmenu";
 
 	import { selectedGroupStore } from "~/lib/stores/SelectedGroup";
@@ -9,11 +9,10 @@
 </script>
 
 <div class="flex flex-col pr-5 text-blue-800 dark:text-blue-200">
-	<button
-		class="cursor-pointer rounded-lg p-2 hover:bg-blue-50 hover:text-opacity-100 dark:hover:bg-gray-700 dark:hover:text-opacity-100"
-		aria-label="add"
-		on:click={contextMenu.createHandler()}>
-		<Icon icon="fa6-solid:plus" width="30" />
+	<button aria-label="add" on:click={contextMenu.createHandler()}>
+		<PlusSolid
+			class="cursor-pointer rounded-lg p-2 hover:bg-blue-50 hover:text-opacity-100 dark:hover:bg-gray-700 dark:hover:text-opacity-100"
+			size="40" />
 	</button>
 	<ContextMenu bind:this={contextMenu}>
 		<Item

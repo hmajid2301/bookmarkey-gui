@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Icon from "@iconify/svelte";
+	import LockSolid from "svelte-awesome-icons/LockSolid.svelte";
 
 	import FormField from "./FormField.svelte";
 
@@ -33,9 +33,7 @@
 			errors.length > 0
 				? 'text-red-500'
 				: 'text-slate-500 dark:text-slate-400'}">
-			<span class="inline-block h-4 w-4">
-				<Icon icon="fa6-solid:lock" />
-			</span>
+			<LockSolid class="inline-block h-4 w-4" />
 		</span>
 		<div class="absolute inset-y-0 right-0 flex items-center px-2">
 			<input class="hidden" type="checkbox" tabindex="-1" />

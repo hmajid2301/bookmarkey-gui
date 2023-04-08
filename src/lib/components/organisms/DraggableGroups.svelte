@@ -2,6 +2,7 @@
 	import { flip } from "svelte/animate";
 	import toast from "svelte-french-toast";
 
+	import Draggable from "./Draggable.svelte";
 	import Group from "./Group.svelte";
 	import { API } from "~/lib/api/client";
 	import { draggableStore, DraggingType } from "~/lib/stores/DraggableStore";
@@ -46,28 +47,28 @@
 </script>
 
 {#each groups as group, index (group)}
-	<div
-		class="flex w-full grow flex-col"
-		animate:flip={{ duration: dragDuration }}
-		draggable={$draggableStore.draggingType === DraggingType.Collection ? "false" : "true"}
-		on:dragstart={() => {
-			if ($draggableStore.draggingType !== DraggingType.Collection) {
-				$draggableStore.draggingType = DraggingType.Group;
-				$draggableStore.group.id = group.id || "";
-				swapFromindex = index;
-			}
-		}}
-		on:dragend={() => {
-			swapFromindex = undefined;
-		}}
-		on:dragenter={async () => {
-			if ($draggableStore.draggingType !== DraggingType.Collection) {
-				await changeGroupOrder(index);
-				$draggableStore.draggingType = null;
-				$draggableStore.group = {};
-			}
-		}}
-		on:dragover|preventDefault>
-		<Group {group} bind:hiddenGroups {currentPath} />
+	<div animate:flip={{ duration: dragDuration }}>
+		<Draggable
+			classes="flex w-full grow flex-col"
+			draggable={$draggableStore.draggingType !== DraggingType.Collection}
+			on:dragstart={() => {
+				if ($draggableStore.draggingType !== DraggingType.Collection) {
+					$draggableStore.draggingType = DraggingType.Group;
+					$draggableStore.group.id = group.id || "";
+					swapFromindex = index;
+				}
+			}}
+			on:dragend={() => {
+				swapFromindex = undefined;
+			}}
+			on:dragenter={async () => {
+				if ($draggableStore.draggingType !== DraggingType.Collection) {
+					await changeGroupOrder(index);
+					$draggableStore.draggingType = null;
+					$draggableStore.group = {};
+				}
+			}}>
+			<Group {group} bind:hiddenGroups {currentPath} />
+		</Draggable>
 	</div>
 {/each}

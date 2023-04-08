@@ -58,3 +58,4 @@ pb_data/
 .nyc_output/
 tests/auth/user.json
 results.xml
+.task/

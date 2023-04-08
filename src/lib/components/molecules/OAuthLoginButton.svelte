@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { browser } from "$app/environment";
-	import Icon from "@iconify/svelte";
+	import GithubBrand from "svelte-awesome-icons/GithubBrand.svelte";
+	import GitlabBrand from "svelte-awesome-icons/GitlabBrand.svelte";
 
 	import TransparentButton from "../atoms/TransparentButton.svelte";
 	import type { AuthProviderWithRedirect } from "~/lib/types/api";
@@ -19,15 +20,11 @@
 </script>
 
 <TransparentButton on:click={() => gotoAuthProvider("github")}>
-	<span class="mr-2 -ml-1 h-4 w-4">
-		<Icon icon="fa-brands:github" />
-	</span>
+	<GithubBrand class="mr-2 -ml-1 h-4 w-4" />
 	Sign in with GitHub
 </TransparentButton>
 
 <TransparentButton on:click={() => gotoAuthProvider("gitlab")}>
-	<span class="mr-2 -ml-1 h-4 w-4">
-		<Icon icon="fa-brands:gitlab" />
-	</span>
+	<GitlabBrand class="mr-2 -ml-1 h-4 w-4" />
 	Sign in with GitHub
 </TransparentButton>

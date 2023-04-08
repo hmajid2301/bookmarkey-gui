@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Icon from "@iconify/svelte";
+	import LayerGroupSolid from "svelte-awesome-icons/LayerGroupSolid.svelte";
 
 	import Modal from "../atoms/Modal.svelte";
 	import FormField from "../molecules/FormField.svelte";
@@ -36,9 +36,7 @@
 			name="group">
 			<span
 				class="pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center text-slate-500 dark:text-slate-400">
-				<span class="inline-block h-4 w-4">
-					<Icon icon="fa6-solid:layer-group" />
-				</span>
+				<LayerGroupSolid class="inline-block h-4 w-4" />
 			</span>
 		</FormField>
 		<FullWidthButton on:click={addGroup}>Add Group</FullWidthButton>

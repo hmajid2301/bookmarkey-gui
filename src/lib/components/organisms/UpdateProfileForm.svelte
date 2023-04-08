@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Icon from "@iconify/svelte";
+	import SignatureSolid from "svelte-awesome-icons/SignatureSolid.svelte";
 
 	import Avatar from "../atoms/Avatar.svelte";
 	import Button from "../atoms/Button.svelte";
@@ -58,9 +58,7 @@
 		errors={errors.nickname}>
 		<span
 			class="pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center text-gray-500 dark:text-slate-400">
-			<span class="inline-block h-4 w-4">
-				<Icon icon="fa6-solid:signature" />
-			</span>
+			<SignatureSolid class="inline-block h-4 w-4" />
 		</span>
 	</FormField>
 

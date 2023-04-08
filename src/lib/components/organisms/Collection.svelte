@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
-	import Icon from "@iconify/svelte";
 	import { tick } from "svelte";
+	import FolderClosedSolid from "svelte-awesome-icons/FolderClosedSolid.svelte";
 	import ContextMenu, { Item } from "svelte-contextmenu";
 	import toast from "svelte-french-toast";
 
@@ -41,7 +41,7 @@
 	class="flex grow flex-row space-x-4 rounded-lg py-1 transition-all duration-100 hover:bg-slate-200 dark:hover:bg-slate-700"
 	href={`/my/collections/${collection.id}`}>
 	<div>
-		<Icon icon="fa6-solid:folder-closed" />
+		<FolderClosedSolid />
 	</div>
 	<div class="flex grow">
 		{#if edittingName}

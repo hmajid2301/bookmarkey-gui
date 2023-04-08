@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Icon from "@iconify/svelte";
+	import LinkSolid from "svelte-awesome-icons/LinkSolid.svelte";
 
 	import { API } from "~/lib/api/client";
 	import FullWidthButton from "~/lib/components/atoms/FullWidthButton.svelte";
@@ -34,9 +34,7 @@
 			name="url">
 			<span
 				class="pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center text-slate-500 dark:text-slate-400">
-				<span class="inline-block h-4 w-4">
-					<Icon icon="fa6-solid:link" />
-				</span>
+				<LinkSolid class="inline-block h-4 w-4" />
 			</span>
 		</FormField>
 		<FullWidthButton on:click={addBookmark}>Add Bookmark</FullWidthButton>

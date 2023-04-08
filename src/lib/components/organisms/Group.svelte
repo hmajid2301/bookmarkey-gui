@@ -1,6 +1,7 @@
 <script lang="ts">
-	import Icon from "@iconify/svelte";
 	import { tick } from "svelte";
+	import CaretDownSolid from "svelte-awesome-icons/CaretDownSolid.svelte";
+	import EllipsisSolid from "svelte-awesome-icons/EllipsisSolid.svelte";
 	import ContextMenu, { Item } from "svelte-contextmenu";
 
 	import AddCollectionForm from "./AddCollectionForm.svelte";
@@ -89,9 +90,9 @@
 	<button on:click={contextMenu.createHandler()}>
 		<div class="my-2 flex flex-col items-start space-y-1">
 			{#if !hiddenGroups.has(group.id)}
-				<Icon icon="fa6-solid:ellipsis" />
+				<EllipsisSolid />
 			{:else}
-				<Icon icon="fa6-solid:caret-down" />
+				<CaretDownSolid />
 			{/if}
 		</div>
 
