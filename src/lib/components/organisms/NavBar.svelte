@@ -1,8 +1,5 @@
 <script lang="ts">
-	import BarsSolid from "svelte-awesome-icons/BarsSolid.svelte";
-	import HouseSolid from "svelte-awesome-icons/HouseSolid.svelte";
-	import UserPlusSolid from "svelte-awesome-icons/UserPlusSolid.svelte";
-	import UserSolid from "svelte-awesome-icons/UserSolid.svelte";
+	import Icon from "@iconify/svelte";
 
 	import Logo from "../atoms/Logo.svelte";
 
@@ -52,7 +49,7 @@
 						on:click={() => {
 							showMobileBar = !showMobileBar;
 						}}>
-						<BarsSolid />
+						<Icon icon="fa6-solid:bars" />
 					</button>
 				</div>
 			</div>
@@ -63,7 +60,7 @@
 				class="relative block cursor-pointer items-center text-black hover:text-slate-500 dark:text-white dark:hover:text-slate-400">
 				<a class:active={currentPath === `/`} href="/" class="flex items-center p-3">
 					<span class="inline-flex h-3 w-3 items-center justify-center transition-colors">
-						<HouseSolid />
+						<Icon icon="fa6-solid:house" />
 					</span>
 					<span class="px-2 transition-colors">Home</span>
 				</a>
@@ -73,7 +70,7 @@
 					href="/login"
 					class="flex items-center p-3">
 					<span class="inline-flex h-3 w-3 items-center justify-center transition-colors">
-						<UserSolid />
+						<Icon icon="fa6-solid:user" />
 					</span>
 					<span class="px-2 transition-colors">Login</span>
 				</a>
@@ -83,7 +80,7 @@
 					href="/register"
 					class="flex items-center p-3">
 					<span class="inline-flex h-4 w-4 items-center justify-center transition-colors">
-						<UserPlusSolid />
+						<Icon icon="fa6-solid:user-plus" />
 					</span>
 					<span class="px-2 transition-colors">Register</span>
 				</a>

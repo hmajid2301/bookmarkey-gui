@@ -4,9 +4,12 @@ devDependencies:
   '@go-task/cli':
     specifier: ^3.20.0
     version: 3.20.0
+  '@iconify/svelte':
+    specifier: ^3.1.1
+    version: 3.1.1(svelte@3.57.0)
   '@playwright/test':
-    specifier: 1.31.2
-    version: 1.31.2
+    specifier: 1.32.2
+    version: 1.32.2
   '@sentry/node':
     specifier: ^7.46.0
     version: 7.46.0
@@ -83,8 +86,8 @@ devDependencies:
     specifier: ^1.6.3
     version: 1.6.3
   flowbite-svelte:
-    specifier: ^0.30.0
-    version: 0.30.6(@popperjs/core@2.11.6)(classnames@2.3.2)(flowbite@1.6.3)(svelte@3.57.0)
+    specifier: ^0.34.0
+    version: 0.34.1(@popperjs/core@2.11.6)(classnames@2.3.2)(flowbite@1.6.3)(svelte@3.57.0)
   hibp:
     specifier: ^12.0.0
     version: 12.0.1
@@ -113,8 +116,8 @@ devDependencies:
     specifier: ^4.4.2
     version: 4.4.2
   pocketbase:
-    specifier: ^0.12.0
-    version: 0.12.0
+    specifier: ^0.13.1
+    version: 0.13.1
   postcss:
     specifier: ^8.4.21
     version: 8.4.21
@@ -130,9 +133,6 @@ devDependencies:
   svelte:
     specifier: ^3.57.0
     version: 3.57.0
-  svelte-awesome-icons:
-    specifier: ^0.2.16
-    version: 0.2.16
   svelte-check:
     specifier: ^3.1.4
     version: 3.1.4(@babel/core@7.20.12)(postcss@8.4.21)(svelte@3.57.0)
@@ -1627,6 +1627,19 @@ packages:
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
     dev: true
 
+  /@iconify/svelte@3.1.1(svelte@3.57.0):
+    resolution: {integrity: sha512-z9w/Z2ei+nxByWgbGYKDmMxY0TKJtrK/6eZS9N2/eMkzQFQnOwbdcaSJDP4kpAFImY7s/WmE49GLH0zHvs9yPw==}
+    peerDependencies:
+      svelte: '>=3'
+    dependencies:
+      '@iconify/types': 2.0.0
+      svelte: 3.57.0
+    dev: true
+
+  /@iconify/types@2.0.0:
+    resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
+    dev: true
+
   /@ioredis/commands@1.2.0:
     resolution: {integrity: sha512-Sx1pU8EM64o2BrqNpEO1CNLtKQwyhuXuqyfH7oGKCk+1a33d2r5saW8zNwm3j6BTExtjrv2BxTgzzkMwts6vGg==}
     dev: true
@@ -1739,13 +1752,13 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@playwright/test@1.31.2:
-    resolution: {integrity: sha512-BYVutxDI4JeZKV1+ups6dt5WiqKhjBtIYowyZIJ3kBDmJgsuPKsqqKNIMFbUePLSCmp2cZu+BDL427RcNKTRYw==}
+  /@playwright/test@1.32.2:
+    resolution: {integrity: sha512-nhaTSDpEdTTttdkDE8Z6K3icuG1DVRxrl98Qq0Lfc63SS9a2sjc9+x8ezysh7MzCKz6Y+nArml3/mmt+gqRmQQ==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@types/node': 18.11.18
-      playwright-core: 1.31.2
+      playwright-core: 1.32.2
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -1899,7 +1912,7 @@ packages:
     resolution: {integrity: sha512-Xi+dqaSOoxbdmxegX7f66FVOxm2dVJLmrMXUpoNyuV6ASoccRWzouGaFekP059SUTTD05ytk1mHqwgVuBCA0Dw==}
     engines: {node: '>= 10'}
     dependencies:
-      '@sentry/cli': 2.11.0
+      '@sentry/cli': 2.17.0
       '@sentry/node': 7.46.0
       '@sentry/tracing': 7.29.0
       magic-string: 0.27.0
@@ -1909,8 +1922,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sentry/cli@2.11.0:
-    resolution: {integrity: sha512-qfCf/R0VhmlWcdfu2rntejqbIgovx7FQTwFreQpbISlB/JS9xHF8KEEJXZTdDFoPCi2H9KHg4CPUsCNAKbAdMA==}
+  /@sentry/cli@2.17.0:
+    resolution: {integrity: sha512-CHIMEg8+YNCpEBDgUctu+DvG3S8+g8Zn9jTE5MMGINNmGkQTMG179LuDE04B/inaCYixLVNpFPTe6Iow3tXjnQ==}
     engines: {node: '>= 10'}
     hasBin: true
     requiresBuild: true
@@ -3872,8 +3885,8 @@ packages:
     resolution: {integrity: sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==}
     dev: true
 
-  /flowbite-svelte@0.30.6(@popperjs/core@2.11.6)(classnames@2.3.2)(flowbite@1.6.3)(svelte@3.57.0):
-    resolution: {integrity: sha512-F4plUcGSToG5/1V+dcwntb78uGWF9HLsxSUOGPrXcrTx7JHfNnIXH6ufiWDcNsnoJUee1f7cyJfuaqBbhT463Q==}
+  /flowbite-svelte@0.34.1(@popperjs/core@2.11.6)(classnames@2.3.2)(flowbite@1.6.3)(svelte@3.57.0):
+    resolution: {integrity: sha512-EXr+5w68332QPd1gbmqAyJ0+JGLeTH5wIf+p2v/JSilhSqXUC6EyYIxbuykbXtMfkFm/VZqtmxhKGXJSkZs32A==}
     engines: {node: '>=16.0.0', npm: '>=7.0.0'}
     peerDependencies:
       '@popperjs/core': ^2.11.6
@@ -5420,14 +5433,14 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /playwright-core@1.31.2:
-    resolution: {integrity: sha512-a1dFgCNQw4vCsG7bnojZjDnPewZcw7tZUNFN0ZkcLYKj+mPmXvg4MpaaKZ5SgqPsOmqIf2YsVRkgqiRDxD+fDQ==}
+  /playwright-core@1.32.2:
+    resolution: {integrity: sha512-zD7aonO+07kOTthsrCR3YCVnDcqSHIJpdFUtZEMOb6//1Rc7/6mZDRdw+nlzcQiQltOOsiqI3rrSyn/SlyjnJQ==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
 
-  /pocketbase@0.12.0:
-    resolution: {integrity: sha512-q+a9siWZisQu50dex6oZP0Xqxden9DDL1JalopVdkHntGHyBBcbcASPowaA8A0bO5grPjN1wSHnInwP+UuCp9A==}
+  /pocketbase@0.13.1:
+    resolution: {integrity: sha512-3Wsj87VcmvqmziWXdXWKyCDKbA3rfMR5wlP64UJj+7KBss4ZEXv3Z1ZXhLe5OOiFwF+ErbcO9bzWBMrVLfsIpQ==}
     dev: true
 
   /postcss-import@14.1.0(postcss@8.4.21):
@@ -6229,10 +6242,6 @@ packages:
   /supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
-    dev: true
-
-  /svelte-awesome-icons@0.2.16:
-    resolution: {integrity: sha512-HyiFSLaCmHKV/YYfYP4Ms2i38hbtE+kWVq38Sj7CpM1tWGfvs1rumPT3FqlKlnw7jx1yxv79/MPLnkmQYGoSsg==}
     dev: true
 
   /svelte-check@3.1.4(@babel/core@7.20.12)(postcss@8.4.21)(svelte@3.57.0):

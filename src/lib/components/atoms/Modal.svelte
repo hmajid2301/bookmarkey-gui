@@ -1,6 +1,6 @@
 <script lang="ts">
+	import Icon from "@iconify/svelte";
 	import { clickoutside } from "@svelte-put/clickoutside";
-	import XmarkSolid from "svelte-awesome-icons/XmarkSolid.svelte";
 
 	export let show: boolean;
 	export let title: string | undefined = undefined;
@@ -29,7 +29,7 @@
 					type="button"
 					on:click={hideModal}>
 					<span class="inline-flex h-6 w-6 items-center justify-center">
-						<XmarkSolid />
+						<Icon icon="fa6-solid:xmark" />
 					</span>
 				</button>
 			</div>

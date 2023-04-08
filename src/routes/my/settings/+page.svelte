@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
+	import Icon from "@iconify/svelte";
 	import { DarkMode } from "flowbite-svelte";
-	import UserSolid from "svelte-awesome-icons/UserSolid.svelte";
 	import toast from "svelte-french-toast";
 	import { superForm } from "sveltekit-superforms/client";
 
@@ -64,7 +64,7 @@
 <section class="mb-6 flex items-center justify-between pt-6 font-semibold">
 	<div class="flex items-center justify-start">
 		<span class="mr-2 inline-flex h-6 w-6 items-center justify-center">
-			<UserSolid />
+			<Icon icon="fa6-solid:user" />
 		</span>
 		<h1 class="text-2xl leading-tight">Manage profile</h1>
 	</div>

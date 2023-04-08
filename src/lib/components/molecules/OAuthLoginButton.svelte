@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { browser } from "$app/environment";
-	import GithubBrand from "svelte-awesome-icons/GithubBrand.svelte";
-	import GitlabBrand from "svelte-awesome-icons/GitlabBrand.svelte";
+	import Icon from "@iconify/svelte";
 
-	import IconButton from "./IconButton.svelte";
+	import TransparentButton from "../atoms/TransparentButton.svelte";
 	import type { AuthProviderWithRedirect } from "~/lib/types/api";
 
 	export let authProviders: Record<string, AuthProviderWithRedirect>;
@@ -19,12 +18,16 @@
 	}
 </script>
 
-<IconButton
-	iconComponent={GithubBrand}
-	on:click={() => gotoAuthProvider("github")}
-	name="Sign in with GitHub" />
+<TransparentButton on:click={() => gotoAuthProvider("github")}>
+	<span class="mr-2 -ml-1 h-4 w-4">
+		<Icon icon="fa-brands:github" />
+	</span>
+	Sign in with GitHub
+</TransparentButton>
 
-<IconButton
-	iconComponent={GitlabBrand}
-	on:click={() => gotoAuthProvider("github")}
-	name="Sign in with GitLab" />
+<TransparentButton on:click={() => gotoAuthProvider("gitlab")}>
+	<span class="mr-2 -ml-1 h-4 w-4">
+		<Icon icon="fa-brands:gitlab" />
+	</span>
+	Sign in with GitHub
+</TransparentButton>

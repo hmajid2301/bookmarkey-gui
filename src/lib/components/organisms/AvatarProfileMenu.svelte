@@ -1,8 +1,5 @@
 <script lang="ts">
-	import BookmarkSolid from "svelte-awesome-icons/BookmarkSolid.svelte";
-	import CaretDownSolid from "svelte-awesome-icons/CaretDownSolid.svelte";
-	import GearSolid from "svelte-awesome-icons/GearSolid.svelte";
-	import RightFromBracketSolid from "svelte-awesome-icons/RightFromBracketSolid.svelte";
+	import Icon from "@iconify/svelte";
 	import ContextMenu, { Item } from "svelte-contextmenu";
 
 	import Avatar from "~/lib/components/atoms/Avatar.svelte";
@@ -28,18 +25,18 @@
 		<p class="flex w-32 flex-row truncate text-xs">
 			{nickname}
 		</p>
-		<CaretDownSolid class="h-4 w-4" />
+		<Icon icon="fa6-solid:caret-down" />
 		<ContextMenu bind:this={contextMenu}>
 			<Item href="/my/collections/0">
-				<BookmarkSolid />
+				<Icon icon="fa6-solid:bookmark" />
 				Bookmarks
 			</Item>
 			<Item href="/my/settings">
-				<GearSolid />
+				<Icon icon="fa6-solid:gear" />
 				Settings
 			</Item>
 			<Item href="/logout">
-				<RightFromBracketSolid />
+				<Icon icon="fa6-solid:arrow-right-from-bracket" />
 				Log Out
 			</Item>
 		</ContextMenu>

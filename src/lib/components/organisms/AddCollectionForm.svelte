@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FolderSolid from "svelte-awesome-icons/FolderSolid.svelte";
+	import Icon from "@iconify/svelte";
 
 	import FormField from "../molecules/FormField.svelte";
 	import { API } from "~/lib/api/client";
@@ -35,6 +35,8 @@
 	name="collection">
 	<span
 		class="pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center text-slate-500 dark:text-slate-400">
-		<FolderSolid class="inline-block h-4 w-4" />
+		<span class="inline-block h-4 w-4">
+			<Icon icon="fa6-solid:folder" />
+		</span>
 	</span>
 </FormField>

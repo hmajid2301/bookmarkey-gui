@@ -9,7 +9,7 @@ test.describe("Update Bookmarks", () => {
 	});
 
 	test("Successfully add bookmark to collection", async ({ page }) => {
-		await page.getByRole("link", { name: "folder closed test" }).click();
+		await page.getByRole("link", { name: "test" }).click();
 		await page.getByRole("button", { name: "Add", exact: true }).click();
 		await page.getByPlaceholder("Copy URL Here").fill("https://playwright.dev/docs/codegen");
 		await page.getByRole("button", { name: "Add Bookmark" }).click();

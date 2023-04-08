@@ -1,5 +1,5 @@
 <script lang="ts">
-	import EnvelopeSolid from "svelte-awesome-icons/EnvelopeSolid.svelte";
+	import Icon from "@iconify/svelte";
 
 	import FormField from "../molecules/FormField.svelte";
 
@@ -28,6 +28,8 @@
 		class="pointer-events-none absolute top-0 left-0 z-10 inline-flex h-12 w-10 items-center justify-center {errors
 			? 'text-red-500'
 			: 'text-slate-500 dark:text-slate-400'}">
-		<EnvelopeSolid class="inline-block h-4 w-4" />
+		<span class="inline-block h-4 w-4">
+			<Icon icon="fa6-solid:circle-xmark" />
+		</span>
 	</span>
 </FormField>

@@ -311,7 +311,6 @@ export class API {
 					Accept: "application/json",
 					"Content-Type": "application/json"
 				},
-				timeout: 5000,
 				body: JSON.stringify({ url })
 			});
 			toast.success("Added bookmark");
