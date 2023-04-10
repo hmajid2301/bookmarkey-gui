@@ -15,8 +15,13 @@ describe("AddBookmarkModal", () => {
 		const { getByRole } = render(AddBookmarkModal, {
 			props: {
 				url: "https://example.com",
-				title: "This is an example site",
-				collections: []
+				collections: [],
+				metadata: {
+					url: "",
+					image: "",
+					title: "",
+					description: ""
+				}
 			}
 		});
 

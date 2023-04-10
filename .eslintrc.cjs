@@ -20,7 +20,7 @@ module.exports = {
 	ignorePatterns: [
 		"*.cjs",
 		"svelte-french-toast",
-		"vite.config.js",
+		"vite.config.ts",
 		"setupTest.ts",
 		"svelte.config.js",
 		"playwright.config.ts",

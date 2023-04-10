@@ -9,7 +9,8 @@ import type {
 	BookmarksMetadataResponse,
 	BookmarksResponse,
 	CollectionsResponse,
-	GroupsResponse
+	GroupsResponse,
+	BookmarksMetadataRecord
 } from "./types";
 import LoadingStore from "../stores/LoadingStore";
 import type { CollectionMove, GroupSwap } from "../types/api";
@@ -319,5 +320,30 @@ export class API {
 			captureException(err);
 			toast.error("Failed to add bookmark");
 		}
+	}
+
+	@loader
+	async getURLMetadata(url: string) {
+		let a: BookmarksMetadataRecord = {
+			url: "",
+			image: "",
+			description: "",
+			title: ""
+		};
+
+		try {
+			a = await this.pb.send<BookmarksMetadataRecord>(
+				`/bookmark/metadata` +
+					new URLSearchParams({
+						url: url
+					}),
+				{
+					method: "GET"
+				}
+			);
+		} catch (err) {
+			captureException(err);
+		}
+		return a;
 	}
 }

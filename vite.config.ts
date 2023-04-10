@@ -15,7 +15,7 @@ export default defineConfig({
 		sveltekit(),
 		SvelteKitPWA({
 			srcDir: "./src",
-			mode: process.env.NODE_ENV,
+			mode: "production",
 			strategies: "injectManifest",
 			filename: "prompt-sw.ts",
 			registerType: "autoUpdate",
@@ -49,13 +49,6 @@ export default defineConfig({
 					"window-controls-overlay"
 				],
 				categories: ["productivity"],
-				shortcuts: [
-					{
-						name: "Settings",
-						url: "/my/settings",
-						description: "Go to your settings page"
-					}
-				],
 				icons: [
 					{
 						src: "/logo.png",
@@ -87,7 +80,7 @@ export default defineConfig({
 			org: "bookmarkey",
 			project: "gui",
 			include: "./dist",
-			authToken: process.env.SENTRY_AUTH_TOKEN,
+			authToken: process.env.SENTRY_AUTH_TOKEN || "",
 			dryRun: !(process.env.NODE_ENV === "production")
 		}),
 		istanbul({
@@ -107,7 +100,7 @@ export default defineConfig({
 		reporters: ["default", "junit"],
 		coverage: {
 			all: true,
-			include: "src/**",
+			include: ["src/**"],
 			reporter: ["text", "cobertura"]
 		}
 	}

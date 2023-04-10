@@ -8,6 +8,7 @@ export enum Collections {
 	BookmarksMetadata = "bookmarks_metadata",
 	Collections = "collections",
 	Groups = "groups",
+	NestedCollections = "nested_collections",
 	Tags = "tags",
 	Users = "users"
 }
@@ -41,10 +42,11 @@ export type BookmarkTagsRecord = {
 };
 
 export type BookmarksRecord = {
-	collection: RecordIdString;
+	collection?: RecordIdString;
 	favourite?: boolean;
 	custom_order?: number;
 	bookmark_metadata: RecordIdString;
+	user: RecordIdString;
 };
 
 export type BookmarksMetadataRecord = {
@@ -55,7 +57,6 @@ export type BookmarksMetadataRecord = {
 };
 
 export type CollectionsRecord = {
-	parent?: RecordIdString;
 	name: string;
 	user: RecordIdString;
 	group?: RecordIdString;
@@ -66,6 +67,11 @@ export type GroupsRecord = {
 	user?: RecordIdString;
 	name?: string;
 	custom_order?: number;
+};
+
+export type NestedCollectionsRecord = {
+	parent_collection: RecordIdString;
+	child_collection: RecordIdString;
 };
 
 export type TagsRecord = {
@@ -83,6 +89,7 @@ export type BookmarksResponse = BookmarksRecord & BaseSystemFields;
 export type BookmarksMetadataResponse = BookmarksMetadataRecord & BaseSystemFields;
 export type CollectionsResponse = CollectionsRecord & BaseSystemFields;
 export type GroupsResponse = GroupsRecord & BaseSystemFields;
+export type NestedCollectionsResponse = NestedCollectionsRecord & BaseSystemFields;
 export type TagsResponse = TagsRecord & BaseSystemFields;
 export type UsersResponse = UsersRecord & AuthSystemFields;
 
@@ -92,6 +99,7 @@ export type CollectionRecords = {
 	bookmarks_metadata: BookmarksMetadataRecord;
 	collections: CollectionsRecord;
 	groups: GroupsRecord;
+	nested_collections: NestedCollectionsRecord;
 	tags: TagsRecord;
 	users: UsersRecord;
 };

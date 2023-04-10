@@ -2,6 +2,8 @@
 	import { page } from "$app/stores";
 	import { onMount } from "svelte";
 
+	import { API } from "~/lib/api/client.js";
+	import type { BookmarksMetadataRecord } from "~/lib/api/types.js";
 	import AddBookmarkModal from "~/lib/components/organisms/AddBookmarkModal.svelte";
 
 	function isValidHttpUrl(str: string) {
@@ -16,9 +18,11 @@
 
 	export let data;
 
-	let title: string = $page.url.searchParams.get("title") || "";
+	const api = new API();
 	let url: string;
-	onMount(() => {
+	let metadata: BookmarksMetadataRecord;
+
+	onMount(async () => {
 		for (var query of ["url", "text", "title"]) {
 			const value = $page.url.searchParams.get(query) || "";
 			if (!isValidHttpUrl(value)) {
@@ -28,7 +32,8 @@
 			url = value;
 			break;
 		}
+		metadata = await api.getURLMetadata(url);
 	});
 </script>
 
-<AddBookmarkModal {title} bind:url collections={data.collections.collections} />
+<AddBookmarkModal {metadata} bind:url collections={data.collections.collections} />
