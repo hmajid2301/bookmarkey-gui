@@ -9,7 +9,7 @@ import { API } from "./lib/api/client";
 SentryNode.init({
 	dsn: config.SentryDNS,
 	environment: config.MY_ENV,
-	tracesSampleRate: 1.0,
+	tracesSampleRate: config.MY_ENV == "production" ? 0.8 : 0,
 	integrations: [new SentryNode.Integrations.Http()]
 });
 

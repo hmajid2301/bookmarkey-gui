@@ -5,7 +5,7 @@ command = "pnpm run build"
 [context.production.environment]
 VITE_POCKET_BASE_URL = "https://pocketbase.bookmarkey.app"
 VITE_SENTRY_DSN = "https://0e98ab5b4a4546c68bfdb4a265be3cbc@o4504622675525632.ingest.sentry.io/4504622759149568"
-VITE = "production"
+VITE_ENV = "production"
 
 [context.next.environment]
 
@@ -14,7 +14,7 @@ VITE = "production"
 [context.deploy-preview.environment]
 VITE_POCKET_BASE_URL = "https://preview.pocketbase.bookmarkey.app"
 VITE_SENTRY_DSN = "https://0e98ab5b4a4546c68bfdb4a265be3cbc@o4504622675525632.ingest.sentry.io/4504622759149568"
-VITE = "deploy-preview"
+VITE_ENV = "deploy-preview"
 
 [[plugins]]
 package = "@sentry/netlify-build-plugin"

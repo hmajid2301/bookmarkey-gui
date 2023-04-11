@@ -5,10 +5,20 @@ import { config } from "./config";
 init({
 	dsn: config.SentryDNS,
 	environment: config.MY_ENV,
-	integrations: [new BrowserTracing(), new Replay()],
-	replaysSessionSampleRate: 1.0,
-	replaysOnErrorSampleRate: 1.0,
-	tracesSampleRate: 1.0
+	integrations: [
+		new BrowserTracing({
+			tracePropagationTargets: [
+				"localhost",
+				"preview.pocketbase.bookmarkey.app",
+				"pocketbase.bookmarkey.app",
+				/^\//
+			]
+		}),
+		new Replay()
+	],
+	replaysSessionSampleRate: config.MY_ENV == "production" ? 0.1 : 0,
+	replaysOnErrorSampleRate: config.MY_ENV == "production" ? 0.5 : 0,
+	tracesSampleRate: config.MY_ENV == "production" ? 0.8 : 0
 });
 
 setTag("svelteKit", "browser");

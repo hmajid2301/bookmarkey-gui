@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
 	import { navigating } from "$app/stores";
+	import { onMount } from "svelte";
 	import toast from "svelte-french-toast";
 	import { inview } from "svelte-inview";
 
