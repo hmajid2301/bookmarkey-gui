@@ -3,7 +3,7 @@ publish = "build"
 command = "pnpm run build"
 
 [context.production.environment]
-VITE_POCKET_BASE_URL = "https://pocketbase.bookmarkey.app"
+VITE_POCKET_BASE_URL = "https://api.bookmarkey.app"
 VITE_SENTRY_DSN = "https://0e98ab5b4a4546c68bfdb4a265be3cbc@o4504622675525632.ingest.sentry.io/4504622759149568"
 VITE_ENV = "production"
 
@@ -12,7 +12,7 @@ VITE_ENV = "production"
 [context.deploy-preview]
 
 [context.deploy-preview.environment]
-VITE_POCKET_BASE_URL = "https://preview.pocketbase.bookmarkey.app"
+VITE_POCKET_BASE_URL = "https://preview.api.bookmarkey.app"
 VITE_SENTRY_DSN = "https://0e98ab5b4a4546c68bfdb4a265be3cbc@o4504622675525632.ingest.sentry.io/4504622759149568"
 VITE_ENV = "deploy-preview"
 

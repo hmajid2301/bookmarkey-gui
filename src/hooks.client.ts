@@ -9,8 +9,8 @@ init({
 		new BrowserTracing({
 			tracePropagationTargets: [
 				"localhost",
-				"preview.pocketbase.bookmarkey.app",
-				"pocketbase.bookmarkey.app",
+				"preview.api.bookmarkey.app",
+				"api.bookmarkey.app",
 				/^\//
 			]
 		}),
