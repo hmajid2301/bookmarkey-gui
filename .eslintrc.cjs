@@ -66,7 +66,7 @@ module.exports = {
 		]
 	},
 	settings: {
-		"import/ignore": ["svelte-french-toast"],
+		"import/ignore": ["svelte-french-toast", "svelte-device-info"],
 		"svelte3/typescript": () => require("typescript")
 	},
 	env: {

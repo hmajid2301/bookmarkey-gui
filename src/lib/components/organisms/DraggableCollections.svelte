@@ -36,7 +36,7 @@
 
 {#each collections as collection, index (collection)}
 	<Draggable
-		classes="flex w-full grow px-1 transition-all duration-100 hover:bg-slate-200 dark:hover:bg-slate-700"
+		classes="flex w-full px-1 transition-all duration-100 hover:bg-slate-200 dark:hover:bg-slate-700"
 		on:dragstart={() => {
 			$draggableStore.collection.id = collection.id;
 			$draggableStore.draggingType = DraggingType.Collection;
@@ -57,6 +57,7 @@
 			}
 		}}>
 		<div
+			class="flex grow"
 			data-testid={`DraggableCollection-${collection.id}`}
 			class:activeCollection={currentPath === `/my/collections/${collection.id}`}>
 			<Collection {collection} />
